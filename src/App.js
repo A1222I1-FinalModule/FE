@@ -1,9 +1,11 @@
 import "./App.css";
 import MainRouter from "./Routes";
-import StatisticalTable from "./templates/StatisticalTable";
+import DailyStatisticalTable from "./templates/DailyStatisticalTable";
 
 function App() {
-    return <StatisticalTable / > ;
+    return (
+        <DailyStatisticalTable />
+    );
 }
 
 export default App;

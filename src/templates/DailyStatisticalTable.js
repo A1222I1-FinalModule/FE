@@ -1,13 +1,21 @@
 import { useEffect, useState } from 'react';
 import '../assets/css/StatisticalTable.css';
+import * as billService from '../Services/BillService';
 const StatisticalTable = () => {
     const [bills, setBills] = useState([]);
     const date = new Date().toLocaleDateString()
     
-    useEffect( () => {
-        
-    }, [])
+    useEffect(() => {
+        getAllBill()
+    }, [bills])
     
+    const getAllBill = async () => {
+        const response = await billService.getAll()
+        setBills(response)
+    }
+
+    if (bills === null || bills.length === 0) return null
+
     return (
         <session className="statistical">
             <div className="container">
@@ -26,36 +34,22 @@ const StatisticalTable = () => {
                                         <th scope="col">Tổng thu</th>
                                         <th scope="col">Tổng chi</th>
                                         <th scope="col">Lãi</th>
-                                    </tr></thead>
+                                    </tr>
+                                </thead>
                                 <tbody>
-                                    <tr>
-                                        <td scope="row">1</td>
-                                        <td>05</td>
-                                        <td>2,000,000</td>
-                                        <td>800,000</td>
-                                        <td>1,200,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">2</td>
-                                        <td>05</td>
-                                        <td>1,000,000</td>
-                                        <td>900,000</td>
-                                        <td>100,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">3</td>
-                                        <td>06</td>
-                                        <td>2,000,000</td>
-                                        <td>100,000</td>
-                                        <td>1,900,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="row">4</td>
-                                        <td>06</td>
-                                        <td>1,500,000</td>
-                                        <td>800,000</td>
-                                        <td>700,000</td>
-                                    </tr>
+                                    {
+                                        bills.map((bill, index) => {
+                                            return (
+                                                <tr key={bill.id}>
+                                                    <td scope="row">{index + 1}</td>
+                                                    <td>{bill.date}</td>
+                                                    <td>{bill.total}</td>
+                                                    <td>{bill.total}</td>
+                                                    <td>{bill.total}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
                                 </tbody>
                             </table>
                         </div>
