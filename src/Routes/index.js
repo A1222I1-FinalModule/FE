@@ -1,11 +1,12 @@
 import React from "react";
-import { Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./privateRouter";
+import NotificationList from "../Components/notification/NotificationList";
 
 const MainRouter = () => {
   return (
     <Routes>
-      
+      <Route path="/notification" element={<NotificationList />}></Route>
     </Routes>
   );
 };
