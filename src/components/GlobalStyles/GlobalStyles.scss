@@ -4,15 +4,17 @@
 :root {
     // Color
     --primary: #5e2572;
+    --white: #fff;
     --text-color: #161823;
 
     // Font
     --font-family: 'Poppins', sans-serif;
 
     // Default layout
-    --default-layout-header-height: 100px;
+    --default-layout-header-height: 80px;
     --default-layout-header-width: 1450px;
     --default-layout-horizontal-spacer: 25px;
+    --default-layout-footer-height: 50px;
 }
 
 * {
