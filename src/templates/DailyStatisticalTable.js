@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react';
 import '../assets/css/StatisticalTable.css';
 import * as billService from '../Services/BillService';
 const StatisticalTable = () => {
-    const [bills, setBills] = useState([]);
+    const [bills, setBills] = useState(null);
     const date = new Date().toLocaleDateString()
-    
+
     useEffect(() => {
         getAllBill()
     }, [bills])
-    
+
     const getAllBill = async () => {
         const response = await billService.getAll()
         setBills(response)
     }
 
-    if (bills === null || bills.length === 0) return null
+    if (bills === null) return null
 
     return (
         <session className="statistical">
@@ -41,8 +41,8 @@ const StatisticalTable = () => {
                                         bills.map((bill, index) => {
                                             return (
                                                 <tr key={bill.id}>
-                                                    <td scope="row">{index + 1}</td>
-                                                    <td>{bill.date}</td>
+                                                    <td>{index + 1}</td>
+                                                    <td>{bill.releaseDate}</td>
                                                     <td>{bill.total}</td>
                                                     <td>{bill.total}</td>
                                                     <td>{bill.total}</td>
