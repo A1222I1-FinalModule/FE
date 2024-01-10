@@ -25,3 +25,4 @@ const PrivateRoute = (props) => {
       <Navigate to="/login" />
     );
   };
+  export default PrivateRoute;
