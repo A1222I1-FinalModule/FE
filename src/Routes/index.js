@@ -1,11 +1,11 @@
 import React from "react";
-import { Routes } from "react-router-dom";
-import PrivateRouter from "./privateRouter";
+import {Route, Routes} from "react-router-dom";
+import Payment from "../Layouts/Main/Payment";
 
 const MainRouter = () => {
   return (
     <Routes>
-      
+      <Route path="/payment" element={<Payment/>}></Route>
     </Routes>
   );
 };

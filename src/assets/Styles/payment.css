@@ -1,0 +1,20 @@
+.btn.purple-btn {
+    background-color: #5E2572;
+    color: white;
+}
+
+.btn.purple-btn:hover {
+    background-color: #000000;
+    color: white;
+}
+
+.btn.loon-crest-btn{
+    background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
+    background-blend-mode: multiply,multiply;
+    color: white;
+}
+
+.btn.loon-crest-btn:hover{
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    color: black;
+}
