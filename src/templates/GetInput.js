@@ -1,8 +1,19 @@
-import { Formik, Form } from "react-router-dom";
+import { Formik, Form } from "formik";
 import * as billService from "../Services/BillService";
+import { useState } from "react";
+import { date } from "yup";
 
 const GetInput = ({ userId, inputDate }) => {
-
+  const [products, setProducts] = useState([])
+  const [product, setProduct] = useState({
+    "productCode": "",
+    "name": "",
+    "quantity": "",
+    "productCategory": "",
+    "size": "",
+    "price": ""
+  })
+  const date = new Date().toLocaleDateString()
 
   return (
     <session className="data_input">
@@ -12,12 +23,12 @@ const GetInput = ({ userId, inputDate }) => {
             {
               "customerId": userId,
               "releaseDate": inputDate,
-              
+
             }
           }
           onSubmit={async (values) => {
-            const response = await billService.save(values)
-            console.log(response);
+            // const response = await billService.save(values)
+            console.log("ok");
           }}
         >
           <Form>
@@ -45,8 +56,8 @@ const GetInput = ({ userId, inputDate }) => {
                       <label htmlFor="input_date" className="form-label">Ngày/tháng/năm</label>
                     </div>
                     <div className="col-sm-9">
-                      <p id="input_date">
-                      </p></div>
+                      <p>{date}</p>
+                    </div>
                   </div>
                 </form>
                 &nbsp;
