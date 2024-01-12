@@ -17,6 +17,8 @@ function Header() {
         {
             icon: <LogoutIcon />,
             title: 'Đăng xuất',
+            to: '/logout',
+            separate: true,
         },
     ];
 
@@ -38,7 +40,7 @@ function Header() {
                 <div className={cx('right')}>
                     <Search />
                     <div className={cx('actions')}>
-                        <Menu>
+                        <Menu items={userMenu}>
                             {currentUser ? (
                                 <Image className={cx('user-avatar')} src="" alt="" />
                             ) : (
