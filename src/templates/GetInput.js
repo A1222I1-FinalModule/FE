@@ -12,9 +12,31 @@ const GetInput = ({ userId }) => {
     "size": "",
     "price": ""
   })
+  const [quantity, setQuantity] = useState(0)
   const productsData = data["products"]
 
   const date = new Date().toLocaleDateString()
+
+  const handleProduct = (productCode) => {
+    const product = productsData.find(product => product.productCode === productCode)
+    if (product === undefined) {
+      setProduct({
+        "productCode": "",
+        "name": "",
+        "quantity": "",
+        "productCategory": "",
+        "size": "",
+        "price": ""
+      })
+      
+    } else {
+      setProduct(product)
+    }
+  }
+
+  const handleChangeQuantity = (quantity) => {
+    setQuantity(quantity)
+  }
 
   return (
     <div className="data_input">
@@ -24,7 +46,6 @@ const GetInput = ({ userId }) => {
             {
               "customerId": userId,
               "releaseDate": date,
-
             }
           }
           onSubmit={async (values) => {
@@ -79,22 +100,22 @@ const GetInput = ({ userId }) => {
                           <button className="btn btn-sm btn-success" id="add_product_btn">ADD</button>
                         </td>
                         <td>
-                          <select className="form-select form-select-sm">
+                          <select className="form-select form-select-sm" onChange={(evt) => handleProduct(evt.target.value)}>
+                            <option defaultValue>Chọn mã hàng</option>
                             {
                               productsData.map((product, index) => {
-                                <option className="form-check">Chọn sản phẩm</option>
                                 return (
-                                  <option key={product.id} value={product.productCode}>{product.productCode}</option>
+                                  <option key={product.productCode}>{product.productCode}</option>
                                 )
                               })
                             }
                           </select>
                         </td>
                         <td>
-                          <input type="text" className="form-control" id="new_product_name" />
+                          <input type="text" className="form-control" value={product.name} />
                         </td>
                         <td>
-                          <input type="text" className="form-control" id="new_product_quantity" />
+                          <input type="text" className="form-control" onChange={(evt) => handleChangeQuantity(evt.target.value)} value={quantity} />
                         </td>
                         <td>
                           <input type="text" className="form-control" id="new_product_size" />
@@ -123,7 +144,7 @@ const GetInput = ({ userId }) => {
                 &nbsp;
                 <div className="row action_buttons">
                   <div className="col-sm-6">
-                    <button className="btn btn-primary">Xác nhận</button>
+                    <button type="submit" className="btn btn-primary">Xác nhận</button>
                   </div>
                   <div className="col-sm-6">
                     <button className="btn btn-outline-danger">Hủy</button>
