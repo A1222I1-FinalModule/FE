@@ -1,5 +1,4 @@
-import React from 'react';
-import Footer from '../Footer/Footer';
+import React from 'react';  
 import { CustomerGrowth } from './ContentElement/CustomerGrowth';
 import { OrderGrowth } from './ContentElement/OrderGrowth';
 import { Revenue } from './ContentElement/Revenue';
@@ -28,7 +27,6 @@ export default function Content(){
         </div>
         <div class="content-three">  
           <OrderRecent></OrderRecent>
-          <Footer></Footer>
         </div>
       </div> 
       </div>

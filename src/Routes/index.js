@@ -7,10 +7,10 @@ import Login from "../Components/Login";
 const MainRouter = () => {
   return (
     <Routes>
-      <Route path="/admin/dashboard" element={<Dashboard></Dashboard>}></Route>
-      <Route path="/" element={<></>}/>
+      <Route path="/admin/dashboard" element={<Dashboard></Dashboard>}></Route>      
       <Route path="/login" element={<Login/>}/>
       <Route path="/private" element={<PrivateRouter><></></PrivateRouter>}/>
+      <Route path="/" element={<></>}/>
     </Routes>
   );
 };
