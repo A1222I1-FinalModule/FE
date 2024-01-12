@@ -49,9 +49,13 @@ const Login = () => {
             for (let i = 0; i <= roles.length; i++) {
               if (roles[i] === "ROLE_ADMIN") {
                 navigate("/admin/dashboard");
+              } else if (roles[i] === "ROLE_SALE") {
+                navigate("/saler/dashboard");
+              } else if (roles[i] === "ROLE_WAREHOUSE") {
+                navigate("/warehouse/dashboard");
               }
             }
-          } 
+          }
         })
         .catch((error) => {
           setError(ERROR_UNAUTHORIZED)

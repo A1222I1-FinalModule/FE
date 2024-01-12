@@ -4,16 +4,14 @@ import "../assets/Styles/StyleDashBoard.css";
 import SideBarWareHouse from "../Layouts/sidebar/SideBarWareHouse";
 import { ContentWareHouse } from "../Components/ContentWareHouse";
 
-export const Saler = () => {
+export const WareHouse = () => {
   return (
-    <>
-      <div>
-        <Header></Header>
-        <div className="row">
-          <SideBarWareHouse></SideBarWareHouse>
-          <ContentWareHouse></ContentWareHouse>
-        </div>
+    <div>
+      <Header></Header>
+      <div className="row">
+        <SideBarWareHouse></SideBarWareHouse>
+        <ContentWareHouse></ContentWareHouse>
       </div>
-    </>
+    </div>
   );
 };

@@ -6,14 +6,12 @@ import { ContentSaler } from "../Components/ContentSaler";
 
 export const Saler = () => {
   return (
-    <>
-      <div>
-        <Header></Header>
-        <div className="row">
-          <SideBarSaler></SideBarSaler>
-          <ContentSaler></ContentSaler>
-        </div>
+    <div>
+      <Header></Header>
+      <div className="row">
+        <SideBarSaler></SideBarSaler>
+        <ContentSaler></ContentSaler>
       </div>
-    </>
+    </div>
   );
 };
