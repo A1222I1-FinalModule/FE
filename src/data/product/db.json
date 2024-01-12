@@ -1,0 +1,65 @@
+{
+  "product": [
+    {
+      "id": 1,
+      "name": "quần dài",
+      "quantity": 10,
+      "size": "M",
+      "category": "đồ nữ",
+      "price": 100000
+    },
+    {
+      "id": 2,
+      "name": "quần tây",
+      "quantity": 10,
+      "size": "M",
+      "category": "đồ nam",
+      "price": 100000
+    },
+    {
+      "productCode": "",
+      "name": "Bảo Đạt",
+      "quantity": "5",
+      "size": "",
+      "category": "",
+      "price": "2100000",
+      "id": 6
+    },
+    {
+      "productCode": "",
+      "name": "Bảo Đạt",
+      "quantity": "5",
+      "size": "",
+      "category": "",
+      "price": "2100000",
+      "id": "iHDcYwl"
+    },
+    {
+      "productCode": "",
+      "name": "Bảo Đạt",
+      "quantity": "10",
+      "size": "",
+      "category": "",
+      "price": 0,
+      "id": 7
+    },
+    {
+      "productCode": "1",
+      "name": "Bảo Đạt",
+      "quantity": "5",
+      "size": "",
+      "category": "",
+      "price": "2100000",
+      "id": 8
+    },
+    {
+      "productCode": "1",
+      "name": "Bảo Đạt",
+      "quantity": "5",
+      "size": "",
+      "category": "",
+      "price": "2100000",
+      "id": 9
+    }
+  ]
+}
