@@ -1,9 +1,9 @@
 import React from "react";
 
-import Payment from "../Layouts/Main/Payment";
 import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./privateRouter";
 import Login from "../Components/Login";
+import Payment from "../Components/Payment";
 
 const MainRouter = () => {
   return (
