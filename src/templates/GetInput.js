@@ -1,5 +1,6 @@
 import { Formik, Form } from "formik";
 import { useState } from "react";
+import data from "../data/db.json";
 
 const GetInput = ({ userId }) => {
   const [products, setProducts] = useState([])
@@ -11,11 +12,12 @@ const GetInput = ({ userId }) => {
     "size": "",
     "price": ""
   })
+  const productsData = data["products"]
 
   const date = new Date().toLocaleDateString()
 
   return (
-    <session className="data_input">
+    <div className="data_input">
       <div className="container">
         <Formik
           initialValues={
@@ -60,7 +62,7 @@ const GetInput = ({ userId }) => {
                   </div>
                 </form>
                 &nbsp;
-                {/* <button class="btn btn-sm btn-secondary" id="add_product_btn">Thêm</button> */}
+                {/* <button className="btn btn-sm btn-secondary" id="add_product_btn">Thêm</button> */}
                 <div className="row">
                   <table className="table table table-striped">
                     <thead className>
@@ -77,33 +79,32 @@ const GetInput = ({ userId }) => {
                           <button className="btn btn-sm btn-success" id="add_product_btn">ADD</button>
                         </td>
                         <td>
-                          {/* <input type="text" class="form-control" id="new_product_id" /> */}
-                          <select>
-                            <option value="1">102</option>
+                          <select className="form-select form-select-sm">
+                            {
+                              productsData.map((product, index) => {
+                                <option className="form-check">Chọn sản phẩm</option>
+                                return (
+                                  <option key={product.id} value={product.productCode}>{product.productCode}</option>
+                                )
+                              })
+                            }
                           </select>
                         </td>
                         <td>
-                          <input type="text" class="form-control" id="new_product_name" />
+                          <input type="text" className="form-control" id="new_product_name" />
                         </td>
                         <td>
-                          <input type="text" class="form-control" id="new_product_quantity" />
+                          <input type="text" className="form-control" id="new_product_quantity" />
                         </td>
                         <td>
-                          <input type="text" class="form-control" id="new_product_size" />
+                          <input type="text" className="form-control" id="new_product_size" />
                         </td>
                         <td>
-                          <input type="text" class="form-control" id="new_product_price" />
+                          <input type="text" className="form-control" id="new_product_price" />
                         </td>
                       </tr>
                       {
                         products.map((product, index) => {
-                          if (product === null) {
-                            return (
-                              <tr key={0}>
-                                <td colSpan="6">Không có dữ liệu</td>
-                              </tr>
-                            )
-                          }
                           return (
                             <tr key={product.id}>
                               <td>{index + 1}</td>
@@ -133,7 +134,7 @@ const GetInput = ({ userId }) => {
           </Form>
         </Formik>
       </div>
-    </session>
+    </div>
 
   )
 }

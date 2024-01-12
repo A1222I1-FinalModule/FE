@@ -17,7 +17,7 @@ const StatisticalTable = () => {
     if (bills === null) return null
 
     return (
-        <session className="statistical">
+        <div className="statistical">
             <div className="container">
                 <div className="card text-dark mb-3" style={{ maxWidth: '50rem' }}>
                     <div className="card-body">
@@ -74,7 +74,7 @@ const StatisticalTable = () => {
                     </div>
                 </div>
             </div>
-        </session>
+        </div>
     )
 };
 
