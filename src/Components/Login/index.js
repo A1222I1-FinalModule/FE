@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../assets/Styles/mdb.min.css";
+import "../../Assets/Styles/mdb.min.css";
 import { LoginAPI } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../Services/UserContext";
@@ -43,7 +43,6 @@ const Login = () => {
           return await user.setUser(response);
         })
         .then((roles) => {
-          console.log(roles);
           if (roles.length > 0) {
             console.log("done");
             for (let i = 0; i <= roles.length; i++) {
