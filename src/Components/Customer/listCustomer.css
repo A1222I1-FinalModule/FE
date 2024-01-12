@@ -1,0 +1,59 @@
+.list_Customer_container-main {
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-family: 14.4px 'Roboto', sans-serif;
+}
+
+.List_customer_find_container-find {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start; 
+}
+
+.container-pagination {
+    align-items: center;
+    padding-top: 20px;
+
+}
+
+.row-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.pagination-circle{
+    justify-content: center;
+}
+
+.action{
+    display: flex;
+}
+
+th {
+    height: 55.4375px;
+    width: 96.4625px;
+    line-height: 3em;
+    text-align: center;
+}
+
+tbody tr{
+    width: 860.275px;
+    height: 82.875px;
+}
+tbody tr td{
+    padding: 16px 22.4px !important;
+  }
+
+  
