@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import '../../assets/Styles/mdb.min.css';
-import { LoginAPI } from '../../services/API/index';
+import '../../Assets/Styles/mdb.min.css';
+import { LoginAPI } from '../../Services/API';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../services/UserContext/index';
+import { useUser } from '../../Services/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes } from '@fortawesome/free-solid-svg-icons';
 import {

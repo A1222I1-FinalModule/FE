@@ -7,13 +7,13 @@ import { UserProvider } from './services/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <React.StrictMode>
-        <UserProvider>
-            <GlobalStyles>
-                <App />
-            </GlobalStyles>
-        </UserProvider>
-    </React.StrictMode>,
+  <React.StrictMode>
+    <UserProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
