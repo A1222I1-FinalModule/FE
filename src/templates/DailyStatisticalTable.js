@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../assets/css/StatisticalTable.css';
-import * as billService from '../Services/BillService';
+import * as billService from '../Services/API/BillService';
 const StatisticalTable = () => {
     const [bills, setBills] = useState(null);
     const date = new Date().toLocaleDateString()

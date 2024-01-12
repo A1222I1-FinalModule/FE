@@ -8,7 +8,7 @@ function App() {
         <>
             {/* <MainRouter /> */}
             {/* <DailyStatisticalTable /> */}
-            <GetInput userId={123} inputDate="2022-01-01" />
+            <GetInput userId={123} />
         </>
     );
 }
