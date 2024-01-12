@@ -2,28 +2,29 @@ import {useEffect, useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ReactPaginate from 'react-paginate';
-import "../../assets/Styles/customer-search.css"
+import "../assets/Styles/customer-search.css"
 
-function CustomerSearchModal() {
+function CustomerSearchModal(props) {
     const [show, setShow] = useState(false);
     const [customers, setCustomers] = useState([]);
     const [selectedCode, setSelectedCode] = useState("");
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    function activeTableRow(event, code) {
-        setSelectedCode(code);
+    function activeTableRow(event) {
         let rows = document.getElementsByClassName("tbl-row");
         for (let i = 0; i < rows.length; i++) {
             rows[i].className = rows[i].className.replace(" table-active", "");
         }
         event.currentTarget.className += " table-active";
-        console.log("code" + code)
+    }
+
+    const handleChange = (code) => {
+        setSelectedCode(code);
     }
 
     useEffect(() => {
         getAllCustomer();
-        console.log("getAll")
     }, []);
 
     const getAllCustomer = async () => {
@@ -71,7 +72,10 @@ function CustomerSearchModal() {
             <>
                 {currentItems &&
                     currentItems.map((item, index) => (
-                        <tr key={item.id} className="tbl-row" onClick={(event) => activeTableRow(event, item.id)}>
+                        <tr key={item.id} className="tbl-row" onClick={(event) => {
+                            handleChange(item.id)
+                            activeTableRow(event);
+                        }}>
                             <td>{index + 1}</td>
                             <td>{item.id}</td>
                             <td>{item.name}</td>
@@ -149,7 +153,12 @@ function CustomerSearchModal() {
                                 <div className="input-group-append">
                                     <button className="input-group-text">Tìm kiếm</button>
                                 </div>
-                                <button className="btn btn-primary">Chọn</button>
+                                <button className="btn btn-primary" onClick={() => {
+                                    props.handleSubmit(selectedCode)
+                                    handleClose();
+                                }
+                                }>Chọn
+                                </button>
                             </div>
                         </div>
                         <PaginatedItems itemsPerPage={4}/>

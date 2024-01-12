@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const host = "http://localhost:8080"
+const host = "/api/staff"
 export const getAll = () => {
-    return axios.get(host + "/api/staff/customer");
+    return axios.get(host + "/customer");
 }
