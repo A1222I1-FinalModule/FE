@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { format } from "date-fns";
 import { useState } from "react";
 import "./NotificationList.css";
 import * as NotificationService from "../../Services/API/notification/NotificationService";
@@ -7,6 +8,10 @@ export default function NotificationList() {
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
+
+  useEffect(() => {
+    getAllBySaler();
+  }, []);
 
   const getAllBySaler = async () => {
     let data = await NotificationService.getAllBySaler();
@@ -25,6 +30,9 @@ export default function NotificationList() {
       element.style.display = "none";
     }
   };
+
+  const currentDate = format(new Date(), "dd-MM-yyyy");
+  if (!notifications) return null;
   return (
     <>
       <body>
@@ -45,9 +53,13 @@ export default function NotificationList() {
             <div className="dropdown-container">
               <div className="title-notification">
                 <div className="content-title">Thông báo</div>
-                <div className="button-notification">
-                  <button className="btn btn-outline-info">Tất Cả</button>
-                  <button className="btn btn-outline-info">Chưa đọc</button>
+                <div className="button-notification d-flex flex-wrap gap-2 ">
+                  <button className="btn btn-sm btn-outline-info text-lowercase fs-6 ">
+                    Tất Cả
+                  </button>
+                  <button className="btn btn-sm btn-outline-info text-lowercase fs-6">
+                    Chưa đọc
+                  </button>
                 </div>
               </div>
               <div className="content-body">
@@ -55,7 +67,7 @@ export default function NotificationList() {
                   return (
                     <div className="content-notification" key={notification.id}>
                       <p className="content">{notification.content}</p>
-                      <p className="date">{notification.startDate}</p>
+                      <p className="date">{currentDate}</p>
                       <div
                         role="button"
                         className="threedots"
