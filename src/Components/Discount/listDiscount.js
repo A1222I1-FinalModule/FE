@@ -8,7 +8,7 @@ import {
 } from "google-fonts";
 import "./listDiscount.css";
 import { useEffect, useState } from "react";
-import * as discounts from "../../service/RentService";
+import * as discounts from "../../Services/API/Discount/discount";
 import { Route, Routes, NavLink, Link } from "react-router-dom";
 import { Modal } from "bootstrap";
 import Example from "./Modal";

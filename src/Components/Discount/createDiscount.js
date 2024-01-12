@@ -9,8 +9,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import * as rentService from "../../service/RentService";
-import { toast } from "react-hot-toast";
+import * as rentService from "../../Services/API/Customer/customer";
 export function CreateDiscount() {
   const [discount, setDiscount] = useState([]);
   const navigate = useNavigate();
@@ -56,14 +55,14 @@ export function CreateDiscount() {
   };
 
 const handleSubmit = async (values) => {
-    const formattedValues = {
-      ...values,
-      beginDate: formatDate(values.beginDate),
-      endDate: formatDate(values.endDate),
-    };
+    // const formattedValues = {
+    //   ...values,
+    //   beginDate: formatDate(values.beginDate),
+    //   endDate: formatDate(values.endDate),
+    // };
 
-    await rentService.addDiscount(formattedValues);
-    navigate("/listDiscount");
+    // await rentService.addDiscount(formattedValues);
+    // navigate("/listDiscount");
   };
   return (
     <div className="container-main">

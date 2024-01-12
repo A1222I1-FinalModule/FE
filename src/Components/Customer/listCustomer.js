@@ -7,17 +7,14 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "google-fonts";
-import "./ListCustomer.css";
+import "../Customer/listCustomer.css";
 import { useEffect, useState } from "react";
-import * as discounts from "../../service/RentService";
-import { Route, Routes, NavLink, Link } from "react-router-dom";
-import { Modal } from "bootstrap";
-import Example from "./Modal";
-import moment from "moment";
+import * as discounts from "../../Services/API/Customer/customer";
 export function ListCustomer() {
   const [customer, setCustomer] = useState([]);
   useEffect(() => {
     getAllCustomer();
+    console.log(123);
   }, []);
   const getAllCustomer = async () => {
     let temp = await discounts.findAllCustomer();
@@ -36,6 +33,7 @@ export function ListCustomer() {
         console.log(err);
       });
   };
+  if(!customer) return null;
   return (
     <div className="list_Customer_container-main">
       <div className="list_Discount_container-main">
@@ -106,9 +104,9 @@ export function ListCustomer() {
                       </button>
                       {/* <Example id={employee.id} handleDelete={handleDelete}/> */}
                       <button className="btn btn-danger">
-                        <Link to={`/updateDiscount/${customer.id}`}>
+                        {/* <Link to={`/updateDiscount/${customer.id}`}>
                           Update
-                        </Link>
+                        </Link> */}
                       </button>
                     </td>
                   </tr>
