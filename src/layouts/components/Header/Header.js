@@ -25,7 +25,7 @@ function Header() {
                 </div>
                 <div className={cx('right')}>
                     <Search />
-                    <div className={cx('actions')}>Actions</div>
+                    <div className={cx('actions')}></div>
                 </div>
             </div>
         </header>
