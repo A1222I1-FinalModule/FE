@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import '../assets/css/StatisticalTable.css';
+import '../Assets/css/StatisticalTable.css';
 import * as billService from '../Services/API/BillService';
 const StatisticalTable = () => {
     const [bills, setBills] = useState(null);

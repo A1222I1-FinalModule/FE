@@ -1,8 +1,8 @@
 import React from 'react';
-import SideBar from '../Layouts/sidebar/SideBar';
+import '../Assets/Styles/StyleDashBoard.css';
 import Content from '../Components/Content';
 import Header from '../Layouts/Header/Header';
-import '../assets/Styles/StyleDashBoard.css';
+import SideBar from '../Layouts/sidebar/SideBar';
 export default function Dashboard() {
     return (
         <div>

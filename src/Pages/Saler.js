@@ -1,8 +1,8 @@
 import React from "react";
-import Header from "../Layouts/Header/Header";
-import "../assets/Styles/StyleDashBoard.css";
-import SideBarSaler from "../Layouts/sidebar/SideBarSaler";
+import "../Assets/Styles/StyleDashBoard.css";
 import { ContentSaler } from "../Components/ContentSaler";
+import Header from "../Layouts/Header/Header";
+import SideBarSaler from "../Layouts/sidebar/SideBarSaler";
 
 export const Saler = () => {
   return (
