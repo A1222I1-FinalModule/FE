@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 
-import config from '~/config';
+import config from '../../../config';
 import Menu, { MenuItem } from './Menu';
 import styles from './Navbar.module.scss';
 

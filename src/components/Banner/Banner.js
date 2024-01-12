@@ -6,7 +6,7 @@ import { Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
-import { ChevronLeftIcon, ChevronRightIcon } from '~/components/Icons';
+import { ChevronLeftIcon, ChevronRightIcon } from '../Icons';
 import styles from './Banner.module.scss';
 
 const cx = classNames.bind(styles);

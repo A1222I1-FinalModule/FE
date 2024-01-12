@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
-import * as productService from '~/services/productService';
 import styles from './Products.module.scss';
 import { Link } from 'react-router-dom';
 

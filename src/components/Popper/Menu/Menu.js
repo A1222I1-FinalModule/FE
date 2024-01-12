@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 
-import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { Wrapper as PopperWrapper } from '../../Popper';
 import Tippy from '@tippyjs/react/headless';
 import styles from './Menu.module.scss';
 
@@ -12,7 +12,6 @@ function Menu({ hideOnClick = false, children }) {
     return (
         <Tippy
             interactive
-            visible
             offset={[12, 8]}
             placement="bottom-end"
             hideOnClick={hideOnClick}

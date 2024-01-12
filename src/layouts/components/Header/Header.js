@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 
-import Image from '~/components/Image';
-import Navbar from '~/layouts/components/Navbar';
-import Search from '~/layouts/components/Search';
-import Menu from '~/components/Popper/Menu';
+import Image from '../../../components/Image';
+import Navbar from '../Navbar';
+import Search from '../Search';
+import Menu from '../../../components/Popper/Menu';
 import styles from './Header.module.scss';
-import { LogoutIcon } from '~/components/Icons';
+import { LogoutIcon } from '../../../components/Icons';
 
 const cx = classNames.bind(styles);
 
@@ -15,10 +15,8 @@ function Header() {
 
     const userMenu = [
         {
-            icon: '',
-        },
-        {
             icon: <LogoutIcon />,
+            title: 'Đăng xuất',
         },
     ];
 
