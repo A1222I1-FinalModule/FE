@@ -11,7 +11,7 @@ body{
    
     height: 50px;
 }
-.menu_left .btn-nav{
+.menu_left .btn_nav{
     width: 40px;
     border-right:1px solid #DDD;
     display: flex;
@@ -105,7 +105,7 @@ body{
     background-color: red;
 }
 /* CSS FOR Sidebar */
-.sidebar-container{
+.sidebar_container{
     
     color: white;
     padding: 10px 5px;
@@ -122,24 +122,24 @@ body{
     text-decoration: none;
     color: white;
 }
-.item-sidebar{
+.item_sidebar{
     padding: 10px 10px;
 }
-.item-sidebar.active{
+.item_sidebar.active{
     background-color: #56126e;
 }
 .contain_item :hover{
     background-color: #56126e;
 }
-.item-sidebar a{
+.item_sidebar a{
     text-decoration: none;
     color: white;
 }
-.item-title{
+.item_title{
     display: flex;
     align-items: center;
 }
-.item-title span{
+.item_title span{
     margin-left: 15px;
     font-weight: bold;
 }
@@ -189,7 +189,7 @@ body{
 .content{
     background-color: #F1F2F7;
 }
-.content-main{
+.content_main{
     padding: 35px 35px;
 }    
 .chart_customer{
@@ -206,7 +206,7 @@ body{
 .sale_total{
     padding-top: 15px;
 }
-.content-second{
+.content_second{
     background-color: white;
     margin-top: 20px;
     padding: 25px;
@@ -226,7 +226,7 @@ body{
     justify-content: flex-end;
     border-radius: 25px;
 }
-.content-three {
+.content_three {
     background-color: white;
     margin-top: 20px;
     padding: 25px;
@@ -236,13 +236,13 @@ h1 {
     text-align: center;
     color: red;
 }  
-.list-order {
+.list_order {
     list-style: none;
     margin: 0;
     padding: 0;
 }
   
-.list-order li {
+.list_order li {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
 }
@@ -254,19 +254,19 @@ h1 {
     width: 250px;
     font-size: 16px;
   }
-.timeline{
+.time_line{
   }
-  .timeline ul{
+  .time_line ul{
     list-style-type:none;
     padding:10px 5px;
   }
-  .timeline ul li{
+  .time_line ul li{
     padding:20px 20px;
     position:relative;
     cursor:pointer;
     transition:.5s;
   }
-  .timeline ul li span{
+  .time_line ul li span{
     display:inline-block;
     background-color:#1685b8;
     border-radius:25px;
@@ -274,16 +274,16 @@ h1 {
     font-size:15px;
     text-align:center;
   }
-  .timeline ul li .content h3{
+  .time_line ul li .content h3{
     color:#34ace0;
     font-size:17px;
     padding-top:5px;
   }
-  .timeline ul li .content p{
+  .time_line ul li .content p{
     padding:5px 0px 15px 0px;
     font-size:15px;
   }
-  .timeline ul li:before{
+  .time_line ul li:before{
     position:absolute;
     content:'';
     width:10px;
@@ -294,21 +294,21 @@ h1 {
     top:28px;
     transition:.5s;
   }
-  .timeline ul li:hover:before{
+  .time_line ul li:hover:before{
     background-color:#0F0;
     box-shadow:0px 0px 10px 2px #0F0;
   }
   @media (max-width:300px){
-    .timeline{
+    .time_line{
       width:100%;
       padding:30px 5px 30px 10px;
     }
-    .timeline ul li .content h3{
+    .time_line ul li .content h3{
       color:#34ace0;
       font-size:15px;
     }
   
   }
-.content-finally{
+.content_finally{
     padding: 25px;
 }

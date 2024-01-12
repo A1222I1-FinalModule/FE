@@ -1,4 +1,5 @@
 import React from 'react';
+import * as style from '../../assets/Styles/StyleDashBoard.module.css';
 export default function SideBarWareHouse(){
     return(
       <div class="sidebar col-2 pe-0">
