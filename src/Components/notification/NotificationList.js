@@ -1,9 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import "./NotificationList.css";
+import * as NotificationService from "../../Services/API/notification/NotificationService";
 
 export default function NotificationList() {
   const [isActive, setIsActive] = useState(false);
+  const [countNotification, setCountNotification] = useState(0);
+  const [notifications, setNotifications] = useState([]);
+
+  const getAllBySaler = async () => {
+    let data = await NotificationService.getAllBySaler();
+    console.log(data);
+    setNotifications(data);
+  };
   const handleDropdownClick = () => {
     setIsActive(!isActive);
   };
@@ -27,7 +36,7 @@ export default function NotificationList() {
             <span className="material-icons">
               <i className="bi bi-bell-fill"></i>
             </span>
-            <span className="icon-button_badge">2</span>
+            <span className="icon-button_badge">{countNotification}</span>
             <div className="title-hide">
               <p className="title-show">Thông báo</p>
             </div>
@@ -42,132 +51,32 @@ export default function NotificationList() {
                 </div>
               </div>
               <div className="content-body">
-                <div className="content-notification">
-                  <p className="content">
-                    Đầu năm 2020 khi Covid-19 bùng phát, Học viện Quân y đề xuất
-                    Bộ Khoa học và Công nghệ giao đơn vị phát triển test xét
-                    nghiệm. Đề tài được Viện Nghiên cứu Y dược học quân sự
-                    (thuộc Học viện Quân y) nghiên cứu và ông Hùng yêu cầu ông
-                    Sơn bổ sung Công ty Cổ phần Công nghệ Việt Á cùng tham gia.
-                  </p>
-                  <p className="date">18/12/2023</p>
-
-                  <div
-                    role="button"
-                    className="threedots"
-                    onClick={() => toggleElement(1)}
-                  >
-                    <i className="bi bi-three-dots"></i>
-                    <div className="threedot-detail" id="selection1">
-                      <a className="content-link" href="#">
-                        Chi tiết Thông báo
-                      </a>
-                      <a className="content-link" href="#">
-                        Gỡ thông báo
-                      </a>
+                {notifications.map((notification, index) => {
+                  return (
+                    <div className="content-notification" key={notification.id}>
+                      <p className="content">{notification.content}</p>
+                      <p className="date">{notification.startDate}</p>
+                      <div
+                        role="button"
+                        className="threedots"
+                        onClick={() => toggleElement(notification.id)}
+                      >
+                        <i className="bi bi-three-dots"></i>
+                        <div
+                          className="threedot-detail"
+                          id={`selection${notification.id}`}
+                        >
+                          <a className="content-link" href="#">
+                            Chi tiết Thông báo
+                          </a>
+                          <a className="content-link" href="#">
+                            Gỡ thông báo
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div className="content-notification">
-                  <p className="content">
-                    Đầu năm 2020 khi Covid-19 bùng phát, Học viện Quân y đề xuất
-                    Bộ Khoa học và Công nghệ giao đơn vị phát triển test xét
-                    nghiệm. Đề tài được Viện Nghiên cứu Y dược học quân sự
-                    (thuộc Học viện Quân y) nghiên cứu và ông Hùng yêu cầu ông
-                    Sơn bổ sung Công ty Cổ phần Công nghệ Việt Á cùng tham gia.
-                  </p>
-                  <p className="date">18/12/2023</p>
-                  <div
-                    role="button"
-                    className="threedots"
-                    onClick={() => toggleElement(52)}
-                  >
-                    <i className="bi bi-three-dots"></i>
-                    <div className="threedot-detail" id="selection52">
-                      <a className="content-link" href="#">
-                        Chi tiết Thông báo
-                      </a>
-                      <a className="content-link" href="#">
-                        Gỡ thông báo
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="content-notification">
-                  <p className="content">
-                    Đầu năm 2020 khi Covid-19 bùng phát, Học viện Quân y đề xuất
-                    Bộ Khoa học và Công nghệ giao đơn vị phát triển test xét
-                    nghiệm. Đề tài được Viện Nghiên cứu Y dược học quân sự
-                    (thuộc Học viện Quân y) nghiên cứu và ông Hùng yêu cầu ông
-                    Sơn bổ sung Công ty Cổ phần Công nghệ Việt Á cùng tham gia.
-                  </p>
-                  <p className="date">18/12/2023</p>
-                  <div
-                    role="button"
-                    className="threedots"
-                    onClick={() => toggleElement(3)}
-                  >
-                    <i className="bi bi-three-dots"></i>
-                    <div className="threedot-detail" id="selection3">
-                      <a className="content-link" href="#">
-                        Chi tiết Thông báo
-                      </a>
-                      <a className="content-link" href="#">
-                        Gỡ thông báo
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="content-notification">
-                  <p className="content">
-                    Đầu năm 2020 khi Covid-19 bùng phát, Học viện Quân y đề xuất
-                    Bộ Khoa học và Công nghệ giao đơn vị phát triển test xét
-                    nghiệm. Đề tài được Viện Nghiên cứu Y dược học quân sự
-                    (thuộc Học viện Quân y) nghiên cứu và ông Hùng yêu cầu ông
-                    Sơn bổ sung Công ty Cổ phần Công nghệ Việt Á cùng tham gia.
-                  </p>
-                  <p className="date">18/12/2023</p>
-                  <div
-                    role="button"
-                    className="threedots"
-                    onClick={() => toggleElement(4)}
-                  >
-                    <i className="bi bi-three-dots"></i>
-                    <div className="threedot-detail" id="selection4">
-                      <a className="content-link" href="#">
-                        Chi tiết Thông báo
-                      </a>
-                      <a className="content-link" href="#">
-                        Gỡ thông báo
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="content-notification">
-                  <p className="content">
-                    Đầu năm 2020 khi Covid-19 bùng phát, Học viện Quân y đề xuất
-                    Bộ Khoa học và Công nghệ giao đơn vị phát triển test xét
-                    nghiệm. Đề tài được Viện Nghiên cứu Y dược học quân sự
-                    (thuộc Học viện Quân y) nghiên cứu và ông Hùng yêu cầu ông
-                    Sơn bổ sung Công ty Cổ phần Công nghệ Việt Á cùng tham gia.
-                  </p>
-                  <p className="date">18/12/2023</p>
-                  <div
-                    role="button"
-                    className="threedots"
-                    onClick={() => toggleElement(10)}
-                  >
-                    <i className="bi bi-three-dots"></i>
-                    <div className="threedot-detail" id="selection10">
-                      <a className="content-link" href="#">
-                        Chi tiết Thông báo
-                      </a>
-                      <a className="content-link" href="#">
-                        Gỡ thông báo
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             </div>
           )}

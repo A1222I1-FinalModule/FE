@@ -54,7 +54,7 @@ const Login = () => {
           }
         })
         .catch((error) => {
-          setError(ERROR_UNAUTHORIZED)
+          setError(ERROR_UNAUTHORIZED);
         });
     }
   };

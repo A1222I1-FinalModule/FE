@@ -1,74 +1,74 @@
 import React from "react";
 import "./NotificationSave.css";
 import notification from "../../assets/Images/img-03.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function NotificationSave() {
   return (
     <>
-      <div class="contact1">
-        <div class="container-contact1">
-          <div class="contact1-pic js-tilt" data-tilt>
+      <div className="contact1">
+        <div className="container-contact1">
+          <div className="contact1-pic js-tilt" data-tilt>
             <img src={notification} alt="Thông báo" />
           </div>
 
-          <form class="contact1-form">
-            <span class="contact1-form-title"> Đăng thông báo </span>
+          <form className="contact1-form">
+            <span className="contact1-form-title"> Đăng thông báo </span>
 
-            <div class="wrap-input1">
-              <textarea class="input1" placeholder="Nội dung"></textarea>
-              <span class="shadow-input1"></span>
+            <div className="wrap-input1">
+              <textarea className="input1" placeholder="Nội dung"></textarea>
+              <span className="shadow-input1"></span>
             </div>
 
-            <div class="wrap-input1">
-              <div class="form-check form-check-inline">
+            <div className="wrap-input1">
+              <div className="form-check form-check-inline">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
                   id="inlineRadio1"
                   value="option1"
                 />
-                <label class="form-check-label" for="inlineRadio1">
+                <label className="form-check-label" for="inlineRadio1">
                   Tất Cả
                 </label>
               </div>
-              <div class="form-check form-check-inline">
+              <div className="form-check form-check-inline">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
                   id="inlineRadio2"
                   value="option2"
                 />
-                <label class="form-check-label" for="inlineRadio2">
+                <label className="form-check-label" for="inlineRadio2">
                   Salers
                 </label>
               </div>
-              <div class="form-check form-check-inline">
+              <div className="form-check form-check-inline">
                 <input
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
                   id="inlineRadio3"
                   value="option1"
                 />
-                <label class="form-check-label" for="inlineRadio3">
+                <label className="form-check-label" for="inlineRadio3">
                   Quản Kho
                 </label>
               </div>
             </div>
 
-            <div class="container-contact1-form-btn">
-              <div class="contact1-form-btn1">
-                <button class="contact1-form-btn">
-                  <span>
-                    Gửi
-                    <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-                  </span>
+            <div className="container-contact1-form-btn">
+              <div className="contact1-form-btn1">
+                <button className="contact1-form-btn">
+                  <span>Gửi</span>
+                  <FontAwesomeIcon icon={faArrowRight} className="arrowRight" />
                 </button>
               </div>
-              <div class="contact1-form-btn2">
-                <button class="contact1-form-btn">
+              <div className="contact1-form-btn2">
+                <button className="contact1-form-btn">
                   <span> Hủy Bỏ </span>
                 </button>
               </div>
