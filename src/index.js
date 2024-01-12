@@ -1,16 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from '~/App';
-import reportWebVitals from '~/reportWebVitals';
-import GlobalStyles from '~/Components/GlobalStyles';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { UserProvider } from "./Services/UserContext";
+import { BrowserRouter } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <GlobalStyles>
-            <App />
-        </GlobalStyles>
-    </React.StrictMode>,
+  <React.StrictMode>
+    <UserProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserProvider>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
