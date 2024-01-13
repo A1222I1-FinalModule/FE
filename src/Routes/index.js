@@ -5,6 +5,8 @@ import Dashboard from "../Pages/DashBoard";
 import Login from "../Components/Login";
 import { CreateDiscount } from "../Components/Discount/createDiscount";
 import { ListCustomer } from "../Components/Customer/listCustomer";
+import { Discount } from "../Components/Discount/listDiscount";
+import { UpdateDiscount } from "../Components/Discount/updateDiscount";
 
 const MainRouter = () => {
   return (
@@ -13,7 +15,9 @@ const MainRouter = () => {
       <Route path="/login" element={<Login/>}/>
       <Route path="/private" element={<PrivateRouter><></></PrivateRouter>}/>
       <Route path="/createDiscount" element={<CreateDiscount/>}></Route>
+      <Route path="/updateDiscount/:id" element={<UpdateDiscount/>}></Route>
       <Route path="/listCustomer" element={<ListCustomer/>}></Route>
+      <Route path="/listDiscount" element={<Discount/>}></Route>
       <Route path="/" element={<></>}/>
     </Routes>
   );

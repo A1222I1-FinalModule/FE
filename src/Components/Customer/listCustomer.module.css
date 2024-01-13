@@ -18,13 +18,15 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: flex-start; 
+    /* justify-content: flex-start;  */
 }
 
 .container-pagination {
-    align-items: center;
     padding-top: 20px;
-
+    display: flex;
+    justify-content: center;  /* Can giữa theo chiều ngang */
+    align-items: center;      /* Can giữa theo chiều dọc */
+    width: 100%;  
 }
 
 .row-container {
@@ -33,12 +35,9 @@
     width: 100%;
 }
 
-.pagination-circle{
-    justify-content: center;
-}
-
 .action{
     display: flex;
+    gap: 10px;
 }
 
 th {

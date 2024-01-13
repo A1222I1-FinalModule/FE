@@ -7,21 +7,37 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "google-fonts";
-import "../Customer/listCustomer.css";
+import styled from "../Customer/listCustomer.module.css";
 import { useEffect, useState } from "react";
-import * as discounts from "../../Services/API/Customer/customer";
+import * as customers from "../../Services/API/Customer/customer";
+import Example from "../ModalConfirm/ModalConfirm";
+import moment from "moment";
 export function ListCustomer() {
   const [customer, setCustomer] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 5;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = customer.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(customer.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
+
   useEffect(() => {
     getAllCustomer();
-    console.log(123);
   }, []);
   const getAllCustomer = async () => {
-    let temp = await discounts.findAllCustomer();
+    let temp;
+    if (searchInput) {
+      temp = await customers.findByNameCustomer(searchInput);
+    } else {
+      temp = await customers.findAllCustomer();
+    }
     setCustomer(temp);
   };
   const getDelete = async (id) => {
-    await discounts.getDeleteCustomer(id);
+    await customers.getDeleteCustomer(id);
     await getAllCustomer();
   };
   const handleDelete = (id) => {
@@ -33,17 +49,17 @@ export function ListCustomer() {
         console.log(err);
       });
   };
-  if(!customer) return null;
   return (
-    <div className="list_Customer_container-main">
+    <div className={styled["list_Customer_container-main"]}>
       <div className="list_Discount_container-main">
-        <div className="row-container">
-          <div className="List_customer_find_container-find">
+        <div className={styled["row-container"]}>
+          <div className={styled["List_customer_find_container-find"]}>
             <button
               type="button"
               className="btn btn-primary"
               data-mdb-ripple-init
               style={{ width: "75px", height: "36px" }}
+              onClick={getAllCustomer}
             >
               Find
             </button>
@@ -51,6 +67,8 @@ export function ListCustomer() {
               type="text"
               style={{ width: "190px", height: "36px" }}
               placeholder="name"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
             />
           </div>
           <div className="contaner-function">
@@ -68,7 +86,7 @@ export function ListCustomer() {
           <table className="table align-middle mb-0 bg-white">
             <thead className="bg-light">
               <tr>
-                <th>Number</th>
+                <th></th>
                 <th>Code</th>
                 <th>Name</th>
                 <th>Gender</th>
@@ -78,7 +96,7 @@ export function ListCustomer() {
               </tr>
             </thead>
             <tbody>
-              {customer.map((customer, index) => {
+              {records.map((customer, index) => {
                 return (
                   <tr key={index}>
                     <td> {index + 1}</td>
@@ -95,19 +113,16 @@ export function ListCustomer() {
                     <td>{customer.point}</td>
                     <td>{customer.customerType.id}</td>
                     <td>
-                      <button
-                        className="btn btn-danger"
-                        ids={customer.id}
-                        onClick={() => handleDelete(customer.id)}
-                      >
-                        Delete
-                      </button>
-                      {/* <Example id={employee.id} handleDelete={handleDelete}/> */}
-                      <button className="btn btn-danger">
-                        {/* <Link to={`/updateDiscount/${customer.id}`}>
+                      <div className={styled["action"]}>
+                        <Example id={customer.id} handleDelete={handleDelete} />
+                        <button
+                          class="btn btn-success"
+                          ids={customer.id}
+                          onClick={() => handleDelete(customer.id)}
+                        >
                           Update
-                        </Link> */}
-                      </button>
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -115,36 +130,50 @@ export function ListCustomer() {
             </tbody>
           </table>
         </div>
-        <div className="container-pagination">
-          <nav aria-label="...">
-            <ul className="pagination pagination-circle">
-              <li className="page-item">
-                <a className="page-link">Previous</a>
-              </li>
-              <li className="page-item active" aria-current="page">
-                <a className="page-link" href="#">
-                  1<span className="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  3
-                </a>
-              </li>
-              <li className="page-item">
-                <a className="page-link" href="#">
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <nav className={styled["container-pagination"]}>
+          <ul className="pagination pagination-circle">
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={prePage}>
+                Prev
+              </a>
+            </li>
+            {numbers.map((n, i) => {
+              return (
+                <li
+                  className={`page-item ${currentPage == n ? `active` : ` `}`}
+                  key={i}
+                >
+                  <a
+                    href="#"
+                    className="page-link"
+                    onClick={() => changeCPage(n)}
+                  >
+                    {n}
+                  </a>
+                </li>
+              );
+            })}
+            <li className="page-item">
+              <a href="#" className="page-link" onClick={nextPage}>
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   );
+  function changeCPage(id) {
+    setCurrentPage(id);
+  }
+  function nextPage() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+  function prePage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
 }

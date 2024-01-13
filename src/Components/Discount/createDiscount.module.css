@@ -1,23 +1,11 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
 
 h1{
   text-align: center;
 }
 
 .container-main {
-  width: auto;
-  max-width: 900px; /* Tăng chiều rộng tối đa của .container-main */
+  max-width: 700px;
+  max-width: 580px; /* Tăng chiều rộng tối đa của .container-main */
   padding: 40px; /* Tăng padding để thêm không gian bên trong */
   background: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -25,6 +13,7 @@ h1{
   font-family: Arial, sans-serif;
   box-sizing: border-box;
   margin: 20px auto;
+  margin-top: 90px;
 }
 
 .form-row {
