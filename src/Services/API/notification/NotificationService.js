@@ -51,3 +51,20 @@ export const saveNotification = async (value) => {
     console.log(error);
   }
 };
+
+export const deleteNotification = async (id) => {
+  try {
+    let respone = await axios.delete(`http://localhost:3000/api/${id}`);
+    return respone.status;
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const findByid = async (id) => {
+  try {
+    let respone = await axios.get(`http://localhost:3000/api/${id}`);
+    return respone.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

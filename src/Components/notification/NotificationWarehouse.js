@@ -8,23 +8,24 @@ import styles from "./NotificationList.module.css";
 // import "./NotificationList.css";
 import * as NotificationService from "../../Services/API/notification/NotificationService";
 
-export default function NotificationList() {
+export default function NotificationWarehouse() {
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [toggle, setToggle] = useState(true);
 
+  console.log(notifications);
   useEffect(() => {
-    getAllBySaler();
+    getAllByWarehouse();
   }, []);
 
-  const getAllBySaler = async () => {
-    let data = await NotificationService.getAllBySaler();
+  const getAllByWarehouse = async () => {
+    let data = await NotificationService.getAllByWarehouse();
     setNotifications(data);
   };
 
-  const getAllByNotReadSaler = async () => {
-    let data = await NotificationService.getAllSalerByNotRead();
+  const getAllNotRead = async () => {
+    let data = await NotificationService.getAllWarehouseByNotRead();
     setNotifications(data);
   };
   const handleDropdownClick = () => {
@@ -41,12 +42,23 @@ export default function NotificationList() {
 
   const handleAll = () => {
     setToggle(true);
-    getAllBySaler();
+    getAllByWarehouse();
   };
   const handleNotRead = () => {
     setToggle(false);
-    getAllByNotReadSaler();
+    getAllNotRead();
   };
+  const handleDelete = async (id) => {
+    await NotificationService.deleteNotification(id);
+    console.log("read");
+    getAllByWarehouse();
+  };
+  const handleDeleteNotRead = async (id) => {
+    await NotificationService.deleteNotification(id);
+    console.log("not read");
+    getAllNotRead();
+  };
+
   const currentDate = format(new Date(), "dd-MM-yyyy");
   if (!notifications) return null;
   return (
@@ -105,36 +117,28 @@ export default function NotificationList() {
                         <p className={styles.date}>{currentDate}</p>
                         <div
                           role="button"
-                          // className="threedots"
                           className={styles.threedots}
                           onClick={() => toggleElement(notification.id)}
                         >
-                          {/* <i
-                          className={`bi bi-three-dots ${styles.bithreedots}`}
-                        ></i> */}
                           <FontAwesomeIcon
                             icon={faEllipsis}
                             className={styles.bithreedots}
                           />
                           <div
-                            // className="threedot-detail"
                             className={styles.threedotdetail}
                             id={`selection${notification.id}`}
                           >
-                            <a
-                              // className="content-link"
-                              className={styles.contentlink}
-                              href="#"
-                            >
+                            <a className={styles.contentlink} href="#">
                               Chi tiết Thông báo
                             </a>
-                            <a
-                              //  className="content-link"
+                            <button
                               className={styles.contentlink}
-                              href="#"
+                              onClick={() => {
+                                handleDelete(notification.id);
+                              }}
                             >
                               Gỡ thông báo
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -151,41 +155,29 @@ export default function NotificationList() {
                         <p className={styles.date}>{currentDate}</p>
                         <div
                           role="button"
-                          // className="threedots"
                           className={styles.threedots}
                           onClick={() => toggleElement(notification.id)}
                         >
-                          {/* <i
-                          className={`bi bi-three-dots ${styles.bithreedots}`}
-                        ></i> */}
                           <FontAwesomeIcon
                             icon={faEllipsis}
                             className={styles.bithreedots}
                           />
                           <div
-                            // className="threedot-detail"
                             className={styles.threedotdetail}
                             id={`selection${notification.id}`}
                           >
-                            <a
-                              // className="content-link"
-                              className={styles.contentlink}
-                              href="#"
-                            >
+                            <a className={styles.contentlink} href="#">
                               Chi tiết Thông báo
                             </a>
-                            <a
-                              //  className="content-link"
+                            <button
                               className={styles.contentlink}
-                              href="#"
+                              onClick={() => {
+                                handleDeleteNotRead(notification.id);
+                              }}
                             >
                               Gỡ thông báo
-                            </a>
-                            <a
-                              //  className="content-link"
-                              className={styles.contentlink}
-                              href="#"
-                            >
+                            </button>
+                            <a className={styles.contentlink} href="#">
                               đánh dấu đã đọc
                             </a>
                           </div>

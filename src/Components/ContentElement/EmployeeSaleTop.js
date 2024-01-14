@@ -1,25 +1,25 @@
-import React,{useState, useEffect} from 'react';
-import EmployeeService from '../../Services/API/EmployeeService';
+import React, { useState, useEffect } from "react";
+import EmployeeService from "../../Services/API/EmployeeService";
 export const EmployeeSaleTop = () => {
-  const[employeeTop,setEmployeeTop] = useState(null);
-  useEffect(()=>{
-      getAll();
-  },[]);
-  const getAll = async() =>{
+  const [employeeTop, setEmployeeTop] = useState(null);
+  useEffect(() => {
+    getAll();
+  }, []);
+  const getAll = async () => {
     try {
       let temp = await EmployeeService.getEmployeeSaleTop();
       setEmployeeTop(temp);
     } catch (error) {
-      console.error('Error get data:', error);
+      console.error("Error get data:", error);
     }
   };
   return (
     <>
-      <div class="table_title">
+      <div className="table_title">
         <span>Top nhân viên bán hàng tốt nhất</span>
       </div>
-      <div class="table_record">
-        <table class="table">
+      <div className="table_record">
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">Họ và tên</th>
@@ -28,14 +28,15 @@ export const EmployeeSaleTop = () => {
             </tr>
           </thead>
           <tbody>
-          { employeeTop? employeeTop.map((value,index) =>(         
-            <tr key={index}>
-              <th scope="row">{value.employeeName}</th>
-              <td>{value.totalSales}</td>
-              <td>{value.totalOrders}</td>
-            </tr>
-          ))
-          :null}
+            {employeeTop
+              ? employeeTop.map((value, index) => (
+                  <tr key={index}>
+                    <th scope="row">{value.employeeName}</th>
+                    <td>{value.totalSales}</td>
+                    <td>{value.totalOrders}</td>
+                  </tr>
+                ))
+              : null}
           </tbody>
         </table>
       </div>

@@ -1,81 +1,127 @@
 import React from "react";
-import "./NotificationSave.css";
-import notification from "../../assets/Images/img-03.png";
+import * as notificationService from "../../Services/API/notification/NotificationService";
+import styles from "./NotificationSave.module.css";
+import notification from "../../Assets/Images/img-03.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { Field, Form, Formik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 export default function NotificationSave() {
+  const navigate = useNavigate();
+  const notificationInit = {
+    id: 0,
+    content: "",
+    target: 1,
+  };
+
+  const addNewNotification = async (notification) => {
+    parseInt(notification.target);
+    await notificationService.saveNotification(notification);
+    console.log(notification);
+    alert("send notification");
+  };
   return (
     <>
-      <div className="contact1">
-        <div className="container-contact1">
-          <div className="contact1-pic js-tilt" data-tilt>
-            <img src={notification} alt="Thông báo" />
+      <Formik
+        initialValues={notificationInit}
+        onSubmit={(value) => {
+          console.log(value.target);
+          addNewNotification(value);
+        }}
+      >
+        <Form>
+          <div className={styles.contact1}>
+            <div className={styles.containercontact1}>
+              <div className={styles.contact1pic} data-tilt>
+                <img src={notification} alt="Thông báo" />
+              </div>
+
+              <form className={styles.contact1form}>
+                <span className={styles.contact1formtitle}>
+                  {" "}
+                  Đăng thông báo{" "}
+                </span>
+
+                <div className={styles.wrapinput1}>
+                  <Field
+                    as="textarea"
+                    name="content"
+                    className={styles.input1}
+                    placeholder="Nội dung"
+                  ></Field>
+                  <span className={styles.shadowninput1}></span>
+                </div>
+
+                <div className={styles.wrapinput1}>
+                  <div className="form-check form-check-inline">
+                    <Field
+                      className="form-check-input"
+                      type="radio"
+                      name="target"
+                      id="inlineRadio1"
+                      value="3"
+                    />
+                    <label
+                      className={styles.formchecklabel}
+                      htmlFor="inlineRadio1"
+                    >
+                      Tất Cả
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <Field
+                      className="form-check-input"
+                      type="radio"
+                      name="target"
+                      id="inlineRadio2"
+                      value="1"
+                    />
+                    <label
+                      className={styles.formchecklabel}
+                      htmlFor="inlineRadio2"
+                    >
+                      Salers
+                    </label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="target"
+                      id="inlineRadio3"
+                      value="2"
+                    />
+                    <label
+                      className={styles.formchecklabel}
+                      htmlFor="inlineRadio3"
+                    >
+                      Quản Kho
+                    </label>
+                  </div>
+                </div>
+
+                <div className={styles.containercontact1formbtn}>
+                  <div className="contact1-form-btn1">
+                    <button type="submit" className={styles.contact1formbtn}>
+                      <span>Gửi</span>
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        className={styles.arrowRight}
+                      />
+                    </button>
+                  </div>
+                  <div className={styles.contact1formbtn2}>
+                    <button className={styles.contact1formbtn}>
+                      <span> Hủy Bỏ </span>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div>
-
-          <form className="contact1-form">
-            <span className="contact1-form-title"> Đăng thông báo </span>
-
-            <div className="wrap-input1">
-              <textarea className="input1" placeholder="Nội dung"></textarea>
-              <span className="shadow-input1"></span>
-            </div>
-
-            <div className="wrap-input1">
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio1"
-                  value="option1"
-                />
-                <label className="form-check-label" for="inlineRadio1">
-                  Tất Cả
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio2"
-                  value="option2"
-                />
-                <label className="form-check-label" for="inlineRadio2">
-                  Salers
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input
-                  className="form-check-input"
-                  type="radio"
-                  name="inlineRadioOptions"
-                  id="inlineRadio3"
-                  value="option1"
-                />
-                <label className="form-check-label" for="inlineRadio3">
-                  Quản Kho
-                </label>
-              </div>
-            </div>
-
-            <div className="container-contact1-form-btn">
-              <div className="contact1-form-btn1">
-                <button className="contact1-form-btn">
-                  <span>Gửi</span>
-                  <FontAwesomeIcon icon={faArrowRight} className="arrowRight" />
-                </button>
-              </div>
-              <div className="contact1-form-btn2">
-                <button className="contact1-form-btn">
-                  <span> Hủy Bỏ </span>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
+        </Form>
+      </Formik>
     </>
   );
 }

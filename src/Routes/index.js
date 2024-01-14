@@ -1,10 +1,13 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./privateRouter";
-import NotificationList from "../Components/notification/NotificationList";
 import Dashboard from "../Pages/DashBoard";
 import Login from "../Components/Login";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import NotificationSave from "../Components/notification/NotificationSave";
+import NotificationList from "../Components/notification/NotificationList";
+import NotificationWarehouse from "../Components/notification/NotificationWarehouse";
 
 const MainRouter = () => {
   return (
@@ -21,8 +24,13 @@ const MainRouter = () => {
           </PrivateRouter>
         }
       />
-      <Route path="/notifications" element={<NotificationList />}></Route>
+      <Route path="/notifications" element={<NotificationList />}></Route>{" "}
+      {/*notificationsaler */}
       <Route path="/notificationsave" element={<NotificationSave />}></Route>
+      <Route
+        path="/notificationWarehouse"
+        element={<NotificationWarehouse />}
+      ></Route>
     </Routes>
   );
 };
