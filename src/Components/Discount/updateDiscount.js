@@ -21,6 +21,10 @@ export function UpdateDiscount() {
     name: Yup.string()
       .required("Not Empty")
       .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, "Not format"),
+      sale: Yup.number()
+      .required("Not Empty")
+      .min(0, "Sale must be at least 0")
+      .max(100, "Sale must be at most 1000"),
     rewardPoint: Yup.number()
       .required("Not Empty")
       .min(0, "Reward Point must be at least 0")
@@ -29,15 +33,16 @@ export function UpdateDiscount() {
       .required("Not Empty")
       .min(1000, "Condition must be at least 1000")
       .max(100000000, "Condition must be at most 100,000,000"),
-    beginDate: Yup.date().required("Not Empty")
-    .test(
-      "is-greater",
-      "Begin Date should be later than Start Date",
-      function (value) {
-        const { endDate } = this.parent;
-        return endDate && value && new Date(value) >= new Date(endDate);
-      }
-    ),
+    beginDate: Yup.date()
+      .required("Not Empty")
+      .test(
+        "is-greater",
+        "Begin Date should be later than Start Date",
+        function (value) {
+          const { endDate } = this.parent;
+          return endDate && value && new Date(value) >= new Date(endDate);
+        }
+      ),
     endDate: Yup.date()
       .required("Not Empty")
       .test(
@@ -57,15 +62,15 @@ export function UpdateDiscount() {
     return "";
   };
 
-  const handleSubmit = async (id,values) => {
+  const handleSubmit = async (id, values) => {
     const formattedValues = {
       ...values,
       beginDate: formatDate(values.beginDate),
       endDate: formatDate(values.endDate),
     };
     console.log("TOi oke");
-    console.log(id , formattedValues);
-    await discounts.updateDiscount(id,formattedValues);
+    console.log(id, formattedValues);
+    await discounts.updateDiscount(id, formattedValues);
     navigate("/listDiscount");
   };
 
@@ -77,11 +82,12 @@ export function UpdateDiscount() {
     name: discount.name,
     rewardPoint: discount.rewardPoint,
     condition: discount.condition,
+    sale:discount.sale,
     beginDate: formatDate(discount.beginDate),
     endDate: formatDate(discount.beginDate),
     customerType: {
-      id: discount.customerType.id
-    }
+      id: discount.customerType.id,
+    },
   };
   return (
     <div className="page-container">
@@ -91,19 +97,20 @@ export function UpdateDiscount() {
           initialValues={initDiscount}
           validationSchema={Yup.object().shape(validateDiscount)}
           onSubmit={(value) => {
-            handleSubmit(discount.discountCode,value);
-            toast.success("Đăng kí thành công");
+            handleSubmit(discount.discountCode, value);
+            toast.success("Update success");
           }}
         >
           <Form>
             <div className={style["form-row"]}>
               <div>
-                <span className="label">Type</span>
-                <div className="col-sm-10" style={{ width: "500px" }}>
+                <span className={style["label"]}>Type</span>
+                <div className="col-sm-10" style={{ width: "240px" }}>
                   <Field
                     as="select"
                     name="customerType.id"
                     className="form-select"
+                    style={{ height: "44px" }}
                   >
                     <option value={1}>Regular</option>
                     <option value={2}>Vip</option>
@@ -111,10 +118,11 @@ export function UpdateDiscount() {
                   </Field>
                 </div>
               </div>
-            </div>
-            <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Discount Code</span>
+                <span className={style["label"]}>
+                  Discount Code{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -125,11 +133,16 @@ export function UpdateDiscount() {
                 <ErrorMessage
                   name="discountCode"
                   component="span"
-                  className="form-err"
+                  className={style["form-err"]}
                 ></ErrorMessage>
               </div>
+            </div>
+            <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Name Discount <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Name Discount{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -139,13 +152,33 @@ export function UpdateDiscount() {
                 <ErrorMessage
                   name="name"
                   component="span"
-                  className="form-err"
+                  className={style["form-err"]}
+                ></ErrorMessage>
+              </div>
+              <div>
+                <span className={style["label"]}>
+                  Sale (%){" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
+                <Field
+                  class="form-control"
+                  type="text"
+                  name="sale"
+                  placeholder="20"
+                />
+                <ErrorMessage
+                  name="sale"
+                  component="span"
+                  className={style["form-err"]}
                 ></ErrorMessage>
               </div>
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Reward Point <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Reward Point{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -159,7 +192,10 @@ export function UpdateDiscount() {
                 ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>Condition <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Condition{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -175,11 +211,17 @@ export function UpdateDiscount() {
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Start Date <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Start Date{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field class="form-control" name="beginDate" type="date" />
               </div>
               <div>
-                <span className={style["label"]}>End Date <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  End Date{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field class="form-control" name="endDate" type="date" />
                 <ErrorMessage
                   name="endDate"

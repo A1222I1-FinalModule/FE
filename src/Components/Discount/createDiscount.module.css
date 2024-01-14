@@ -1,8 +1,4 @@
 
-h1{
-  text-align: center;
-}
-
 .container-main {
   /* max-width: 700px; */
   max-width: 580px; /* Tăng chiều rộng tối đa của .container-main */
@@ -51,8 +47,9 @@ input[type="button"] {
   margin: 0 5px;
 }
 
-.form-select{
+.form-select {
   height: 44px;
+  margin-bottom: 5px; /* Thêm khoảng cách dưới ô select */
 }
 
 .buttons {

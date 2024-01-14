@@ -12,6 +12,7 @@ import * as discounts from "../../Services/API/Discount/discount";
 import { Route, Routes, NavLink, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
+import { toast } from "react-hot-toast";
 import Example from "../ModalConfirm/ModalConfirm";
 export function Discount() {
   const [discount, setDiscount] = useState([]);
@@ -40,6 +41,7 @@ export function Discount() {
   };
   const getDelete = async (id) => {
     await discounts.getDeleteDiscount(id);
+    toast.error("Delete Success");
     await getAllDiscount();
   };
   const handleDelete = (id) => {

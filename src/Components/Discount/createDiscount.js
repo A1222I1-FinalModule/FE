@@ -5,10 +5,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
 import * as discounts from "../../Services/API/Discount/discount";
 import moment from "moment";
 export function CreateDiscount() {
@@ -46,6 +42,10 @@ export function CreateDiscount() {
     name: Yup.string()
       .required("Not Empty")
       .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, "Invalid Characters 3-10"),
+    sale: Yup.number()
+      .required("Not Empty")
+      .min(0, "Sale must be at least 0")
+      .max(100, "Sale must be at most 1000"),
     rewardPoint: Yup.number()
       .required("Not Empty")
       .min(0, "Reward Point must be at least 0")
@@ -54,15 +54,16 @@ export function CreateDiscount() {
       .required("Not Empty")
       .min(1000, "Condition must be at least 1000")
       .max(100000000, "Condition must be at most 100,000,000"),
-    beginDate: Yup.date().required("Not Empty")
-    .test(
-      "is-greater",
-      "Begin Date should be later than Start Date",
-      function (value) {
-        const { endDate } = this.parent;
-        return endDate && value && new Date(value) >= new Date(endDate);
-      }
-    ),
+    beginDate: Yup.date()
+      .required("Not Empty")
+      .test(
+        "is-greater",
+        "Begin Date should be later than Start Date",
+        function (value) {
+          const { endDate } = this.parent;
+          return endDate && value && new Date(value) <= new Date(endDate);
+        }
+      ),
     endDate: Yup.date()
       .required("Not Empty")
       .test(
@@ -118,18 +119,19 @@ export function CreateDiscount() {
           validationSchema={Yup.object().shape(validateDiscount)}
           onSubmit={(value) => {
             handleSubmit(value);
-            toast.success("Đăng kí thành công");
+            toast.success("Create Success");
           }}
         >
           <Form>
             <div className={style["form-row"]}>
               <div>
-                <span className="label">Type</span>
-                <div className="col-sm-10" style={{ width: "500px" }}>
+                <span className={style["label"]}>Type</span>
+                <div className="col-sm-10" style={{ width: "240px" }}>
                   <Field
                     as="select"
                     name="customerType.id"
                     className="form-select"
+                    style={{ height: "44px" }}
                   >
                     <option value={1}>Regular</option>
                     <option value={2}>Vip</option>
@@ -137,10 +139,11 @@ export function CreateDiscount() {
                   </Field>
                 </div>
               </div>
-            </div>
-            <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Discount Code <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Discount Code{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -153,8 +156,13 @@ export function CreateDiscount() {
                   className={style["form-err"]}
                 ></ErrorMessage>
               </div>
+            </div>
+            <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Name Discount <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Name Discount{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -167,10 +175,30 @@ export function CreateDiscount() {
                   className={style["form-err"]}
                 ></ErrorMessage>
               </div>
+              <div>
+                <span className={style["label"]}>
+                  Sale (%){" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
+                <Field
+                  class="form-control"
+                  type="text"
+                  name="sale"
+                  placeholder="20"
+                />
+                <ErrorMessage
+                  name="sale"
+                  component="span"
+                  className={style["form-err"]}
+                ></ErrorMessage>
+              </div>
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Reward Point <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Reward Point{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -184,7 +212,10 @@ export function CreateDiscount() {
                 ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>Condition <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Condition{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field
                   class="form-control"
                   type="text"
@@ -200,7 +231,10 @@ export function CreateDiscount() {
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Start Date <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  Start Date{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field class="form-control" name="beginDate" type="date" />
                 <ErrorMessage
                   name="beginDate"
@@ -209,7 +243,10 @@ export function CreateDiscount() {
                 ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>End Date <span className={` ${style["required-field"]}`}>*</span></span>
+                <span className={style["label"]}>
+                  End Date{" "}
+                  <span className={` ${style["required-field"]}`}>*</span>
+                </span>
                 <Field class="form-control" name="endDate" type="date" />
                 <ErrorMessage
                   name="endDate"

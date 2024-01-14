@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./privateRouter";
 import Dashboard from "../Pages/DashBoard";
 import Login from "../Components/Login";
+import { Toaster} from 'react-hot-toast';
 import { CreateDiscount } from "../Components/Discount/createDiscount";
 import { ListCustomer } from "../Components/Customer/listCustomer";
 import { Discount } from "../Components/Discount/listDiscount";
@@ -10,7 +11,8 @@ import { UpdateDiscount } from "../Components/Discount/updateDiscount";
 
 const MainRouter = () => {
   return (
-    <Routes>
+    <>
+        <Routes>
       <Route path="/admin/dashboard" element={<Dashboard></Dashboard>}></Route>      
       <Route path="/login" element={<Login/>}/>
       <Route path="/private" element={<PrivateRouter><></></PrivateRouter>}/>
@@ -20,6 +22,8 @@ const MainRouter = () => {
       <Route path="/listDiscount" element={<Discount/>}></Route>
       <Route path="/" element={<></>}/>
     </Routes>
+    <Toaster position="top-right" reverseOrder={false} />;
+    </>
   );
 };
 
