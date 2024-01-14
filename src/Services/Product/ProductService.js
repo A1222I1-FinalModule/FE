@@ -10,3 +10,15 @@ export const saveInfoProduct = async(values) => {
     console.log(temp)
     return temp.status;
 }
+
+export const pageProduct = async(name,page,perPage) => {
+    let temp = await axios.get("http://localhost:8080/product", {
+        params:{
+           name_like : name,
+           _page : page,
+           _limit : perPage,    
+           _order : 'desc',
+        }
+    });
+    return temp;
+}

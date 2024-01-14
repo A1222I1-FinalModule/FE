@@ -1,17 +1,25 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./privateRouter";
+import Dashboard from "../Pages/DashBoard";
 import Login from "../Components/Login";
-import InfoProductCreate from "./Components/product/InfoProductCreate";
-import ProductList from "./Components/product/InfoProductCreate";
+import InfoProductCreate from "../Components/product/InfoProductCreate";
+import ProductList from "../Components/product/ProductList";
 const MainRouter = () => {
   return (
     <Routes>
-      <Route path="/" element={<></>}/>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/private" element={<PrivateRouter><></></PrivateRouter>}/>
-      {/* <Route path="/createInfo" element={<InfoProductCreate/>}/> */}
-      <Route path="/listProduct" element={<ProductList/>}/>
+      <Route path="/admin/dashboard" element={<Dashboard></Dashboard>}></Route>
+      <Route path="/login" element={<Login />} />
+      <Route
+        path="/private"
+        element={
+          <PrivateRouter>
+            <></>
+          </PrivateRouter>
+        }
+      />
+      <Route path="/createInfo" element={<InfoProductCreate />} />
+      <Route path="/listProduct" element={<ProductList />} />
     </Routes>
   );
 };

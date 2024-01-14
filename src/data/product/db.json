@@ -60,6 +60,24 @@
       "category": "",
       "price": "2100000",
       "id": 9
+    },
+    {
+      "productCode": "Bảo Đạt",
+      "name": "10",
+      "quantity": "10",
+      "size": "",
+      "category": "",
+      "price": 0,
+      "id": 10
+    },
+    {
+      "productCode": "Bảo Đạt",
+      "name": "10",
+      "quantity": "10",
+      "size": "",
+      "category": "",
+      "price": 0,
+      "id": 11
     }
   ]
 }

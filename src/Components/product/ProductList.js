@@ -1,37 +1,73 @@
 import { useEffect, useState } from "react";
+import classNames from "classnames/bind";
 import * as ProductService from "../../Services/product/ProductService";
-import "../product/Product.css";
+import styles from  "../product/Product.module.css";
 
+const cx = classNames.bind(styles);
+
+
+const INIT_PAGE = 1;
+const PER_PAGE = 5;
+const ODER = 'desc'
 
 export default function ProductList() {
   const [product, setProduct] = useState([]);
   const [name,setName] = useState("");
+  const [page, setPage] = useState(INIT_PAGE);
+  const [perPage, setPerPage] = useState(PER_PAGE);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     getAllListProduct();
-  },[name]);
+  },[name,page]);
 
-  const getAllListProduct =  async () => {
-      let temp = await ProductService.getAllListProduct(name);
-      setProduct(temp);
+  // const getAllListProduct =  async () => {
+  //     let temp = await ProductService.getAllListProduct(name);
+  //     setProduct(temp);
+  // }
+
+  const getAllListProduct = async () => {
+    let temp = await ProductService.pageProduct(
+      name,
+      page,
+      perPage
+    )
+    setProduct(temp.data);
+
+    const totalCount = temp.headers.get("X-Total-Count");
+    const totalPages = Math.ceil(totalCount / 5);
+    setTotalPages(totalPages);
+    console.log(temp);
   }
 
+    const handleNextPage = () => {
+      if (page < totalPages) {
+        setPage((prev) => prev + 1);
+      }
+    };
+  
+    const handlePrevPage = () => {
+      if (page > 1) {
+        setPage((prev) => prev - 1);
+      }
+    };
+
   return (
-    <div className="wrapper">
-      <div className="container">
-        <div className="row">
-          <div className="col">
-            <div className="card">
-              <div className="card-header">
-                <h3 className="fst-italic">
+    <div className={cx('wrapper')}>
+      <div className={cx('container')}>
+        <div className={cx('row')}>
+          <div className={cx('col')}>
+            <div className={cx('card')}>
+              <div className={cx('card-header')}>
+                <h3 className={cx('fst-italic')}>
                   {" "}
-                  <i className="fa-solid fa-list" /> Products are in stock
+                  <i className={cx('fa-solid fa-list')} /> Products are in stock 
                 </h3>
-                <div className="input-group">
-                  <div className="col-sm-6">
+                <div className={cx('input-group')}>
+                  <div className={cx('col-sm-6')}>
                     <input
                       type="search"
-                      className="form-control rounded "
+                      className={cx('form-control rounded')} 
                       placeholder
                       aria-label="Search"
                       aria-describedby="search-addon"
@@ -40,24 +76,24 @@ export default function ProductList() {
                   </div>
                   <button
                     type="button"
-                    className=" btn btn-outline-primary"
+                    className={cx('btn btn-outline-primary')}  
                     data-mdb-ripple-init
                   >
                     Search
                   </button>
                 </div>
               </div>
-              <div className="card-body">
+              <div className={cx('card-body')}> 
                 <table className="table table-bordered border-secondary table-secondary table-striped table-hover">
                   <thead>
                     <tr className="text-center">
-                      <th className="align-middle">#</th>
-                      <th className="align-middle">Product code</th>
-                      <th className="align-middle">Product's name</th>
-                      <th className="align-middle">Quantity</th>
-                      <th className="align-middle">Size</th>
-                      <th className="align-middle">Category</th>
-                      <th className="align-middle">Price</th>
+                      <th className={cx('align-middle')}>#</th>  
+                      <th className={cx('align-middle')}>Product code</th>
+                      <th className={cx('align-middle')}>Product's name</th>
+                      <th className={cx('align-middle')}>Quantity</th>
+                      <th className={cx('align-middle')}>Size</th>
+                      <th className={cx('align-middle')}>Category</th>
+                      <th className={cx('align-middle')}>Price</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -90,40 +126,29 @@ export default function ProductList() {
                     })}
                   </tbody>
                 </table>
-                <nav aria-label="Page navigation example">
-                  <ul className="pagination justify-content-center">
-                    <li className="page-item disabled">
-                      <a
-                        className="page-link"
-                        href="#"
-                        tabIndex={-1}
-                        aria-disabled="true"
-                      >
-                        Previous
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        1
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        2
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        3
-                      </a>
-                    </li>
-                    <li className="page-item">
-                      <a className="page-link" href="#">
-                        Next
-                      </a>
-                    </li>
-                  </ul>
-                </nav>
+                <nav>
+        <ul className="pagination">
+          <li className="page-item">
+            <button
+              className={`page-link ${page === 1 ? "disabled" : ""}`}
+              onClick={handlePrevPage}
+            >
+              Previous
+            </button>
+          </li>
+          <li className="page-item">
+            <p className="page-link">{page}</p>
+          </li>
+          <li className="page-item">
+            <button
+              className={`page-link ${page === totalPages ? "disabled" : ""}`}
+              onClick={handleNextPage}
+            >
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
               </div>
             </div>
           </div>
@@ -132,3 +157,4 @@ export default function ProductList() {
     </div>
   ) 
 }
+

@@ -1,7 +1,12 @@
 import { useEffect } from "react";
 import * as ProductService from "../../Services/product/ProductService";
-import { Formik, Form, Field} from "formik";
-import "../product/InfoProductCreate.css";
+import { Formik, Form, Field,ErrorMessage} from "formik";
+import styles from "../product/InfoProductCreate.module.css";
+import classNames from "classnames/bind";
+import * as Yup from "yup";
+
+
+const cx = classNames.bind(styles);
 
 export default function InfoProductCreate() {
   const infoProductInit = {
@@ -12,6 +17,26 @@ export default function InfoProductCreate() {
     category: "",
     price: 0,
   };
+
+
+  const productValidate = {
+    productCode : Yup.string()
+    .required("Required")
+    .matches(/^H[0-9]{3,9}$/, "Not format"),
+    name : Yup.string()
+    .required("Required")
+    .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, "Invalid Characters 3-10"),
+    quantity : Yup.string()
+    .required("Required")
+    .min(1,"Quantity must be at least 1 or more"),
+    size : Yup.string()
+    .required("Required"),
+    category : Yup.string()
+      .required("Required"),
+    price : Yup.string()
+    .required("Required")
+    .min(1,"Price must be at least 1 VND or more")
+  }
 
   // useEffect(() => {}, []);
 
@@ -29,29 +54,32 @@ export default function InfoProductCreate() {
     onSubmit={(values) => {
       saveInfoProduct(values)
     }}
+    validationSchema={
+      Yup.object(productValidate)
+    }
     >
-      <div className="container">
-        <h1 className="brand">
+      <div className={cx('container')}>
+        <h1 className={cx('brand')}>
           <span>FASHION SHOP</span>
         </h1>
-        <div className="wrapper">
-          <div className="company-info">
+        <div className={cx('wrapper')}>
+          <div className={cx('company-info')}> 
             <h3>FASHION SHOP</h3>
             <ul>
               <li>
-                <i className="fa fa-road" /> 44 Main Street
+                <i className={cx('fa fa-road')}/> 44 Main Street  
               </li>
               <li>
-                <i className="fa fa-phone" /> (555) 555-5555
+                <i className={cx('fa fa-phone')}/> (555) 555-5555  
               </li>
               <li>
-                <i className="fa fa-envelope" /> fashionshop@phoenix.com
+                <i className={cx('fa fa-envelope')}/> fashionshop@phoenix.com  
               </li>
             </ul>
           </div>
            
-          <div className="contact">
-            <h3 className="text-primary">Create Product</h3>
+          <div className={cx('contact')}>
+            <h3 className={cx('text-primary')}>Create Product</h3> 
             <Form>
             {/* <p>
                   <label className="text-primary" htmlFor="">Id</label>
@@ -64,7 +92,7 @@ export default function InfoProductCreate() {
                   />
                 </p> */}
               <p>
-                  <label className="text-primary" htmlFor="">Product's code</label>
+                  <label className={cx('text-primary')} htmlFor="">Product's code</label>
                   <Field
                     type="text"
                     name="productCode"
@@ -72,9 +100,10 @@ export default function InfoProductCreate() {
                     required
                     placeholder="Please enter your id"
                   />
+                <ErrorMessage style={{color : "red"}} name="productCode" component="span" className={cx('form-err')} ></ErrorMessage>
                 </p>
                 <p>
-                  <label className="text-primary" htmlFor="">Product's name</label>
+                  <label className={cx('text-primary')} htmlFor="">Product's name</label>
                   <Field
                     type="text"
                     name="name"
@@ -82,9 +111,10 @@ export default function InfoProductCreate() {
                     required
                     placeholder="Please enter your name"
                   />
+                  <ErrorMessage style={{color : "red"}} name="name" component="span" className={cx('form-err')} ></ErrorMessage>
                 </p>
                 <p>
-                  <label className="text-primary" htmlFor="">Quantity</label>
+                  <label className={cx('text-primary')} htmlFor="">Quantity</label>
                   <Field
                     type="text"
                     name ="quantity"
@@ -92,94 +122,95 @@ export default function InfoProductCreate() {
                     required
                     placeholder="Please enter your price"
                   />
+                  <ErrorMessage style={{color : "red"}} name="quantity" component="span" className={cx('form-err')} ></ErrorMessage>
                 </p>
                
-                <div className="form-group">
+                <div className={cx('form-group')}> 
                   <label
                     htmlFor
-                    className="col-sm-2 col-form-label text-primary"
+                    className={cx('col-sm-2 col-form-label text-primary')}  
                   >
                     Size
                   </label>
-                  <div className="form-check-inline">
+                  <div className={cx('form-check-inline')}>  
                     <input
-                      className="form-check-input"
+                      className={cx('form-check-input')}   
                       type="checkbox"
                       id="XS"
                       defaultValue
                     />
                     <label
-                      className="form-check-label text-primary"
+                      className={cx('form-check-label text-primary')}  
                       htmlFor="XS"
                     >
                       XS
                     </label>
                   </div>
-                  <div className="form-check-inline">
+                  <div className={cx('form-check-inline')}>
                     <input
-                      className="form-check-input"
+                      className={cx('form-check-input')}
                       type="checkbox"
                       id="S"
                       defaultValue
                     />
                     <label
-                      className="form-check-label text-primary"
+                      className={cx('form-check-label text-primary')}
                       htmlFor="S"
                     >
                       S
                     </label>
                   </div>
-                  <div className="form-check-inline">
+                  <div className={cx('form-check-inline')}>
                     <input
-                      className="form-check-input"
+                      className={cx('form-check-input')}
                       type="checkbox"
                       id="M"
                       defaultValue
                     />
                     <label
-                      className="form-check-label text-primary"
+                      className={cx('form-check-label text-primary')}
                       htmlFor="M"
                     >
                       M
                     </label>
                   </div>
-                  <div className="form-check-inline">
+                  <div className={cx('form-check-inline')}>
                     <input
-                      className="form-check-input"
+                      className={cx('form-check-input')}
                       type="checkbox"
                       id="L"
                       defaultValue
                     />
                     <label
-                      className="form-check-label text-primary"
+                      className={cx('form-check-label text-primary')}
                       htmlFor="L"
                     >
                       L
                     </label>
                   </div>
-                  <div className="form-check-inline">
+                  <div className={cx('form-check-inline')}>
                     <input
-                      className="form-check-input"
+                      className={cx('form-check-input')}
                       type="checkbox"
                       id="XL"
                       defaultValue
                     />
                     <label
-                      className="form-check-label text-primary"
+                      className={cx('form-check-label text-primary')}
                       htmlFor="XL"
                     >
                       XL
                     </label>
                   </div>
-                  <div className="form-check-inline">
+                  <div className={cx('form-check-inline')}>
                     <input
-                      className="form-check-input"
+                      className={cx('form-check-input')}
                       type="checkbox"
                       id="XXL"
                       defaultValue
                     />
                     <label
-                      className="form-check-label text-primary"
+                      className={cx('form-check-label text-primary')}
                       htmlFor="XXL"
                     >
                       XXL
@@ -202,14 +233,14 @@ export default function InfoProductCreate() {
                       accept=".png,.gif,.jpg,.jpeg"
                       id="input-file"
                     />
-                  </div>
-                </div> */}
-                <div className="form-group">
-                  <label htmlFor="category" className="text-primary">
+                  </div> */}
+                {/* </div> */}
+                <div className={cx('form-group')}>
+                  <label htmlFor="category" className={cx('text-primary')}>
                     Category Product
                   </label>
                   <select
-                    className="form-select"
+                    className={cx('form-select')}  
                     aria-label="Default select example"
                     id="category"
                     name="category"
@@ -220,8 +251,9 @@ export default function InfoProductCreate() {
                     <option value={3}>Children's clothing</option>
                   </select>
                 </div>
+               
                 <p>
-                  <label className="text-primary">Price</label>
+                  <label className={cx('text-primary')}>Price</label>
                   <Field
                     type="text"
                     name="price"
@@ -229,11 +261,11 @@ export default function InfoProductCreate() {
                     required
                     placeholder="Please enter your price"
                   />
+                  <ErrorMessage style={{color : "red"}} name="price" component="span" className={cx('form-err')} ></ErrorMessage>
                 </p>
-                <p className="full">
+                <p className={cx('full')}>
                   <button type="submit">Save</button>
                 </p>
-           
               </Form>
           </div>
         </div>
