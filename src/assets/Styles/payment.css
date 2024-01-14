@@ -1,3 +1,7 @@
+:root{
+    --normal-font-size: 20px;
+}
+
 .btn.purple-btn {
     background-color: #5E2572;
     color: white;
@@ -17,4 +21,10 @@
 .btn.loon-crest-btn:hover{
     background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
     color: black;
+}
+
+.error-message{
+    box-sizing: border-box;
+    height: var(--normal-font-size);
+    font-size: var(--normal-font-size);
 }
