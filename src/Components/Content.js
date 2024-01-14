@@ -4,12 +4,13 @@ import { OrderGrowth } from './ContentElement/OrderGrowth';
 import { Revenue } from './ContentElement/Revenue';
 import { EmployeeSaleTop } from './ContentElement/EmployeeSaleTop';
 import { OrderRecent } from './ContentElement/OrderRecent';
+import style from '../assets/Styles/StyleDashBoard.module.css';
 export default function Content() {
 
   return (
-    <div className="content col-10 ps-0">
-      <div className="content-main">
-        <div className="content_first">
+    <div className={`${style.content} col-10 ps-0`}>
+      <div className={style.content_main}>
+        <div className={style.content_first}>
           <div className="row">
             <div className="col-4">
               <CustomerGrowth />
@@ -22,10 +23,10 @@ export default function Content() {
             </div>
           </div>
         </div>
-        <div className="content-second">
+        <div className={style.content_second}>
           <EmployeeSaleTop />
         </div>
-        <div className="content-three">
+        <div className={style.content_three}>
           <OrderRecent />
         </div>
       </div>

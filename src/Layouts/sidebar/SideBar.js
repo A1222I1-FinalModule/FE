@@ -1,88 +1,20 @@
 import React from 'react';
-export default function SideBar() {
-  return (
-    <div className="sidebar col-2 pe-0">
-      <div className="sidebar-container">
-        <div className="list-item">
-          <div className="contain_item">
-            <a href="#" className="single_option">
-              <div className="item-sidebar">
-                <div className="item-title">
-                  <ion-icon name="logo-buffer" />
-                  <span>Dashboard</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="contain_item">
-            <a href="#" className="single_option">
-              <div className="item-sidebar">
-                <div className="item-title">
-                  <ion-icon name="logo-buffer" />
-                  <span>Xóa sản phẩm</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="contain_item">
-            <a href="#" className="single_option">
-              <div className="item-sidebar">
-                <div className="item-title">
-                  <ion-icon name="logo-buffer" />
-                  <span>Thêm sản phẩm</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="contain_item">
-            <a href="#" className="single_option">
-              <div className="item-sidebar">
-                <div className="item-title">
-                  <ion-icon name="logo-buffer" />
-                  <span>Sửa sản phẩm</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className="contain_item">
-            <div className="item-sidebar dropdown">
-              <div className="item-title">
-                <ion-icon name="color-palette" />
-                <span>Quản lý kho hàng</span>
-              </div>
-            </div>
-            <div className="submenu">
-              <ul className="dfsaf">
-                <li><a href="#">Nguyen Van A</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="contain_item">
-            <div className="item-sidebar dropdown">
-              <div className="item-title">
-                <ion-icon name="school" />
-                <span>Nhân viên bán hàng</span>
-              </div>
-            </div>
-            <div className="submenu">
-              <ul className>
-                <li><a href="#">Nguyen Van B</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="contain_item">
-            <div className="item-sidebar dropdown">
-              <div className="item-title">
-                <ion-icon name="trending-up" />
-                <span>Thống kê</span>
-              </div>
-            </div>
-            <div className="submenu">
-              <ul className>
-                <li><a href="#">Nguyen Van E</a></li>
-              </ul>
-            </div>
-          </div>
+import style from '../../assets/Styles/StyleDashBoard.module.css';
+export default function SideBar(){
+    return(
+      <div className={`${style.sidebar} col-2 pe-0`}>
+         <div className={style.sidebar_container}>
+        <div className={style.list_item}>
+          <div className={style.contain_item}>
+                <a href="/abc" className={style.single_option}>
+                    <div className={style.item_sidebar}>
+                        <div className={style.item_title}>
+                          <ion-icon name="logo-buffer"></ion-icon>
+                          <span>Dashboard</span>
+                        </div>
+                    </div>
+                </a>
+          </div>       
         </div>
       </div>
     </div>
