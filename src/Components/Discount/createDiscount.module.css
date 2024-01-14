@@ -4,7 +4,7 @@ h1{
 }
 
 .container-main {
-  max-width: 700px;
+  /* max-width: 700px; */
   max-width: 580px; /* Tăng chiều rộng tối đa của .container-main */
   padding: 40px; /* Tăng padding để thêm không gian bên trong */
   background: #fff;
@@ -60,4 +60,8 @@ input[type="button"] {
   justify-content: center;
   gap: 20px;
   margin-top: 20px;
+}
+.required-field {
+  color: red;
+  display: inline-block;
 }

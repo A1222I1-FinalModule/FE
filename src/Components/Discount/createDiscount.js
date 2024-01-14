@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import * as discounts from "../../Services/API/Discount/discount";
+import moment from "moment";
 export function CreateDiscount() {
   const navigate = useNavigate();
   const initDiscount = {
@@ -18,33 +19,33 @@ export function CreateDiscount() {
     rewardPoint: "",
     condition: "",
     customerType: {
-      id: 2
-    }
+      id: 2,
+    },
   };
   const validateDiscount = {
     discountCode: Yup.string()
       .required("Not Empty")
       .matches(/^C[a-zA-Z0-9]{2,9}$/, "Not format"),
-      // .test(
-      //   "discountCode-existence",
-      //   "Discount code already exists",
-      //   async function (value) {
-      //     console.log("Validation function called with value:", value);
-      //     try {
-      //       const exists = await checkDiscountCodeExistence(value);
-      //       console.log("API response:", exists);
-      //       return !exists
-      //         ? true
-      //         : this.createError({ message: "Discount code already exists" });
-      //     } catch (error) {
-      //       console.error("Error checking discount code existence:", error);
-      //       return false;
-      //     }
-      //   }
-      // ),
+    // .test(
+    //   "discountCode-existence",
+    //   "Discount code already exists",
+    //   async function (value) {
+    //     console.log("Validation function called with value:", value);
+    //     try {
+    //       const exists = await checkDiscountCodeExistence(value);
+    //       console.log("API response:", exists);
+    //       return !exists
+    //         ? true
+    //         : this.createError({ message: "Discount code already exists" });
+    //     } catch (error) {
+    //       console.error("Error checking discount code existence:", error);
+    //       return false;
+    //     }
+    //   }
+    // ),
     name: Yup.string()
       .required("Not Empty")
-      .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, "Not format"),
+      .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, "Invalid Characters 3-10"),
     rewardPoint: Yup.number()
       .required("Not Empty")
       .min(0, "Reward Point must be at least 0")
@@ -53,7 +54,15 @@ export function CreateDiscount() {
       .required("Not Empty")
       .min(1000, "Condition must be at least 1000")
       .max(100000000, "Condition must be at most 100,000,000"),
-    beginDate: Yup.date().required("Not Empty"),
+    beginDate: Yup.date().required("Not Empty")
+    .test(
+      "is-greater",
+      "Begin Date should be later than Start Date",
+      function (value) {
+        const { endDate } = this.parent;
+        return endDate && value && new Date(value) >= new Date(endDate);
+      }
+    ),
     endDate: Yup.date()
       .required("Not Empty")
       .test(
@@ -88,10 +97,10 @@ export function CreateDiscount() {
     try {
       const temp = await discounts.checkDiscountCodeExistence(discountCode);
       console.log("Full API response:", temp);
-      console.log("Full",temp.data);
-      if (temp=== true) {
-        console.log("API response data:", temp.data===true);
-        return !temp.data;
+      console.log("Full", temp.data);
+      if (temp === true) {
+        console.log("API response data:");
+        return temp;
       } else {
         throw new Error("Invalid API response format");
       }
@@ -131,7 +140,7 @@ export function CreateDiscount() {
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Discount Code</span>
+                <span className={style["label"]}>Discount Code <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field
                   class="form-control"
                   type="text"
@@ -141,11 +150,11 @@ export function CreateDiscount() {
                 <ErrorMessage
                   name="discountCode"
                   component="span"
-                  className="form-err"
+                  className={style["form-err"]}
                 ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>Name Discount</span>
+                <span className={style["label"]}>Name Discount <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field
                   class="form-control"
                   type="text"
@@ -155,13 +164,13 @@ export function CreateDiscount() {
                 <ErrorMessage
                   name="name"
                   component="span"
-                  className="form-err"
+                  className={style["form-err"]}
                 ></ErrorMessage>
               </div>
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Reward Point</span>
+                <span className={style["label"]}>Reward Point <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field
                   class="form-control"
                   type="text"
@@ -171,11 +180,11 @@ export function CreateDiscount() {
                 <ErrorMessage
                   name="rewardPoint"
                   component="span"
-                  className="form-err"
+                  className={style["form-err"]}
                 ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>Condition</span>
+                <span className={style["label"]}>Condition <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field
                   class="form-control"
                   type="text"
@@ -185,22 +194,27 @@ export function CreateDiscount() {
                 <ErrorMessage
                   name="condition"
                   component="span"
-                  className="form-err"
+                  className={style["form-err"]}
                 ></ErrorMessage>
               </div>
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Start Date</span>
+                <span className={style["label"]}>Start Date <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field class="form-control" name="beginDate" type="date" />
+                <ErrorMessage
+                  name="beginDate"
+                  component="span"
+                  className={style["form-err"]}
+                ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>End Date</span>
+                <span className={style["label"]}>End Date <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field class="form-control" name="endDate" type="date" />
                 <ErrorMessage
                   name="endDate"
                   component="span"
-                  className="form-err"
+                  className={style["form-err"]}
                 ></ErrorMessage>
               </div>
             </div>

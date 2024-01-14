@@ -29,7 +29,15 @@ export function UpdateDiscount() {
       .required("Not Empty")
       .min(1000, "Condition must be at least 1000")
       .max(100000000, "Condition must be at most 100,000,000"),
-    beginDate: Yup.date().required("Not Empty"),
+    beginDate: Yup.date().required("Not Empty")
+    .test(
+      "is-greater",
+      "Begin Date should be later than Start Date",
+      function (value) {
+        const { endDate } = this.parent;
+        return endDate && value && new Date(value) >= new Date(endDate);
+      }
+    ),
     endDate: Yup.date()
       .required("Not Empty")
       .test(
@@ -98,8 +106,8 @@ export function UpdateDiscount() {
                     className="form-select"
                   >
                     <option value={1}>Regular</option>
-                    <option value={2}>VIP</option>
-                    <option value={3}>NORMAL</option>
+                    <option value={2}>Vip</option>
+                    <option value={3}>Normal</option>
                   </Field>
                 </div>
               </div>
@@ -112,6 +120,7 @@ export function UpdateDiscount() {
                   type="text"
                   name="discountCode"
                   placeholder="S001"
+                  readOnly
                 />
                 <ErrorMessage
                   name="discountCode"
@@ -120,7 +129,7 @@ export function UpdateDiscount() {
                 ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>Name Discount</span>
+                <span className={style["label"]}>Name Discount <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field
                   class="form-control"
                   type="text"
@@ -136,7 +145,7 @@ export function UpdateDiscount() {
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Reward Point</span>
+                <span className={style["label"]}>Reward Point <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field
                   class="form-control"
                   type="text"
@@ -150,7 +159,7 @@ export function UpdateDiscount() {
                 ></ErrorMessage>
               </div>
               <div>
-                <span className={style["label"]}>Condition</span>
+                <span className={style["label"]}>Condition <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field
                   class="form-control"
                   type="text"
@@ -166,11 +175,11 @@ export function UpdateDiscount() {
             </div>
             <div className={style["form-row"]}>
               <div>
-                <span className={style["label"]}>Start Date</span>
+                <span className={style["label"]}>Start Date <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field class="form-control" name="beginDate" type="date" />
               </div>
               <div>
-                <span className={style["label"]}>End Date</span>
+                <span className={style["label"]}>End Date <span className={` ${style["required-field"]}`}>*</span></span>
                 <Field class="form-control" name="endDate" type="date" />
                 <ErrorMessage
                   name="endDate"
