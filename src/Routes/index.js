@@ -4,6 +4,7 @@ import PrivateRouter from './privateRoute';
 import Dashboard from '../Pages/DashBoard';
 import Login from '../Components/Login';
 import Home from '../Pages/Home';
+import { CustomerCreate, CustomerUpdate } from '../Components/Customer';
 
 const MainRouter = () => {
     return (
@@ -19,6 +20,8 @@ const MainRouter = () => {
                 }
             />
             <Route path="/" element={<Home></Home>} />
+            <Route path="/customer/create" element={<CustomerCreate></CustomerCreate>} />
+            <Route path="/customer/update/:id" element={<CustomerUpdate></CustomerUpdate>} />
         </Routes>
     );
 };

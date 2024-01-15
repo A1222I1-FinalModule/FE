@@ -36,4 +36,14 @@ export const get = async (path) => {
     return response.data;
 };
 
+export const detail = async (path, id) => {
+    const response = await instance.get(path, id);
+    return response.data;
+};
+
+export const post = async (path, value) => {
+    const response = await instance.post(path, value);
+    return response;
+};
+
 export default instance;
