@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import PrivateRouter from "./privateRouter";
 import Dashboard from "../Pages/DashBoard";
 import Login from "../Components/Login";
+import Payment from "../Components/Payment"
 import { Toaster} from 'react-hot-toast';
 import { CreateDiscount } from "../Components/Discount/createDiscount";
 import { ListCustomer } from "../Components/Customer/listCustomer";
@@ -23,8 +24,9 @@ const MainRouter = () => {
       <Route path="/" element={<></>}/>
     </Routes>
     <Toaster position="top-right" reverseOrder={false} />;
-    </>
-  );
+            <Route path="/payment" element={<Payment/>} />
+            </>
+    );
 };
 
 export default MainRouter;
