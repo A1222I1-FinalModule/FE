@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import style from '../Assets/css/StatisticalTable.css';
+import style from '../Assets/css/StatisticalTable.module.css';
 import * as billService from '../Services/API/BillService';
 import * as importingService from '../Services/API/ImportingService';
 const StatisticalTable = () => {
