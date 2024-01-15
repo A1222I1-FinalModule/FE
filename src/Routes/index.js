@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRouter from './privateRouter';
+import PrivateRouter from './privateRoute';
 import Dashboard from '../Pages/DashBoard';
 import Login from '../Components/Login';
+import Payment from "../Components/Payment"
 
 const MainRouter = () => {
     return (
@@ -18,6 +19,7 @@ const MainRouter = () => {
                 }
             />
             <Route path="/" element={<></>} />
+            <Route path="/payment" element={<Payment/>} />
         </Routes>
     );
 };
