@@ -5,13 +5,17 @@ import Header from '../Layouts/Header/Header';
 import style from '../Assets/Styles/StyleDashBoard.module.css';
 export default function Dashboard() {
     return (
-        <div>
-            <Header></Header>
-            <div className="row">
-                <SideBar></SideBar>
-                <Content></Content>
+import style from '../Assets/Styles/StyleDashBoard.module.css';
+    export default function Dashboard() {
+        return (
+            <div>
+                <Header></Header>
+                <div className="row">
+                    <SideBar></SideBar>
+                    <Content></Content>
+                </div>
             </div>
-        </div>
+        </div >
 
     )
-}
+    }

@@ -11,6 +11,9 @@ import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
 import Saler from '../Pages/Saler';
 import { Warehouse } from '../Pages/WareHouse';
+import PrivateRoute from './privateRoute';
+import Payment from "../Components/Payment"
+import { CustomerCreate, CustomerUpdate } from '../Components/Customer'
 
 const MainRouter = () => {
     return (

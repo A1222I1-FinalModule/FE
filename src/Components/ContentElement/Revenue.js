@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BillService from '../../Services/API/BillService';
 import style from '../../Assets/Styles/StyleDashBoard.module.css';
+import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const Revenue = () => {
   const [weeklyRevenue, setWeeklyRevenue] = useState(null);
   const [monthlyRevenue, setMonthlyRevenue] = useState(null);
