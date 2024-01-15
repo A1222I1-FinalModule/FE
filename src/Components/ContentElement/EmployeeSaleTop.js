@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
-import EmployeeService from "../../Services/API/EmployeeService";
+import React, { useState, useEffect } from 'react';
+import EmployeeService from '../../Services/API/EmployeeService';
+import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const EmployeeSaleTop = () => {
   const [employeeTop, setEmployeeTop] = useState(null);
   useEffect(() => {
@@ -15,10 +16,10 @@ export const EmployeeSaleTop = () => {
   };
   return (
     <>
-      <div className="table_title">
+      <div className={style.table_title}>
         <span>Top nhân viên bán hàng tốt nhất</span>
       </div>
-      <div className="table_record">
+      <div className={style.table_record}>
         <table className="table">
           <thead>
             <tr>
@@ -30,12 +31,12 @@ export const EmployeeSaleTop = () => {
           <tbody>
             {employeeTop
               ? employeeTop.map((value, index) => (
-                  <tr key={index}>
-                    <th scope="row">{value.employeeName}</th>
-                    <td>{value.totalSales}</td>
-                    <td>{value.totalOrders}</td>
-                  </tr>
-                ))
+                <tr key={index}>
+                  <th scope="row">{value.employeeName}</th>
+                  <td>{value.totalSales}</td>
+                  <td>{value.totalOrders}</td>
+                </tr>
+              ))
               : null}
           </tbody>
         </table>

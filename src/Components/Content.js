@@ -1,33 +1,36 @@
-import React from "react";
-import { CustomerGrowth } from "./ContentElement/CustomerGrowth";
-import { OrderGrowth } from "./ContentElement/OrderGrowth";
-import { Revenue } from "./ContentElement/Revenue";
-import { EmployeeSaleTop } from "./ContentElement/EmployeeSaleTop";
-import { OrderRecent } from "./ContentElement/OrderRecent";
+import React from 'react';
+import { CustomerGrowth } from './ContentElement/CustomerGrowth';
+import { OrderGrowth } from './ContentElement/OrderGrowth';
+import { Revenue } from './ContentElement/Revenue';
+import { EmployeeSaleTop } from './ContentElement/EmployeeSaleTop';
+import { OrderRecent } from './ContentElement/OrderRecent';
+import style from '../Assets/Styles/StyleDashBoard.module.css';
 export default function Content() {
+
   return (
-    <div className="content col-10 ps-0">
-      <div className="content-main">
-        <div className="content_first">
-          <div className="row">
-            <div className="col-4">
+    <div class="content col-10 ps-0">
+      <div class="content-main">
+        <div class="content_first">
+          <div class="row">
+            <div class="col-4">
               <CustomerGrowth></CustomerGrowth>
             </div>
-            <div className="col-4">
+            <div class="col-4">
               <OrderGrowth></OrderGrowth>
             </div>
-            <div className="col-4">
+            <div class="col-4">
               <Revenue></Revenue>
             </div>
           </div>
         </div>
-        <div className="content-second">
+        <div class="content-second">
           <EmployeeSaleTop></EmployeeSaleTop>
         </div>
-        <div className="content-three">
+        <div class="content-three">
           <OrderRecent></OrderRecent>
         </div>
       </div>
     </div>
-  );
+
+  )
 }

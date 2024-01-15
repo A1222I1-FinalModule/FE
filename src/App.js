@@ -1,9 +1,6 @@
-import logo from "./logo.svg";
-import "./App.css";
-import MainRouter from "./Routes";
-
+import MainRouter from './Routes';
 function App() {
-  return <MainRouter/>;
+    return <MainRouter />;
 }
 
 export default App;

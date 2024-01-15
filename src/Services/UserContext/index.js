@@ -1,27 +1,32 @@
-import React, { createContext, useContext, useState } from "react";
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
+import React, { createContext, useContext, useState } from 'react';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import { validateUser } from '../API/authService';
 const UserContext = createContext();
 const UserProvider = ({ children }) => {
-  const [jwt, setJwt] = useState(Cookies.get("jwt"));
-  const [role, setRole] = useState([]);
-  const setUser = async (jwtToken) => {
-    setJwt(jwtToken);
-    const roles = await jwtDecode(jwtToken).authorities;
-    setRole(roles);
-    return roles;
-  };
-  const value = { jwt, setJwt, role, setUser };
-  return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+    const [jwt, setJwt] = useState(Cookies.get('jwt'));
+    const setUser = async (jwtToken) => {
+        setJwt(jwtToken);
+        return await getRole();
+    };
+    const getRole = async (role) => {
+        const roles = await jwtDecode(jwt).authorities;
+        return roles;
+    };
+    const isActive = async () => {
+        return await validateUser();
+    };
+    const value = { getRole, setUser, isActive, jwt };
+    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
 
 function useUser() {
-  const context = useContext(UserContext);
-  if (context === undefined) {
-    throw new Error("useUser must be used within a UserProvider");
-  }
+    const context = useContext(UserContext);
+    if (context === undefined) {
+        throw new Error('useUser must be used within a UserProvider');
+    }
 
-  return context;
+    return context;
 }
 
 export { useUser, UserProvider };

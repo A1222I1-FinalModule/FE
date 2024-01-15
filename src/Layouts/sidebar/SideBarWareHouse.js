@@ -1,13 +1,14 @@
-import React from "react";
+import React from 'react';
+import * as style from '../../Assets/Styles/StyleDashBoard.module.css';
 export default function SideBarWareHouse() {
   return (
-    <div className="sidebar col-2 pe-0">
-      <div className="sidebar-container">
-        <div className="list-item">
-          <div className="contain_item">
-            <a href="#" className="single_option">
-              <div className="item-sidebar">
-                <div className="item-title">
+    <div class="sidebar col-2 pe-0">
+      <div class="sidebar-container">
+        <div class="list-item">
+          <div class="contain_item">
+            <a href="#" class="single_option">
+              <div class="item-sidebar">
+                <div class="item-title">
                   <ion-icon name="logo-buffer"></ion-icon>
                   <span>Đây là sidebar cho warehouse</span>
                 </div>

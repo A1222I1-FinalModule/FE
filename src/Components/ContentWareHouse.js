@@ -1,4 +1,6 @@
-import React from "react";
+import React from 'react'
+import * as style from '../../Assets/Styles/StyleDashBoard.module.css';
+
 
 export const ContentWareHouse = () => {
   return (

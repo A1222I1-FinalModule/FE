@@ -116,31 +116,25 @@ export default function NotificationList() {
                         <p className={styles.date}>{currentDate}</p>
                         <div
                           role="button"
-                          // className="threedots"
                           className={styles.threedots}
                           onClick={() => toggleElement(notification.id)}
                         >
-                          {/* <i
-                          className={`bi bi-three-dots ${styles.bithreedots}`}
-                        ></i> */}
+
                           <FontAwesomeIcon
                             icon={faEllipsis}
                             className={styles.bithreedots}
                           />
                           <div
-                            // className="threedot-detail"
                             className={styles.threedotdetail}
                             id={`selection${notification.id}`}
                           >
                             <a
-                              // className="content-link"
                               className={styles.contentlink}
                               href="#"
                             >
                               Chi tiết Thông báo
                             </a>
                             <button
-                              //  className="content-link"
                               className={styles.contentlink}
                               onClick={() => {
                                 handleDelete(notification.id);
