@@ -1,28 +1,43 @@
 import { useEffect, useState } from 'react';
-import '../Assets/css/StatisticalTable.css';
+import style from '../Assets/css/StatisticalTable.css';
 import * as billService from '../Services/API/BillService';
 const StatisticalTable = () => {
     const [bills, setBills] = useState(null);
     const date = new Date().toLocaleDateString()
-
+    const [totalRevenue, setTotalRevenue] = useState(0)
+    const [totalExpenditure, setTotalExpenditure] = useState(0)
     useEffect(() => {
         getAllBill()
+        getRevenue()
+        getExpenditure()
     }, [bills])
 
     const getAllBill = async () => {
         const response = await billService.getAll()
         setBills(response)
     }
+    const getRevenue = () => {
+        const total = bills?.reduce((total, bill) => {
+            return total + bill[1]
+        }, 0)
+        setTotalRevenue(total)
+    }
+    const getExpenditure = () => {
+        const total = bills?.reduce((total, bill) => {
+            return total + bill[1]
+        }, 0)
+        setTotalExpenditure(total)
+    }
 
     if (bills === null) return null
 
     return (
-        <div className="statistical">
+        <div className={style.statistical}>
             <div className="container">
-                <div className="card text-dark mb-3" style={{ maxWidth: '50rem' }}>
-                    <div className="card-body">
+                <div className="card text-dark w-100 mb-3">
+                    <div className="card-body w-100">
                         <div className="row">
-                            <p className="col-3 title mb-2">Ngày/tháng/năm</p>
+                            <p className="col-3 title mb-2">Tháng/năm</p>
                             <p className="col-3 mb-2" id="day_month_year">{date}</p>
                         </div>
                         &nbsp;
@@ -40,12 +55,12 @@ const StatisticalTable = () => {
                                     {
                                         bills.map((bill, index) => {
                                             return (
-                                                <tr key={bill.id}>
+                                                <tr key={index}>
                                                     <td>{index + 1}</td>
-                                                    <td>{bill.releaseDate}</td>
-                                                    <td>{bill.total}</td>
-                                                    <td>{bill.total}</td>
-                                                    <td>{bill.total}</td>
+                                                    <td>{bill[0]}</td>
+                                                    <td>{bill[1]}</td>
+                                                    <td>{0}</td>
+                                                    <td>{bill[1] - 0}</td>
                                                 </tr>
                                             )
                                         })
@@ -57,19 +72,19 @@ const StatisticalTable = () => {
                             <div className="total-revenue col-6">
                                 <div className="row">
                                     <p className="col-5 title mb-2">Tổng thu</p>
-                                    <p className="col-7 mb-2">6,500,000</p>
+                                    <p className="col-7 mb-2">{totalRevenue}</p>
                                 </div>
                             </div>
                             <div className="total-expenditure col-6">
                                 <div className="row">
                                     <p className="col-5 title mb-2">Tổng chi</p>
-                                    <p className="col-7 mb-2">2,600,000</p>
+                                    <p className="col-7 mb-2">{totalExpenditure}</p>
                                 </div>
                             </div>
                         </div>
                         &nbsp;
                         <div className="row">
-                            <button className="btn btn-sm btn-outline-secondary">In thống kê</button>
+                            <button className="btn btn-sm btn-outline-secondary" onClick={window.print}>In thống kê</button>
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../Assets/Styles/StyleDashBoard.css';
+import '../Assets/Styles/StyleDashBoard.module.css';
 import Content from '../Components/Content';
 import Header from '../Layouts/Header/Header';
 import SideBar from '../Layouts/sidebar/SideBar';
