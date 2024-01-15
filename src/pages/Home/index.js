@@ -1,5 +1,5 @@
-import Banner from '../../components/Banner';
-import Products from '../../components/Products';
+import Banner from '../../Components/Banner';
+import Products from '../../Components/Products';
 
 function Home() {
     return (

@@ -1,8 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRouter from './privateRouter';
 import Dashboard from '../Pages/DashBoard';
 import Login from '../Components/Login';
+import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
+import Home from '../Pages/Home';
+import PrivateRoute from './privateRoute';
 
 const MainRouter = () => {
     return (
@@ -12,12 +14,27 @@ const MainRouter = () => {
             <Route
                 path="/private"
                 element={
-                    <PrivateRouter>
+                    <PrivateRoute>
                         <></>
-                    </PrivateRouter>
+                    </PrivateRoute>
                 }
             />
-            <Route path="/" element={<></>} />
+            <Route
+                path="/"
+                element={
+                    <DefaultLayout>
+                        <Home />
+                    </DefaultLayout>
+                }
+            />
+            <Route
+                path="/home"
+                element={
+                    <DefaultLayout>
+                        <Home />
+                    </DefaultLayout>
+                }
+            />
         </Routes>
     );
 };
