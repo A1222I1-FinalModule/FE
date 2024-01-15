@@ -4,7 +4,7 @@ import { OrderGrowth } from './ContentElement/OrderGrowth';
 import { Revenue } from './ContentElement/Revenue';
 import { EmployeeSaleTop } from './ContentElement/EmployeeSaleTop';
 import { OrderRecent } from './ContentElement/OrderRecent';
-import style from '../assets/Styles/StyleDashBoard.module.css';
+import style from '../Assets/Styles/StyleDashBoard.module.css';
 export default function Content() {
 
   return (
