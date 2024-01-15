@@ -44,3 +44,15 @@ body {
 .data_input .action_buttons {
   text-align: center;
 }
+
+.total_revenue {
+  margin: 0;
+  padding-left: 10px;
+  font-weight: 600;
+}
+
+.total_expenditure {
+  margin: 0;
+  padding-left: 10px;
+  font-weight: 600;
+}
