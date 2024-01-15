@@ -3,8 +3,8 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import Tippy from '@tippyjs/react/headless';
 
-import { Wrapper as PopperWrapper } from '../../../components/Popper';
-import { ClearIcon, SearchIcon, SpinnerIcon } from '../../../components/Icons';
+import { Wrapper as PopperWrapper } from '../../../Components/Popper';
+import { ClearIcon, SearchIcon, SpinnerIcon } from '../../../Components/Icons';
 import styles from './Search.module.scss';
 
 const cx = classNames.bind(styles);
