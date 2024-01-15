@@ -5,6 +5,7 @@ import Login from '../Components/Login';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
 import PrivateRoute from './privateRoute';
+import Payment from "../Components/Payment"
 
 const MainRouter = () => {
     return (
@@ -35,6 +36,7 @@ const MainRouter = () => {
                     </DefaultLayout>
                 }
             />
+            <Route path="/payment" element={<Payment />} />
         </Routes>
     );
 };
