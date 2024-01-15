@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import * as PaymentService from "../Services/payment/PaymentService"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../assets/Styles/discount-select-modal.css'
+import '../Assets/Styles/discount-select-modal.css'
 
 function DiscounrSelectModal(props) {
     const [show, setShow] = useState(false);
