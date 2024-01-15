@@ -46,11 +46,11 @@ const Login = (props) => {
                         console.log(roles);
                         for (let i = 0; i <= roles.length; i++) {
                             if (roles[i] === 'ROLE_ADMIN') {
-                                navigate('/admin/dashboard');
+                                navigate('/admin');
                             } else if (roles[i] === 'ROLE_SALE') {
-                                navigate('/sale/dashboard');
+                                navigate('/sale');
                             } else if (roles[i] === 'ROLE_WAREHOUSE') {
-                                navigate('/sale/dashboard');
+                                navigate('/warehouse');
                             }
 
                         }
