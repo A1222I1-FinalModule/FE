@@ -1,5 +1,4 @@
 import MainRouter from './Routes';
-
 function App() {
     return <MainRouter />;
 }

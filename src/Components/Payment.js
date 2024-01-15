@@ -147,7 +147,7 @@ function Payment() {
                 enableReinitialize={true}
                 onSubmit={values => handleSubmitImport(values)}>
                 {({ errors }) => (
-                    <Form className="container-fluid row">
+                    <Form className=" row">
                         <div className="col-xl-5 col-lg-6 col-md-10 card p-xl-4 p-sm-2 p-xs-2 mx-auto shadow">
                             {/* <div className="mx-auto shadow"> */}
                             <div className="row">
