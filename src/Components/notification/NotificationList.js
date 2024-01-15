@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NotificationList.module.css";
-// import "./NotificationList.css";
 import * as NotificationService from "../../Services/API/notification/NotificationService";
 
 export default function NotificationList() {
@@ -14,6 +13,7 @@ export default function NotificationList() {
   const [notifications, setNotifications] = useState([]);
   const [toggle, setToggle] = useState(true);
 
+  console.log(styles);
   useEffect(() => {
     getAllBySaler();
   }, []);
@@ -47,6 +47,17 @@ export default function NotificationList() {
     setToggle(false);
     getAllByNotReadSaler();
   };
+
+  const handleDelete = async (id) => {
+    await NotificationService.deleteNotification(id);
+    getAllBySaler();
+  };
+
+  const handleDeleteNotRead = async (id) => {
+    await NotificationService.deleteNotification(id);
+    getAllByNotReadSaler();
+  };
+
   const currentDate = format(new Date(), "dd-MM-yyyy");
   if (!notifications) return null;
   return (
@@ -128,13 +139,15 @@ export default function NotificationList() {
                             >
                               Chi tiết Thông báo
                             </a>
-                            <a
+                            <button
                               //  className="content-link"
                               className={styles.contentlink}
-                              href="#"
+                              onClick={() => {
+                                handleDelete(notification.id);
+                              }}
                             >
                               Gỡ thông báo
-                            </a>
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -174,13 +187,15 @@ export default function NotificationList() {
                             >
                               Chi tiết Thông báo
                             </a>
-                            <a
+                            <button
                               //  className="content-link"
                               className={styles.contentlink}
-                              href="#"
+                              onClick={() => {
+                                handleDeleteNotRead(notification.id);
+                              }}
                             >
                               Gỡ thông báo
-                            </a>
+                            </button>
                             <a
                               //  className="content-link"
                               className={styles.contentlink}

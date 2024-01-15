@@ -15,8 +15,9 @@ export default function NotificationSave() {
     target: 1,
   };
 
+  const validateNotification = {};
+
   const addNewNotification = async (notification) => {
-    parseInt(notification.target);
     await notificationService.saveNotification(notification);
     console.log(notification);
     alert("send notification");
@@ -26,7 +27,6 @@ export default function NotificationSave() {
       <Formik
         initialValues={notificationInit}
         onSubmit={(value) => {
-          console.log(value.target);
           addNewNotification(value);
         }}
       >
@@ -37,7 +37,7 @@ export default function NotificationSave() {
                 <img src={notification} alt="Thông báo" />
               </div>
 
-              <form className={styles.contact1form}>
+              <div className={styles.contact1form}>
                 <span className={styles.contact1formtitle}>
                   {" "}
                   Đăng thông báo{" "}
@@ -117,7 +117,7 @@ export default function NotificationSave() {
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </Form>
