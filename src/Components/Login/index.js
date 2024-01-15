@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../assets/Styles/mdb.min.css';
+import '../../Assets/Styles/mdb.min.css';
 import { LoginAPI } from '../../Services/API';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../Services/UserContext';
