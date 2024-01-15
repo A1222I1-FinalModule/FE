@@ -2,13 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-<<<<<<< HEAD
 import GlobalStyles from './Components/GlobalStyles';
-=======
->>>>>>> a19de413d04d1c55a4a406374388162cd8f9ad19
 import { BrowserRouter } from 'react-router-dom';
 import { UserProvider } from './Services/UserContext';
-import GlobalStyles from './Components/GlobalStyles';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <React.StrictMode>
