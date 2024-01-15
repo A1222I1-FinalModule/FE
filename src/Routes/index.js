@@ -20,7 +20,22 @@ const MainRouter = () => {
                     </PrivateRoute>
                 }
             />
-            <Route path="/" element={<></>} />
+            <Route
+                path="/"
+                element={
+                    <DefaultLayout>
+                        <Home />
+                    </DefaultLayout>
+                }
+            />
+            <Route
+                path="/home"
+                element={
+                    <DefaultLayout>
+                        <Home />
+                    </DefaultLayout>
+                }
+            />
         </Routes>
     );
 };

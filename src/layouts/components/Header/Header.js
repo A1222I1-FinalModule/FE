@@ -1,23 +1,15 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-<<<<<<< HEAD
-
-import { LogoutIcon } from '../../../Components/Icons';
-=======
-import Button from 'react-bootstrap/Button';
->>>>>>> a19de413d04d1c55a4a406374388162cd8f9ad19
 import Image from '../../../Components/Image';
 import Navbar from '../Navbar';
 import Search from '../Search';
 import Menu from '../../../Components/Popper/Menu';
 import styles from './Header.module.scss';
-<<<<<<< HEAD
-=======
-import { LogoutIcon } from '../../../Components/Icons';
+import { LogoutIcon, UserIcon } from '../../../Components/Icons';
 import { useUser } from '../../../Services/UserContext';
 import Login from '../../../Components/Login';
 import { useEffect, useState } from 'react';
->>>>>>> a19de413d04d1c55a4a406374388162cd8f9ad19
+import Button from '../../../Components/Button';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +17,7 @@ function Header() {
     const user = useUser();
     const [currentUser, setCurrentUser] = useState(null);
     const [modalShow, setModalShow] = useState(false);
+
     const getCurrentUser = async () => {
         return setCurrentUser(await user.isActive());
     };
@@ -34,15 +27,21 @@ function Header() {
             getCurrentUser();
         }
     }, [currentUser]);
+
     const userMenu = [
+        {
+            icon: <UserIcon />,
+            title: 'Tài khoản của tôi',
+            to: '/',
+        },
         {
             icon: <LogoutIcon />,
             title: 'Đăng xuất',
-            to: '/logout',
+            to: '/',
             separate: true,
         },
     ];
-    console.log(currentUser);
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
@@ -71,8 +70,8 @@ function Header() {
                                     />
                                 </Menu>
                             ) : (
-                                <Button variant="primary" onClick={() => setModalShow(true)}>
-                                    Login
+                                <Button primary onClick={() => setModalShow(true)} className={cx('login-btn')}>
+                                    Đăng nhập
                                 </Button>
                             )}
                         </div>

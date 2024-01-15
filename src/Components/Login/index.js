@@ -47,7 +47,7 @@ const Login = (props) => {
                             if (roles[i] === 'ROLE_ADMIN') {
                                 navigate('/admin/dashboard');
                             } else {
-                                navigate('/home');
+                                navigate('/');
                                 window.location.reload(false);
                             }
                         }
