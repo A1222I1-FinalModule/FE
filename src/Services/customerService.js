@@ -1,5 +1,31 @@
 import axios from "axios";
 
+
+export const findAllCustomer = async () => {
+    try {
+        let temp = await axios.get("http://localhost:3000/api/admin/listCustomer");
+        console.log(temp);
+        return temp.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export const getDeleteCustomer = async (id) => {
+    let temp = await axios.delete(`http://localhost:3000/api/admin/deleteByIdCustomer?id=${id}`);
+    return temp.data;
+}
+
+
+export const findByNameCustomer = async (name) => {
+    try {
+        let temp = await axios.get(`http://localhost:3000/api/admin/findByNameCustomer?name=${name}`);
+        console.log(temp);
+        return temp.data;
+    } catch (err) {
+        console.log(err);
+    }
+}
 export const createCustomer = async (value) => {
     try {
         const response = await axios.post('/api/admin/insert-customer', value);
@@ -12,7 +38,7 @@ export const createCustomer = async (value) => {
 
 export const updateCustomer = async (id, value) => {
     try {
-        const response = await axios.post(`/api/admin/update-customer/${id}`, value);
+        const response = await axios.put(`/api/admin/update-customer/"${id}"`, value);
 
         return response.data;
     } catch (error) {
@@ -29,3 +55,6 @@ export const detailCustomer = async (id) => {
         console.log(error);
     }
 };
+
+
+

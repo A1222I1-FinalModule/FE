@@ -9,7 +9,6 @@ function CustomerCreate() {
         await customerService.createCustomer(value);
         navigate('/')
         setSubmitting(false);
-
     };
 
     return (
@@ -28,8 +27,10 @@ function CustomerCreate() {
                     customerType: {
                         id: 1,
                     },
+                    point: 0
                 }}
                 onSubmit={handleSubmit}
+
             >
                 <Form class="">
                     <div class="mb-3">

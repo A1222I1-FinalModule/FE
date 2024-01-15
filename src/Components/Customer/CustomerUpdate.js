@@ -1,24 +1,36 @@
 import { Formik, Form, Field } from 'formik';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+
+import { useNavigate, useParams } from 'react-router-dom';
 import * as customerService from '../../Services/customerService';
 
 function CustomerUpdate() {
     const params = useParams();
-    const [customer, setCustomer] = useState({});
-
+    const navigate = useNavigate();
+    const [customer, setCustomer] = useState();
     useEffect(() => {
         const fetchApi = async () => {
             const result = await customerService.detailCustomer(params.id);
-
-            console.log(result);
+            console.log("toi da vao", result.data);
+            setCustomer(result);
         };
         fetchApi();
     }, [params.id]);
 
     const handleSubmit = async (value, { setSubmitting }) => {
-        console.log(value);
+        await customerService.updateCustomer(params.id, value);
+        navigate("/");
+        setSubmitting(false)
     };
+
+    const formatDate = (dateStr) => {
+        if (dateStr) {
+            const [year, month, day] = dateStr.split("-");
+            return `${day}-${month}-${year}`;
+        }
+        return "";
+    };
+
 
     return (
         <div className="container">
@@ -28,7 +40,7 @@ function CustomerUpdate() {
                 initialValues={{
                     id: customer.id,
                     name: customer.name,
-                    date_of_birth: customer.date_of_birth,
+                    dateOfBirth: formatDate(customer.dateOfBirth),
                     address: customer.address,
                     gender: customer.gender,
                     phone: customer.phone,
@@ -39,62 +51,76 @@ function CustomerUpdate() {
             >
                 <Form class="">
                     <div class="mb-3">
-                        <label for="id" class="form-label">
+                        <label htmlFor="id" class="form-label">
                             Mã khách hàng
                         </label>
                         <Field type="text" class="form-control" name="id" />
                     </div>
                     <div class="mb-3">
-                        <label for="name" class="form-label">
+                        <label htmlFor="name" class="form-label">
                             Họ tên
                         </label>
                         <Field type="text" class="form-control" name="name" />
                     </div>
                     <div class="mb-3">
-                        <label for="date_of_birth" class="form-label">
+                        <label htmlFor="dateOfBirth" class="form-label">
                             Ngày sinh
                         </label>
-                        <Field type="date" class="form-control" name="date_of_birth" />
+                        <Field type="date" class="form-control" name="dateOfBirth" />
                     </div>
                     <div class="mb-3">
-                        <label for="address" class="form-label">
+                        <label htmlFor="address" class="form-label">
                             Địa chỉ
                         </label>
                         <Field type="text" class="form-control" name="address" />
                     </div>
                     <div className="mb-3">
-                        <label for="gender" class="form-label">
+                        <label htmlFor="gender" className="form-label">
                             Giới tính
                         </label>
                         <div className="d-flex align-items-center">
-                            <div class="form-check d-flex align-items-center me-2">
-                                <Field class="form-check-input" type="radio" name="gender" value="0" />
-                                <label class="form-check-label" for="">
+                            <div className="form-check d-flex align-items-center me-2">
+                                <Field
+                                    className="form-check-input"
+                                    type="radio"
+                                    id="male"
+                                    name="gender"
+                                    value={true}
+                                    checked={customer.gender === true}
+                                />
+                                <label className="form-check-label" htmlFor="male">
                                     Nam
                                 </label>
                             </div>
-                            <div class="form-check d-flex align-items-center">
-                                <Field class="form-check-input" type="radio" name="gender" value="1" />
-                                <label class="form-check-label" for="">
+                            <div className="form-check d-flex align-items-center">
+                                <Field
+                                    className="form-check-input"
+                                    type="radio"
+                                    id="female"
+                                    name="gender"
+                                    value={false}
+                                    checked={customer.gender === false}
+                                />
+                                <label className="form-check-label" htmlFor="female">
                                     Nữ
                                 </label>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="phone" class="form-label">
+                        <label htmlFor="phone" class="form-label">
                             Số điện thoại
                         </label>
                         <Field type="text" class="form-control" name="phone" />
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">
+                        <label htmlFor="email" class="form-label">
                             Email
                         </label>
                         <Field type="email" class="form-control" name="email" />
                     </div>
                     <div class="mb-3">
-                        <label for="" class="form-label">
+                        <label htmlFor="" class="form-label">
                             Điểm
                         </label>
                         <Field type="text" class="form-control" name="point" />
@@ -103,9 +129,9 @@ function CustomerUpdate() {
                     <button type="submit" class="btn btn-primary">
                         Sửa
                     </button>
-                    <button type="submit" class="btn btn-secondary">
+                    {/* <button type="submit" class="btn btn-secondary">
                         Hủy
-                    </button>
+                    </button> */}
                 </Form>
             </Formik>
         </div>

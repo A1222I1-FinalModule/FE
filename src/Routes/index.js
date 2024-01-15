@@ -31,6 +31,7 @@ const MainRouter = () => {
             />
             <Route path='/customer/create' element={<CustomerCreate />} />
             <Route path='/customer/update/:id' element={<CustomerUpdate />} />
+            
         </Routes>
     );
 };
