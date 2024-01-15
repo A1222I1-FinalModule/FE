@@ -9,9 +9,7 @@ import { Discount } from '../Components/Discount/listDiscount';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
-import PrivateRoute from './privateRoute';
-import Payment from "../Components/Payment"
-import { Saler } from '../Pages/Saler';
+import Saler from '../Pages/Saler';
 import { Warehouse } from '../Pages/WareHouse';
 
 const MainRouter = () => {
