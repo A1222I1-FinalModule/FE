@@ -1,10 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRouter from './privateRoute';
 import Dashboard from '../Pages/DashBoard';
 import Login from '../Components/Login';
+import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
-import { CustomerCreate, CustomerUpdate } from '../Components/Customer';
+import PrivateRoute from './privateRoute';
+import Payment from "../Components/Payment"
 
 const MainRouter = () => {
     return (
@@ -14,14 +15,12 @@ const MainRouter = () => {
             <Route
                 path="/private"
                 element={
-                    <PrivateRouter>
+                    <PrivateRoute>
                         <></>
-                    </PrivateRouter>
+                    </PrivateRoute>
                 }
             />
-            <Route path="/" element={<Home></Home>} />
-            <Route path="/customer/create" element={<CustomerCreate></CustomerCreate>} />
-            <Route path="/customer/update/:id" element={<CustomerUpdate></CustomerUpdate>} />
+            <Route path="/" element={<></>} />
         </Routes>
     );
 };
