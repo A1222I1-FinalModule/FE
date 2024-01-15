@@ -6,6 +6,7 @@ import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
 import PrivateRoute from './privateRoute';
 import Payment from "../Components/Payment"
+import { CustomerCreate, CustomerUpdate } from '../Components/Customer'
 
 const MainRouter = () => {
     return (
@@ -28,14 +29,8 @@ const MainRouter = () => {
                     </DefaultLayout>
                 }
             />
-            <Route
-                path="/home"
-                element={
-                    <DefaultLayout>
-                        <Home />
-                    </DefaultLayout>
-                }
-            />
+            <Route path='/customer/create' element={<CustomerCreate />} />
+            <Route path='/customer/update/:id' element={<CustomerUpdate />} />
         </Routes>
     );
 };

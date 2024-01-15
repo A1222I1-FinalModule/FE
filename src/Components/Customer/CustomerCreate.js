@@ -1,10 +1,15 @@
 import { Formik, Form, Field } from 'formik';
 import * as customerService from '../../Services/customerService';
+import { useNavigate } from 'react-router-dom';
 
 function CustomerCreate() {
+    const navigate = useNavigate()
+
     const handleSubmit = async (value, { setSubmitting }) => {
         await customerService.createCustomer(value);
+        navigate('/')
         setSubmitting(false);
+
     };
 
     return (
