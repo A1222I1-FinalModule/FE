@@ -14,7 +14,7 @@ const UserProvider = ({ children }) => {
         return roles;
     };
     const isActive = async () => {
-        return await validateUser();
+        return await validateUser(jwt);
     };
     const value = { getRole, setUser, isActive, jwt };
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
