@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
 
-import Image from '../../../components/Image';
+import { LogoutIcon } from '../../../Components/Icons';
+import Image from '../../../Components/Image';
 import Navbar from '../Navbar';
 import Search from '../Search';
-import Menu from '../../../components/Popper/Menu';
+import Menu from '../../../Components/Popper/Menu';
 import styles from './Header.module.scss';
-import { LogoutIcon } from '../../../components/Icons';
 
 const cx = classNames.bind(styles);
 

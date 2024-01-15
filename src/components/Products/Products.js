@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 
-import * as productService from '../../services/productService';
+import * as productService from '../../Services/productService';
 import styles from './Products.module.scss';
 import { Link } from 'react-router-dom';
 
@@ -36,7 +36,7 @@ function Products() {
                         </Link>
                         <div className={cx('info')}>
                             <h4 className={cx('name')}>{product.name}</h4>
-                            <p className={cx('price')}>Price</p>
+                            <p className={cx('price')}>{product.price}</p>
                         </div>
                     </div>
                 ))}

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRouter from './privateRouter';
+import PrivateRouter from './privateRoute';
 import Dashboard from '../Pages/DashBoard';
 import Login from '../Components/Login';
+import Home from '../Pages/Home';
 
 const MainRouter = () => {
     return (
@@ -17,7 +18,7 @@ const MainRouter = () => {
                     </PrivateRouter>
                 }
             />
-            <Route path="/" element={<></>} />
+            <Route path="/" element={<Home></Home>} />
         </Routes>
     );
 };
