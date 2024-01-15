@@ -13,7 +13,7 @@ import { useEffect, useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function Header(props) {
+function Header() {
     const user = useUser();
     const [currentUser, setCurrentUser] = useState(null);
     const [modalShow, setModalShow] = useState(false);
@@ -24,9 +24,6 @@ function Header(props) {
     useEffect(() => {
         if (currentUser === null) {
             getCurrentUser();
-        }
-        if (props.isOpenModal) {
-            setModalShow(true);
         }
     }, [currentUser]);
     const userMenu = [

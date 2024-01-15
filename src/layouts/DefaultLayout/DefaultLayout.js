@@ -9,7 +9,7 @@ const cx = classNames.bind(styles);
 function DefaultLayout({ props, children }) {
     return (
         <div className={cx('wrapper')}>
-            <Header isOpenModal={props.isOpenModal} />
+            <Header />
             <div className={cx('container')}>
                 <div className={cx('content')}>{children}</div>
             </div>
