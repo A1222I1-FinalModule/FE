@@ -127,7 +127,7 @@ function CustomerSearchModal(props) {
 
     return (
         <>
-            <Button variant="success" onClick={handleShow}>
+            <Button className='normal-txt-payment' variant="success" onClick={handleShow}>
                 Tra cứu khách hàng
             </Button>
             <Modal show={show} onHide={handleClose}>

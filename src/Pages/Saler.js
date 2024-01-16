@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "../Layouts/Header/Header";
+import * as style from '../Assets/Styles/StyleDashBoard.module.css';
 import SideBarSaler from "../Layouts/sidebar/SideBarSaler";
 import { ContentSaler } from "../Components/ContentSaler";
 
@@ -8,9 +9,9 @@ export const Saler = () => {
     <>
       <div>
         <Header></Header>
-        <div className="row">
+        <div className="row h-100">
           <SideBarSaler></SideBarSaler>
-          <ContentSaler />
+          <ContentSaler></ContentSaler>
         </div>
       </div>
     </>

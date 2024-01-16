@@ -5,7 +5,11 @@ import Payment from "./Payment";
 export const ContentSaler = () => {
   return (
     <Routes>
-      <Route path="/" element={<div className={style.content + " col-10 ps-0"}><Payment /></div>} />
+      <Route path="/" element={
+        <div className={style.content + " col-10 ps-0"}>
+          <Payment />
+        </div>
+      } />
 
     </Routes>
   );
