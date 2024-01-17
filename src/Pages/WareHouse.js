@@ -6,14 +6,12 @@ import { ContentWareHouse } from "../Components/ContentWareHouse";
 
 export const Warehouse = () => {
   return (
-    <>
-      <div>
-        <Header></Header>
-        <div className="row">
-          <SideBarWareHouse></SideBarWareHouse>
-          <ContentWareHouse></ContentWareHouse>
-        </div>
+    <div>
+      <Header></Header>
+      <div className="row">
+        <SideBarWareHouse></SideBarWareHouse>
+        <ContentWareHouse></ContentWareHouse>
       </div>
-    </>
+    </div>
   );
 };
