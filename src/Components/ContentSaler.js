@@ -1,22 +1,14 @@
-import { React, useEffect } from "react";
+import React from "react";
 import style from '../Assets/Styles/StyleDashBoard.module.css';
-import DailyStatisticalTable from "../templates/MonthlyStatisticalTable";
-export const ContentSaler = ({ feature }) => {
-  if (feature === 'daily-statistical-table') {
-    return (
-      <div className={`${style.content} col-10 ps-0`}>
-        <div className={style.contain_main}>
-          <DailyStatisticalTable />
-        </div>
-      </div>
-    )
-  }
-
+import { Route, Routes } from "react-router";
+import Payment from "./Payment";
+import StatisticalTable from "./StatisticalTable";
+export const ContentSaler = () => {
   return (
-    <div className={`${style.content} col-10 ps-0`}>
-      <div className={style.contain_main}>
-        <span>Nội dung chức năng cho Saler</span>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<div className={style.content + " col-10 ps-0"}><Payment /></div>} />
+      <Route path="/statistical" element={<div className={style.content + " col-10 ps-0"}><StatisticalTable /></div>} />
+
+    </Routes>
   );
 };

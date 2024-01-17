@@ -4,49 +4,16 @@ export default function SideBarWareHouse() {
   return (
     <div className={`${style.sidebar} col-2 pe-0`}>
       <div className={style.sidebar_container}>
-        <div className={style.list_order}>
+        <div className={style.list_item}>
           <div className={style.contain_item}>
-            <a href="#" className={style.single_option}>
+            <a href="/abc" className={style.single_option}>
               <div className={style.item_sidebar}>
                 <div className={style.item_title}>
-                  <ion-icon name="logo-buffer" />
-                  <span>Đây là sidebar cho warehouse</span>
+                  <ion-icon name="logo-buffer"></ion-icon>
+                  <span>saler</span>
                 </div>
               </div>
             </a>
-          </div>
-          <div className={style.contain_item}>
-            <a href="#" className={style.single_option}>
-              <div className={style.item_sidebar}>
-                <div className={style.item_title}>
-                  <ion-icon name="logo-buffer" />
-                  <span>Thêm sản phẩm</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className={style.contain_item}>
-            <a href="#" className={style.single_option}>
-              <div className={style.item_sidebar}>
-                <div className={style.item_title}>
-                  <ion-icon name="logo-buffer" />
-                  <span>Sửa sản phẩm</span>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div className={style.contain_item}>
-            <div className={`${style.item_sidebar} ${style.dropdown}`}>
-              <div className={style.item_title}>
-                <ion-icon name="color-palette" />
-                <span>Quản lý kho hàng</span>
-              </div>
-            </div>
-            <div className={style.submenu}>
-              <ul className="dfsaf">
-                <li><a href="#">Nguyen Van A</a></li>
-              </ul>
-            </div>
           </div>
         </div>
         <div className={style.contain_item}>

@@ -43,17 +43,19 @@ const Login = (props) => {
                 })
                 .then((roles) => {
                     if (roles.length > 0) {
+                        console.log(roles);
                         for (let i = 0; i <= roles.length; i++) {
                             if (roles[i] === 'ROLE_ADMIN') {
                                 navigate('/admin/dashboard');
                             } else if (roles[i] === 'ROLE_SALE') {
-                                navigate('/saler/dashboard');
+                                navigate('/sale/dashboard');
                             } else if (roles[i] === 'ROLE_WAREHOUSE') {
                                 navigate('/warehouse/dashboard');
                             } else {
                                 navigate('/home');
                                 window.location.reload(false);
                             }
+
                         }
                     }
                 })

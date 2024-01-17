@@ -1,12 +1,12 @@
-import React,{useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import EmployeeService from '../../Services/API/EmployeeService';
 import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const EmployeeSaleTop = () => {
-  const[employeeTop,setEmployeeTop] = useState(null);
-  useEffect(()=>{
-      getAll();
-  },[]);
-  const getAll = async() =>{
+  const [employeeTop, setEmployeeTop] = useState(null);
+  useEffect(() => {
+    getAll();
+  }, []);
+  const getAll = async () => {
     try {
       let temp = await EmployeeService.getEmployeeSaleTop();
       setEmployeeTop(temp);
@@ -29,14 +29,14 @@ export const EmployeeSaleTop = () => {
             </tr>
           </thead>
           <tbody>
-          { employeeTop? employeeTop.map((value,index) =>(         
-            <tr key={index}>
-              <th scope="row">{value.employeeName}</th>
-              <td>{value.totalSales}</td>
-              <td>{value.totalOrders}</td>
-            </tr>
-          ))
-          :null}
+            {employeeTop ? employeeTop.map((value, index) => (
+              <tr key={index}>
+                <th scope="row">{value.employeeName}</th>
+                <td>{value.totalSales}</td>
+                <td>{value.totalOrders}</td>
+              </tr>
+            ))
+              : null}
           </tbody>
         </table>
       </div>

@@ -3,7 +3,7 @@ import Header from "../Layouts/Header/Header";
 import SideBarWareHouse from "../Layouts/sidebar/SideBarWareHouse";
 import { ContentWareHouse } from "../Components/ContentWareHouse";
 
-export const WareHouse = () => {
+export const Warehouse = () => {
   return (
     <div>
       <Header></Header>
