@@ -6,7 +6,6 @@ import * as PaymentService from "../Services/payment/PaymentService"
 import "../Assets/Styles/payment.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import style from '../Assets/Styles/payment.css';
 import PdfDoc from './PdfDoc';
 
 function Payment() {
@@ -278,7 +277,7 @@ function Payment() {
                                     </div>
                                 </div>
                             </div>
-                            {/* {checkValidBill(bill) ? <PdfDoc bill={bill} discount={discount} /> : ""} */}
+                            {checkValidBill(bill) ? <PdfDoc bill={bill} discount={discount} ref={pdfExportComponent} /> : ""}
                         </div>
                     </Form>
                 )}
