@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from '../Pages/DashBoard';
-import { Saler } from '../Pages/Saler';
 import Login from '../Components/Login';
 import Payment from '../Components/Payment';
 import { CreateDiscount } from '../Components/Discount/createDiscount';

@@ -13,7 +13,7 @@ const StatisticalTable = () => {
         getAllImporting()
         getRevenue()
         getExpenditure()
-    }, [bills, importings, totalRevenue, totalExpenditure, date])
+    }, [])
 
     const getAllBill = async () => {
         const response = await billService.getAll()

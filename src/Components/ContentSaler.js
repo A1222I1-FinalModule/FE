@@ -1,13 +1,14 @@
 import React from "react";
-import style from '../Assets/Styles/StyleDashBoard.module.css';
 import { Route, Routes } from "react-router";
 import Payment from "./Payment";
 import StatisticalTable from "../templates/MonthlyStatisticalTable";
+import Saler from "../Pages/Saler";
 export const ContentSaler = () => {
   return (
     <Routes>
-      <Route path="/" element={<div className={style.content + " col-10 ps-0"}><Payment /></div>} />
-1      <Route path="/statistical" element={<div className={style.content + " col-10 ps-0"}><StatisticalTable /></div>} />
+      <Route path="/sale" element={<Saler><Payment /></Saler>} />
+      <Route path="/sale/payment" element={<Saler><Payment /></Saler>} />
+      <Route path="/sale/statistical" element={<Saler><StatisticalTable /></Saler>} />
 
     </Routes>
   );
