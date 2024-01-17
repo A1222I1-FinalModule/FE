@@ -1,16 +1,16 @@
 import React from 'react';
-import '../Assets/Styles/StyleDashBoard.module.css';
-import Content from '../Components/Content';
-import Header from '../Layouts/Header/Header';
 import SideBar from '../Layouts/sidebar/SideBar';
-
-export default function Dashboard() {
+import ContentAdmin from '../Components/ContentAdmin';
+import Info from '../Components/Info/Info';
+import Header from '../Layouts/Header/Header';
+import { Route, Routes } from 'react-router';
+export default function AdminDashboard({ children }) {
     return (
         <div>
             <Header></Header>
             <div className="row">
                 <SideBar></SideBar>
-                <Content></Content>
+                {children}
             </div>
         </div>
 

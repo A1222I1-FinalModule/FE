@@ -6,7 +6,7 @@ export default function SideBar() {
       <div className={style.sidebar_container}>
         <div className={style.list_item}>
           <div className={style.contain_item}>
-            <a href="/abc" className={style.single_option}>
+            <a href="/admin/info" className={style.single_option}>
               <div className={style.item_sidebar}>
                 <div className={style.item_title}>
                   <ion-icon name="logo-buffer"></ion-icon>
@@ -18,5 +18,5 @@ export default function SideBar() {
         </div>
       </div>
     </div>
-  )
+  );
 }

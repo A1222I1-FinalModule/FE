@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import * as discounts from "../../Services/API/Discount/discount";
-import moment from "moment";
-import { toast } from "react-toastify";
 export function CreateDiscount() {
   const navigate = useNavigate();
   const initDiscount = {
@@ -120,7 +118,7 @@ export function CreateDiscount() {
           validationSchema={Yup.object().shape(validateDiscount)}
           onSubmit={(value) => {
             handleSubmit(value);
-            toast.success("Create Success");
+            //  toast.success("Create Success");
           }}
         >
           <Form>
