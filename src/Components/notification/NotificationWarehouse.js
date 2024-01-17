@@ -12,6 +12,7 @@ export default function NotificationWarehouse() {
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
+  const [notificationNotRead, setNotifficationNotRead] = useState([]);
   const [toggle, setToggle] = useState(true);
 
   console.log(notifications);
@@ -22,11 +23,14 @@ export default function NotificationWarehouse() {
   const getAllByWarehouse = async () => {
     let data = await NotificationService.getAllByWarehouse();
     setNotifications(data);
+    let newArr = data.filter((item) => item.status === false);
+    setNotifficationNotRead(newArr);
+    setCountNotification(newArr.length);
   };
 
   const getAllNotRead = async () => {
-    let data = await NotificationService.getAllWarehouseByNotRead();
-    setNotifications(data);
+    let newArrNotRead = [...notificationNotRead];
+    setNotifficationNotRead(newArrNotRead);
   };
   const handleDropdownClick = () => {
     setIsActive(!isActive);
@@ -46,16 +50,13 @@ export default function NotificationWarehouse() {
   };
   const handleNotRead = () => {
     setToggle(false);
-    getAllNotRead();
   };
   const handleDelete = async (id) => {
     await NotificationService.deleteNotification(id);
-    console.log("read");
     getAllByWarehouse();
   };
   const handleDeleteNotRead = async (id) => {
     await NotificationService.deleteNotification(id);
-    console.log("not read");
     getAllNotRead();
   };
 
@@ -104,88 +105,83 @@ export default function NotificationWarehouse() {
                 </div>
               </div>
               <div className={styles.contentbody}>
-                {notifications.map((notification, index) => {
-                  if (toggle) {
-                    return (
+                {toggle ? (notifications.map((notification, index) => {
+                  return (
+                    <div
+                      className={styles.contentnotification}
+                      key={notification.id}
+                    >
+                      <p className={styles.content1}>
+                        {notification.content}
+                      </p>
+                      <p className={styles.date}>{currentDate}</p>
                       <div
-                        className={styles.contentnotification}
-                        key={notification.id}
+                        role="button"
+                        className={styles.threedots}
+                        onClick={() => toggleElement(notification.id)}
                       >
-                        <p className={styles.content1}>
-                          {notification.content}
-                        </p>
-                        <p className={styles.date}>{currentDate}</p>
+                        <FontAwesomeIcon
+                          icon={faEllipsis}
+                          className={styles.bithreedots}
+                        />
                         <div
-                          role="button"
-                          className={styles.threedots}
-                          onClick={() => toggleElement(notification.id)}
+                          className={styles.threedotdetail}
+                          id={`selection${notification.id}`}
                         >
-                          <FontAwesomeIcon
-                            icon={faEllipsis}
-                            className={styles.bithreedots}
-                          />
-                          <div
-                            className={styles.threedotdetail}
-                            id={`selection${notification.id}`}
+                          <a className={styles.contentlink} href="#">
+                            Chi tiết Thông báo
+                          </a>
+                          <button
+                            className={styles.contentlink}
+                            onClick={() => {
+                              handleDelete(notification.id);
+                            }}
                           >
-                            <a className={styles.contentlink} href="#">
-                              Chi tiết Thông báo
-                            </a>
-                            <button
-                              className={styles.contentlink}
-                              onClick={() => {
-                                handleDelete(notification.id);
-                              }}
-                            >
-                              Gỡ thông báo
-                            </button>
-                          </div>
+                            Gỡ thông báo
+                          </button>
                         </div>
                       </div>
-                    );
-                  } else {
-                    return (
+                    </div>
+                  )
+                })) : (notificationNotRead.map((notification, index) => {
+                  return (
+                    <div
+                      className={styles.contentnotification}
+                      key={notification.id}
+                    >
+                      <p className={styles.content1}>
+                        {notification.content}
+                      </p>
+                      <p className={styles.date}>{currentDate}</p>
                       <div
-                        className={styles.contentnotification}
-                        key={notification.id}
+                        role="button"
+                        className={styles.threedots}
+                        onClick={() => toggleElement(notification.id)}
                       >
-                        <p className={styles.content1}>
-                          {notification.content}
-                        </p>
-                        <p className={styles.date}>{currentDate}</p>
+                        <FontAwesomeIcon
+                          icon={faEllipsis}
+                          className={styles.bithreedots}
+                        />
                         <div
-                          role="button"
-                          className={styles.threedots}
-                          onClick={() => toggleElement(notification.id)}
+                          className={styles.threedotdetail}
+                          id={`selection${notification.id}`}
                         >
-                          <FontAwesomeIcon
-                            icon={faEllipsis}
-                            className={styles.bithreedots}
-                          />
-                          <div
-                            className={styles.threedotdetail}
-                            id={`selection${notification.id}`}
+                          <a className={styles.contentlink} href="#">
+                            Chi tiết Thông báo
+                          </a>
+                          <button
+                            className={styles.contentlink}
+                            onClick={() => {
+                              handleDeleteNotRead(notification.id);
+                            }}
                           >
-                            <a className={styles.contentlink} href="#">
-                              Chi tiết Thông báo
-                            </a>
-                            <button
-                              className={styles.contentlink}
-                              onClick={() => {
-                                handleDeleteNotRead(notification.id);
-                              }}
-                            >
-                              Gỡ thông báo
-                            </button>
-                            <a className={styles.contentlink} href="#">
-                              đánh dấu đã đọc
-                            </a>
-                          </div>
+                            Gỡ thông báo
+                          </button>
                         </div>
                       </div>
-                    );
-                  }
-                })}
+                    </div>
+                  )
+                }))}
               </div>
             </div>
           )}

@@ -11,9 +11,9 @@ export default function NotificationList() {
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
+  const [notificationNotRead, setNotificationNotRead] = useState([]);
+  const [notificationDelete, setNotificationDelete] = useState([]);
   const [toggle, setToggle] = useState(true);
-
-  console.log(styles);
   useEffect(() => {
     getAllBySaler();
   }, []);
@@ -21,11 +21,14 @@ export default function NotificationList() {
   const getAllBySaler = async () => {
     let data = await NotificationService.getAllBySaler();
     setNotifications(data);
+    let newArr = data.filter((item) => item.status === false);
+    setNotificationNotRead(newArr);
+    setCountNotification(newArr.length);
   };
 
   const getAllByNotReadSaler = async () => {
-    let data = await NotificationService.getAllSalerByNotRead();
-    setNotifications(data);
+    let newArrNotRead = [...notificationNotRead];
+    notificationDelete(newArrNotRead);
   };
   const handleDropdownClick = () => {
     setIsActive(!isActive);
@@ -45,7 +48,6 @@ export default function NotificationList() {
   };
   const handleNotRead = () => {
     setToggle(false);
-    getAllByNotReadSaler();
   };
 
   const handleDelete = async (id) => {
@@ -103,106 +105,95 @@ export default function NotificationList() {
                 </div>
               </div>
               <div className={styles.contentbody}>
-                {notifications.map((notification, index) => {
-                  if (toggle) {
-                    return (
-                      <div
-                        className={styles.contentnotification}
-                        key={notification.id}
-                      >
-                        <p className={styles.content1}>
-                          {notification.content}
-                        </p>
-                        <p className={styles.date}>{currentDate}</p>
-                        <div
-                          role="button"
-                          className={styles.threedots}
-                          onClick={() => toggleElement(notification.id)}
-                        >
+                {toggle ? (notifications.map((notification, index) => {
+                  return (<div
+                    className={styles.contentnotification}
+                    key={notification.id}
+                  >
+                    <p className={styles.content1}>
+                      {notification.content}
+                    </p>
+                    <p className={styles.date}>{currentDate}</p>
+                    <div
+                      role="button"
+                      className={styles.threedots}
+                      onClick={() => toggleElement(notification.id)}
+                    >
 
-                          <FontAwesomeIcon
-                            icon={faEllipsis}
-                            className={styles.bithreedots}
-                          />
-                          <div
-                            className={styles.threedotdetail}
-                            id={`selection${notification.id}`}
-                          >
-                            <a
-                              className={styles.contentlink}
-                              href="#"
-                            >
-                              Chi tiết Thông báo
-                            </a>
-                            <button
-                              className={styles.contentlink}
-                              onClick={() => {
-                                handleDelete(notification.id);
-                              }}
-                            >
-                              Gỡ thông báo
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  } else {
-                    return (
+                      <FontAwesomeIcon
+                        icon={faEllipsis}
+                        className={styles.bithreedots}
+                      />
                       <div
-                        className={styles.contentnotification}
-                        key={notification.id}
+                        className={styles.threedotdetail}
+                        id={`selection${notification.id}`}
                       >
-                        <p className={styles.content1}>
-                          {notification.content}
-                        </p>
-                        <p className={styles.date}>{currentDate}</p>
-                        <div
-                          role="button"
-                          // className="threedots"
-                          className={styles.threedots}
-                          onClick={() => toggleElement(notification.id)}
+                        <a
+                          className={styles.contentlink}
+                          href="#"
                         >
-                          {/* <i
-                          className={`bi bi-three-dots ${styles.bithreedots}`}
-                        ></i> */}
-                          <FontAwesomeIcon
-                            icon={faEllipsis}
-                            className={styles.bithreedots}
-                          />
-                          <div
-                            // className="threedot-detail"
-                            className={styles.threedotdetail}
-                            id={`selection${notification.id}`}
-                          >
-                            <a
-                              // className="content-link"
-                              className={styles.contentlink}
-                              href="#"
-                            >
-                              Chi tiết Thông báo
-                            </a>
-                            <button
-                              //  className="content-link"
-                              className={styles.contentlink}
-                              onClick={() => {
-                                handleDeleteNotRead(notification.id);
-                              }}
-                            >
-                              Gỡ thông báo
-                            </button>
-                            <a
-                              //  className="content-link"
-                              className={styles.contentlink}
-                              href="#"
-                            >
-                              đánh dấu đã đọc
-                            </a>
-                          </div>
-                        </div>
+                          Chi tiết Thông báo
+                        </a>
+                        <button
+                          className={styles.contentlink}
+                          onClick={() => {
+                            handleDelete(notification.id);
+                          }}
+                        >
+                          Gỡ thông báo
+                        </button>
                       </div>
-                    );
-                  }
-                })}
+                    </div>
+                  </div>)
+                })) : (notificationNotRead.map((notification, index) => {
+                  return (<div
+                    className={styles.contentnotification}
+                    key={notification.id}
+                  >
+                    <p className={styles.content1}>
+                      {notification.content}
+                    </p>
+                    <p className={styles.date}>{currentDate}</p>
+                    <div
+                      role="button"
+                      className={styles.threedots}
+                      onClick={() => toggleElement(notification.id)}
+                    >
+
+                      <FontAwesomeIcon
+                        icon={faEllipsis}
+                        className={styles.bithreedots}
+                      />
+                      <div
+                        className={styles.threedotdetail}
+                        id={`selection${notification.id}`}
+                      >
+                        <a
+                          className={styles.contentlink}
+                          href="#"
+                        >
+                          Chi tiết Thông báo
+                        </a>
+                        <button
+                          className={styles.contentlink}
+                          onClick={() => {
+                            handleDeleteNotRead(notification.id);
+                          }}
+                        >
+                          Gỡ thông báo
+                        </button>
+                        <button
+                          className={styles.contentlink}
+                          onClick={() => {
+
+                          }}
+                        >
+                          Đánh dấu đã đọc
+                        </button>
+                      </div>
+                    </div>
+                  </div>)
+                }))}
               </div>
             </div>
           )}

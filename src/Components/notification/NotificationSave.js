@@ -4,23 +4,36 @@ import styles from "./NotificationSave.module.css";
 import notification from "../../Assets/Images/img-03.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { Field, Form, Formik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import * as yup from 'yup';
 
 export default function NotificationSave() {
   const navigate = useNavigate();
   const notificationInit = {
     id: 0,
     content: "",
-    target: 1,
+    target: "1",
   };
 
-  const validateNotification = {};
+  const validateNotification = {
+    content: yup.string().required("Nội dung không được để trống")
+  };
 
   const addNewNotification = async (notification) => {
     await notificationService.saveNotification(notification);
     console.log(notification);
-    alert("send notification");
+    toast.success(' gửi thông báo thành công !', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
   return (
     <>
@@ -29,6 +42,7 @@ export default function NotificationSave() {
         onSubmit={(value) => {
           addNewNotification(value);
         }}
+        validationSchema={yup.object(validateNotification)}
       >
         <Form>
           <div className={styles.contact1}>
@@ -52,7 +66,7 @@ export default function NotificationSave() {
                   ></Field>
                   <span className={styles.shadowninput1}></span>
                 </div>
-
+                <ErrorMessage name="content" component={"span"} className={styles.validateContent}></ErrorMessage>
                 <div className={styles.wrapinput1}>
                   <div className="form-check form-check-inline">
                     <Field
@@ -61,7 +75,7 @@ export default function NotificationSave() {
                       name="target"
                       id="inlineRadio1"
                       value="3"
-                    />
+                    ></Field>
                     <label
                       className={styles.formchecklabel}
                       htmlFor="inlineRadio1"
@@ -85,13 +99,13 @@ export default function NotificationSave() {
                     </label>
                   </div>
                   <div className="form-check form-check-inline">
-                    <input
+                    <Field
                       className="form-check-input"
                       type="radio"
                       name="target"
                       id="inlineRadio3"
                       value="2"
-                    />
+                    ></Field>
                     <label
                       className={styles.formchecklabel}
                       htmlFor="inlineRadio3"
@@ -112,7 +126,7 @@ export default function NotificationSave() {
                     </button>
                   </div>
                   <div className={styles.contact1formbtn2}>
-                    <button className={styles.contact1formbtn}>
+                    <button type="reset" className={styles.contact1formbtn}>
                       <span> Hủy Bỏ </span>
                     </button>
                   </div>
@@ -122,6 +136,7 @@ export default function NotificationSave() {
           </div>
         </Form>
       </Formik>
+      <ToastContainer />
     </>
   );
 }
