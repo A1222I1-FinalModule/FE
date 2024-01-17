@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import React, { useState, useEffect } from 'react';
 import EmployeeService from '../../Services/API/EmployeeService';
-import style from '../../Assets/Styles/StyleDashBoard.module.css';
 import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const EmployeeSaleTop = () => {
   const [employeeTop, setEmployeeTop] = useState(null);

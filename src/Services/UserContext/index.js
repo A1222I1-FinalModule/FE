@@ -7,10 +7,10 @@ const UserProvider = ({ children }) => {
     const [jwt, setJwt] = useState(Cookies.get('jwt'));
     const setUser = async (jwtToken) => {
         setJwt(jwtToken);
-        return await getRole();
+        return await getRole(jwtToken);
     };
-    const getRole = async (role) => {
-        const roles = await jwtDecode(jwt).authorities;
+    const getRole = async (jwtToken) => {
+        const roles = await jwtDecode(jwtToken).authorities;
         return roles;
     };
     const isActive = async () => {

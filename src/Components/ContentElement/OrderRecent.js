@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BillService from '../../Services/API/BillService';
 import style from '../../Assets/Styles/StyleDashBoard.module.css';
-import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const OrderRecent = () => {
   const [orderRecent, setOrderRecent] = useState(null);
   useEffect(() => {

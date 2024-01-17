@@ -12,13 +12,13 @@ import Home from '../Pages/Home';
 import Saler from '../Pages/Saler';
 import { Warehouse } from '../Pages/WareHouse';
 import PrivateRoute from './privateRoute';
-import Payment from "../Components/Payment"
-import { CustomerCreate, CustomerUpdate } from '../Components/Customer'
+import Info from '../Components/Info/Info';
+import AdminRoutes from './AdminRoutes';
 
 const MainRouter = () => {
     return (
         <Routes>
-            <Route path="/admin" element={<Dashboard></Dashboard>}></Route>
+            <Route path="/admin/*" element={<AdminRoutes />} />
             <Route path="/sale" element={<Saler />}></Route>
             <Route path="/warehouse" element={<Warehouse />}></Route>
             <Route path="/login" element={<Login />} />
@@ -44,7 +44,7 @@ const MainRouter = () => {
             <Route path="/updateDiscount/:id" element={<UpdateDiscount />}></Route>
             <Route path="/listCustomer" element={<ListCustomer />}></Route>
             <Route path="/listDiscount" element={<Discount />}></Route>
-            <Route path="/" element={<></>} />
+            <Route path="/info" element={<Info></Info>} />
             <Route path="/payment" element={<Payment />} />
         </Routes>
     );
