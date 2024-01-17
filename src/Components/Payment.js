@@ -213,8 +213,8 @@ function Payment() {
                                 <div className="col row">
                                     <label htmlFor="quantity" className="fw-medium normal-txt-payment col-form-label col-auto">Số lượng</label>
                                     <div className="col-auto">
-                                        <input type="text" name="quantity" value={productBill.quantity}
-                                            className="normal-txt-payment" id="quantity"
+                                        <input type="number" name="quantity" value={productBill.quantity}
+                                            className="normal-txt-payment form-control" id="quantity"
                                             onChange={(e) => handleChangeProductBill(e)} />
                                         <p className="text-danger error-message-payment">{errors.quantity}</p>
                                     </div>
