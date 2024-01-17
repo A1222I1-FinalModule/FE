@@ -281,7 +281,7 @@ function Payment() {
                         </div>
                     </Form>
                 )}
-            </Formik >
+            </Formik>
             <ToastContainer />
         </div>
     );

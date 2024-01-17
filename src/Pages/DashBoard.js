@@ -4,12 +4,11 @@ import ContentAdmin from '../Components/ContentAdmin';
 import Info from '../Components/Info/Info';
 import Header from '../Layouts/Header/Header';
 import { Route, Routes } from 'react-router';
-export default function AdminDashboard({ children }) {
+export default function Dashboard({ children }) {
     return (
         <div>
             <Header></Header>
             <div className="row">
-                <SideBar></SideBar>
                 {children}
             </div>
         </div>
