@@ -24,9 +24,11 @@
 .container-pagination {
     padding-top: 20px;
     display: flex;
-    justify-content: center;  /* Can giữa theo chiều ngang */
-    align-items: center;      /* Can giữa theo chiều dọc */
-    width: 100%;  
+    justify-content: center;
+    /* Can giữa theo chiều ngang */
+    align-items: center;
+    /* Can giữa theo chiều dọc */
+    width: 100%;
 }
 
 .row-container {
@@ -35,24 +37,7 @@
     width: 100%;
 }
 
-.action{
+.action {
     display: flex;
     gap: 10px;
 }
-
-th {
-    height: 55.4375px;
-    width: 96.4625px;
-    line-height: 3em;
-    text-align: center;
-}
-
-tbody tr{
-    width: 860.275px;
-    height: 82.875px;
-}
-tbody tr td{
-    padding: 16px 22.4px !important;
-  }
-
-  
