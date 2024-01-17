@@ -7,6 +7,7 @@ import { CreateDiscount } from '../Components/Discount/createDiscount';
 import { ListCustomer } from '../Components/Customer/listCustomer';
 import { Discount } from '../Components/Discount/listDiscount';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
+import { UpdateDiscount } from '../Components/Discount/updateDiscount';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
 import Saler from '../Pages/Saler';
@@ -44,7 +45,7 @@ const MainRouter = () => {
             <Route path="/updateDiscount/:id" element={<UpdateDiscount />}></Route>
             <Route path="/listCustomer" element={<ListCustomer />}></Route>
             <Route path="/listDiscount" element={<Discount />}></Route>
-            <Route path="/info" element={<Info></Info>} />
+            <Route path="/" element={<></>} />
             <Route path="/payment" element={<Payment />} />
         </Routes>
     );

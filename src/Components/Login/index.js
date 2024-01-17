@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import '../../Assets/Styles/mdb.min.css';
+import { LoginAPI } from '../../Services/API/authService';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../Services/UserContext';
-import { LoginAPI } from '../../Services/API/authService';
 import styles from '../../Assets/Styles/Login/login.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes, faXmark } from '@fortawesome/free-solid-svg-icons';
