@@ -5,7 +5,7 @@ import StatisticalTable from "./StastisticalTable/StatisticalTable";
 export const ContentSaler = () => {
   return (
     <Routes>
-      <Route path={"*"} element={<StatisticalTable />} />
+      <Route path={"*"} element={<Payment />} />
       <Route path={"payment"} element={<Payment />} />
       <Route path={"statistical/*"} element={<StatisticalTable />} />
     </Routes>

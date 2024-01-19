@@ -10,8 +10,8 @@ const StatisticalTable = () => {
                 <NavbarTable />
                 <Routes>
                     <Route path="*" element={<DailyTable />} />
-                    <Route path="daily" element={<DailyTable />} />
-                    <Route path="monthly" element={<MonthlyTable />} />
+                    <Route path="/daily" element={<DailyTable />} />
+                    <Route path="/monthly" element={<MonthlyTable />} />
                 </Routes>
             {/* </div> */}
         </div>

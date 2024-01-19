@@ -39,20 +39,3 @@
     display: flex;
     gap: 10px;
 }
-
-th {
-    height: 55.4375px;
-    width: 96.4625px;
-    line-height: 3em;
-    text-align: center;
-}
-
-tbody tr{
-    width: 860.275px;
-    height: 82.875px;
-}
-tbody tr td{
-    padding: 16px 22.4px !important;
-  }
-
-  

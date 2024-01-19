@@ -32,7 +32,7 @@ const MonthlyTable = () => {
     setTotalExpenditure(total)
   }
 
-  const getMonth = () => {
+  function getMonth() {
     let date = new Date().toLocaleDateString().split('/')
     return date[1] + '/' + date[2]
   }

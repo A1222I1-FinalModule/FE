@@ -7,8 +7,8 @@ export default function Saler() {
     <div>
       <Header></Header>
       <div className="row">
-        <SideBarSaler></SideBarSaler>
-        <ContentSaler />
+          <SideBarSaler></SideBarSaler>
+          <ContentSaler/>
       </div>
     </div>
   );

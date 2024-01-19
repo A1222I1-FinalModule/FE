@@ -46,9 +46,3 @@
     align-items: center;      /* Can giữa theo chiều dọc */
     width: 100%;  
 }
-  th {
-    height: 55.4375px;
-    width: 96.4625px;
-    line-height: 3em;
-    text-align: center;
-}
