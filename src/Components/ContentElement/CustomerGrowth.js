@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import BillService from '../../Services/API/BillService';
-import style from '../../assets/Styles/StyleDashBoard.module.css';
+import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const CustomerGrowth = () => {
   const[customerGrowth,setCustomerGrowth] = useState(null);
   useEffect(()=>{

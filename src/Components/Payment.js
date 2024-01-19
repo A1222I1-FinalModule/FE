@@ -3,7 +3,7 @@ import CustomerSearchModal from "./CustomerSearchModal";
 import DiscounrSelectModal from "./DiscountSelectModal";
 import { Formik, Form } from "formik";
 import * as PaymentService from "../Services/payment/PaymentService"
-import "../assets/Styles/payment.css"
+import "../Assets/Styles/payment.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

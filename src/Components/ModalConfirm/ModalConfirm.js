@@ -30,7 +30,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={submit}>
+          <Button variant="danger" onClick={submit}>
             Delete
           </Button>
         </Modal.Footer>

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ReactPaginate from 'react-paginate';
-import "../assets/Styles/customer-search.css"
+import "../Assets/Styles/customer-search.css"
 import * as PaymentService from "../Services/payment/PaymentService"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

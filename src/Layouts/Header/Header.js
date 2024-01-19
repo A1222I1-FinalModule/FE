@@ -1,5 +1,5 @@
 import React from 'react';
-import style from '../../assets/Styles/StyleDashBoard.module.css'
+import style from '../../Assets/Styles/StyleDashBoard.module.css'
 export default function Header() {
   return (
     <div id={style.menu}>

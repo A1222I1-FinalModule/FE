@@ -1,7 +1,7 @@
 import axios from "axios";
 export const findAllCustomer = async()=>{
     try{
-        let temp=await axios.get("http://localhost:3000/api/admin/listCustomer");
+        let temp=await axios.get("/api/admin/listCustomer");
         console.log(temp);
         return temp.data;
     }catch(err){
@@ -10,14 +10,14 @@ export const findAllCustomer = async()=>{
 }
 
 export const getDeleteCustomer =async (id)=>{
-    let temp=await axios.delete(`http://localhost:3000/api/admin/deleteByIdCustomer?id=${id}`);
+    let temp=await axios.get(`/api/admin/deleteByIdCustomer?id=${id}`);
     return temp.data;
 }
 
 
 export const findByNameCustomer = async (name)=>{
     try{
-        let temp= await axios.get(`http://localhost:3000/api/admin/findByNameCustomer?name=${name}`);
+        let temp= await axios.get(`/api/admin/findByNameCustomer?name=${name}`);
         console.log(temp);
         return temp.data;
     }catch(err){

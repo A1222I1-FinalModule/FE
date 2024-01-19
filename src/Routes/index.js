@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRouter from './privateRouter';
+import PrivateRouter from './privateRoute';
 import Dashboard from '../Pages/DashBoard';
 import Login from '../Components/Login';
 import Payment from '../Components/Payment';
@@ -29,9 +29,9 @@ const MainRouter = () => {
                 <Route path="/listCustomer" element={<ListCustomer />}></Route>
                 <Route path="/listDiscount" element={<Discount />}></Route>
                 <Route path="/" element={<></>} />
+                <Route path="/payment" element={<Payment />} />
             </Routes>
-            <Toaster position="top-right" reverseOrder={false} />;
-            <Route path="/payment" element={<Payment />} />
+                <Toaster position="top-right" reverseOrder={false} />;
         </>
     );
 };
