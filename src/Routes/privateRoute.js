@@ -14,7 +14,7 @@ const PrivateRoute = (props) => {
             setIsLoading(false);
         });
     } else {
-        return <Navigate to="/login" />;
+        return props.handleUnauthenticated();
     }
 
     return isLoading ? <div>Loading...</div> : isValid === true ? children : <Navigate to="/login" />;

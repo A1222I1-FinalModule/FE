@@ -1,81 +1,52 @@
 import React from 'react';
-import * as style from '../../Assets/Styles/StyleDashBoard.module.css';
-export default function SideBarSaler(){
-    return(
-      <div class="sidebar col-2 pe-0">
-         <div class="sidebar-container">
-        <div class="list-item">
-          <div class="contain_item">
-                <a href="#" class="single_option">
-                    <div class="item-sidebar">
-                        <div class="item-title">
-                          <ion-icon name="logo-buffer"></ion-icon>
-                          <span>Đây là sidebar cho saler</span>
-                        </div>
-                    </div>
-                </a>
-          </div>
-          <div class="contain_item">
-                <a href="#" class="single_option">
-                    <div class="item-sidebar">
-                        <div class="item-title">
-                          <ion-icon name="logo-buffer"></ion-icon>
-                          <span>Thêm sản phẩm</span>
-                        </div>
-                    </div>
-                </a>
-          </div>
-          <div class="contain_item">
-                <a href="#" class="single_option">
-                    <div class="item-sidebar">
-                        <div class="item-title">
-                          <ion-icon name="logo-buffer"></ion-icon>
-                          <span>Sửa sản phẩm</span>
-                        </div>
-                    </div>
-                </a>
-          </div>
-          <div class="contain_item">
-                <div class="item-sidebar dropdown">
-                  <div class="item-title">
-                    <ion-icon name="color-palette"></ion-icon>
-                    <span>Quản lý kho hàng</span>
-                  </div>
+import style from '../../Assets/Styles/StyleDashBoard.module.css';
+export default function SideBarSaler() {
+  return (
+    <div className={`${style.sidebar} col-2 pe-0`}>
+      <div className={style.sidebar_container}>
+        <div className={style.list_item}>
+          <div className={style.contain_item}>
+            <a href="/sale/dashboard" className={style.single_option}>
+              <div className={style.item_sidebar}>
+                <div className={style.item_title}>
+                  <ion-icon name="logo-buffer"></ion-icon>
+                  <span>Thanh Toán</span>
                 </div>
-                <div class="submenu">
-                  <ul class="dfsaf">
-                    <li><a href="#">Nguyen Van A</a></li>
-                  </ul>
+              </div>
+            </a>
+          </div>
+          <div className={style.contain_item}>
+            <a href="/abc" className={style.single_option}>
+              <div className={style.item_sidebar}>
+                <div className={style.item_title}>
+                  <ion-icon name="logo-buffer"></ion-icon>
+                  <span>Thống Kê</span>
                 </div>
-          </div>
-          <div class="contain_item">
-            <div class="item-sidebar dropdown">
-              <div class="item-title">
-                <ion-icon name="school"></ion-icon>
-                <span>Nhân viên bán hàng</span>
               </div>
-            </div>
-            <div class="submenu">
-              <ul class="">
-                <li><a href="#">Nguyen Van B</a></li>
-              </ul>
-            </div>
+            </a>
           </div>
-          <div class="contain_item">
-            <div class="item-sidebar dropdown">
-              <div class="item-title">
-                <ion-icon name="trending-up"></ion-icon>
-                <span>Thống kê</span>
+          <div className={style.contain_item}>
+            <a href="/abc" className={style.single_option}>
+              <div className={style.item_sidebar}>
+                <div className={style.item_title}>
+                  <ion-icon name="logo-buffer"></ion-icon>
+                  <span>Hàng Trong Kho</span>
+                </div>
               </div>
-            </div>
-            <div class="submenu">
-              <ul class="">
-                <li><a href="#">Nguyen Van E</a></li>
-              </ul>
-            </div>
+            </a>
+          </div>
+          <div className={style.contain_item}>
+            <a href="/abc" className={style.single_option}>
+              <div className={style.item_sidebar}>
+                <div className={style.item_title}>
+                  <ion-icon name="logo-buffer"></ion-icon>
+                  <span>Thông Báo Mới</span>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
-      </div>     
-    )
+    </div>
+  )
 } 
