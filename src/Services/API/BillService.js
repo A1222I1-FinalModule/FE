@@ -6,6 +6,7 @@ const WAREHOUSE_URL = `/api/warehouse`;
 export const getAll = async () => {
     try {
         const response = await axios.get(`${SALER_URL}/bill`)
+        console.log(response)
         return response.data
     } catch (error) {
         console.log(error);

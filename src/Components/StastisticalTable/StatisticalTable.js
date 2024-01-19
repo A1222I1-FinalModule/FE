@@ -6,14 +6,14 @@ import MonthlyTable from './MonthlyTable';
 const StatisticalTable = () => {
     return (
         <div className={style.statistical}>
-            <div className={`container`}>
+            {/* <div className={`container`}> */}
                 <NavbarTable />
                 <Routes>
                     <Route path="*" element={<DailyTable />} />
                     <Route path="daily" element={<DailyTable />} />
                     <Route path="monthly" element={<MonthlyTable />} />
                 </Routes>
-            </div>
+            {/* </div> */}
         </div>
     )
 };

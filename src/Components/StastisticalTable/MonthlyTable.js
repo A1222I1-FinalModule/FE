@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import style from '../../Assets/css/StatisticalTable.module.css';
-import * as billService from '../../Services/API/BillService';
-import * as importingService from '../../Services/API/ImportingService';
+import * as statisticalService from '../../Services/API/StatisticalService'
 
 const MonthlyTable = () => {
   const [bills, setBills] = useState(null);
@@ -11,29 +10,15 @@ const MonthlyTable = () => {
   const [totalExpenditure, setTotalExpenditure] = useState(0)
 
   useEffect(() => {
-    getAllBill()
-    getAllImporting()
+    getMonthlyStastistical()
     getRevenue()
     getExpenditure()
   }, [])
 
-  useEffect(() => {
-    getAllBill()
-  }, [bills])
-
-  useEffect(() => {
-    getAllImporting()
-  }, [importings])
-
-
-  const getAllBill = async () => {
-    const response = await billService.getAll()
-    setBills(response)
+  const getMonthlyStastistical = async () => {
+    return await statisticalService.getMonthlyStastisticalByAdmin()
   }
-  const getAllImporting = async () => {
-    const response = await importingService.getMonthlyImportingBySaler()
-    setImportings(response)
-  }
+
   const getRevenue = () => {
     const total = bills?.reduce((total, bill) => {
       return total + bill[1]

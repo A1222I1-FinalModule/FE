@@ -1,7 +1,3 @@
-.statistical {
-  width: 100%;
-  height: 100%;
-}
 
 .statistical .title {
   margin: 0;
@@ -47,7 +43,7 @@
   margin: 0;
   padding: 0;
   overflow: hidden;
-  background-color: #ffff;
+  background-color: #5E2572;
 }
 
 .statistical_navbar .navbar_item {
@@ -62,6 +58,12 @@
   text-decoration: none;
 }
 
+.navbar_item .navbar_item_link:active {
+  font-weight: bold;
+  background-color: #56126e;
+}
+
 .navbar_item .navbar_item_link:hover:not(.active) {
+  font-weight: bold;
   background-color: #5E2572;
 }

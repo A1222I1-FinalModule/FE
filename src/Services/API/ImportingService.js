@@ -4,15 +4,15 @@ const SALER_URL = `/api/saler`;
 const WAREHOUSE_URL = `/api/warehouse`;
 
 export const getAll = async () => {
-  const respone = await axios.get(`${BASE_URL}/importing}`);
+  const respone = await axios.get(`${BASE_URL}/importing`);
   return respone.data;
 }
 export const getAllBySaler = async () => {
-  const respone = await axios.get(`${SALER_URL}/importing}`);
+  const respone = await axios.get(`${SALER_URL}/importing`);
   return respone.data;
 }
 export const getAllByWarehouse = async () => {
-  const respone = await axios.get(`${WAREHOUSE_URL}/importing}`);
+  const respone = await axios.get(`${WAREHOUSE_URL}/importing`);
   return respone.data;
 }
 

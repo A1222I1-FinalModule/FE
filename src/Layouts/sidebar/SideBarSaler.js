@@ -7,7 +7,7 @@ export default function SideBarSaler() {
       <div className={style.sidebar_container}>
         <div className={style.list_item}>
           <div className={style.contain_item}>
-            <Link to="/sale/payment" className={style.single_option}>
+            <Link to={"/sale/payment"} className={style.single_option}>
               <div className={style.item_sidebar}>
                 <div className={style.item_title}>
                   <ion-icon name="logo-buffer"></ion-icon>
@@ -17,7 +17,7 @@ export default function SideBarSaler() {
             </Link>
           </div>
           <div className={style.contain_item}>
-            <Link to="/sale/statistical" className={style.single_option}>
+            <Link to={"/sale/statistical"} className={style.single_option}>
               <div className={style.item_sidebar}>
                 <div className={style.item_title}>
                   <ion-icon name="logo-buffer"></ion-icon>

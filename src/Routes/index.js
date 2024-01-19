@@ -19,7 +19,7 @@ const MainRouter = () => {
     return (
         <Routes>
             <Route path="/admin/*" element={<AdminRoutes />} />
-            <Route path="/sale" element={<Saler />}></Route>
+            <Route path="/sale/*" element={<Saler />}></Route>
             <Route path="/warehouse" element={<Warehouse />}></Route>
             <Route path="/login" element={<Login />} />
             <Route
