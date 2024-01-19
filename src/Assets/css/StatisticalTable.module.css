@@ -41,3 +41,27 @@
   padding-left: 10px;
   font-weight: 600;
 }
+
+.statistical_navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #ffff;
+}
+
+.statistical_navbar .navbar_item {
+  float: left;
+}
+
+.navbar_item .navbar_item_link {
+  display: block;
+  color: #ffff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.navbar_item .navbar_item_link:hover:not(.active) {
+  background-color: #5E2572;
+}

@@ -2,7 +2,7 @@ import { React } from "react";
 import Header from "../Layouts/Header/Header";
 import SideBarSaler from "../Layouts/sidebar/SideBarSaler";
 import { ContentSaler } from "../Components/ContentSaler";
-const Saler = () => {
+export default function Saler() {
   return (
     <div>
       <Header></Header>
@@ -13,5 +13,3 @@ const Saler = () => {
     </div>
   );
 };
-
-export default Saler;
