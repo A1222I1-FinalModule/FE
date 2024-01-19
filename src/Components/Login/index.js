@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../Assets/Styles/mdb.min.css';
-import { LoginAPI } from '../../Services/API';
+import { Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../Services/UserContext';
 import { LoginAPI } from '../../Services/API/authService';
