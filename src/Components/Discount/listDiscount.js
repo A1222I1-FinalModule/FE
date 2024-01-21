@@ -1,10 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import styles from '../Discount/listDiscount.module.css';
-import { Roboto_300Light, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } from 'google-fonts';
 import { useEffect, useState } from 'react';
 import * as discounts from '../../Services/API/Discount/discount';
-import { Route, Routes, NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { toast } from 'react-hot-toast';
@@ -43,7 +42,6 @@ export function Discount() {
         if (searchInput) {
             temp = await discounts.getFindByNameDiscount(searchInput);
             if (temp.length === 0) {
-                console.log("troi:",temp);
                 alert('NOT FOUND.');
             }else{
                 setDiscount(temp);
@@ -127,7 +125,6 @@ export function Discount() {
                         </thead>
                         <tbody>
                             {records.map((discount, index) => {
-                                // if (discount.delete) {
                                 return (
                                     <tr key={index}>
                                         <td>{discount.discountCode}</td>
@@ -139,8 +136,8 @@ export function Discount() {
                                         <td>{discount.condition}</td>
                                         <td>{discount.rewardPoint}</td>
                                         <td>{discount.customerType.typeName}</td>
-                                        <td>{moment(discount.beginDate).format('DD/MM/YYYY')}</td>
-                                        <td>{moment(discount.endDate).format('DD/MM/YYYY')}</td>
+                                        <td>{moment(discount.beginDate).format('MM/DD/YYYY')}</td>
+                                        <td>{moment(discount.endDate).format('MM/DD/YYYY')}</td>
                                         <td>
                                             <div className={styles['action']}>
                                                 <Example id={discount.discountCode} handleDelete={handleDelete} />

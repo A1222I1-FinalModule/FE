@@ -84,7 +84,7 @@ export function UpdateDiscount() {
         condition: discount.condition,
         sale: discount.sale,
         beginDate: formatDate(discount.beginDate),
-        endDate: formatDate(discount.beginDate),
+        endDate: formatDate(discount.endDate),
         customerType: {
             id: discount.customerType.id,
         },

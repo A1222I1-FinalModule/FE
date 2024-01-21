@@ -79,7 +79,7 @@ export function CreateDiscount() {
             };
 
             await discounts.addDiscount(formattedValues);
-            navigate('/admin/listDiscount');
+            navigate('/admin/discount');
             toast.success('Create Success');
         } catch (error) {
             if (error.response && error.response.status === 400) {
