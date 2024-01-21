@@ -89,7 +89,7 @@ function CustomerSearchModal(props) {
 
         return (
             <>
-                <table align="center" id="custom-table" className="table table-hover table-bordered">
+                <table align="center" id="custom-table" className="table table-hover table-bordered normal-txt-payment">
                     <thead>
                         <tr className="table-dark">
                             <th>STT</th>
@@ -107,17 +107,17 @@ function CustomerSearchModal(props) {
                         breakLabel="..."
                         nextLabel="&raquo;"
                         nextClassName="page-item"
-                        nextLinkClassName="page-link"
+                        nextLinkClassName="page-link normal-txt-payment"
                         onPageChange={handlePageClick}
                         pageRangeDisplayed={5}
                         pageCount={pageCount}
                         previousLabel="&laquo;"
                         previousClassName="page-item"
-                        previousLinkClassName="page-link"
+                        previousLinkClassName="page-link normal-txt-payment"
                         renderOnZeroPageCount={null}
                         className="pagination"
                         pageClassName="page-item"
-                        pageLinkClassName="page-link"
+                        pageLinkClassName="page-link normal-txt-payment"
                         activeClassName="active"
                     />
                 </nav>
@@ -127,10 +127,10 @@ function CustomerSearchModal(props) {
 
     return (
         <>
-            <Button variant="success" onClick={handleShow}>
+            <Button className='normal-txt-payment' variant="success" onClick={handleShow}>
                 Tra cứu khách hàng
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            <Modal size='xl' show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Tra cứu khách hàng</Modal.Title>
                 </Modal.Header>
@@ -138,18 +138,22 @@ function CustomerSearchModal(props) {
                     <div>
                         <div>
                             <div className="input-group mb-3">
-                                <input type="text" onChange={(e) => setSearchStr(e.target.value)} className="form-control" value={searchStr} placeholder="Nhập mã KH, tên KH hoặc sdt" />
-                                <div className="input-group-append">
-                                    <button className="input-group-text" onClick={() => {
+                                <input type="text" onChange={(e) => setSearchStr(e.target.value)} className="form-control p-4 normal-txt-payment" value={searchStr} placeholder="Nhập mã KH, tên KH hoặc sdt" />
+                            </div>
+                            <div className='row'>
+                                <div className="input-group-append col-auto">
+                                    <button className="btn btn-success normal-txt-payment" onClick={() => {
                                         getSearchCustomer();
                                     }}>Tìm kiếm</button>
                                 </div>
-                                <button className="btn btn-primary" onClick={() => {
-                                    props.handleSubmit(selectedCode)
-                                    handleClose();
-                                }
-                                }>Chọn
-                                </button>
+                                <div className='input-group-append col-auto'>
+                                    <button className="btn btn-primary normal-txt-payment" onClick={() => {
+                                        props.handleSubmit(selectedCode)
+                                        handleClose();
+                                    }
+                                    }>Chọn
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         <PaginatedItems itemsPerPage={4} />

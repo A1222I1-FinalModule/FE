@@ -68,29 +68,30 @@ export function Discount() {
             });
     };
     const handleUpdateClick = (discountCode) => {
-        navigate(`/updateDiscount/${discountCode}`);
+        navigate(`/admin/updateDiscount/${discountCode}`);
     };
     return (
         <div>
             <div className={styles['list_Discount_container-main']}>
                 <div style={{ paddingBottom: '30px' }}>
-                    <h1>List Discount</h1>
+                    <h1>Danh Sách Giảm Giá</h1>
                 </div>
                 <div className={styles['row-container']}>
-                    <div className={styles['List_customer_find_container-find']}>
+                    <div className={styles['List_customer_find_container-find']}  >
                         <button
                             type="button"
                             className="btn btn-primary"
                             data-mdb-ripple-init
-                            style={{ width: '75px', height: '36px' }}
+                            style={{ width: '75px', height: '33px' }}
                             onClick={getAllDiscount}
                         >
-                            Find
+                            Tìm
                         </button>
                         <input
                             type="text"
                             style={{ width: '190px', height: '36px' }}
                             placeholder="name"
+                            class="form-control"
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
@@ -101,10 +102,10 @@ export function Discount() {
                             className="btn btn-success"
                             data-mdb-ripple-init
                             style={{ width: '200px' }}
-                            onClick={() => navigate('/createDiscount')}
+                            onClick={() => navigate('/admin/createDiscount')}
                         >
-                            Add new Discount
-                            <NavLink to="/createDiscount"></NavLink>
+                            Thêm mới mã giảm giá
+                            <NavLink to="/admin/createDiscount"></NavLink>
                         </button>
                     </div>
                 </div>
@@ -113,14 +114,14 @@ export function Discount() {
                         <thead className="bg-light">
                             <tr>
                                 <th scope="col" className={styles['head-discount']}>Code</th>
-                                <th scope="col" className={styles['head-discount']}>Name</th>
-                                <th scope="col" className={styles['head-discount']}>Condition</th>
-                                <th scope="col" className={styles['head-discount']}>Point</th>
-                                <th scope="col" className={styles['head-discount']}>Type</th>
-                                <th scope="col" className={styles['head-discount']}>Start Date</th>
-                                <th scope="col" className={styles['head-discount']}>End Date</th>
+                                <th scope="col" className={styles['head-discount']}>Tên</th>
+                                <th scope="col" className={styles['head-discount']}>Điều kiện</th>
+                                <th scope="col" className={styles['head-discount']}>Điểm</th>
+                                <th scope="col" className={styles['head-discount']}>Loại</th>
+                                <th scope="col" className={styles['head-discount']}>Ngày Bắt Đầu</th>
+                                <th scope="col" className={styles['head-discount']}>Ngày Kết Thúc</th>
                                 <th scope="col" style={{ textAlign: 'center' }}>
-                                    Action
+                                    
                                 </th>
                             </tr>
                         </thead>
@@ -148,14 +149,12 @@ export function Discount() {
                                                     ids={discount.discountCode}
                                                     onClick={() => handleUpdateClick(discount.discountCode)}
                                                 >
-                                                    Update
+                                                    Sửa
                                                 </button>
                                             </div>
                                         </td>
                                     </tr>
                                 );
-                                // }
-                                // return null;
                             })}
                         </tbody>
                     </table>
@@ -164,7 +163,7 @@ export function Discount() {
                     <ul className="pagination pagination-circle">
                         <li className="page-item">
                             <a href="#" className="page-link" onClick={prePage}>
-                                Prev
+                                Sau
                             </a>
                         </li>
                         {numbers.map((n, i) => {
@@ -178,7 +177,7 @@ export function Discount() {
                         })}
                         <li className="page-item">
                             <a href="#" className="page-link" onClick={nextPage}>
-                                Next
+                                Trước
                             </a>
                         </li>
                     </ul>

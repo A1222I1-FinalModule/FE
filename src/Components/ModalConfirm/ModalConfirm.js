@@ -18,20 +18,20 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
   return (
     <>
       <Button variant="danger" onClick={handleShow}>
-        Delete
+        Xóa
       </Button>
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header closeButton>
-          <Modal.Title>Notification</Modal.Title>
+          <Modal.Title>Thông Báo</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Do you want to delete</Modal.Body>
+        <Modal.Body>Bạn có muốn xóa </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Thoát
           </Button>
           <Button variant="danger" onClick={submit}>
-            Delete
+            Xóa
           </Button>
         </Modal.Footer>
       </Modal>

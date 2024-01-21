@@ -68,6 +68,9 @@ export function ListCustomer() {
     };
     return (
         <div className={styled['list_Customer_container-main']}>
+            <div style={{ paddingBottom: '30px' }}>
+                    <h1>Danh Sách Khách Hàng</h1>
+                </div>
             <div className="list_Discount_container-main">
                 <div className={styled['row-container']}>
                     <div className={styled['List_customer_find_container-find']}>
@@ -75,15 +78,16 @@ export function ListCustomer() {
                             type="button"
                             className="btn btn-primary"
                             data-mdb-ripple-init
-                            style={{ width: '75px', height: '36px' }}
+                            style={{ width: '75px', height: '33px' }}
                             onClick={getAllCustomer}
                         >
-                            Find
+                            Tìm
                         </button>
                         <input
                             type="text"
                             style={{ width: '190px', height: '36px' }}
                             placeholder="name"
+                            class="form-control"
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
@@ -95,7 +99,7 @@ export function ListCustomer() {
                             data-mdb-ripple-init
                             style={{ width: '200px' }}
                         >
-                            Add new Customer
+                            Thêm mới khách hàng
                         </button>
                     </div>
                 </div>
@@ -105,11 +109,11 @@ export function ListCustomer() {
                             <tr>
                                 <th></th>
                                 <th>Code</th>
-                                <th>Name</th>
-                                <th>Gender</th>
-                                <th>Point</th>
-                                <th>Rank</th>
-                                <th>Actions</th>
+                                <th>Tên</th>
+                                <th>Giới Tính</th>
+                                <th>Điểm</th>
+                                <th>Loại</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -138,7 +142,7 @@ export function ListCustomer() {
                                                     ids={customer.id}
                                                     onClick={() => handleDelete(customer.id)}
                                                 >
-                                                    Update
+                                                    Sửa
                                                 </button>
                                             </div>
                                         </td>
@@ -152,7 +156,7 @@ export function ListCustomer() {
                     <ul className="pagination pagination-circle">
                         <li className="page-item">
                             <a href="#" className="page-link" onClick={prePage}>
-                                Prev
+                                Sau
                             </a>
                         </li>
                         {numbers.map((n, i) => {
@@ -166,7 +170,7 @@ export function ListCustomer() {
                         })}
                         <li className="page-item">
                             <a href="#" className="page-link" onClick={nextPage}>
-                                Next
+                                Trước
                             </a>
                         </li>
                     </ul>

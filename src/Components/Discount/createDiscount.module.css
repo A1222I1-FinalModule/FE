@@ -8,7 +8,7 @@
   font-family: Arial, sans-serif;
   box-sizing: border-box;
   margin: 20px auto;
-  margin-top: 90px;
+  margin-top: 30px;
 }
 
 .form-row {
@@ -58,4 +58,19 @@
 
 .form-err{
   color:red;
+}
+
+.font{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: Verdana;
+}
+.error-message {
+  color: red;
+  margin-top: 10px;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
