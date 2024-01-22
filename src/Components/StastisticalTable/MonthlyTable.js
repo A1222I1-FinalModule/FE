@@ -3,8 +3,7 @@ import style from '../../Assets/css/StatisticalTable.module.css';
 import * as statisticalService from '../../Services/API/StatisticalService'
 
 const MonthlyTable = () => {
-  const [bills, setBills] = useState(null);
-  const [importings, setImportings] = useState(null);
+  const [statisticalTable, setStatisticalTable] = useState([])
   const thisMonth = getMonth()
   const [totalRevenue, setTotalRevenue] = useState(0)
   const [totalExpenditure, setTotalExpenditure] = useState(0)
@@ -16,18 +15,19 @@ const MonthlyTable = () => {
   }, [])
 
   const getMonthlyStastistical = async () => {
-    return await statisticalService.getMonthlyStastisticalByAdmin()
+    let respone = await statisticalService.getMonthlyStastisticalByAdmin()
+    setStatisticalTable(respone)
   }
 
   const getRevenue = () => {
-    const total = bills?.reduce((total, bill) => {
-      return total + bill[1]
+    const total = statisticalTable?.reduce((total, item) => {
+      return total + item[1]
     }, 0)
     setTotalRevenue(total)
   }
   const getExpenditure = () => {
-    const total = importings?.reduce((total, importing) => {
-      return total + importing.total
+    const total = statisticalTable?.reduce((total, item) => {
+      return total + item[2]
     }, 0)
     setTotalExpenditure(total)
   }
@@ -37,7 +37,7 @@ const MonthlyTable = () => {
     return date[1] + '/' + date[2]
   }
 
-  if (bills === null || importings === null) return null
+  if (statisticalTable === null) return null
 
   return (
     <div className={`card text-dark w-100 mb-3`}>
@@ -60,14 +60,14 @@ const MonthlyTable = () => {
             </thead>
             <tbody>
               {
-                bills.map((bill, index) => {
+                statisticalTable.map((item, index) => {
                   return (
-                    <tr key={index}>
+                    <tr key={item.index}>
                       <td>{index + 1}</td>
-                      <td>{bill[0]}</td>
-                      <td>{bill[1]}</td>
-                      <td>{0}</td>
-                      <td>{bill[1] - 0}</td>
+                      <td>{item[0]}</td>
+                      <td>{item[1]}</td>
+                      <td>{item[2]}</td>
+                      <td>{item[1] - item[2]}</td>
                     </tr>
                   )
                 })
