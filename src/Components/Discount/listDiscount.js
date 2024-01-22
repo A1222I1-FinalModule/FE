@@ -136,8 +136,8 @@ export function Discount() {
                                         <td>{discount.condition}</td>
                                         <td>{discount.rewardPoint}</td>
                                         <td>{discount.customerType.typeName}</td>
-                                        <td>{moment(discount.beginDate).format('MM/DD/YYYY')}</td>
-                                        <td>{moment(discount.endDate).format('MM/DD/YYYY')}</td>
+                                        <td>{moment(discount.beginDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
+                                        <td>{moment(discount.endDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
                                         <td>
                                             <div className={styles['action']}>
                                                 <Example id={discount.discountCode} handleDelete={handleDelete} />
