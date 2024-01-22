@@ -48,7 +48,7 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('left')}>
-                    <Link>
+                    <Link to={'/'}>
                         <img className={cx('logo')} src={images.logo} alt="" />
                     </Link>
 

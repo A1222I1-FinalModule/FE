@@ -30,9 +30,17 @@ const MainRouter = () => {
                     </DefaultLayout>
                 }
             />
+            <Route
+                path="/search"
+                element={
+                    <DefaultLayout>
+                        <ListProduct />
+                    </DefaultLayout>
+                }
+            />
+
             <Route path="/customer/create" element={<CustomerCreate />} />
             <Route path="/customer/update/:id" element={<CustomerUpdate />} />
-            <Route path="/list-product" element={<ListProduct />} />
         </Routes>
     );
 };

@@ -1,22 +1,36 @@
+import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
-import styles from './ProductItem.module.scss';
+import { Link } from 'react-router-dom';
 
 import { formatMoney, convertSlug } from '../../utils/helpers';
 import Image from '../Image';
-import { Link } from 'react-router-dom';
+import styles from './ProductItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ProductItem({ data }) {
+function ProductItem({ data, number }) {
     return (
-        <Link to={convertSlug(data.name)} className={cx('wrapper')}>
-            <Image className={cx('thumbnail')} src={data.image} alt={data.name} />
-            <div className={cx('info')}>
-                <h4 className={cx('name')}>{data.name}</h4>
-                <span className={cx('price')}>{formatMoney(data.price)}</span>
-            </div>
-        </Link>
+        <div className={cx('wrapper')}>
+            {data?.slice(0, number).map((product) => (
+                <div key={product.productCode} className={cx('product-item')}>
+                    <Link className={cx('thumbnail')}>
+                        <Image src={product.image} alt={product.name} />
+                    </Link>
+                    <div className={cx('info')}>
+                        <h4 className={cx('name')}>
+                            <Link to={convertSlug(product.name)}>{product.name}</Link>
+                        </h4>
+                        <p className={cx('price')}>{formatMoney(product.price)}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
     );
 }
+
+ProductItem.propType = {
+    data: PropTypes.array.isRequired,
+    number: PropTypes.number.isRequired,
+};
 
 export default ProductItem;
