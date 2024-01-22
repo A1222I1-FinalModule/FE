@@ -36,7 +36,7 @@ function Products() {
                         </Link>
                         <div className={cx('info')}>
                             <h4 className={cx('name')}>{product.name}</h4>
-                            <p className={cx('price')}>Price</p>
+                            <p className={cx('price')}>{product.price}</p>
                         </div>
                     </div>
                 ))}

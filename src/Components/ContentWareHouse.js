@@ -7,5 +7,6 @@ export const ContentWareHouse = () => {
         <span>Nội dung chức năng cho WareHouse</span>
       </div>
     </div>
+
   )
 }

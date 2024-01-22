@@ -120,7 +120,7 @@ export function CreateDiscount() {
           validationSchema={Yup.object().shape(validateDiscount)}
           onSubmit={(value) => {
             handleSubmit(value);
-            toast.success("Create Success");
+            //  toast.success("Create Success");
           }}
         >
           <Form>
