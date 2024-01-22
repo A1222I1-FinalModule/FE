@@ -8,9 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import { toast } from 'react-hot-toast';
 import Example from '../ModalConfirm/ModalConfirm';
+import NotFound from '../ModalConfirm/NotificationDiscount';
 export function Discount() {
     const [discount, setDiscount] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    const [showNotFoundModal, setShowNotFoundModal] = useState(false);
     const navigate = useNavigate();
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -42,9 +44,9 @@ export function Discount() {
         if (searchInput) {
             temp = await discounts.getFindByNameDiscount(searchInput);
             if (temp.length === 0) {
-                alert('NOT FOUND.');
+                setShowNotFoundModal(true);
             }else{
-                setDiscount(temp);
+                setDiscount(temp.filter(item => item.delete === true));
             }
         } else {
             temp = await discounts.findAllDiscount();
@@ -53,7 +55,7 @@ export function Discount() {
     };
     const getDelete = async (id) => {
         await discounts.getDeleteDiscount(id);
-        toast.success('Delete Success');
+        toast.success('Xóa Thành Công');
         await getAllDiscount();
     };
     const handleDelete = (id) => {
@@ -68,6 +70,10 @@ export function Discount() {
     const handleUpdateClick = (discountCode) => {
         navigate(`/admin/updateDiscount/${discountCode}`);
     };
+
+    const handleCloseNotFoundModal = () => {
+        setShowNotFoundModal(false);
+      };
     return (
         <div>
             <div className={styles['list_Discount_container-main']}>
@@ -75,7 +81,7 @@ export function Discount() {
                     <h1>Danh Sách Giảm Giá</h1>
                 </div>
                 <div className={styles['row-container']}>
-                    <div className={styles['List_customer_find_container-find']}  >
+                    <div className={styles['List_discount_find_container-find']}  >
                         <button
                             type="button"
                             className="btn btn-primary"
@@ -110,7 +116,7 @@ export function Discount() {
                 <div className={styles['container-table']}>
                     <table className="table align-middle mb-0 bg-white">
                         <thead className="bg-light">
-                            <tr>
+                            <tr className={styles['headtr-discount']}>
                                 <th scope="col" className={styles['head-discount']}>Code</th>
                                 <th scope="col" className={styles['head-discount']}>Tên</th>
                                 <th scope="col" className={styles['head-discount']}>Điều kiện</th>
@@ -126,21 +132,21 @@ export function Discount() {
                         <tbody>
                             {records.map((discount, index) => {
                                 return (
-                                    <tr key={index}>
-                                        <td>{discount.discountCode}</td>
-                                        <td>
+                                    <tr key={index} className={styles['headtr-discount']}>
+                                        <td className={styles['headtd-discount']}>{discount.discountCode}</td>
+                                        <td className={styles['headtd-discount']}>
                                             <div className="d-flex align-items-center text-nowrap">
                                                 <span>{discount.name}</span>
                                             </div>
                                         </td>
-                                        <td>{discount.condition}</td>
-                                        <td>{discount.rewardPoint}</td>
-                                        <td>{discount.customerType.typeName}</td>
-                                        <td>{moment(discount.beginDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
-                                        <td>{moment(discount.endDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
-                                        <td>
+                                        <td className={styles['headtd-discount']}>{discount.condition}</td>
+                                        <td className={styles['headtd-discount']}>{discount.rewardPoint}</td>
+                                        <td className={styles['headtd-discount']}>{discount.customerType.typeName}</td>
+                                        <td className={styles['headtd-discount']}>{moment(discount.beginDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
+                                        <td className={styles['headtd-discount']}>{moment(discount.endDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
+                                        <td className={styles['headtd-discount']}>
                                             <div className={styles['action']}>
-                                                <Example id={discount.discountCode} handleDelete={handleDelete} />
+                                                <Example id={discount.discountCode} name={discount.name} handleDelete={handleDelete} />
                                                 <button
                                                     class="btn btn-success"
                                                     ids={discount.discountCode}
@@ -180,6 +186,7 @@ export function Discount() {
                     </ul>
                 </nav>
             </div>
+            <NotFound show={showNotFoundModal} handleClose={handleCloseNotFoundModal} />
         </div>
     );
 }

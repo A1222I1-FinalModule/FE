@@ -5,6 +5,7 @@ import Payment from '../Components/Payment';
 import { CreateDiscount } from '../Components/Discount/createDiscount';
 import { ListCustomer } from '../Components/Customer/listCustomer';
 import { Discount } from '../Components/Discount/listDiscount';
+import { Toaster} from 'react-hot-toast';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
@@ -14,6 +15,7 @@ import SalerRoutes from './SalerRoutes';
 
 const MainRouter = () => {
     return (
+        <>
         <Routes>
             <Route path="/admin/*" element={<AdminRoutes />} />
             <Route path="/sale/*" element={<SalerRoutes />}></Route>
@@ -43,6 +45,8 @@ const MainRouter = () => {
             <Route path="/" element={<></>} />
             <Route path="/payment" element={<Payment />} />
         </Routes>
+        <Toaster position="top-right" reverseOrder={false} />;
+        </>
     );
 };
 

@@ -18,13 +18,14 @@
     align-items: center;
     gap: 10px;
     justify-content: flex-start; 
+    padding-bottom: 10px;
 }
 
 .container-pagination {
     padding-top: 20px;
     display: flex;
-    justify-content: center;  /* Can giữa theo chiều ngang */
-    align-items: center;      /* Can giữa theo chiều dọc */
+    justify-content: center; 
+    align-items: center;  
     width: 100%;  
 }
 
@@ -39,19 +40,21 @@
     gap: 10px;
 }
 
-th {
+.head-customer{
     height: 55.4375px;
     width: 96.4625px;
     line-height: 3em;
     text-align: center;
+    }
+
+.headtr-customer{
+    width: 860.275px;
+    height: 60px;
 }
 
-tbody tr{
-    width: 860.275px;
-    height: 82.875px;
-}
-tbody tr td{
+.headtd-customer{
+    height: 80px;
     padding: 16px 22.4px !important;
-  }
+}
 
   

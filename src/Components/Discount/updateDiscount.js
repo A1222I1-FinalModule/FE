@@ -23,7 +23,7 @@ export function UpdateDiscount() {
             .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, 'Not format'),
             name: Yup.string()
             .required('Không Được Bỏ Trống')
-            .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
+            .matches(/^[A-ZÀ-ỸĐ\s][a-zA-Z0-9À-ỹđĐ\s]{1,28}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
         sale: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
@@ -67,11 +67,9 @@ export function UpdateDiscount() {
             beginDate: formatDate(values.beginDate),
             endDate: formatDate(values.endDate),
         };
-        console.log('TOi oke');
-        console.log(id, formattedValues);
         await discounts.updateDiscount(id, formattedValues);
         navigate('/admin/discount');
-        toast.success('Update Success');
+        toast.success('Cập Nhật Thành Công');
     };
 
     if (!discount) {
@@ -98,7 +96,6 @@ export function UpdateDiscount() {
                     validationSchema={Yup.object().shape(validateDiscount)}
                     onSubmit={(value) => {
                         handleSubmit(discount.discountCode, value);
-                        toast.success('Update success');
                     }}
                 >
                     <Form>
@@ -114,7 +111,6 @@ export function UpdateDiscount() {
                                     >
                                         <option value={1}>Regular</option>
                                         <option value={2}>Vip</option>
-                                        <option value={3}>Normal</option>
                                     </Field>
                                 </div>
                             </div>

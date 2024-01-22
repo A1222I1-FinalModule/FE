@@ -5,13 +5,13 @@ import { Roboto_300Light, Roboto_400Regular, Roboto_500Medium, Roboto_700Bold } 
 import styled from '../Customer/listCustomer.module.css';
 import { useEffect, useState } from 'react';
 import * as customers from '../../Services/API/Customer/customer';
-import Example from '../ModalConfirm/ModalConfirm';
+import Example2 from '../ModalConfirm/ModalConfirmCustomer';
 import { toast } from 'react-hot-toast';
-import moment from 'moment';
+import NotFound from '../ModalConfirm/NotificationDiscount';
 export function ListCustomer() {
     const [customer, setCustomer] = useState([]);
     const [searchInput, setSearchInput] = useState('');
-
+    const [showNotFoundModal, setShowNotFoundModal] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 5;
     const lastIndex = currentPage * recordsPerPage;
@@ -42,9 +42,9 @@ export function ListCustomer() {
         if (searchInput) {
             temp = await customers.findByNameCustomer(searchInput);
             if (temp.length === 0) {
-                alert('NOT FOUND.');
+                setShowNotFoundModal(true);
             }else{
-                setCustomer(temp);
+                setCustomer(temp.filter(item => item.delete === true));
             }
             
         } else {
@@ -54,7 +54,7 @@ export function ListCustomer() {
     };
     const getDelete = async (id) => {
         await customers.getDeleteCustomer(id);
-        toast.success('Delete Success');
+        toast.success('Xóa thành công');
         await getAllCustomer();
     };
     const handleDelete = (id) => {
@@ -66,6 +66,9 @@ export function ListCustomer() {
                 console.log(err);
             });
     };
+    const handleCloseNotFoundModal = () => {
+        setShowNotFoundModal(false);
+      };
     return (
         <div className={styled['list_Customer_container-main']}>
             <div style={{ paddingBottom: '30px' }}>
@@ -106,24 +109,24 @@ export function ListCustomer() {
                 <div className="container-table">
                     <table className="table align-middle mb-0 bg-white">
                         <thead className="bg-light">
-                            <tr>
-                                <th></th>
-                                <th>Code</th>
-                                <th>Tên</th>
-                                <th>Giới Tính</th>
-                                <th>Điểm</th>
-                                <th>Loại</th>
-                                <th></th>
+                            <tr className={styled['headtr-customer']}>
+                                <th scope="col" className={styled['head-customer']}></th>
+                                <th scope="col" className={styled['head-customer']}>Code</th>
+                                <th scope="col" className={styled['head-customer']}>Tên</th>
+                                <th scope="col" className={styled['head-customer']}>Giới Tính</th>
+                                <th scope="col" className={styled['head-customer']}>Điểm</th>
+                                <th scope="col" className={styled['head-customer']}>Loại</th>
+                                <th scope="col" className={styled['head-customer']}></th>
                             </tr>
                         </thead>
                         <tbody>
                             {records.map((customer, index) => {
                                 const rowNumber = firstIndex + index + 1;
                                 return (
-                                    <tr key={index}>
-                                        <td> {rowNumber}</td>
-                                        <td>{customer.id}</td>
-                                        <td>
+                                    <tr key={index} className={styled['headtr-customer']}>
+                                        <td className={styled['headtd-customer']}> {rowNumber}</td>
+                                        <td className={styled['headtd-customer']}>{customer.id}</td>
+                                        <td className={styled['headtd-customer']}>
                                             <div className="d-flex align-items-center">
                                                 <div className="ms-3">
                                                     <p className="fw-bold mb-1">{customer.name}</p>
@@ -131,12 +134,12 @@ export function ListCustomer() {
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{customer.gender ? 'Nam' : 'Nữ'}</td>
-                                        <td>{customer.point}</td>
-                                        <td>{customer.customerType.typeName}</td>
-                                        <td>
+                                        <td className={styled['headtd-customer']}>{customer.gender ? 'Nam' : 'Nữ'}</td>
+                                        <td className={styled['headtd-customer']}>{customer.point}</td>
+                                        <td className={styled['headtd-customer']}>{customer.customerType.typeName}</td>
+                                        <td className={styled['headtd-customer']}>
                                             <div className={styled['action']}>
-                                                <Example id={customer.id} handleDelete={handleDelete} />
+                                                <Example2 id={customer.id} name={customer.name} handleDelete={handleDelete} />
                                                 <button
                                                     class="btn btn-success"
                                                     ids={customer.id}
@@ -176,6 +179,7 @@ export function ListCustomer() {
                     </ul>
                 </nav>
             </div>
+            <NotFound show={showNotFoundModal} handleClose={handleCloseNotFoundModal} />
         </div>
     );
 }

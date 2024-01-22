@@ -9,7 +9,6 @@ import * as discounts from '../../Services/API/Discount/discount';
 import { toast } from 'react-hot-toast';
 import moment from 'moment';
 export function CreateDiscount() {
-    const [discountCode, setDiscountCode] = useState([]);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const initDiscount = {
@@ -29,7 +28,7 @@ export function CreateDiscount() {
             .matches(/^C[a-zA-Z0-9]{2,9}$/, 'Không Đúng Định Dạng C0001'),
         name: Yup.string()
             .required('Không Được Bỏ Trống')
-            .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
+            .matches(/^[A-ZÀ-ỸĐ\s][a-zA-Z0-9À-ỹđĐ\s]{1,28}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
         sale: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
@@ -65,10 +64,6 @@ export function CreateDiscount() {
         }
         return '';
     };
-    const checkDiscountCode = async () => {
-        setDiscountCode(await discounts.listDiscountCode());
-        console.log('discountCode', discountCode);
-    };
     const handleSubmit = async (values) => {
         try {
             const formattedValues = {
@@ -80,11 +75,9 @@ export function CreateDiscount() {
 
             await discounts.addDiscount(formattedValues);
             navigate('/admin/discount');
-            toast.success('Create Success');
+            toast.success('Thêm Mới Thành Công');
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                console.log('loi tao');
-                const errorMessage = error.response.data.message;
                 setError('Code Đã Tồn Tại');
             } else {
                 console.error(error);
@@ -101,7 +94,6 @@ export function CreateDiscount() {
                     validationSchema={Yup.object().shape(validateDiscount)}
                     onSubmit={(value) => {
                         handleSubmit(value);
-                        toast.success('Create Success');
                     }}
                 >
                     <Form>
@@ -120,9 +112,6 @@ export function CreateDiscount() {
                                         </option>
                                         <option value={2} className={style['option']}>
                                             Vip
-                                        </option>
-                                        <option value={3} className={style['option']}>
-                                            Normal
                                         </option>
                                     </Field>
                                 </div>
