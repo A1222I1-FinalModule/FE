@@ -5,6 +5,7 @@
     // Color
     --primary: #5e2572;
     --white: #fff;
+    --red: #fe2c55;
     --black: #000;
     --text-color: #161823;
 
@@ -46,4 +47,22 @@ input,
 a {
     color: var(--text-color);
     text-decoration: none;
+
+    &:hover {
+        color: var(--text-color);
+    }
+}
+
+.form-control,
+.form-select {
+    padding: 0.5em 1rem;
+    font-size: 1.4rem;
+}
+
+.spacing {
+    height: 80px;
+}
+
+.form-label {
+    font-weight: 600;
 }
