@@ -10,12 +10,14 @@ const MonthlyTable = () => {
 
   useEffect(() => {
     getMonthlyStastistical()
+  }, [])
+  useEffect(() => {
     getRevenue()
     getExpenditure()
-  }, [])
+  }, [statisticalTable])
 
   const getMonthlyStastistical = async () => {
-    let respone = await statisticalService.getMonthlyStastisticalByAdmin()
+    let respone = await statisticalService.getMonthlyStastisticalBySaler()
     setStatisticalTable(respone)
   }
 
@@ -34,58 +36,60 @@ const MonthlyTable = () => {
 
   function getMonth() {
     let date = new Date().toLocaleDateString().split('/')
-    return date[1] + '/' + date[2]
+    return date[0] + '/' + date[2]
   }
 
   if (statisticalTable === null) return null
 
   return (
-    <div className={`card text-dark w-100 mb-3`}>
-      <div className={`card-body w-100`}>
-        <div className={`row`}>
-          <p className={`col-3 title mb-2`}>Tháng/năm</p>
-          <p className={`col-3 mb-2`}>{thisMonth}</p>
-          <button className={`col-6 mb-2 btn btn-secondary`} onClick={window.print}>In thống kê</button>
-        </div>
-        &nbsp;
-        <div className={`row`}>
-          <table className={`table table table-striped`}>
-            <thead className>
-              <tr><th scope={`col`}>STT</th>
-                <th scope={`col`}>Ngày</th>
-                <th scope={`col`}>Tổng thu</th>
-                <th scope={`col`}>Tổng chi</th>
-                <th scope={`col`}>Lãi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                statisticalTable.map((item, index) => {
-                  return (
-                    <tr key={item.index}>
-                      <td>{index + 1}</td>
-                      <td>{item[0]}</td>
-                      <td>{item[1]}</td>
-                      <td>{item[2]}</td>
-                      <td>{item[1] - item[2]}</td>
-                    </tr>
-                  )
-                })
-              }
-            </tbody>
-          </table>
-        </div>
-        <div className={`row`}>
-          <div className={`${style.total_revenue} col-6`}>
-            <div className={`row`}>
-              <p className={`col-5 title mb-2`}>Tổng thu</p>
-              <p className={`col-7 mb-2`}>{totalRevenue}</p>
-            </div>
+    <div className={`col-10`}>
+      <div className={`card text-dark w-100 mb-3`}>
+        <div className={`card-body w-100`}>
+          <div className={`row`}>
+            <p className={`col-3 title mb-2`}>Tháng/năm</p>
+            <p className={`col-3 mb-2`}>{thisMonth}</p>
+            <button className={`col-6 mb-2 btn btn-secondary`} onClick={window.print}>In thống kê</button>
           </div>
-          <div className={`${style.total_expenditure} col-6`}>
-            <div className={`row`}>
-              <p className={`col-5 title mb-2`}>Tổng chi</p>
-              <p className={`col-7 mb-2`}>{totalExpenditure}</p>
+          &nbsp;
+          <div className={`row`}>
+            <table className={`table table table-striped`}>
+              <thead className>
+                <tr><th scope={`col`}>STT</th>
+                  <th scope={`col`}>Ngày</th>
+                  <th scope={`col`}>Tổng thu</th>
+                  <th scope={`col`}>Tổng chi</th>
+                  <th scope={`col`}>Lãi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  statisticalTable.map((item, index) => {
+                    return (
+                      <tr key={item[0]}>
+                        <td>{index + 1}</td>
+                        <td>{item[0]}</td>
+                        <td>{item[1]}</td>
+                        <td>{item[2]}</td>
+                        <td>{item[1] - item[2]}</td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+          </div>
+          <div className={`row`}>
+            <div className={`${style.total_revenue} col-6`}>
+              <div className={`row`}>
+                <p className={`col-5 title mb-2`}>Tổng thu</p>
+                <p className={`col-7 mb-2`}>{totalRevenue}</p>
+              </div>
+            </div>
+            <div className={`${style.total_expenditure} col-6`}>
+              <div className={`row`}>
+                <p className={`col-5 title mb-2`}>Tổng chi</p>
+                <p className={`col-7 mb-2`}>{totalExpenditure}</p>
+              </div>
             </div>
           </div>
         </div>

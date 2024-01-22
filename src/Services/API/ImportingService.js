@@ -41,3 +41,13 @@ export const getMonthlyImportingByWarehouse = async () => {
   const respone = await axios.get(`${WAREHOUSE_URL}/importing/month`);
   return respone.data;
 }
+
+export const getMaxId = async () => {
+  const respone = await axios.get(`${BASE_URL}/importing/maxId`);
+  return respone.data;
+}
+export const getMaxIdByWarehouse = async () => {
+  const respone = await axios.get(`${WAREHOUSE_URL}/importing/maxId`);
+  console.log(respone.data);
+  return respone.data;
+}

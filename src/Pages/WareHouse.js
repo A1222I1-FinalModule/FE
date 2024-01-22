@@ -9,7 +9,7 @@ export const Warehouse = () => {
       <Header></Header>
       <div className="row">
         <SideBarWareHouse></SideBarWareHouse>
-        <ContentWareHouse></ContentWareHouse>
+        <ContentWareHouse />
       </div>
     </div>
   );

@@ -5,15 +5,17 @@ import DailyTable from './DailyTable';
 import MonthlyTable from './MonthlyTable';
 const StatisticalTable = () => {
     return (
-        <div className={style.statistical}>
-            {/* <div className={`container`}> */}
-                <NavbarTable />
-                <Routes>
-                    <Route path="*" element={<DailyTable />} />
-                    <Route path="/daily" element={<DailyTable />} />
-                    <Route path="/monthly" element={<MonthlyTable />} />
-                </Routes>
-            {/* </div> */}
+        <div className={`col-10`}>
+            <div className={style.statistical}>
+                <div className={`row p-0`}>
+                    <NavbarTable />
+                    <Routes>
+                        <Route path="*" element={<DailyTable />} />
+                        <Route path="/daily" element={<DailyTable />} />
+                        <Route path="/monthly" element={<MonthlyTable />} />
+                    </Routes>
+                </div>
+            </div>
         </div>
     )
 };
