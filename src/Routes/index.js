@@ -2,11 +2,12 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from '../Pages/DashBoard';
 import Login from '../Components/Login';
-import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
+import DefaultLayout from '../Layouts/DefaultLayout';
 import Home from '../Pages/Home';
 import PrivateRoute from './privateRoute';
-import Payment from "../Components/Payment"
-import { CustomerCreate, CustomerUpdate } from '../Components/Customer'
+import Payment from '../Components/Payment';
+import { CustomerCreate, CustomerUpdate } from '../Components/Customer';
+import ListProduct from '../Pages/ListProduct';
 
 const MainRouter = () => {
     return (
@@ -29,9 +30,9 @@ const MainRouter = () => {
                     </DefaultLayout>
                 }
             />
-            <Route path='/customer/create' element={<CustomerCreate />} />
-            <Route path='/customer/update/:id' element={<CustomerUpdate />} />
-            
+            <Route path="/customer/create" element={<CustomerCreate />} />
+            <Route path="/customer/update/:id" element={<CustomerUpdate />} />
+            <Route path="/list-product" element={<ListProduct />} />
         </Routes>
     );
 };

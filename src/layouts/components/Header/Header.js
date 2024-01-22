@@ -10,6 +10,7 @@ import { useUser } from '../../../Services/UserContext';
 import Login from '../../../Components/Login';
 import { useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
+import images from '../../../Assets/Images';
 
 const cx = classNames.bind(styles);
 
@@ -32,13 +33,14 @@ function Header() {
         {
             icon: <UserIcon />,
             title: 'Tài khoản của tôi',
-            to: '/',
+            to: '/user',
         },
         {
             icon: <LogoutIcon />,
             title: 'Đăng xuất',
             to: '/',
             separate: true,
+            isLogout: true,
         },
     ];
 
@@ -47,12 +49,7 @@ function Header() {
             <div className={cx('inner')}>
                 <div className={cx('left')}>
                     <Link>
-                        <img
-                            className={cx('logo')}
-                            src="https://media-fmplus.cdn.vccloud.vn/uploads/gui/4795312b-8e83-4876-b497-340f9c755df0.png"
-                            alt=""
-                            width={60}
-                        />
+                        <img className={cx('logo')} src={images.logo} alt="" />
                     </Link>
 
                     <Navbar />

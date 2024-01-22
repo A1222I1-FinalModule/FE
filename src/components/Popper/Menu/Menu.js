@@ -15,14 +15,19 @@ function Menu({ items = [], hideOnClick = false, children }) {
 
     const renderItems = () => {
         return items.map((item, index) => {
-            return <MenuItem key={index} data={item} onClick={() => {
-                if (item.to === '/' && item.title === 'Đăng xuất') {
-                    handleLogout()
-                }
-            }} />
-        }
-        )
-    }
+            return (
+                <MenuItem
+                    key={index}
+                    data={item}
+                    onClick={() => {
+                        if (item.isLogout) {
+                            handleLogout();
+                        }
+                    }}
+                />
+            );
+        });
+    };
 
     const renderResult = (attrs) => (
         <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
@@ -33,13 +38,7 @@ function Menu({ items = [], hideOnClick = false, children }) {
     );
 
     return (
-        <Tippy
-            interactive
-            offset={[12, 8]}
-            placement="bottom-end"
-            hideOnClick={hideOnClick}
-            render={renderResult}
-        >
+        <Tippy interactive offset={[12, 8]} placement="bottom-end" hideOnClick={hideOnClick} render={renderResult}>
             {children}
         </Tippy>
     );
