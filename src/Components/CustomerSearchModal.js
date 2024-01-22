@@ -9,9 +9,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerSearchModal(props) {
     let selectedCode = "";
+    let searchStr = "";
     const [show, setShow] = useState(false);
     const [customers, setCustomers] = useState([]);
-    const [searchStr, setSearchStr] = useState("");
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -28,7 +28,7 @@ function CustomerSearchModal(props) {
     }
 
     useEffect(() => {
-        if (show == true) {
+        if (show === true) {
             getAllCustomer();
         }
     }, [show]);
@@ -40,7 +40,7 @@ function CustomerSearchModal(props) {
 
     const getSearchCustomer = async () => {
         let temp = await PaymentService.searchCustomer(searchStr);
-        if (temp.status != 204) {
+        if (temp.status !== 204) {
             setCustomers(temp.data);
         } else {
             toast.error('Không tìm thấy khách hàng!', {
@@ -89,7 +89,7 @@ function CustomerSearchModal(props) {
 
         return (
             <>
-                <table align="center" id="custom-table" className="table table-hover table-bordered normal-txt-payment">
+                <table align="center" id="custom-table" className="table table-hover mt-4 table-bordered normal-txt-payment">
                     <thead>
                         <tr className="table-dark">
                             <th>STT</th>
@@ -138,7 +138,7 @@ function CustomerSearchModal(props) {
                     <div>
                         <div>
                             <div className="input-group mb-3">
-                                <input type="text" onChange={(e) => setSearchStr(e.target.value)} className="form-control p-4 normal-txt-payment" value={searchStr} placeholder="Nhập mã KH, tên KH hoặc sdt" />
+                                <input type="text" onChange={(e) => searchStr = (e.target.value)} className="form-control p-4 normal-txt-payment" placeholder="Nhập mã KH, tên KH hoặc sdt" />
                             </div>
                             <div className='row'>
                                 <div className="input-group-append col-auto">

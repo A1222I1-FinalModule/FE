@@ -40,9 +40,6 @@ function Payment() {
         });
     };
     const checkValidBill = (obj) => {
-        // if (obj.customerCode === "" || obj.employeeCode === "" || obj.discountCode === "" || obj.billCode === "" || obj.productBills.length <= 0) {
-        //     return false;
-        // }
         if (obj.customerCode === "" || obj.employeeCode === "" || obj.billCode === "" || obj.productBills.length <= 0) {
             return false;
         }
@@ -57,7 +54,7 @@ function Payment() {
             };
         });
         return currentQuantity;
-    }
+    };
     const changeCustomerCode = (newCode) => {
         setBill(prevState => {
             return { ...prevState, customerCode: newCode };
@@ -116,8 +113,22 @@ function Payment() {
                 total: 0
             }
         });
+        setDiscount({});
         setBillCode();
     };
+    const handleCancel = () => {
+        setBill(prevState => {
+            return {
+                ...prevState,
+                customerCode: "",
+                discountCode: "",
+                productBills: [],
+                total: 0
+            }
+        });
+        setDiscount({});
+        setBillCode();
+    }
     const handleSubmitImport = async (values) => {
         setProductBill({
             productCode: "",
@@ -241,7 +252,7 @@ function Payment() {
                                     </thead>
                                     <tbody>
                                         {bill.productBills && bill.productBills.map((value, index) => (
-                                            <tr key={value.productCode}>
+                                            <tr key={value.productCode} style={{ textAlign: 'center' }}>
                                                 <td>{index + 1}</td>
                                                 <td>{value.productCode}</td>
                                                 <td>{value.name}</td>
@@ -268,14 +279,14 @@ function Payment() {
                                 <span className="col-auto normal-txt-payment">+{discount.rewardPoint ? discount.rewardPoint : 0}</span>
                             </div>
                             <div className="row p-2 d-flex justify-content-center">
-                                <button type="button" className="btn btn-default normal-txt-payment col-auto">QR Code</button>
+                                <button type="button" className="btn btn-default normal-txt-payment col-auto">Mã QR</button>
                                 <div className="col-auto">
                                     <div className="row">
                                         <div className="col-auto">
                                             <button type="button" disabled={!checkValidBill(bill)} className="btn normal-txt-payment btn-primary btn-block" onClick={() => handlePrintInvoice()}>In hóa đơn</button>
                                         </div>
                                         <div className="col-auto">
-                                            <button type="button" className="btn btn-danger normal-txt-payment">Hủy</button>
+                                            <button type="button" className="btn btn-danger normal-txt-payment" onClick={() => handleCancel()}>Hủy</button>
                                         </div>
                                     </div>
                                 </div>
