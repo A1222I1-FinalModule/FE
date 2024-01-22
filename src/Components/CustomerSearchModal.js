@@ -8,9 +8,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerSearchModal(props) {
+    let selectedCode = "";
     const [show, setShow] = useState(false);
     const [customers, setCustomers] = useState([]);
-    const [selectedCode, setSelectedCode] = useState("");
     const [searchStr, setSearchStr] = useState("");
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -24,7 +24,7 @@ function CustomerSearchModal(props) {
     }
 
     const handleChange = (code) => {
-        setSelectedCode(code);
+        selectedCode = code;
     }
 
     useEffect(() => {

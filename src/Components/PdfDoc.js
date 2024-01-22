@@ -1,5 +1,6 @@
 import React, { useRef, useImperativeHandle } from 'react'
 import { PDFExport } from "@progress/kendo-react-pdf";
+import "../Assets/Styles/pdfDoc.css"
 
 const PdfDoc = React.forwardRef((props, ref) => {
     const pdfExportComponent = useRef(null);
@@ -12,15 +13,15 @@ const PdfDoc = React.forwardRef((props, ref) => {
         handleExportPdf,
     }), [handleExportPdf]);
     return (
-        <>
-            <PDFExport ref={pdfExportComponent} paperSize="auto" fileName={`HoaDon${props.bill.billCode}`}>
+        <div className='display-none-payment'>
+            <PDFExport ref={pdfExportComponent} paperSize="A3" fileName={`HoaDon${props.bill.billCode}`}>
                 <h3 style={{ textAlign: 'center', fontSize: '16px' }}>HOA DON BAN HANG</h3>
                 <p style={{ textAlign: 'center', fontSize: '14px' }}>Ma Don Hang: {props.bill.billCode}</p>
-                <table style={{ margin: '0 auto', width: '80%', fontSize: '12px', fontFamily: 'Arial Unicode MS' }}>
+                <p style={{ textAlign: 'center', fontSize: '14px' }}>Thoi Gian: {new Intl.DateTimeFormat('vi-VN', { year: 'numeric', month: '2-digit', day: '2-digit' }).format(Date.now())}</p>
+                <table style={{ margin: '0 auto', width: '95%', fontSize: '12px' }}>
                     <thead>
                         <tr>
                             <th style={{ fontSize: '12px' }}>STT</th>
-                            <th style={{ fontSize: '12px' }}>Ma hang</th>
                             <th style={{ fontSize: '12px' }}>Ten hang</th>
                             <th style={{ fontSize: '12px' }}>So luong</th>
                             <th style={{ fontSize: '12px' }}>Size</th>
@@ -31,22 +32,21 @@ const PdfDoc = React.forwardRef((props, ref) => {
                     <tbody>
                         {props.bill.productBills && props.bill.productBills.map((value, index) => (
                             <tr key={value.productCode}>
-                                <td style={{ fontSize: '12px' }}>{index + 1}</td>
-                                <td style={{ fontSize: '12px' }}>{value.productCode}</td>
-                                <td style={{ wordWrap: 'break-word', whiteSpace: 'normal', fontSize: '12px' }}>{value.name}</td>
-                                <td style={{ fontSize: '12px' }}>{value.quantity}</td>
-                                <td style={{ fontSize: '12px' }}>{value.size.size}</td>
-                                <td style={{ fontSize: '12px' }}>VND {value.price}</td>
-                                <td style={{ fontSize: '12px' }}>VND {value.price * value.quantity}</td>
+                                <td style={{ textAlign: 'center', fontSize: '12px' }}>{index + 1}</td>
+                                <td style={{ textAlign: 'center', wordWrap: 'break-word', whiteSpace: 'normal', fontSize: '12px' }}>{value.name}</td>
+                                <td style={{ textAlign: 'center', fontSize: '12px' }}>{value.quantity}</td>
+                                <td style={{ textAlign: 'center', fontSize: '12px' }}>{value.size.size}</td>
+                                <td style={{ textAlign: 'center', fontSize: '12px' }}>đ{value.price}</td>
+                                <td style={{ textAlign: 'center', fontSize: '12px' }}>đ{value.price * value.quantity}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-                <h5 style={{ textAlign: 'center', fontSize: '14px' }}>Tong <span>VND{props.bill.total}</span></h5>
-                <h5 style={{ textAlign: 'center', fontSize: '14px' }}>Giam <span>VND{props.discount.sale ? props.discount.sale : 0}</span></h5>
-                <h5 style={{ textAlign: 'center', fontSize: '14px' }}>Thanh Tien <span>VND{props.bill.total - (props.discount.sale ? props.discount.sale : 0)}</span></h5>
+                <h5 style={{ textAlign: 'center', fontSize: '14px' }}>Tong <span>đ{props.bill.total}</span></h5>
+                <h5 style={{ textAlign: 'center', fontSize: '14px' }}>Giam <span>đ{props.discount.sale ? props.discount.sale : 0}</span></h5>
+                <h5 style={{ textAlign: 'center', fontSize: '14px' }}>Thanh Tien <span>đ{props.bill.total - (props.discount.sale ? props.discount.sale : 0)}</span></h5>
             </PDFExport>
-        </>
+        </div>
     );
 });
 export default PdfDoc;

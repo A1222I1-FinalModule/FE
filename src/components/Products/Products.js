@@ -11,12 +11,12 @@ function Products() {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        const fetchProduct = async () => {
-            const res = await productService.getProducts();
-            setProducts(res);
-        };
+        // const fetchProduct = async () => {
+        //     const res = await productService.getProducts();
+        //     setProducts(res);
+        // };
 
-        fetchProduct();
+        // fetchProduct();
     }, []);
 
     return (

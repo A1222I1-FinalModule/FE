@@ -40,7 +40,10 @@ function Payment() {
         });
     };
     const checkValidBill = (obj) => {
-        if (obj.customerCode === "" || obj.employeeCode === "" || obj.discountCode === "" || obj.billCode === "" || obj.productBills.length <= 0) {
+        // if (obj.customerCode === "" || obj.employeeCode === "" || obj.discountCode === "" || obj.billCode === "" || obj.productBills.length <= 0) {
+        //     return false;
+        // }
+        if (obj.customerCode === "" || obj.employeeCode === "" || obj.billCode === "" || obj.productBills.length <= 0) {
             return false;
         }
         return true;
