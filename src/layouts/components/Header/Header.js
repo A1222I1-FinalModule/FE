@@ -58,7 +58,7 @@ function Header() {
                 <div className={cx('right')}>
                     <Search />
                     <div className={cx('actions')}>
-                        <div>
+                        <div className={cx("icon-container")}>
                             {currentUser === true ? (<>
 
                                 <NotificationList />

@@ -2,10 +2,12 @@
   float: right;
   margin-right: 60px;
 }
+
 .detail {
   color: #e4e6eb;
   text-decoration: none;
 }
+
 .contentlink {
   display: block;
   text-decoration: none;
@@ -32,6 +34,7 @@
 .dropdownbtn:hover .bibellfill {
   color: black !important;
 }
+
 .dropdownbtn:hover .titlehide {
   display: block;
 }
@@ -43,9 +46,11 @@
 .active i {
   color: black;
 }
+
 .active .iconbutton_badge {
   display: none;
 }
+
 .titlehide {
   width: 100px;
   margin: 20px;
@@ -58,6 +63,7 @@
   border-radius: 10px;
   display: none;
 }
+
 .titleshow {
   text-align: center;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -74,6 +80,7 @@
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: #242526;
 }
+
 .iconbutton_badge {
   position: absolute;
   top: -10px;
@@ -97,9 +104,11 @@
   /* position: sticky; */
   top: 0;
 }
+
 .contentnotification {
   position: static;
 }
+
 .threedots {
   background: grey;
   width: 40px;
@@ -112,10 +121,12 @@
   bottom: 50px;
   visibility: hidden;
 }
+
 .bithreedots {
   width: 40px;
   height: 20px;
 }
+
 .threedotdetail {
   display: none;
   position: absolute;
@@ -132,23 +143,29 @@
 .contentnotification:hover .threedots {
   visibility: visible;
 }
+
 .threedots:hover {
   color: #dddddd;
 }
+
 .buttonnotification {
   padding: 5px;
   padding-left: 10px;
 }
+
 .contentbody::-webkit-scrollbar {
   width: 10px;
   background-color: transparent;
 }
+
 .contentbody:hover:-webkit-scrollbar-track {
   background: #242526;
 }
+
 .contentbody:hover:-webkit-scrollbar-thumb {
   background-color: transparent;
 }
+
 /* .content-body::-webkit-scrollbar-thumb:hover {
       background: #555;
     } */
@@ -161,6 +178,7 @@
 .contentbody:hover::-webkit-scrollbar-thumb {
   background-color: gray;
 }
+
 .content1 {
   font-size: 15px;
   font-family: Arial, Helvetica, sans-serif;
@@ -170,9 +188,11 @@
   overflow: hidden;
   color: #e4e6eb;
 }
+
 .date {
   color: #e4e6eb;
 }
+
 .contenttitle {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 30px;
@@ -181,13 +201,16 @@
   margin-bottom: 5px;
   color: #e4e6eb;
 }
+
 @media (max-width: 576px) {
   .dropdowncontainer {
     width: 70%;
   }
+
   .threedots {
     left: 250px;
   }
+
   .threedotdetail {
     width: 250px;
     left: -200px;
