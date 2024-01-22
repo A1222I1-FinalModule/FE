@@ -1,6 +1,5 @@
 // import * as httpRequest from '../utils/httpRequest';
 import axios from 'axios';
-import { Value } from 'sass';
 export const getProducts = async () => {
     try {
         const response = await axios.get('/api/public/list-product');

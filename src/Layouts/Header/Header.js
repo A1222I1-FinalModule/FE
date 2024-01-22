@@ -1,6 +1,6 @@
 import React from 'react';
 import style from '../../Assets/Styles/StyleDashBoard.module.css';
-export default function Header() {
+export default function Header({ children }) {
   return (
     <div id={style.menu}>
       <div className={style.menu_left}>
