@@ -1,4 +1,4 @@
-/*//////////////////////////////////////////////////////////////////
+/* //////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
 @font-face {
@@ -29,19 +29,19 @@
     box-sizing: border-box;
 }
 
-body,
+/* body,
 html {
     height: 100%;
     font-family: Montserrat-Regular, sans-serif;
-}
-h1,
+} */
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
     margin: 0px;
-}
+} */
 
 p {
     font-family: Montserrat-Regular;

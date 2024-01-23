@@ -12,8 +12,9 @@ export default function NotificationList() {
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [notificationNotRead, setNotificationNotRead] = useState([]);
-  const [notificationDelete, setNotificationDelete] = useState([]);
   const [toggle, setToggle] = useState(true);
+
+
   useEffect(() => {
     getAllBySaler();
   }, []);
@@ -26,9 +27,9 @@ export default function NotificationList() {
     setCountNotification(newArr.length);
   };
 
-  const getAllByNotReadSaler = async () => {
-    let newArrNotRead = [...notificationNotRead];
-    notificationDelete(newArrNotRead);
+  const getAllByNotReadSaler = () => {
+    let arrNotRead = [...notificationNotRead];
+    setNotificationNotRead(arrNotRead);
   };
   const handleDropdownClick = () => {
     setIsActive(!isActive);
@@ -60,6 +61,18 @@ export default function NotificationList() {
     getAllByNotReadSaler();
   };
 
+  const updateStatusById = (id) => {
+    console.log(123);
+    const newArray = notificationNotRead.map((item) => {
+      if (item.id === id) {
+        return { ...item, status: true };
+      } else {
+        return item;
+      }
+    })
+    return newArray;
+  }
+
   const currentDate = format(new Date(), "dd-MM-yyyy");
   if (!notifications) return null;
   return (
@@ -87,7 +100,7 @@ export default function NotificationList() {
                 <div className={styles.contenttitle}>Thông báo</div>
                 <div className="button-notification d-flex flex-wrap gap-2 ">
                   <button
-                    className="btn btn-sm btn-outline-info text-lowercase fs-6 "
+                    className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3"
                     onClick={() => {
                       handleAll();
                     }}
@@ -95,7 +108,7 @@ export default function NotificationList() {
                     Tất Cả
                   </button>
                   <button
-                    className="btn btn-sm btn-outline-info text-lowercase fs-6"
+                    className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3"
                     onClick={() => {
                       handleNotRead();
                     }}
@@ -184,9 +197,9 @@ export default function NotificationList() {
                         </button>
                         <button
                           className={styles.contentlink}
-                          onClick={() => {
-
-                          }}
+                        // onClick={() => {
+                        //   setNotificationNotRead(updateStatusById(notification.id));
+                        // }}
                         >
                           Đánh dấu đã đọc
                         </button>

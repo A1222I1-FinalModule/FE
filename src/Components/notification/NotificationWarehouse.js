@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NotificationList.module.css";
-// import "./NotificationList.css";
 import * as NotificationService from "../../Services/API/notification/NotificationService";
 
 export default function NotificationWarehouse() {
@@ -15,7 +14,9 @@ export default function NotificationWarehouse() {
   const [notificationNotRead, setNotifficationNotRead] = useState([]);
   const [toggle, setToggle] = useState(true);
 
+
   console.log(notifications);
+  console.log(notificationNotRead);
   useEffect(() => {
     getAllByWarehouse();
   }, []);
@@ -29,8 +30,8 @@ export default function NotificationWarehouse() {
   };
 
   const getAllNotRead = async () => {
-    let newArrNotRead = [...notificationNotRead];
-    setNotifficationNotRead(newArrNotRead);
+    let arrNotRead = [...notificationNotRead];
+    setNotifficationNotRead(arrNotRead);
   };
   const handleDropdownClick = () => {
     setIsActive(!isActive);
@@ -87,7 +88,7 @@ export default function NotificationWarehouse() {
                 <div className={styles.contenttitle}>Thông báo</div>
                 <div className="button-notification d-flex flex-wrap gap-2 ">
                   <button
-                    className="btn btn-sm btn-outline-info text-lowercase fs-6 "
+                    className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3"
                     onClick={() => {
                       handleAll();
                     }}
@@ -95,7 +96,7 @@ export default function NotificationWarehouse() {
                     Tất Cả
                   </button>
                   <button
-                    className="btn btn-sm btn-outline-info text-lowercase fs-6"
+                    className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3"
                     onClick={() => {
                       handleNotRead();
                     }}
