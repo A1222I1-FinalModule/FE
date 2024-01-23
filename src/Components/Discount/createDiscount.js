@@ -225,7 +225,7 @@ export function CreateDiscount() {
                                     padding: '10px 20px',
                                     margin: '0 5px',
                                 }}
-                                onClick={() => navigate('/listDiscount')}
+                                onClick={() => navigate('/admin/discount')}
                             >
                                 Thoát
                             </button>
