@@ -32,7 +32,7 @@ export const EmployeeSaleTop = () => {
             {employeeTop ? employeeTop.map((value, index) => (
               <tr key={index}>
                 <th scope="row">{value.employeeName}</th>
-                <td>{value.totalSales}</td>
+                <td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value.totalSales)}</td>
                 <td>{value.totalOrders}</td>
               </tr>
             ))

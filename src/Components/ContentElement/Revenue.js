@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import BillService from '../../Services/API/BillService';
 import style from '../../Assets/Styles/StyleDashBoard.module.css';
+
 export const Revenue = () => {
   const [weeklyRevenue, setWeeklyRevenue] = useState(null);
   const [monthlyRevenue, setMonthlyRevenue] = useState(null);
   const [selectedOption, setSelectedOption] = useState('week');
+  const formatMoney = new Intl.NumberFormat('vi-VN',{
+    style: 'currency',
+    currency: 'VND'
+  }).format(monthlyRevenue,weeklyRevenue);
   useEffect(() => {
     getByTime();
   }, []);
@@ -39,13 +44,13 @@ export const Revenue = () => {
         <div className={style.sale_total}>
           {selectedOption === 'week' && (
             <>
-              <h2>{weeklyRevenue}</h2>
+              <h2>{formatMoney}</h2>
               <h8>Tổng doanh thu tuần gần nhất</h8>
             </>
           )}
           {selectedOption === 'month' && (
             <>
-              <h2>{monthlyRevenue}</h2>
+              <h2>{formatMoney}</h2>
               <h8>Tổng doanh thu tháng gần nhất</h8>
             </>
           )}

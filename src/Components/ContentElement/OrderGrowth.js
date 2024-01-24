@@ -17,7 +17,7 @@ export const OrderGrowth = () => {
   return (
     <>
       {orderGrowth ? orderGrowth.map((value, index) => (
-        <div className={style.content_customer}>
+        <div className={style.content_customer} key={index}>
           <div className={style.chart_customer}>
             <div className={style.chart}>
               <ion-icon name="pie"></ion-icon>
@@ -26,7 +26,7 @@ export const OrderGrowth = () => {
               <span>Đơn hàng</span>
             </div>
           </div>
-          <div className={style.total_customer} key={index}>
+          <div className={style.total_customer}>
             <div className={style.number}>
               <h4>{value.orderCount}</h4>
             </div>

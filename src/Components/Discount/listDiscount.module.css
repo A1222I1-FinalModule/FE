@@ -1,4 +1,4 @@
-.list_Discount_container-main{
+.list_Discount_container-main {
     width: 60%;
     height: auto;
     display: flex;
@@ -12,43 +12,37 @@
     right: 0;
     bottom: 0;
     font-family: 14.4px 'Roboto', sans-serif;
-  }
-  .List_customer_find_container-find {
+}
+.List_customer_find_container-find {
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: flex-start; 
-  }
-  .custom-table-layout {
+    justify-content: flex-start;
+}
+.custom-table-layout {
     table-layout: auto !important;
     width: auto !important;
-  }
-  
-  .container-table{
-    width: 100%; 
+}
+
+.container-table {
+    width: 100%;
     margin-top: 20px;
-  }
-  .row-container {
+}
+.row-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
-  }
-  
-  .action{
+}
+
+.action {
     display: flex;
     gap: 10px;
-  }
+}
 
-  .container-pagination {
+.container-pagination {
     padding-top: 20px;
     display: flex;
-    justify-content: center;  /* Can giữa theo chiều ngang */
-    align-items: center;      /* Can giữa theo chiều dọc */
-    width: 100%;  
-}
-  th {
-    height: 55.4375px;
-    width: 96.4625px;
-    line-height: 3em;
-    text-align: center;
+    justify-content: center; /* Can giữa theo chiều ngang */
+    align-items: center; /* Can giữa theo chiều dọc */
+    width: 100%;
 }

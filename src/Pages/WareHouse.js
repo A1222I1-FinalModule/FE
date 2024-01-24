@@ -1,18 +1,19 @@
 import React from "react";
 import Header from "../Layouts/Header/Header";
-import SideBarWareHouse from "../Layouts/sidebar/SideBarWareHouse";
 import { ContentWareHouse } from "../Components/ContentWareHouse";
+import SideBar from "../Layouts/sidebar/SideBar";
 
-export const Warehouse = () => {
+const Warehouse = () => {
   return (
     <>
       <div>
         <Header></Header>
         <div className="row">
-          <SideBarWareHouse></SideBarWareHouse>
+          <SideBar></SideBar>
           <ContentWareHouse></ContentWareHouse>
         </div>
       </div>
     </>
   );
 };
+export default Warehouse();
