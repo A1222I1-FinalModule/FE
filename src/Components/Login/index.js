@@ -13,27 +13,47 @@ import {
   ERROR_UNAUTHORIZED,
   REGEX_SPECIAL_CHARACTERS,
 } from '../../Constants/LoginConstant/index';
+import { Button } from 'antd';
+import { PoweroffOutlined } from '@ant-design/icons';
 const Login = (props) => {
-  const user = useUser();
-  const navigate = useNavigate();
   const defaultInput = {
     username: '',
     password: '',
   };
+  const user = useUser();
+  const navigate = useNavigate();
+  const [loadings, setLoadings] = useState([]);
   const [inputs, setInputs] = useState(defaultInput);
   const [error, setError] = useState('');
   const updateValue = (key, value) => {
     setInputs({ ...inputs, [key]: value });
   };
+  const enterLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = true;
+      return newLoadings;
+    });
+  }
+  const closedLoading = (index) => {
+    setLoadings((prevLoadings) => {
+      const newLoadings = [...prevLoadings];
+      newLoadings[index] = false;
+      return newLoadings;
+    });
+  }
   const resetError = () => setError('');
   const handleLogin = async () => {
+    enterLoading(1);
     let isValid = true;
     if (REGEX_SPECIAL_CHARACTERS.test(inputs.username) || REGEX_SPECIAL_CHARACTERS.test(inputs.password)) {
       isValid = false;
+      closedLoading(1);
       setError(ERROR_FIELD_HAS_SPECIAL_CHARACTERS);
     }
     if (inputs.username.length === 0 || inputs.password.length === 0) {
       isValid = false;
+      closedLoading(1);
       setError(ERROR_FIELD_EMPTY);
     }
     if (isValid) {
@@ -58,6 +78,7 @@ const Login = (props) => {
         })
         .catch((error) => {
           console.log(error);
+          closedLoading(1);
           setError(ERROR_UNAUTHORIZED);
         });
     }
@@ -122,13 +143,14 @@ const Login = (props) => {
                     <span style={{ color: 'red' }}>{error}</span>
                   </div>
                   <div className="pt-1 mb-4 mt-3 row">
-                    <button
-                      className="btn btn-dark btn-lg btn-block"
-                      type="button"
+                    <Button
+                      type="primary"
+                      icon={<PoweroffOutlined />}
+                      loading={loadings[1]}
                       onClick={() => handleLogin()}
                     >
                       Đăng Nhập
-                    </button>
+                    </Button>
                   </div>
                 </div>
               </div>

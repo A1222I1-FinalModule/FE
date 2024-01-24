@@ -27,3 +27,13 @@
     justify-content: center;
     align-items: center;
 }
+
+.error-message {
+    color: red;
+    padding: 4px;
+
+}
+
+.error {
+    height: 24px !important;
+}

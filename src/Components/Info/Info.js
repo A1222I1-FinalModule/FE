@@ -34,7 +34,7 @@ const Info = () => {
             <div className={style.content + '  ps-0'}>
                 <div className={style['inf-content'] + 'panel-body'}>
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-4 text-center">
                             <img
                                 alt=""
                                 style={{ width: "300px" }}
@@ -121,14 +121,14 @@ const Info = () => {
                                             <td>
                                                 <button
                                                     type="button"
-                                                    className="btn btn-primary"
+                                                    className={style['btnInfo'] + " btn btn-primary"}
                                                     onClick={() => setModalShow(true)}
                                                 >
                                                     Đổi Mật Khẩu
                                                 </button>
                                             </td>
                                             <td>
-                                                <button type="button" className="btn btn-warning" onClick={handleLogout}>Đăng Xuất</button></td>
+                                                <button type="button" className={style['btnInfo'] + " btn btn-warning"} onClick={handleLogout}>Đăng Xuất</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

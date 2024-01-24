@@ -7,23 +7,45 @@ import styles from '../../../Assets/Styles/Login/login.module.css';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { changePassword } from '../../../Services/API/authService';
 import { toast, ToastContainer } from "react-toastify";
+import { Button } from 'antd';
 const ChangePass = (props) => {
+    const [loadings, setLoadings] = useState([]);
     const defaultInput = {
         oldPassword: '',
         newPassword: '',
         confirmPassword: ''
     }
+    const enterLoading = (index) => {
+        setLoadings((prevLoadings) => {
+            const newLoadings = [...prevLoadings];
+            newLoadings[index] = true;
+            return newLoadings;
+        });
+    }
+    const closedLoading = (index) => {
+        setLoadings((prevLoadings) => {
+            const newLoadings = [...prevLoadings];
+            newLoadings[index] = false;
+            return newLoadings;
+        });
+    }
     const validatePassword = {
         oldPassword: Yup.string()
-            .required("Hãy Nhập Thông Tin Đầy Đủ"),
+            .required("Hãy Nhập Thông Tin Đầy Đủ")
+            .matches(/\w/, "Lỗi Chứa Kí Tự Đăc Biệt"),
         newPassword: Yup.string().optional().notOneOf([Yup.ref("oldPassword")], "Mật Khẩu Mới Trùng Với Mật Khẩu Hiện Tại")
-            .required("Hãy Nhập Thông Tin Đầy Đủ"),
-        confirmPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], "Mật Khẩu Mới Không Chính Xác").required('Hãy Nhập Thông Tin Đầy Đủ'),
+            .required("Hãy Nhập Thông Tin Đầy Đủ")
+            .matches(/\w/, "Lỗi Chứa Kí Tự Đăc Biệt"),
+        confirmPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], "Mật Khẩu Mới Không Chính Xác")
+            .required('Hãy Nhập Thông Tin Đầy Đủ')
+            .matches(/\w/, "Lỗi Chứa Kí Tự Đăc Biệt"),
 
 
     };
     const handleSubmit = async (value, setFieldError = () => { }) => {
+        enterLoading(1);
         await changePassword(value).then(() => {
+            closedLoading(1);
             toast.success(' Thay đổi mật khẩu thành công !', {
                 position: "top-right",
                 autoClose: 5000,
@@ -34,10 +56,13 @@ const ChangePass = (props) => {
                 progress: undefined,
                 theme: "light",
             });
-            window.location.reload(false);
+            setTimeout(() => {
+                window.location.reload(false);
+            }, 3000)
         }).catch((err) => {
             if (err.response) {
                 setFieldError("oldPassword", "Mật Khẩu hiện Tại Không Chính Xác")
+                closedLoading(1);
             }
 
 
@@ -55,7 +80,7 @@ const ChangePass = (props) => {
                             handleSubmit(value, setFieldError)
                         }}
                     >
-                        <Form>
+                        <Form id='formChange'>
                             <div className={styles['d-flex']}>
                                 <div className={styles['change-pass-container'] + " col-10"}>
                                     <h2 className="text-center mb-4 mt-4">Thay Đổi Mật Khẩu</h2>
@@ -66,9 +91,12 @@ const ChangePass = (props) => {
                                             className={`${styles['login-input']} form-control form-control-lg `}
                                             name="oldPassword"
                                         />
-                                        <ErrorMessage style={{ color: 'red', height: "24px" }} name="oldPassword"
-                                            component="span"
-                                        />
+                                        <div className={styles['error']}>
+                                            <ErrorMessage className={styles['error-message']} name="oldPassword"
+                                                component="span"
+                                            />
+
+                                        </div>
                                     </div>
                                     <div className={styles['form-group']}>
                                         <label for="newPassword">Mật Khẩu Mới</label>
@@ -77,9 +105,12 @@ const ChangePass = (props) => {
                                             className={`${styles['login-input']} form-control form-control-lg `}
                                             name="newPassword"
                                         />
-                                        <ErrorMessage style={{ color: 'red', height: "24px" }} name="newPassword"
-                                            component="span"
-                                        />
+                                        <div className={styles['error']}>
+                                            <ErrorMessage className={styles['error-message']} name="newPassword"
+                                                component="span"
+                                            />
+
+                                        </div>
                                     </div>
                                     <div className={styles['form-group']}>
                                         <label for="confirmPassword">Xác Nhận Mật Khẩu Mới</label>
@@ -88,15 +119,23 @@ const ChangePass = (props) => {
                                             className={`${styles['login-input']} form-control form-control-lg `}
                                             name="confirmPassword"
                                         />
-                                        <ErrorMessage style={{ color: 'red', height: "24px" }} name="confirmPassword"
-                                            component="span"
-                                        />
+                                        <div className={styles['error']}>
+                                            <ErrorMessage className={styles['error-message']} name="confirmPassword"
+                                                component="span"
+                                            />
+
+                                        </div>
                                     </div>
                                     <div className='text-center'>
 
-                                        <button type="submit" className="btn btn-primary my-4" onClick={handleSubmit}>
+                                        <Button
+                                            type="primary"
+                                            htmlType='submit'
+                                            loading={loadings[1]}
+                                            className='my-4'
+                                        >
                                             Thay Đổi Mật Khẩu
-                                        </button>
+                                        </Button>
                                     </div>
                                 </div>
                             </div>
