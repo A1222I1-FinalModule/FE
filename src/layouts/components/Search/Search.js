@@ -3,9 +3,13 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import Tippy from '@tippyjs/react/headless';
 
+import * as productService from '../../../Services/productService';
 import { Wrapper as PopperWrapper } from '../../../Components/Popper';
+import Button from '../../../Components/Button';
 import { ClearIcon, SearchIcon, SpinnerIcon } from '../../../Components/Icons';
 import styles from './Search.module.scss';
+import ProductItem from '../../../Components/ProductItem';
+import { useDebounce } from '../../../Hooks';
 
 const cx = classNames.bind(styles);
 
@@ -15,13 +19,26 @@ function Search() {
     const [showResult, setShowResult] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const debouncedValue = useDebounce(searchValue, 500);
     const inputRef = useRef();
 
+    console.log(searchResult);
+
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 1000);
-    }, [searchValue]);
+        if (!debouncedValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+
+        const fetchApi = async () => {
+            setLoading(true);
+            const result = await productService.searchProducts(searchValue);
+            setSearchResult(result);
+            setLoading(false);
+        };
+
+        fetchApi();
+    }, [debouncedValue]);
 
     const handleClear = () => {
         setSearchValue('');
@@ -48,7 +65,17 @@ function Search() {
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
-                            <h4 className={cx('search-title')}>Accounts</h4>
+                            <h4 className={cx('search-title')}>Sản phẩm</h4>
+                            {searchResult.slice(0, 5).map((result) => (
+                                <ProductItem key={result.id} data={result} />
+                            ))}
+
+                            <Button
+                                to={{ pathname: '/list-product', state: { data: searchResult } }}
+                                className={cx('search-more')}
+                            >
+                                Xem thêm
+                            </Button>
                         </PopperWrapper>
                     </div>
                 )}
@@ -73,6 +100,7 @@ function Search() {
                             <ClearIcon />
                         </button>
                     )}
+
                     {loading && <SpinnerIcon className={cx('loading')} />}
                 </div>
             </Tippy>

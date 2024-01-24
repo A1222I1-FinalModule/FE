@@ -11,7 +11,7 @@ export const OrderRecent = () => {
       let temp = await BillService.getTopOrderRecent();
       setOrderRecent(temp);
     } catch (error) {
-      console.error('Error get data:', error);
+      console.error("Error get data:", error);
     }
   };
   return (

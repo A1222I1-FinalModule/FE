@@ -28,7 +28,7 @@ function DiscounrSelectModal(props) {
     };
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary" className='normal-txt-payment' onClick={handleShow}>
                 Chọn mã giảm giá
             </Button>
             <Modal show={show} onHide={handleClose}>

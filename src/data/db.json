@@ -1,0 +1,67 @@
+{
+  "productCategory": [
+    {
+      "id": "C001",
+      "name": "Shirt"
+    },
+    {
+      "id": "C002",
+      "name": "Pants"
+    },
+    {
+      "id": "C003",
+      "name": "Shoes"
+    },
+    {
+      "id": "C004",
+      "name": "Hat"
+    }
+  ],
+  "products": [
+    {
+      "productCode": "P001",
+      "name": "Product 1",
+      "price": 100,
+      "quantity": 0,
+      "image": "https://picsum.photos/200/300",
+      "size": "S",
+      "category": "Shirt"
+    },
+    {
+      "productCode": "P002",
+      "name": "Product 2",
+      "price": 200,
+      "quantity": 10,
+      "image": "https://picsum.photos/200/301",
+      "size": "M",
+      "category": "Pants"
+    },
+    {
+      "productCode": "P003",
+      "name": "Product 3",
+      "price": 300,
+      "quantity": 20,
+      "image": "https://picsum.photos/200/302",
+      "size": "L",
+      "category": "Shoes"
+    },
+    {
+      "productCode": "P004",
+      "name": "Product 4",
+      "price": 400,
+      "quantity": 30,
+      "image": "https://picsum.photos/200/303",
+      "size": "XL",
+      "category": "Hat"
+    },
+    {
+      "productCode": "P005",
+      "name": "Product 5",
+      "price": 500,
+      "quantity": 40,
+      "image": "https://picsum.photos/200/304",
+      "size": "XXL",
+      "category": "Shirt"
+    }
+  ]
+}
