@@ -11,3 +11,7 @@ html,body{
     background-image:
     url(https://decordi.vn/wp-content/uploads/2021/10/tu-quan-ao-canh-mo.jpg);
 }
+
+.pictureList{
+    width: 50px;
+}

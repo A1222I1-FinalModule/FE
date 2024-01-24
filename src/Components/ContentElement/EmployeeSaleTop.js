@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import EmployeeService from '../../Services/API/EmployeeService';
+import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const EmployeeSaleTop = () => {
   const[employeeTop,setEmployeeTop] = useState(null);
   useEffect(()=>{
@@ -15,11 +16,11 @@ export const EmployeeSaleTop = () => {
   };
   return (
     <>
-      <div class="table_title">
+      <div className={style.table_title}>
         <span>Top nhân viên bán hàng tốt nhất</span>
       </div>
-      <div class="table_record">
-        <table class="table">
+      <div className={style.table_record}>
+        <table className="table">
           <thead>
             <tr>
               <th scope="col">Họ và tên</th>

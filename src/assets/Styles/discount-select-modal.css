@@ -1,0 +1,6 @@
+.scroll-div {
+    overflow-y: scroll;
+}
+.list-container {
+    height: 50vh;
+}

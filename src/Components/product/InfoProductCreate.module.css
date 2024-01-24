@@ -1,7 +1,7 @@
-img {
+/* img {
   width: 10%;
   border-radius: 5%;
-}
+} */
 @import url("https://fonts.googleapis.com/css?family=Yantramanav:100,300");
 
 * {
@@ -138,4 +138,8 @@ ul {
   .brand {
     text-align: left;
   }
+}
+
+.pictureCreate{
+  width:20px;
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import PrivateRouter from "./privateRouter";
 import Dashboard from "../Pages/DashBoard";
 import Login from "../Components/Login";
 import InfoProductCreate from "../Components/product/InfoProductCreate";
 import ProductList from "../Components/product/ProductList";
+import PrivateRoute from "./privateRoute";
 const MainRouter = () => {
   return (
     <Routes>
@@ -13,9 +13,9 @@ const MainRouter = () => {
       <Route
         path="/private"
         element={
-          <PrivateRouter>
+          <PrivateRoute>
             <></>
-          </PrivateRouter>
+          </PrivateRoute>
         }
       />
       <Route path="/createInfo" element={<InfoProductCreate />} />

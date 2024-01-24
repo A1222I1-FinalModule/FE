@@ -1,56 +1,66 @@
 import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import * as ProductService from "../../Services/product/ProductService";
-import styles from  "../product/Product.module.css";
+import styles from "../product/Product.module.css";
 
 const cx = classNames.bind(styles);
 
 
 const INIT_PAGE = 1;
-const PER_PAGE = 5;
+const PER_PAGE = 6;
 const ODER = 'desc'
 
 export default function ProductList() {
   const [product, setProduct] = useState([]);
-  const [name,setName] = useState("");
+  const [name, setName] = useState("");
   const [page, setPage] = useState(INIT_PAGE);
   const [perPage, setPerPage] = useState(PER_PAGE);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchInput, setSearchInput] = useState('');
+
+
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 5;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = product.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(product.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1);
 
   useEffect(() => {
     getAllListProduct();
-  },[name,page]);
-
-  // const getAllListProduct =  async () => {
-  //     let temp = await ProductService.getAllListProduct(name);
-  //     setProduct(temp);
-  // }
+  }, [name]);
 
   const getAllListProduct = async () => {
-    let temp = await ProductService.pageProduct(
-      name,
-      page,
-      perPage
-    )
-    setProduct(temp.data);
+    let temp;
+    if (name) {
+      temp = await ProductService.findByNameProduct(name);
+      if (temp.length === 0) {
+        alert('NOT FOUND.');
+      } else {
+        setProduct(temp);
+      }
 
-    const totalCount = temp.headers.get("X-Total-Count");
-    const totalPages = Math.ceil(totalCount / 5);
-    setTotalPages(totalPages);
-    console.log(temp);
+    } else {
+      temp = await ProductService.getAllListProduct();
+      setProduct(temp);
+    }
+  };
+  function changeCPage(id) {
+    setCurrentPage(id);
   }
 
-    const handleNextPage = () => {
-      if (page < totalPages) {
-        setPage((prev) => prev + 1);
-      }
-    };
-  
-    const handlePrevPage = () => {
-      if (page > 1) {
-        setPage((prev) => prev - 1);
-      }
-    };
+  function nextPage() {
+    if (currentPage !== npage) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+  function prePage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
 
   return (
     <div className={cx('wrapper')}>
@@ -61,43 +71,50 @@ export default function ProductList() {
               <div className={cx('card-header')}>
                 <h3 className={cx('fst-italic')}>
                   {" "}
-                  <i className={cx('fa-solid fa-list')} /> Products are in stock 
+                  <i className={cx('fa-solid fa-list')} /> Sản phẩm đang có trong kho
                 </h3>
                 <div className={cx('input-group')}>
                   <div className={cx('col-sm-6')}>
                     <input
                       type="search"
-                      className={cx('form-control rounded')} 
+                      className={cx('form-control rounded')}
                       placeholder
                       aria-label="Search"
                       aria-describedby="search-addon"
+                      value={name}
                       onChange={(evt) => setName(evt.target.value)}
+
                     />
                   </div>
                   <button
                     type="button"
-                    className={cx('btn btn-outline-primary')}  
+                    className={cx('btn btn-outline-primary')}
                     data-mdb-ripple-init
+                    onClick={getAllListProduct}
                   >
-                    Search
+                    Tìm kiếm
                   </button>
                 </div>
               </div>
-              <div className={cx('card-body')}> 
+              <div className={cx('card-body')}>
                 <table className="table table-bordered border-secondary table-secondary table-striped table-hover">
                   <thead>
                     <tr className="text-center">
-                      <th className={cx('align-middle')}>#</th>  
-                      <th className={cx('align-middle')}>Product code</th>
-                      <th className={cx('align-middle')}>Product's name</th>
-                      <th className={cx('align-middle')}>Quantity</th>
+                      <th className={cx('align-middle')}>#</th>
+                      <th className={cx('align-middle')}>Mã hàng hóa</th>
+                      <th className={cx('align-middle')}>Tên hàng hóa</th>
+                      <th className={cx('align-middle')}>Số lượng</th>
+                      <th className={cx('align-middle')}>Hình ảnh</th>
+                      <th className={cx('align-middle')}>Giá</th>
+                      <th className={cx('align-middle')}>Loại hàng hóa</th>
                       <th className={cx('align-middle')}>Size</th>
-                      <th className={cx('align-middle')}>Category</th>
-                      <th className={cx('align-middle')}>Price</th>
+
+
                     </tr>
                   </thead>
                   <tbody>
-                    {product.map((values, index) => {
+                    {records.map((values, index) => {
+                      const rowNumber = firstIndex + index + 1;
                       return (
                         <tr>
                           <td scope="col" style={{ textAlign: "center" }}>
@@ -113,48 +130,54 @@ export default function ProductList() {
                             {values.quantity}
                           </td>
                           <td scope="col" style={{ textAlign: "center" }}>
-                            {values.size}
-                          </td>
-                          <td scope="col" style={{ textAlign: "center" }}>
-                            {values.category}
+                            <img className={cx('pictureList')} src={`${values.image}`} alt={`photo${index + 1}`} />
                           </td>
                           <td scope="col" style={{ textAlign: "right" }}>
                             {values.price}
                           </td>
+                          <td scope="col" style={{ textAlign: "center" }}>
+                            {values.productCategory.name}
+                          </td>
+                          <td scope="col" style={{ textAlign: "center" }}>
+                            {/* {size.map(size => <div>{values.size}</div>)} */}
+                            {values.size.size}
+                          </td>
+
+
                         </tr>
                       )
                     })}
                   </tbody>
                 </table>
-                <nav>
-        <ul className="pagination">
-          <li className="page-item">
-            <button
-              className={`page-link ${page === 1 ? "disabled" : ""}`}
-              onClick={handlePrevPage}
-            >
-              Previous
-            </button>
-          </li>
-          <li className="page-item">
-            <p className="page-link">{page}</p>
-          </li>
-          <li className="page-item">
-            <button
-              className={`page-link ${page === totalPages ? "disabled" : ""}`}
-              onClick={handleNextPage}
-            >
-              Next
-            </button>
-          </li>
-        </ul>
-      </nav>
+                <nav className={cx['container-pagination']}>
+                  <ul className="pagination pagination-circle">
+                    <li className="page-item">
+                      <a href="#" className="page-link" onClick={prePage}>
+                        Trước
+                      </a>
+                    </li>
+                    {numbers.map((n, i) => {
+                      return (
+                        <li className={`page-item ${currentPage == n ? `active` : ` `}`} key={i}>
+                          <a href="#" className="page-link" onClick={() => changeCPage(n)}>
+                            {n}
+                          </a>
+                        </li>
+                      );
+                    })}
+                    <li className="page-item">
+                      <a href="#" className="page-link" onClick={nextPage}>
+                        Sau
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  ) 
+  )
 }
 

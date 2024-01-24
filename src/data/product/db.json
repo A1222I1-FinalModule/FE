@@ -9,75 +9,410 @@
       "price": 100000
     },
     {
-      "id": 2,
-      "name": "quần tây",
-      "quantity": 10,
-      "size": "M",
-      "category": "đồ nam",
-      "price": 100000
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "10",
+      "size": "",
+      "category": "Women clothes",
+      "price": "10",
+      "id": 2
     },
     {
-      "productCode": "",
-      "name": "Bảo Đạt",
-      "quantity": "5",
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "10",
+      "size": [
+        "XS",
+        "S"
+      ],
+      "category": "Women clothes",
+      "price": "10",
+      "id": 3
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "10",
+      "size": [],
+      "category": "Men's clothes",
+      "price": "10",
+      "image": "",
+      "id": 4
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "10",
       "size": "",
       "category": "",
-      "price": "2100000",
+      "price": "10",
+      "image": "",
+      "id": 5
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "10",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
       "id": 6
     },
     {
-      "productCode": "",
-      "name": "Bảo Đạt",
-      "quantity": "5",
-      "size": "",
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": [
+        "M",
+        "S"
+      ],
       "category": "",
-      "price": "2100000",
-      "id": "iHDcYwl"
-    },
-    {
-      "productCode": "",
-      "name": "Bảo Đạt",
-      "quantity": "10",
-      "size": "",
-      "category": "",
-      "price": 0,
+      "price": "10",
+      "image": "",
       "id": 7
     },
     {
-      "productCode": "1",
-      "name": "Bảo Đạt",
-      "quantity": "5",
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
       "size": "",
       "category": "",
-      "price": "2100000",
+      "price": "10",
+      "image": "",
       "id": 8
     },
     {
-      "productCode": "1",
-      "name": "Bảo Đạt",
-      "quantity": "5",
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
       "size": "",
       "category": "",
-      "price": "2100000",
+      "price": "10",
+      "image": "",
       "id": 9
     },
     {
-      "productCode": "Bảo Đạt",
-      "name": "10",
-      "quantity": "10",
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
       "size": "",
       "category": "",
-      "price": 0,
+      "price": "10",
+      "image": "",
       "id": 10
     },
     {
-      "productCode": "Bảo Đạt",
-      "name": "10",
-      "quantity": "10",
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
       "size": "",
       "category": "",
-      "price": 0,
+      "price": "10",
+      "image": "",
       "id": 11
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 12
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 13
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 14
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 15
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 16
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 17
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 18
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 19
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 20
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 21
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 22
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 23
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 24
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 25
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": "",
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 26
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "01",
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "category": "Women clothes",
+      "price": "10",
+      "image": "",
+      "id": 27
+    },
+    {
+      "productCode": "H222",
+      "name": "Quan",
+      "quantity": "01",
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "category": "",
+      "price": "10",
+      "image": "",
+      "id": 28
+    },
+    {
+      "productCode": "H333",
+      "name": "AoDai",
+      "quantity": "01",
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L",
+        "XL",
+        "XXL"
+      ],
+      "category": "Women clothes",
+      "price": "10",
+      "image": "",
+      "id": 29
+    },
+    {
+      "productCode": "H555",
+      "name": "QuanTay",
+      "quantity": "01",
+      "size": [
+        "XS",
+        "S",
+        "M",
+        "L"
+      ],
+      "category": "Women clothes",
+      "price": "10",
+      "image": "",
+      "id": 30
+    },
+    {
+      "productCode": "H555",
+      "name": "QuanTay",
+      "quantity": "01",
+      "size": [
+        "XS"
+      ],
+      "category": "Men's clothes",
+      "price": "10",
+      "image": "",
+      "id": 31
+    },
+    {
+      "productCode": "H555",
+      "name": "QuanTay",
+      "quantity": "01",
+      "image": "",
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "category": "Men's clothes",
+      "price": "10",
+      "id": 32
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "10",
+      "image": null,
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "category": "",
+      "price": "10",
+      "id": 33
+    },
+    {
+      "productCode": "H111",
+      "name": "Quan",
+      "quantity": "10",
+      "image": null,
+      "size": [
+        "XS",
+        "S"
+      ],
+      "category": "Men's clothes",
+      "price": "10",
+      "id": 34
+    },
+    {
+      "productCode": "H666",
+      "name": "Quan",
+      "quantity": "10",
+      "image": null,
+      "size": "",
+      "category": "Women clothes",
+      "price": "10",
+      "id": 35
+    },
+    {
+      "productCode": "H777",
+      "name": "QuanAP",
+      "quantity": "10",
+      "image": null,
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "category": "Men's clothes",
+      "price": "10",
+      "id": 36
+    },
+    {
+      "productCode": "H777",
+      "name": "QuanAP",
+      "quantity": "10",
+      "image": null,
+      "size": [
+        "XS",
+        "S",
+        "M"
+      ],
+      "category": "",
+      "price": "10",
+      "id": 37
     }
   ]
 }

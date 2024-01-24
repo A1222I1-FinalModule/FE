@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import BillService from '../../Services/API/BillService';
+import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const CustomerGrowth = () => {
   const[customerGrowth,setCustomerGrowth] = useState(null);
   useEffect(()=>{
@@ -16,20 +17,20 @@ export const CustomerGrowth = () => {
   return (
     <>
     {customerGrowth ? customerGrowth.map((value,index)=>(
-      <div class="content_customer">
-      <div class="chart_customer">
-        <div class="chart">
+      <div className={style.content_customer}>
+      <div className={style.chart_customer}>
+        <div className={style.chart}>
           <ion-icon name="person"></ion-icon>
         </div>
-        <div class="chart_name">
+        <div className={style.chart_name}>
           <span>Lượng khách</span>
         </div>
       </div>
-      <div class="total_customer">
-      <div className="number" key={index}>
+      <div className={style.total_customer}>
+      <div className={style.number} key={index}>
             <h4>{value.customerCount}</h4>
           </div>
-          <div className="percent">
+          <div className={style.percent}>
             <span>Tăng {value.customerGrowthPercentage} %</span>
           </div>
       </div>

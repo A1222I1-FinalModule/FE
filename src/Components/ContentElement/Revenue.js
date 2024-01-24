@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
 import BillService from '../../Services/API/BillService';
+import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const Revenue = () => {
   const [weeklyRevenue, setWeeklyRevenue] = useState(null);
   const [monthlyRevenue, setMonthlyRevenue] = useState(null);
@@ -23,29 +24,29 @@ export const Revenue = () => {
   };
   return (
    <>
-     <div class="sale">
-     <div class="sale_item">
-       <div class="sale_text">
+     <div className={style.sale}>
+     <div className={style.sale_item}>
+       <div className={style.sale_text}>
          <span>Doanh thu</span>
        </div>
-       <div class="sale_select">
+       <div className={style.sale_select}>
          <select name="" id="" onChange={handleSelectChange}>
            <option value="week">Tuần này</option>
            <option value="month">Tháng này</option>
          </select>
        </div>
      </div>
-     <div class="sale_total">
+     <div className={style.sale_total}>
      {selectedOption === 'week' && (
           <>
             <h2>{weeklyRevenue}</h2>
-            <h8>Tổng doanh thu hàng tuần</h8>
+            <h8>Tổng doanh thu tuần gần nhất</h8>
           </>
         )}
         {selectedOption === 'month' && (
           <>
             <h2>{monthlyRevenue}</h2>
-            <h8>Tổng doanh thu hàng tháng</h8>
+            <h8>Tổng doanh thu tháng gần nhất</h8>
           </>
         )}
      </div>

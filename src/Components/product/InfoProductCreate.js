@@ -1,157 +1,291 @@
-import { useEffect } from "react";
+
 import * as ProductService from "../../Services/product/ProductService";
-import { Formik, Form, Field,ErrorMessage} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "../product/InfoProductCreate.module.css";
 import classNames from "classnames/bind";
 import * as Yup from "yup";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { imageDb } from '../../FirebaseProduct/ConfigProduct.js';
+import { v4 } from 'uuid'
+import imgProduct from '../../Assets/images/product/upload-image.webp';
+
 
 
 const cx = classNames.bind(styles);
 
 export default function InfoProductCreate() {
+  const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = useState(``);
+
+  const productCategoryList = [
+    {
+      id: 1,
+      name: 'Nam',
+    },
+    {
+      id: 2,
+      name: 'Nữ',
+    },
+    {
+      id: 3,
+      name: 'Trẻ em',
+    }
+  ];
+
+  const sizeList = [
+    {
+      id: 1,
+      size: 'XS',
+    },
+    {
+      id: 2,
+      size: 'S',
+    },
+    {
+      id: 3,
+      size: 'M',
+    },
+    {
+      id: 4,
+      size: 'L',
+    },
+    {
+      id: 5,
+      size: 'XL',
+    },
+    {
+      id: 6,
+      size: 'XXL',
+    }
+  ];
+
   const infoProductInit = {
     productCode: "",
     name: "",
-    quantity: 0,
-    size: "",
-    category: "",
-    price: 0,
+    quantity: "",
+    image: "",
+    price: "",
+    productCategory: JSON.stringify(productCategoryList[0]),
+    size: JSON.stringify(sizeList[0])
+
   };
 
+  
 
   const productValidate = {
-    productCode : Yup.string()
-    .required("Required")
-    .matches(/^H[0-9]{3,9}$/, "Not format"),
-    name : Yup.string()
-    .required("Required")
-    .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, "Invalid Characters 3-10"),
-    quantity : Yup.string()
-    .required("Required")
-    .min(1,"Quantity must be at least 1 or more"),
-    size : Yup.string()
-    .required("Required"),
-    category : Yup.string()
-      .required("Required"),
-    price : Yup.string()
-    .required("Required")
-    .min(1,"Price must be at least 1 VND or more")
+    productCode: Yup.string()
+      .required("Vui lòng điền vào thông tin!")
+      .matches(/^H[0-9]{3,20}$/, "Không đúng định dạng"),
+    name: Yup.string()
+      .required("Vui lòng điền vào thông tin!")
+      .matches(/^[A-ZÁ+]+[a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểìíịỉĩễòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđA-Z0-9 /]{2,255}$/, "Độ dài ký tự phải từ 2 đến 255 và không chứa ký tự đặc biệt"),
+    quantity: Yup.number()
+      .required("Vui lòng điền vào thông tin!")
+      .min(1, "Số lượng phải từ 1 trở lên"),
+    price: Yup.number()
+      .required("Vui lòng điền vào thông tin!")
+      .min(1, "Gía phải từ 1 VND trở lên")
   }
 
-  // useEffect(() => {}, []);
+  const uploadFirebase = async () => {
+    if (selectedFile) {
+      const imgRef = ref(imageDb, `files/${v4()}`);
+      console.log(selectedFile);
+      await uploadBytes(imgRef, selectedFile);
+      return await getDownloadURL(imgRef);
+    }
+    return null
+  };
 
   const saveInfoProduct = async (values) => {
-    let temp = await ProductService.saveInfoProduct(values);
-    console.log(temp)
-    alert("Tạo mới thành công !");
-    
+    const imgUrl = await uploadFirebase();
+    const obj = {
+      ...values,
+      productCategory: JSON.parse(values.productCategory),
+      size: JSON.parse(values.size),
+      image: imgUrl
+
+    };
+   let temp = await ProductService.saveInfoProduct(obj);
+    console.log(temp);
+    navigate("/listProduct")
   };
+
+  const notifySubmit = () => {
+    toast.success('Thêm mới thông tin sản phẩm thành công!', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  }
 
   return (
     <>
-    <Formik
-    initialValues={infoProductInit}
-    onSubmit={(values) => {
-      saveInfoProduct(values)
-    }}
-    validationSchema={
-      Yup.object(productValidate)
-    }
-    >
-      <div className={cx('container')}>
-        <h1 className={cx('brand')}>
-          <span>FASHION SHOP</span>
-        </h1>
-        <div className={cx('wrapper')}>
-          <div className={cx('company-info')}> 
-            <h3>FASHION SHOP</h3>
-            <ul>
-              <li>
-                <i className={cx('fa fa-road')}/> 44 Main Street  
-              </li>
-              <li>
-                <i className={cx('fa fa-phone')}/> (555) 555-5555  
-              </li>
-              <li>
-                <i className={cx('fa fa-envelope')}/> fashionshop@phoenix.com  
-              </li>
-            </ul>
-          </div>
-           
-          <div className={cx('contact')}>
-            <h3 className={cx('text-primary')}>Create Product</h3> 
-            <Form>
-            {/* <p>
-                  <label className="text-primary" htmlFor="">Id</label>
-                  <Field
-                    type="text"
-                    name="id"
-                    id="productCode"
-                    required
-                    placeholder="Please enter your id"
-                  />
-                </p> */}
-              <p>
-                  <label className={cx('text-primary')} htmlFor="">Product's code</label>
+      <Formik
+        initialValues={infoProductInit}
+        onSubmit={(values) => {
+          saveInfoProduct(values)
+          notifySubmit();
+        }}
+        validationSchema={
+          Yup.object(productValidate)
+        }
+      >
+        <div className={cx('container')}>
+          <h1 className={cx('brand')}>
+            <span>FASHION SHOP</span>
+          </h1>
+          <div className={cx('wrapper')}>
+            <div className={cx('company-info')}>
+              <h3>FASHION SHOP</h3>
+              <ul>
+                <li>
+                  <i className={cx('fa fa-road')} /> Số 10,Trần Cao Vân
+                </li>
+                <li>
+                  <i className={cx('fa fa-phone')} /> (555) 555-5555
+                </li>
+                <li>
+                  <i className={cx('fa fa-envelope')} /> fashionshop@phoenix.com
+                </li>
+              </ul>
+            </div>
+
+            <div className={cx('contact')}>
+              <h3 className={cx('text-primary')}>Thêm thông tin hàng hóa</h3>
+              <Form>
+                <p>
+                  <label className={cx('text-primary')} htmlFor="">Mã hàng hóa</label>
                   <Field
                     type="text"
                     name="productCode"
                     id="productCode"
                     required
-                    placeholder="Please enter your id"
+                    placeholder="
+                    Vui lòng nhập mã sản phẩm"
                   />
-                <ErrorMessage style={{color : "red"}} name="productCode" component="span" className={cx('form-err')} ></ErrorMessage>
+                  <ErrorMessage style={{ color: "red" }} name="productCode" component="span" className={cx('form-err')} ></ErrorMessage>
                 </p>
                 <p>
-                  <label className={cx('text-primary')} htmlFor="">Product's name</label>
+                  <label className={cx('text-primary')} htmlFor="">Tên hàng hóa</label>
                   <Field
                     type="text"
                     name="name"
                     id="name"
                     required
-                    placeholder="Please enter your name"
+                    placeholder="
+                    Vui lòng nhập tên sản phẩm"
                   />
-                  <ErrorMessage style={{color : "red"}} name="name" component="span" className={cx('form-err')} ></ErrorMessage>
+                  <ErrorMessage style={{ color: "red" }} name="name" component="span" className={cx('form-err')} ></ErrorMessage>
                 </p>
                 <p>
-                  <label className={cx('text-primary')} htmlFor="">Quantity</label>
+                  <label className={cx('text-primary')} htmlFor="">Số lượng</label>
                   <Field
                     type="text"
-                    name ="quantity"
+                    name="quantity"
                     id="quantity"
                     required
-                    placeholder="Please enter your price"
+                    placeholder="
+                    Vui lòng nhập số lượng sản phẩm"
                   />
-                  <ErrorMessage style={{color : "red"}} name="quantity" component="span" className={cx('form-err')} ></ErrorMessage>
+                  <ErrorMessage style={{ color: "red" }} name="quantity" component="span" className={cx('form-err')} ></ErrorMessage>
                 </p>
-               
-                <div className={cx('form-group')}> 
+                <div className={cx('custom-file')}>
+                  <label htmlFor="input-file" className={cx('text-primary')}>
+                    Hình ảnh
+                    <img src={imgProduct} className={cx('pictureCreate')} />
+                  </label>
+                  <Field
+                    type="file"
+                    accept="image/jpeg, image/png, image/jpg"
+                    id="input-file"
+                    className={cx("input-imgg")}
+                    value={""}
+                    onChange={(event) => setSelectedFile(event.target.files[0])}
+                  />
+                </div>
+
+                <div className={cx('form-group')}>
+                  <label className={cx('text-primary')}>Giá</label>
+                  <Field
+                    type="text"
+                    name="price"
+                    id="price"
+                    required
+                    placeholder="
+                    Vui lòng nhập giá sẩn phẩm"
+                  />
+                  <ErrorMessage style={{ color: "red" }} name="price" component="span" className={cx('form-err')} ></ErrorMessage>
+                </div>
+                <div className={cx('form-group')}>
+                  <label htmlFor="category" className={cx('text-primary')}>
+                    Loại hàng hóa
+                  </label>
+                  <Field as="select" name="productCategory" className={cx('form-select')} aria-label="Default select example">
+                    {productCategoryList.map((item) => (
+                      <option key={item.id} value={JSON.stringify(item)}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+
+
+                <div className={cx('form-group')}>
+                  <label htmlFor="size" className={cx('text-primary')}>
+                    Size
+                  </label>
+                  <Field as="select" name="size" className={cx('form-select')} aria-label="Default select example">
+                    {sizeList.map((item) => (
+                      <option key={item.id} value={JSON.stringify(item)}>
+                        {item.size}
+                      </option>
+                    ))}
+                  </Field>
+                </div>
+
+
+                {/* 
+                <div className={cx('form-group')}>
                   <label
                     htmlFor
-                    className={cx('col-sm-2 col-form-label text-primary')}  
+                    className={cx('col-sm-2 col-form-label text-primary')}
                   >
                     Size
                   </label>
-                  <div className={cx('form-check-inline')}>  
-                    <input
-                      className={cx('form-check-input')}   
+                  <div className={cx('form-check-inline')}>
+                    <Field
+                      className={cx('form-check-input')}
                       type="checkbox"
                       id="XS"
-                      defaultValue
+                      name="size"
+                      value="XS"
                     />
+
                     <label
-                      className={cx('form-check-label text-primary')}  
+                      className={cx('form-check-label text-primary')}
                       htmlFor="XS"
                     >
                       XS
                     </label>
                   </div>
                   <div className={cx('form-check-inline')}>
-                    <input
+                    <Field
                       className={cx('form-check-input')}
                       type="checkbox"
                       id="S"
-                      defaultValue
+                      name="size"
+                      value="S"
                     />
                     <label
                       className={cx('form-check-label text-primary')}
@@ -161,11 +295,12 @@ export default function InfoProductCreate() {
                     </label>
                   </div>
                   <div className={cx('form-check-inline')}>
-                    <input
+                    <Field
                       className={cx('form-check-input')}
                       type="checkbox"
                       id="M"
-                      defaultValue
+                      name="size"
+                      value="M"
                     />
                     <label
                       className={cx('form-check-label text-primary')}
@@ -175,11 +310,12 @@ export default function InfoProductCreate() {
                     </label>
                   </div>
                   <div className={cx('form-check-inline')}>
-                    <input
+                    <Field
                       className={cx('form-check-input')}
                       type="checkbox"
                       id="L"
-                      defaultValue
+                      name="size"
+                      value="L"
                     />
                     <label
                       className={cx('form-check-label text-primary')}
@@ -189,11 +325,12 @@ export default function InfoProductCreate() {
                     </label>
                   </div>
                   <div className={cx('form-check-inline')}>
-                    <input
+                    <Field
                       className={cx('form-check-input')}
                       type="checkbox"
                       id="XL"
-                      defaultValue
+                      name="size"
+                      value="XL"
                     />
                     <label
                       className={cx('form-check-label text-primary')}
@@ -203,11 +340,12 @@ export default function InfoProductCreate() {
                     </label>
                   </div>
                   <div className={cx('form-check-inline')}>
-                    <input
+                    <Field
                       className={cx('form-check-input')}
                       type="checkbox"
                       id="XXL"
-                      defaultValue
+                      name="size"
+                      value="XXL"
                     />
                     <label
                       className={cx('form-check-label text-primary')}
@@ -216,61 +354,17 @@ export default function InfoProductCreate() {
                       XXL
                     </label>
                   </div>
-                </div>
-                {/* <div className="form-group row">
-                  <label htmlFor="picture" className="text-primary">
-                    Image
-                    <img
-                      src="https://cdn3d.iconscout.com/3d/premium/thumb/upload-image-8079452-6458695.png"
-                      id="picture"
-                    />
-                    <i className="fas fa-image" />
-                  </label>
-                  <div className="custom-file">
-                    <input
-                      type="file"
-                      name
-                      accept=".png,.gif,.jpg,.jpeg"
-                      id="input-file"
-                    />
-                  </div> */}
-                {/* </div> */}
-                <div className={cx('form-group')}>
-                  <label htmlFor="category" className={cx('text-primary')}>
-                    Category Product
-                  </label>
-                  <select
-                    className={cx('form-select')}  
-                    aria-label="Default select example"
-                    id="category"
-                    name="category"
-                  >
-                    <option selected>Category</option>
-                    <option value={1}>Men's clothes</option>
-                    <option value={2}>Women clothes</option>
-                    <option value={3}>Children's clothing</option>
-                  </select>
-                </div>
-               
-                <p>
-                  <label className={cx('text-primary')}>Price</label>
-                  <Field
-                    type="text"
-                    name="price"
-                    id="price"
-                    required
-                    placeholder="Please enter your price"
-                  />
-                  <ErrorMessage style={{color : "red"}} name="price" component="span" className={cx('form-err')} ></ErrorMessage>
-                </p>
+                </div> */}
+
                 <p className={cx('full')}>
-                  <button type="submit">Save</button>
+                  <button type="submit">Thêm</button>
                 </p>
               </Form>
+            </div>
           </div>
         </div>
-      </div>
-    </Formik>
+      </Formik>
+      <ToastContainer />
     </>
   );
 }
