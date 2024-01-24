@@ -4,7 +4,7 @@ import style from '../../Assets/Styles/StyleDashBoard.module.css';
 export const Revenue = () => {
   const [weeklyRevenue, setWeeklyRevenue] = useState(null);
   const [monthlyRevenue, setMonthlyRevenue] = useState(null);
-  const [selectedOption, setSelectedOption] = useState("week");
+  const [selectedOption, setSelectedOption] = useState('week');
   useEffect(() => {
     getByTime();
   }, []);
@@ -53,4 +53,4 @@ export const Revenue = () => {
       </div>
     </>
   );
-};
+}

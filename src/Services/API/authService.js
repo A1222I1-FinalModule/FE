@@ -14,3 +14,12 @@ export async function validateUser(jwt) {
 export async function logout() {
     return await axios.get(`/api/auth/logout`).then();
 }
+export async function changePassword(value) {
+    return await axios.post(`/api/auth/changePassword`, value).then(async (response) => {
+        if (response.status === 200) {
+            return response.data;
+        } else {
+            throw new Error(response.status);
+        }
+    });
+}

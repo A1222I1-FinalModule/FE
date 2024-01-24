@@ -1,15 +1,17 @@
 import classNames from 'classnames/bind';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
 import Image from '../../../Components/Image';
 import Navbar from '../Navbar';
 import Search from '../Search';
 import Menu from '../../../Components/Popper/Menu';
 import styles from './Header.module.scss';
-import { LogoutIcon } from '../../../Components/Icons';
+import { LogoutIcon, UserIcon } from '../../../Components/Icons';
 import { useUser } from '../../../Services/UserContext';
 import Login from '../../../Components/Login';
 import { useEffect, useState } from 'react';
+import Button from '../../../Components/Button';
+import NotificationList from '../../../Components/notification/NotificationList';
+import images from '../../../Assets/Images';
 
 const cx = classNames.bind(styles);
 
@@ -17,6 +19,7 @@ function Header() {
     const user = useUser();
     const [currentUser, setCurrentUser] = useState(null);
     const [modalShow, setModalShow] = useState(false);
+
     const getCurrentUser = async () => {
         return setCurrentUser(await user.isActive());
     };
@@ -26,26 +29,28 @@ function Header() {
             getCurrentUser();
         }
     }, [currentUser]);
+
     const userMenu = [
+        {
+            icon: <UserIcon />,
+            title: 'Tài khoản của tôi',
+            to: '/user',
+        },
         {
             icon: <LogoutIcon />,
             title: 'Đăng xuất',
-            to: '/logout',
+            to: '/',
             separate: true,
+            isLogout: true,
         },
     ];
-    console.log(currentUser);
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('left')}>
                     <Link>
-                        <img
-                            className={cx('logo')}
-                            src="https://media-fmplus.cdn.vccloud.vn/uploads/gui/4795312b-8e83-4876-b497-340f9c755df0.png"
-                            alt=""
-                            width={60}
-                        />
+                        <img className={cx('logo')} src={images.logo} alt="" />
                     </Link>
 
                     <Navbar />
@@ -53,8 +58,10 @@ function Header() {
                 <div className={cx('right')}>
                     <Search />
                     <div className={cx('actions')}>
-                        <div>
-                            {currentUser === true ? (
+                        <div className={cx("icon-container")}>
+                            {currentUser === true ? (<>
+
+                                <NotificationList />
                                 <Menu items={userMenu}>
                                     <Image
                                         className={cx('user-avatar')}
@@ -62,9 +69,10 @@ function Header() {
                                         alt=""
                                     />
                                 </Menu>
+                            </>
                             ) : (
-                                <Button variant="primary" onClick={() => setModalShow(true)}>
-                                    Login
+                                <Button primary onClick={() => setModalShow(true)} className={cx('login-btn')}>
+                                    Đăng nhập
                                 </Button>
                             )}
                         </div>
