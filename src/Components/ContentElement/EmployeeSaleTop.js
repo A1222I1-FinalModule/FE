@@ -6,12 +6,13 @@ export const EmployeeSaleTop = () => {
   useEffect(() => {
     getAll();
   }, []);
+
   const getAll = async () => {
     try {
       let temp = await EmployeeService.getEmployeeSaleTop();
       setEmployeeTop(temp);
     } catch (error) {
-      console.error('Error get data:', error);
+      console.error("Error get data:", error);
     }
   };
   return (
@@ -29,17 +30,24 @@ export const EmployeeSaleTop = () => {
             </tr>
           </thead>
           <tbody>
-            {employeeTop ? employeeTop.map((value, index) => (
-              <tr key={index}>
-                <th scope="row">{value.employeeName}</th>
-                <td>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value.totalSales)}</td>
-                <td>{value.totalOrders}</td>
-              </tr>
-            ))
+            {employeeTop
+              ? employeeTop.map((value, index) => (
+                  <tr key={index}>
+                    <th scope="row">{value.employeeName}</th>
+                    <td>
+                      {new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND',
+                      }).format(value.totalSales)}
+                    </td>
+                    <td>{value.totalOrders}</td>
+                  </tr>
+                ))
               : null}
           </tbody>
         </table>
       </div>
     </>
-  );
-};
+    );
+}
+

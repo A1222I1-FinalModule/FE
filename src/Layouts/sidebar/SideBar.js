@@ -108,5 +108,6 @@ export default function SideBar() {
         {renderingSideBar()}
       </div>
     </div>
-  )
-} 
+  );
+}
+

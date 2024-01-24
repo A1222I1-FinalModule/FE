@@ -21,7 +21,7 @@ export const Revenue = () => {
       setWeeklyRevenue(weeklyTemp);
       setMonthlyRevenue(monthlyTemp);
     } catch (error) {
-      console.error('Error getting data:', error);
+      console.error("Error getting data:", error);
     }
   };
   const handleSelectChange = (event) => {
@@ -58,4 +58,4 @@ export const Revenue = () => {
       </div>
     </>
   );
-};
+}

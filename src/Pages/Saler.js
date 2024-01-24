@@ -1,4 +1,4 @@
-import React from "react";
+import { React } from "react";
 import Header from "../Layouts/Header/Header";
 import { ContentSaler } from "../Components/ContentSaler";
 import SideBar from "../Layouts/sidebar/SideBar";
