@@ -8,14 +8,13 @@ import styles from './Header.module.scss';
 import { LogoutIcon, UserIcon } from '../../../Components/Icons';
 import { useUser } from '../../../Services/UserContext';
 import Login from '../../../Components/Login';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
-import NotificationList from '../../../Components/Notification/NotificationList';
-import images from '../../../Assets/Images';
+import images from '../../../Assets/Images/index';
 
 const cx = classNames.bind(styles);
 
-function Header() {
+function Header({ hideSearch }) {
     const user = useUser();
     const [currentUser, setCurrentUser] = useState(null);
     const [modalShow, setModalShow] = useState(false);
@@ -34,7 +33,7 @@ function Header() {
         {
             icon: <UserIcon />,
             title: 'Tài khoản của tôi',
-            to: '/user',
+            to: '/admin',
         },
         {
             icon: <LogoutIcon />,
@@ -49,14 +48,14 @@ function Header() {
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('left')}>
-                    <Link>
+                    <Link to={'/'}>
                         <img className={cx('logo')} src={images.logo} alt="" />
                     </Link>
 
                     <Navbar />
                 </div>
                 <div className={cx('right')}>
-                    <Search />
+                    {hideSearch ? <Search /> : <Fragment></Fragment>}
                     <div className={cx('actions')}>
                         <div className={cx("icon-container")}>
                             {currentUser === true ? (<>

@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
-
 import { formatMoney, convertSlug } from '../../utils/helpers';
 import * as productService from '../../Services/API/productService';
+import ProductItem from '../ProductItem';
+import Button from '../Button';
 import styles from './ProductGender.module.scss';
 
 const cx = classNames.bind(styles);
 
 function ProductGender({ category }) {
     const [products, setProducts] = useState([]);
+    const [size, setSize] = useState(10);
 
     useEffect(() => {
         const fetchProductGender = async () => {
@@ -21,27 +22,20 @@ function ProductGender({ category }) {
     }, []);
 
     return (
-        // <div className={cx('wrapper')}>
-        //     <h2 className={cx('heading')}>Thời trang {category === '1' ? 'nam' : 'nữ'}</h2>
-        //     <div className={cx('inner')}>
-        //         {products.slice(0, 10).map((product) => (
-        //             <div key={product.productCode} className={cx('product-item')}>
-        //                 <Link className={cx('thumbnail')}>
-        //                     <img src={product.image} alt={product.name} />
-        //                 </Link>
-        //                 <div className={cx('info')}>
-        //                     <h4 className={cx('name')}>
-        //                         <Link to={convertSlug(product.name)}>{product.name}</Link>
-        //                     </h4>
+        <div className={cx('wrapper')}>
+            <h2 className={cx('title')}>Đề xuất cho bạn</h2>
+            <div className={cx('inner')}>
+                <ProductItem data={products} number={size} />
+            </div>
 
-        //                     <p className={cx('price')}>{formatMoney(product.price)}</p>
-        //                 </div>
-        //             </div>
-        //         ))}
-        //     </div>
-        // </div>
-        <>
-        </>
+            {size === 10 && (
+                <div className={cx('more')}>
+                    <Button primary className={cx('more-btn')} onClick={() => setSize(20)}>
+                        Xem thêm
+                    </Button>
+                </div>
+            )}
+        </div>
     );
 }
 
