@@ -25,9 +25,6 @@ function Products() {
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>
                 <span>Thời trang nam nữ</span>
-                <Link to={'/thoi-trang-nam-nu'} className={cx('more')}>
-                    Xem thêm <ChevronRightIcon width="1.2rem" height="1.2rem" className={cx('icon')} />
-                </Link>
             </h2>
 
             <div className={cx('inner')}>

@@ -11,13 +11,9 @@ export const findAllCustomerType = async () => {
 };
 
 export const createCustomer = async (value) => {
-    try {
-        const response = await axios.post('/api/admin/insert-customer', value);
-        console.log('Thành công', response);
-        return response.data;
-    } catch (error) {
-        console.log('Thất bại', error);
-    }
+    const response = await axios.post('/api/admin/insert-customer', value);
+    console.log('Thành công', response);
+    return response.data;
 };
 
 export const updateCustomer = async (id, value) => {

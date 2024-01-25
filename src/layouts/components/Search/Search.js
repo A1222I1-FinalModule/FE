@@ -32,7 +32,7 @@ function Search() {
 
         const fetchApi = async () => {
             setLoading(true);
-            const result = await productService.searchProducts(searchValue);
+            const result = await productService.searchProducts({ name: searchValue, size: '20' });
             setSearchResult(result);
             setLoading(false);
         };

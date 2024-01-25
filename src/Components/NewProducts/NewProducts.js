@@ -26,8 +26,6 @@ function NewProduct() {
         fetchProduct();
     }, []);
 
-    console.log(newProducts);
-
     return (
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>Sản phẩm mới nhất</h2>

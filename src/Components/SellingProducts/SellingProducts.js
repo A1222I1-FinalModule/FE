@@ -26,8 +26,6 @@ function SellingProducts() {
         fetchProduct();
     }, []);
 
-    console.log(sellingProducts);
-
     return (
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>
