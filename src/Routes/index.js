@@ -1,5 +1,5 @@
-import { Route, Routes } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
 import AdminRoutes from './AdminRoutes';

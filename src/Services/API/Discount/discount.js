@@ -6,6 +6,7 @@ export const addDiscount = async (value) => {
         return temp.status;
     } catch (err) {
         console.log(err);
+        throw err;
     }
 }
 
@@ -18,9 +19,17 @@ export const findAllDiscount = async () => {
         console.log(err)
     }
 }
+export const listDiscountCode = async () => {
+    try {
+        let temp = await instance.get("/api/admin/listDiscountCode");
+        return temp.data;
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 export const getDeleteDiscount = async (id) => {
-    let temp = await instance.delete(`/api/admin/deleteByIdDiscount?id=${id}`);
+    let temp = await instance.get(`/api/admin/deleteByIdDiscount?id=${id}`);
     return temp.data;
 }
 
@@ -32,14 +41,13 @@ export const updateDiscount = async (id, value) => {
         console.log(temp.data);
         return temp.status;
     } catch (err) {
-        console.log("loi roi");
         console.log(err);
     }
 }
 
-export const getFindByNameDiscount = async (name) => {
+export const getFindByNameDiscount = async (name, customerType) => {
     try {
-        let temp = await instance.get(`/api/admin/findByNameDiscount?name=${name}`);
+        let temp = await instance.get(`/api/admin/findByNameDiscount?name=${name}&customerType=${customerType}`);
         return temp.data;
     } catch (err) {
         console.log(err);
@@ -48,7 +56,6 @@ export const getFindByNameDiscount = async (name) => {
 export const getFindByIdDiscount = async (id) => {
     try {
         let temp = await instance.get(`/api/admin/findByIdDiscount?id=${id}`);
-        console.log("Da vao roi nghe");
         return temp.data;
     } catch (err) {
         console.log(err);
@@ -58,10 +65,7 @@ export const getFindByIdDiscount = async (id) => {
 export const checkDiscountCodeExistence = async (id) => {
     try {
         let temp = await instance.get("/api/admin/existDiscountCode/" + id);
-        console.log("Response from API:", temp);
-        console.log("Haiz", temp.data);
         if (temp.data !== undefined) {
-            console.log("oke roi");
             return temp.data;
         } else {
             throw new Error("Invalid API response format");

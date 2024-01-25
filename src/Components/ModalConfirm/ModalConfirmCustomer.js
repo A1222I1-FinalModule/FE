@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
- function Example({handleDelete,id,name}) {
+ function Example2({handleDelete,id,name}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -24,7 +24,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
         <Modal.Header closeButton>
           <Modal.Title>Thông Báo</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Bạn có muốn xóa mã giảm giá {name} </Modal.Body>
+        <Modal.Body>Bạn có muốn xóa khách hàng {name} </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Thoát
@@ -38,4 +38,4 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
   );
 }
 
-export default Example;
+export default Example2;

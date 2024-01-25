@@ -54,6 +54,16 @@ export default function SideBar() {
               </Link>
             </div>
             <div className={style.contain_item}>
+              <Link to="/admin/customer" className={style.single_option}>
+                <div className={style.item_sidebar}>
+                  <div className={style.item_title}>
+                    <ion-icon name="logo-buffer"></ion-icon>
+                    <span>Khách Hàng</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className={style.contain_item}>
               <Link to="/admin/notification" className={style.single_option}>
                 <div className={style.item_sidebar}>
                   <div className={style.item_title}>
@@ -98,6 +108,7 @@ export default function SideBar() {
                 </div>
               </Link>
             </div>
+
           </>
         );
       } else if (roles.includes('ROLE_WAREHOUSE')) {
@@ -122,11 +133,13 @@ export default function SideBar() {
     }
   }
   return (
-    <div className={`${style.sidebar} col col-lg-2 col-md-4 col-0 pe-0`}>
-      <div className={style.sidebar_container}>
-        {renderingSideBar()}
+    <>
+      <div className={`${style.sidebar} col col-lg-2 col-md-4 col-0 pe-0`}>
+        <div className={style.sidebar_container}>
+          {renderingSideBar()}
+        </div>
       </div>
-    </div>
+
+    </>
   );
 }
-
