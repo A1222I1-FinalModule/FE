@@ -27,6 +27,7 @@
 
 .logo {
     display: flex;
+    width: 100px;
 }
 
 .left,
@@ -34,6 +35,12 @@
     display: flex;
     align-items: center;
     gap: 20px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .user-avatar {
@@ -44,4 +51,14 @@
     object-fit: cover;
     margin-left: 10px;
     cursor: pointer;
+}
+
+.login-btn {
+    width: 40px;
+    height: 40px;
+}
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

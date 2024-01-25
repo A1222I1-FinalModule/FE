@@ -30,14 +30,17 @@ export default function Header() {
         </div>
         <div className={style.account}>
           <div className={style.image_account}>
-            <img
-              src="https://images.unsplash.com/photo-1555952517-2e8e729e0b44?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-            />
+            <a href='/admin/info'>
+
+              <img
+                src="https://images.unsplash.com/photo-1555952517-2e8e729e0b44?q=80&w=1528&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt=""
+              />
+            </a>
           </div>
           <select name="account-name" id={style.account_name}>
             <option>Evan Morales</option>
-            <option value="">Thông tin cá nhân</option>
+            <option value=""><a href='/admin/info'>Thông tin cá nhân</a></option>
             <option value="">Đổi mật khẩu</option>
           </select>
         </div>
@@ -48,5 +51,5 @@ export default function Header() {
         </div>
       </div>
     </div>
-  )
+  );
 }

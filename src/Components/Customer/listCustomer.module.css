@@ -1,0 +1,43 @@
+.list_Customer_container-main {
+    width: 50%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-family: 14.4px 'Roboto', sans-serif;
+}
+
+.List_customer_find_container-find {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* justify-content: flex-start;  */
+}
+
+.container-pagination {
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    /* Can giữa theo chiều ngang */
+    align-items: center;
+    /* Can giữa theo chiều dọc */
+    width: 100%;
+}
+
+.row-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.action {
+    display: flex;
+    gap: 10px;
+}

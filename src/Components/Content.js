@@ -1,4 +1,4 @@
-import React from 'react';  
+import React from 'react';
 import { CustomerGrowth } from './ContentElement/CustomerGrowth';
 import { OrderGrowth } from './ContentElement/OrderGrowth';
 import { Revenue } from './ContentElement/Revenue';
@@ -15,21 +15,21 @@ export default function Content(){
             <div className="col-4">
               <CustomerGrowth />
             </div>
-            <div className="col-4">
-              <OrderGrowth />
+            <div class="col-4">
+              <OrderGrowth></OrderGrowth>
             </div>
-            <div className="col-4">
-              <Revenue />
+            <div class="col-4">
+              <Revenue></Revenue>
             </div>
           </div>
         </div>
-        <div className={style.content_second}>
-          <EmployeeSaleTop />
+        <div class="content-second">
+          <EmployeeSaleTop></EmployeeSaleTop>
         </div>
-        <div className={style.content_three}>
-          <OrderRecent />
+        <div class="content-three">
+          <OrderRecent></OrderRecent>
         </div>
       </div>
     </div>
-    )
+  )
 }
