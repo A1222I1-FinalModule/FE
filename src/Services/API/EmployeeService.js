@@ -1,13 +1,12 @@
-import axios from 'axios';
-const BASE_URL = `/api`;
+import instance from "../../Config/axiosConfig";
 export const EmployeeService = {
     getEmployeeSaleTop: async () => {
-        const res = await axios.get(`${BASE_URL}/admin/employee-top`);
+        const res = await instance.get(`/api/admin/employee-top`);
         return res.data;
     },
 };
 export async function getUser() {
-    const res = await axios.get(`/api/public/info`);
+    const res = await instance.get(`/api/public/info`, { withCredentials: true });
     return res.data;
 }
 export default EmployeeService;

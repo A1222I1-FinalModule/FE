@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import React from 'react';
 import Tippy from '@tippyjs/react/headless';
 
-import * as productService from '../../../Services/productService';
+import * as productService from '../../../Services/API/productService';
 import { Wrapper as PopperWrapper } from '../../../Components/Popper';
 import Button from '../../../Components/Button';
 import { ClearIcon, SearchIcon, SpinnerIcon } from '../../../Components/Icons';

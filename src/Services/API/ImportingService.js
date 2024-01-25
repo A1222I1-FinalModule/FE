@@ -1,56 +1,39 @@
-import axios from 'axios';
-const BASE_URL = `/api/admin`;
-const SALER_URL = `/api/saler`;
-const WAREHOUSE_URL = `/api/warehouse`;
-
+import instance from "../../Config/axiosConfig";
 export const getAll = async () => {
-  const response = await axios.get(`${BASE_URL}/importing`);
-  return response.data;
+  const respone = await instance.get(`/api/admin/importing}`);
+  return respone.data;
 }
 export const getAllBySaler = async () => {
-  const response = await axios.get(`${SALER_URL}/importing`);
-  return response.data;
+  const respone = await instance.get(`/api/saler/importing}`);
+  return respone.data;
 }
 export const getAllByWarehouse = async () => {
-  const response = await axios.get(`${WAREHOUSE_URL}/importing`);
-  return response.data;
+  const respone = await instance.get(`/api/warehouse/importing}`);
+  return respone.data;
 }
 
 export const save = async (value) => {
-  const response = await axios.post(`${BASE_URL}/importing`, value)
-  return response.status;
+  const respone = await instance.post(`/api/admin/importing`, value)
+  return respone.status;
 }
 export const saveByWarehouse = async (value) => {
-  const response = await axios.post(`${WAREHOUSE_URL}/importing`, value, {
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  })
-  return response.status;
+  const respone = await instance.post(`/api/warehouse/importing`, value)
+  return respone.status;
 }
 
 export const getDailyImportingBySaler = async () => {
-  const response = await axios.get(`${SALER_URL}/importing/daily`);
-  return response.data;
+  const respone = await instance.get(`/api/saler/importing/daily`);
+  return respone.data;
 }
 export const getMonthlyImportingBySaler = async () => {
-  const response = await axios.get(`${SALER_URL}/importing/month`);
-  return response.data;
+  const respone = await instance.get(`/api/saler/importing/month`);
+  return respone.data;
 }
 export const getDailyImportingByWarehouse = async () => {
-  const response = await axios.get(`${WAREHOUSE_URL}/importing/daily`);
-  return response.data;
+  const respone = await instance.get(`/api/warehouse/importing/daily`);
+  return respone.data;
 }
 export const getMonthlyImportingByWarehouse = async () => {
-  const response = await axios.get(`${WAREHOUSE_URL}/importing/month`);
-  return response.data;
-}
-
-export const getMaxId = async () => {
-  const response = await axios.get(`${BASE_URL}/importing/maxId`);
-  return response.data;
-}
-export const getMaxIdByWarehouse = async () => {
-  const response = await axios.get(`${WAREHOUSE_URL}/importing/maxId`);
-  return response.data;
+  const respone = await instance.get(`/api/warehouse/importing/month`);
+  return respone.data;
 }

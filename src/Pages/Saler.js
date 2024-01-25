@@ -1,19 +1,15 @@
-import { React } from "react";
+import React  from "react";
 import Header from "../Layouts/Header/Header";
-import style from '../Assets/Styles/StyleDashBoard.module.css';
-import SideBarSaler from "../Layouts/sidebar/SideBarSaler";
-const Saler = ({ children }) => {
+import { ContentSaler } from "../Components/ContentSaler";
+import SideBar from "../Layouts/sidebar/SideBar";
+export default function Saler() {
   return (
-    <div>
-      <Header></Header>
-      <div className="row h-100">
-        <SideBarSaler></SideBarSaler>
-        <div className={style.content + ' col-10 ps-0'}>
-          {children}
+      <div>
+        <Header></Header>
+        <div className="row">
+          <SideBar></SideBar>
+          <ContentSaler/>
         </div>
       </div>
-    </div>
-  );
+  )
 };
-
-export default Saler;

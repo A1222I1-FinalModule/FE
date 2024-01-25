@@ -9,12 +9,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import PdfDoc from './PdfDoc';
 
 function Payment() {
-    const pdfExportComponent = useRef(null);
-    const handleExportPdf = () => {
-        if (pdfExportComponent.current) {
-            pdfExportComponent.current.handleExportPdf();
-        }
-    };
+    // const pdfExportComponent = useRef(null);
+    // const handleExportPdf = () => {
+    //     if (pdfExportComponent.current) {
+    //         pdfExportComponent.current.handleExportPdf();
+    //     }
+    // };
     const [productBill, setProductBill] = useState({
         productCode: "",
         quantity: 0
@@ -81,7 +81,7 @@ function Payment() {
     };
     const handlePrintInvoice = () => {
         let saveBill = { ...bill, total: (bill.total - discount.sale) }
-        handleExportPdf();
+        // handleExportPdf();
         addBill(saveBill);
     };
     const validateProduct = () => {
@@ -277,7 +277,7 @@ function Payment() {
                                     </div>
                                 </div>
                             </div>
-                            {checkValidBill(bill) ? <PdfDoc bill={bill} discount={discount} ref={pdfExportComponent} /> : ""}
+                            {/* {checkValidBill(bill) ? <PdfDoc bill={bill} discount={discount} ref={pdfExportComponent} /> : ""} */}
                         </div>
                     </Form>
                 )}
@@ -286,5 +286,4 @@ function Payment() {
         </div>
     );
 }
-
-export default Payment;
+export default Payment();

@@ -1,10 +1,10 @@
-import axios from 'axios';
+import instance from "../../Config/axiosConfig";
 const BASE_URL = `/api/admin`;
-const WAREHOUSE_URL = `/api/warehouse`;
+const WAREHOUSE_URL = `/api/warehouse`
 
 export const getProducts = async () => {
     try {
-        const response = await axios.get('/api/public/list-product');
+        const response = await instance.get('/api/public/list-product');
 
         return response.data;
     } catch (error) {
@@ -14,7 +14,7 @@ export const getProducts = async () => {
 
 export const searchProducts = async (name) => {
     try {
-        const response = await axios.get('/api/public/findByNameProduct', {
+        const response = await instance.get('/api/public/findByNameProduct', {
             params: {
                 name,
             },
@@ -28,7 +28,7 @@ export const searchProducts = async (name) => {
 
 export const searchProductCategories = async (id) => {
     try {
-        const response = await axios.get('/api/public/findByProductCategories', {
+        const response = await instance.get('/api/public/findByProductCategories', {
             params: {
                 id,
             },
@@ -40,10 +40,10 @@ export const searchProductCategories = async (id) => {
     }
 };
 export const updateQuantityByAdmin = async (value) => {
-    const respone = await axios.post(`${BASE_URL}/update-quantity`, value)
+    const respone = await instance.post(`${BASE_URL}/update-quantity`, value)
     return respone.status;
 }
 export const updateQuantityByWarehouse = async (value) => {
-    const respone = await axios.post(`${WAREHOUSE_URL}/update-quantity`, value)
+    const respone = await instance.post(`${WAREHOUSE_URL}/update-quantity`, value)
     return respone.status;
 }
