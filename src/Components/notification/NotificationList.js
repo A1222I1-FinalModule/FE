@@ -6,6 +6,8 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NotificationList.module.css";
 import * as NotificationService from "../../Services/API/notification/NotificationService";
+import { ModalNotification } from "./ModalNotification";
+import { Modal } from "react-bootstrap";
 
 export default function NotificationList() {
   const [isActive, setIsActive] = useState(false);
@@ -13,7 +15,12 @@ export default function NotificationList() {
   const [notifications, setNotifications] = useState([]);
   const [notificationNotRead, setNotificationNotRead] = useState([]);
   const [toggle, setToggle] = useState(true);
+  const [modal, setModal] = useState(false);
+  const [data, setData] = useState();
 
+
+  console.log(modal);
+  console.log(data);
 
   useEffect(() => {
     getAllBySaler();
@@ -43,6 +50,9 @@ export default function NotificationList() {
     }
   };
 
+
+  const handleClose = () => setModal(false);
+
   const handleAll = () => {
     setToggle(true);
     getAllBySaler();
@@ -61,17 +71,12 @@ export default function NotificationList() {
     getAllByNotReadSaler();
   };
 
-  const updateStatusById = (id) => {
-    console.log(123);
-    const newArray = notificationNotRead.map((item) => {
-      if (item.id === id) {
-        return { ...item, status: true };
-      } else {
-        return item;
-      }
-    })
-    return newArray;
+  const handleFindById = async (id) => {
+    setModal(true);
+    let data = await NotificationService.findByid(id);
+    setData(data);
   }
+
 
   const currentDate = format(new Date(), "dd-MM-yyyy");
   if (!notifications) return null;
@@ -99,7 +104,7 @@ export default function NotificationList() {
               <div className={styles.contenttitle}>Thông báo</div>
               <div className="button-notification d-flex flex-wrap gap-2 ">
                 <button
-                  className="btn btn-sm btn-outline-info text-lowercase fs-6 mt-3 "
+                  className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3 "
                   onClick={() => {
                     handleAll();
                   }}
@@ -107,7 +112,7 @@ export default function NotificationList() {
                   Tất Cả
                 </button>
                 <button
-                  className="btn btn-sm btn-outline-info text-lowercase fs-6 mt-3"
+                  className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3"
                   onClick={() => {
                     handleNotRead();
                   }}
@@ -140,16 +145,19 @@ export default function NotificationList() {
                       className={styles.threedotdetail}
                       id={`selection${notification.id}`}
                     >
-                      <a
+                      <button
                         className={styles.contentlink}
-                        href="#"
+                        onClick={() => {
+                          handleFindById(notification.id);
+                        }}
                       >
                         Chi tiết Thông báo
-                      </a>
+                      </button>
                       <button
                         className={styles.contentlink}
                         onClick={() => {
                           handleDelete(notification.id);
+                          console.log(456);
                         }}
                       >
                         Gỡ thông báo
@@ -157,7 +165,7 @@ export default function NotificationList() {
                     </div>
                   </div>
                 </div>)
-              })) : (notificationNotRead.map((notification, index) => {
+              })) : (notificationNotRead.map((notification) => {
                 return (<div
                   className={styles.contentnotification}
                   key={notification.id}
@@ -180,12 +188,16 @@ export default function NotificationList() {
                       className={styles.threedotdetail}
                       id={`selection${notification.id}`}
                     >
-                      <a
+                      <button
                         className={styles.contentlink}
-                        href="#"
+                        onClick={() => {
+                          // console.log(123); 
+                          setModal(true);
+                          handleFindById(notification.id);
+                        }}
                       >
                         Chi tiết Thông báo
-                      </a>
+                      </button>
                       <button
                         className={styles.contentlink}
                         onClick={() => {
@@ -193,14 +205,6 @@ export default function NotificationList() {
                         }}
                       >
                         Gỡ thông báo
-                      </button>
-                      <button
-                        className={styles.contentlink}
-                        onClick={() => {
-
-                        }}
-                      >
-                        Đánh dấu đã đọc
                       </button>
                     </div>
                   </div>
@@ -210,6 +214,19 @@ export default function NotificationList() {
           </div>
         )}
       </div>
+      {<Modal show={modal} onHide={handleClose} backdrop="static" keyboard={false} className={styles.modalcss}>
+        <Modal.Header className={styles.contenttitle}>
+          <Modal.Title>Thông báo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {data.content}
+        </Modal.Body>
+        <Modal.Footer>
+          <button variant="secondary" onClick={handleClose}>
+            Đóng thông báo
+          </button>
+        </Modal.Footer>
+      </Modal>}
     </>
   );
 }

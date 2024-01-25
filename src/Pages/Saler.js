@@ -15,7 +15,6 @@ const Saler = ({ children }) => {
           <SideBarSaler></SideBarSaler>
           <div className={style.content + ' col-10 ps-0'}>
             {children}
-
           </div>
         </div>
       </div>

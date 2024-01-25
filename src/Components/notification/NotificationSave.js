@@ -14,11 +14,12 @@ export default function NotificationSave() {
   const notificationInit = {
     id: 0,
     content: "",
-    target: "1",
+    target: "",
   };
 
   const validateNotification = {
-    content: yup.string().required("Nội dung không được để trống")
+    content: yup.string().required("Nội dung không được để trống"),
+    target: yup.string().required("Chưa chọn đối tượng gửi")
   };
 
   const addNewNotification = async (notification) => {
@@ -35,6 +36,10 @@ export default function NotificationSave() {
       theme: "light",
     });
   };
+
+  const handleCancleNotification = () => {
+    navigate("/admin/info");
+  }
   return (
     <>
       <Formik
@@ -95,7 +100,7 @@ export default function NotificationSave() {
                       className={styles.formchecklabel}
                       htmlFor="inlineRadio2"
                     >
-                      Salers
+                      Người bán hàng
                     </label>
                   </div>
                   <div className="form-check form-check-inline">
@@ -114,6 +119,7 @@ export default function NotificationSave() {
                     </label>
                   </div>
                 </div>
+                <ErrorMessage name="target" component={"span"} className={styles.validateContent}></ErrorMessage>
 
                 <div className={styles.containercontact1formbtn}>
                   <div className="contact1-form-btn1">
@@ -126,7 +132,7 @@ export default function NotificationSave() {
                     </button>
                   </div>
                   <div className={styles.contact1formbtn2}>
-                    <button type="reset" className={styles.contact1formbtn}>
+                    <button type="button" className={styles.contact1formbtn} onClick={() => handleCancleNotification()}>
                       <span> Hủy Bỏ </span>
                     </button>
                   </div>

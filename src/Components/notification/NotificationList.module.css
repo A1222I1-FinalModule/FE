@@ -1,6 +1,7 @@
 .contentright {
     float: right;
     margin-right: 60px;
+    z-index: 77;
 }
 
 .detail {
@@ -28,7 +29,6 @@
     outline: none;
     border-radius: 50%;
     background: #dddddd;
-    margin-top: 30px;
 }
 
 .dropdownbtn:hover .bibellfill {
@@ -83,7 +83,7 @@
 
 .iconbutton_badge {
     position: absolute;
-    top: -10px;
+    bottom: -10px;
     right: -10px;
     width: 25px;
     height: 25px;
@@ -107,6 +107,7 @@
 .contentnotification {
     position: static;
 }
+
 
 .threedots {
     width: 40px;
@@ -198,6 +199,14 @@
     font-weight: bold;
     margin-bottom: 5px;
     color: #242526;
+}
+
+.modalcss {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    z-index: 9999;
 }
 
 @media (max-width: 576px) {
