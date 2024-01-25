@@ -1,8 +1,7 @@
-// import * as httpRequest from '../utils/httpRequest';
-import axios from 'axios';
+import instance from "../../Config/axiosConfig";
 export const getProducts = async () => {
     try {
-        const response = await axios.get('/api/public/list-product');
+        const response = await instance.get('/api/public/list-product');
 
         return response.data;
     } catch (error) {
@@ -12,7 +11,7 @@ export const getProducts = async () => {
 
 export const searchProducts = async (name) => {
     try {
-        const response = await axios.get('/api/public/findByNameProduct', {
+        const response = await instance.get('/api/public/findByNameProduct', {
             params: {
                 name,
             },
@@ -26,7 +25,7 @@ export const searchProducts = async (name) => {
 
 export const searchProductCategories = async (id) => {
     try {
-        const response = await axios.get('/api/public/findByProductCategories', {
+        const response = await instance.get('/api/public/findByProductCategories', {
             params: {
                 id,
             },

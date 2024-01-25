@@ -5,7 +5,7 @@ import { Discount } from '../Components/Discount/listDiscount';
 import { ListCustomer } from '../Components/Customer/listCustomer';
 import { CreateDiscount } from '../Components/Discount/createDiscount';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
-
+import ContentAdmin from '../Components/ContentAdmin';
 const AdminRoutes = () => {
     return (
         <Routes>
@@ -15,7 +15,7 @@ const AdminRoutes = () => {
             <Route path='/customer' element={<Dashboard><ListCustomer /></Dashboard>} />
             <Route path='/createDiscount' element={<Dashboard><CreateDiscount /></Dashboard>} />
             <Route path='/updateDiscount/:id' element={<Dashboard><UpdateDiscount/></Dashboard>} />
-
+            <Route path='/report' element={<Dashboard><ContentAdmin /></Dashboard>} />
         </Routes>
     );
 };

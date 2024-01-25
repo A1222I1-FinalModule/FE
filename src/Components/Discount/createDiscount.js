@@ -17,9 +17,12 @@ export function CreateDiscount() {
         sale: '',
         rewardPoint: '',
         condition: '',
+
         customerType: {
             id: 2,
         },
+        beginDate:'',
+        endDate:'',
         isDeleted: true,
     };
     const validateDiscount = {
@@ -78,7 +81,7 @@ export function CreateDiscount() {
             toast.success('Thêm Mới Thành Công');
         } catch (error) {
             if (error.response && error.response.status === 400) {
-                setError('Code Đã Tồn Tại');
+                setError('Mã Giảm Giá    Đã Tồn Tại');
             } else {
                 console.error(error);
             }
@@ -87,7 +90,7 @@ export function CreateDiscount() {
     return (
         <div className="page-container">
             <div className={style['container-main']}>
-                <h1 className={style['font']}>Giảm Giá</h1>
+                <h1 className={style['font']} >Giảm Giá</h1>
                 {error && <div className={style['error-message']}>{error}</div>}
                 <Formik
                     initialValues={initDiscount}
@@ -194,7 +197,7 @@ export function CreateDiscount() {
                             </div>
                         </div>
                         <div className={style['form-row']}>
-                            <div>
+                            <div style={{height:'2000px'}}>
                                 <span className={style['label']}>
                                     Ngày Bắt Đầu <span className={` ${style['required-field']}`}>*</span>
                                 </span>
@@ -205,7 +208,7 @@ export function CreateDiscount() {
                                     className={style['form-err']}
                                 ></ErrorMessage>
                             </div>
-                            <div>
+                            <div style={{height:'2000px'}}>
                                 <span className={style['label']}>
                                     Ngày Kết Thúc <span className={` ${style['required-field']}`}>*</span>
                                 </span>

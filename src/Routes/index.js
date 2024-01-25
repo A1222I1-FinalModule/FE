@@ -9,49 +9,61 @@ import { Toaster} from 'react-hot-toast';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
-import { Warehouse } from '../Pages/WareHouse';
+import  Warehouse from '../Pages/WareHouse';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
 import { useEffect, useState } from "react";
 import { useUser } from "../Services/UserContext";
 import { jwtDecode } from 'jwt-decode';
+import NotFound from "../Pages/NotFound";
 
 const MainRouter = () => {
-    return (
-      <>
-        <Routes>
-            <Route path="/admin/*" element={<AdminRoutes />} />
-            <Route path="/sale/*" element={<SalerRoutes />}></Route>
-            <Route path="/warehouse" element={<Warehouse />}></Route>
-            <Route path="/login" element={<Login />} />
-            <Route
-                path="/"
-                element={
-                    <DefaultLayout>
-                        <Home />
-                    </DefaultLayout>
-                }
-            />
-            <Route
-                path="/home"
-                element={
-                    <DefaultLayout>
-                        <Home />
-                    </DefaultLayout>
-                }
-            />
+  const [roles, setRoles] = useState([]);
+  const user = useUser();
+  function getRolesFromJWT() {
+    if (user.jwt) {
+      const decodedJwt = jwtDecode(user.jwt);
+      return decodedJwt.authorities;
+    }
+    return [];
+  }
+  useEffect(() => {
+    setRoles(getRolesFromJWT());
+  }, [user.jwt]);
+  console.log(roles);
+  return (
+    <Routes>
+      <Route path="/admin/*" element={roles.find((role) => role === "ROLE_ADMIN") ? (<AdminRoutes />) : (<DefaultLayout>
+        <Home />
+      </DefaultLayout>)} />
+      <Route path="/sale/*"
+        element={roles.find((role) => role === "ROLE_SALE") ? (<SalerRoutes />) : (<DefaultLayout>
+          <Home />
+        </DefaultLayout>)}></Route>
+      <Route path="/warehouse"
+        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<Warehouse />) : (<DefaultLayout>
+          <Home />
+        </DefaultLayout>)}></Route>
+      <Route
+        path="/"
+        element={
+          <DefaultLayout>
+            <Home />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <DefaultLayout>
+            <Home />
+          </DefaultLayout>
+        }
+      />
+      <Route path="*" element={<NotFound />}>
 
-
-            <Route path="/createDiscount" element={<CreateDiscount />}></Route>
-            <Route path="/updateDiscount/:id" element={<UpdateDiscount />}></Route>
-            <Route path="/listCustomer" element={<ListCustomer />}></Route>
-            <Route path="/listDiscount" element={<Discount />}></Route>
-            <Route path="/" element={<></>} />
-            <Route path="/payment" element={<Payment />} />
-        </Routes>
-        <Toaster position="top-right" reverseOrder={false} />
-        </>
-    );
+      </Route>
+    </Routes>
+  );
 };
-
 export default MainRouter;
