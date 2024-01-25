@@ -8,6 +8,7 @@ import * as customers from '../../Services/API/Customer/customer';
 import Example2 from '../ModalConfirm/ModalConfirmCustomer';
 import { toast } from 'react-hot-toast';
 import NotFound from '../ModalConfirm/NotificationDiscount';
+import Loading from '../Customer/Loading';
 export function ListCustomer() {
     const [customer, setCustomer] = useState([]);
     const [searchInput, setSearchInput] = useState('');
@@ -19,7 +20,7 @@ export function ListCustomer() {
     const records = customer.slice(firstIndex, lastIndex);
     const npage = Math.ceil(customer.length / recordsPerPage);
     const numbers = [...Array(npage + 1).keys()].slice(1);
-
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         getAllCustomer();
     }, []);
@@ -40,6 +41,7 @@ export function ListCustomer() {
     const getAllCustomer = async () => {
         let temp;
         if (searchInput) {
+            setLoading(true);
             temp = await customers.findByNameCustomer(searchInput);
             if (searchInput == '_') {
                 setShowNotFoundModal(true);
@@ -47,11 +49,13 @@ export function ListCustomer() {
                 setShowNotFoundModal(true);
             } else {
                 setCustomer(temp.filter((item) => item.delete === true));
+                setLoading(false);
                 setCurrentPage(1);
             }
         } else {
             temp = await customers.findAllCustomer();
             setCustomer(temp.filter((item) => item.delete === true));
+            setLoading(false);
         }
     };
     const getDelete = async (id) => {
@@ -102,14 +106,14 @@ export function ListCustomer() {
                             type="button"
                             className="btn btn-success"
                             data-mdb-ripple-init
-                            style={{ width: '200px' }}
+                            style={{ width: '200px', height: '36px', fontSize: '13px' }}
                         >
                             Thêm mới khách hàng
                         </button>
                     </div>
                 </div>
                 <div className="container-table">
-                    <table className="table align-middle mb-0 bg-white" style={{width:'1000px'}}>
+                    <table className="table align-middle mb-0 bg-white" style={{ width: '1000px' }}>
                         <thead className="bg-light">
                             <tr className={styled['headtr-customer']}>
                                 <th scope="col" className={styled['head-customer']}></th>
@@ -132,67 +136,65 @@ export function ListCustomer() {
                             </tr>
                         </thead>
                         <tbody>
-                            {records.map((customer, index) => {
-                                const rowNumber = firstIndex + index + 1;
-                                return (
-                                    <tr key={index} className={styled['headtr-customer']}>
-                                        <td className="text-center" style={{fontSize:'13px'}}> {rowNumber}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.id}</td>
-                                        <td className={styled['text-center']}>
-                                            <div className="d-flex align-items-center">
-                                                <div className="ms-3">
-                                                    <p className="fw-bold mb-1" style={{fontSize:'13px'}}>{customer.name}</p>
-                                                    <p className="text-muted mb-0" style={{fontSize:'13px'}}>{customer.email}</p>
+                            {loading ? (
+                                <tr>
+                                    <td colSpan="7">
+                                        <Loading />
+                                    </td>
+                                </tr>
+                            ) : (
+                                records.map((customer, index) => {
+                                    const rowNumber = firstIndex + index + 1;
+                                    
+                                    return (
+                                        <tr key={index} className={styled['headtr-customer']}>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {' '}
+                                                {rowNumber}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {customer.id}
+                                            </td>
+                                            <td className={styled['text-center']}>
+                                                <div className="d-flex align-items-center">
+                                                    <div className="ms-3">
+                                                        <p className="fw-bold mb-1" style={{ fontSize: '13px' }}>
+                                                            {customer.name}
+                                                        </p>
+                                                        <p className="text-muted mb-0" style={{ fontSize: '13px' }}>
+                                                            {customer.email}
+                                                        </p>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.gender ? 'Nam' : 'Nữ'}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.point}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.customerType.typeName}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>
-                                            <div className={styled['action']}>
-                                                <Example2
-                                                    id={customer.id}
-                                                    name={customer.name}
-                                                    handleDelete={handleDelete}
-                                                />
-                                                <button
-                                                    class="btn btn-success"
-                                                    ids={customer.id}
-                                                >
-                                                    Sửa
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {customer.gender ? 'Nam' : 'Nữ'}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {customer.point}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {customer.customerType.typeName}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                <div className={styled['action']}>
+                                                    <Example2
+                                                        id={customer.id}
+                                                        name={customer.name}
+                                                        handleDelete={handleDelete}
+                                                    />
+                                                    <button class="btn btn-success" ids={customer.id}>
+                                                        Sửa
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
+                            )}
                         </tbody>
                     </table>
                 </div>
-                {/* <nav className={styled['container-pagination']}>
-                    <ul className="pagination pagination-circle">
-                        <li className="page-item">
-                            <a href="#" className="page-link" onClick={prePage}>
-                                Trước
-                            </a>
-                        </li>
-                        {numbers.map((n, i) => {
-                            return (
-                                <li className={`page-item ${currentPage == n ? `active` : ` `}`} key={i}>
-                                    <a href="#" className="page-link" onClick={() => changeCPage(n)}>
-                                        {n}
-                                    </a>
-                                </li>
-                            );
-                        })}
-                        <li className="page-item">
-                            <a href="#" className="page-link" onClick={nextPage}>
-                                Sau
-                            </a>
-                        </li>
-                    </ul>
-                </nav> */}
                 <nav className={styled['container-pagination']}>
                     <ul className="pagination pagination-circle">
                         {npage > 1 && (

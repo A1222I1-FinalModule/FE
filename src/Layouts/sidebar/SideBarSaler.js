@@ -48,5 +48,6 @@ export default function SideBarSaler() {
           </div>
         </div>
       </div>
-    </div>)
-}
+    </div>
+  )
+} 

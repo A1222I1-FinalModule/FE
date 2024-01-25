@@ -1,6 +1,5 @@
 // import * as httpRequest from '../utils/httpRequest';
 import axios from 'axios';
-import { Value } from 'sass';
 export const getProducts = async () => {
     try {
         const response = await axios.get('/api/public/list-product');
@@ -11,7 +10,30 @@ export const getProducts = async () => {
     }
 };
 
-export const update = async (quantity, value) => {
-    const respone = await axios.post(`/api/admin/update-quantity/${quantity}`, value)
-    return respone.status;
-}
+export const searchProducts = async (name) => {
+    try {
+        const response = await axios.get('/api/public/findByNameProduct', {
+            params: {
+                name,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const searchProductCategories = async (id) => {
+    try {
+        const response = await axios.get('/api/public/findByProductCategories', {
+            params: {
+                id,
+            },
+        });
+
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

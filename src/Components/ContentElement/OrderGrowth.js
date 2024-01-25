@@ -11,7 +11,7 @@ export const OrderGrowth = () => {
       let temp = await BillService.getOrderGrowth();
       setOrderGrowth(temp);
     } catch (error) {
-      console.error('Error get data:', error);
+      console.error("Error get data:", error);
     }
   };
   return (

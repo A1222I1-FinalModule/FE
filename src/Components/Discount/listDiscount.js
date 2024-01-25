@@ -9,13 +9,13 @@ import moment from 'moment';
 import { toast } from 'react-hot-toast';
 import Example from '../ModalConfirm/ModalConfirm';
 import NotFound from '../ModalConfirm/NotificationDiscount';
+import Loading from '../Customer/Loading';
 export function Discount() {
     const [discount, setDiscount] = useState([]);
     const [searchInput, setSearchInput] = useState('');
     const [searhType, setSearhType] = useState('0');
     const [showNotFoundModal, setShowNotFoundModal] = useState(false);
     const navigate = useNavigate();
-
     const [currentPage, setCurrentPage] = useState(1);
     const recordsPerPage = 5;
     const lastIndex = currentPage * recordsPerPage;
@@ -23,6 +23,7 @@ export function Discount() {
     const records = discount.slice(firstIndex, lastIndex);
     const npage = Math.ceil(discount.length / recordsPerPage);
     const numbers = [...Array(npage + 1).keys()].slice(1);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getAllDiscount();
@@ -43,8 +44,8 @@ export function Discount() {
     const getAllDiscount = async () => {
         let temp;
         if (searchInput) {
+            setLoading(true);
             temp = await discounts.getFindByNameDiscount(searchInput,searhType);
-            console.log("test",temp.length);
             if (searchInput == '_') {
                 setShowNotFoundModal(true);
             } else if (temp.length === 0) {
@@ -52,10 +53,12 @@ export function Discount() {
             } else {
                 setDiscount(temp.filter((item) => item.delete === true));
                 setCurrentPage(1);
+                setLoading(false);
             }
         } else {
             temp = await discounts.findAllDiscount();
             setDiscount(temp.filter((item) => item.delete === true));
+            setLoading(false);
         }
     };
     const getDelete = async (id) => {
@@ -122,7 +125,7 @@ export function Discount() {
                             type="button"
                             className="btn btn-success"
                             data-mdb-ripple-init
-                            style={{ width: '200px' }}
+                            style={{ width: '200px',height:'33px',fontSize:'13px' }}
                             onClick={() => navigate('/admin/createDiscount')}
                         >
                             Thêm mới mã giảm giá
@@ -159,7 +162,14 @@ export function Discount() {
                             </tr>
                         </thead>
                         <tbody>
-                            {records.map((discount, index) => {
+                            {loading ? (
+                                <tr>
+                                    <td colSpan="7">
+                                        <Loading />
+                                    </td>
+                                </tr>
+                            ) : (
+                            records.map((discount, index) => {
                                 return (
                                     <tr key={index} className="text-center">
                                         <td className="text-center" style={{fontSize:'13px'}}>{discount.discountCode}</td>
@@ -191,7 +201,8 @@ export function Discount() {
                                         </td>
                                     </tr>
                                 );
-                            })}
+                            })
+                            )}
                         </tbody>
                     </table>
                 </div>

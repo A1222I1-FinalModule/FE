@@ -1,6 +1,6 @@
 .search,
 .search-result {
-    width: 360px;
+    width: 400px;
 }
 
 .search {
@@ -39,9 +39,27 @@
     cursor: pointer;
 }
 
+.loading {
+    animation: spinner 0.8s linear infinite;
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
+}
+
 .search-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     width: var(--search-button-width);
+}
+
+.search-more {
+    border-top: 1px solid rgb(0 0 0 / 12%);
+    text-transform: uppercase;
 }

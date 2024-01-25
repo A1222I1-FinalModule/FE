@@ -12,10 +12,13 @@ import Home from '../Pages/Home';
 import { Warehouse } from '../Pages/WareHouse';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
+import { useEffect, useState } from "react";
+import { useUser } from "../Services/UserContext";
+import { jwtDecode } from 'jwt-decode';
 
 const MainRouter = () => {
     return (
-        <>
+      <>
         <Routes>
             <Route path="/admin/*" element={<AdminRoutes />} />
             <Route path="/sale/*" element={<SalerRoutes />}></Route>
@@ -42,6 +45,7 @@ const MainRouter = () => {
             <Route path="/createDiscount" element={<CreateDiscount />}></Route>
             <Route path="/updateDiscount/:id" element={<UpdateDiscount />}></Route>
             <Route path="/listCustomer" element={<ListCustomer />}></Route>
+            <Route path="/listDiscount" element={<Discount />}></Route>
             <Route path="/" element={<></>} />
             <Route path="/payment" element={<Payment />} />
         </Routes>
