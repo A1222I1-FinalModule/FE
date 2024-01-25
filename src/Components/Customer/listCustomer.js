@@ -44,10 +44,15 @@ export function ListCustomer() {
             setLoading(true);
             temp = await customers.findByNameCustomer(searchInput);
             if (searchInput == '_') {
+                setLoading(false);
                 setShowNotFoundModal(true);
+                temp = await customers.findAllCustomer();
+                setCustomer(temp.filter((item) => item.delete === true));
             } else if (temp.length === 0) {
                 setLoading(false);
                 setShowNotFoundModal(true);
+                temp = await customers.findAllCustomer();
+                setCustomer(temp.filter((item) => item.delete === true));
             } else {
                 setCustomer(temp.filter((item) => item.delete === true));
                 setLoading(false);
