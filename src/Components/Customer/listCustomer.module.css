@@ -24,9 +24,11 @@
 .container-pagination {
     padding-top: 20px;
     display: flex;
-    justify-content: center;  /* Can giữa theo chiều ngang */
-    align-items: center;      /* Can giữa theo chiều dọc */
-    width: 100%;  
+    justify-content: center;
+    /* Can giữa theo chiều ngang */
+    align-items: center;
+    /* Can giữa theo chiều dọc */
+    width: 100%;
 }
 
 .row-container {
@@ -35,7 +37,7 @@
     width: 100%;
 }
 
-.action{
+.action {
     display: flex;
     gap: 10px;
 }

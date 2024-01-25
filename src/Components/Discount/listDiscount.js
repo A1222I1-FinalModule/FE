@@ -20,7 +20,7 @@ export function Discount() {
   const navigate = useNavigate();
 
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 3;
+  const recordsPerPage = 5;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = discount.slice(firstIndex, lastIndex);
@@ -55,7 +55,7 @@ export function Discount() {
   };
   const handleUpdateClick = (discountCode) => {
     navigate(`/updateDiscount/${discountCode}`);
-}
+  }
   return (
     <div>
       <div className={styles["list_Discount_container-main"]}>
@@ -136,7 +136,7 @@ export function Discount() {
                           ids={discount.discountCode}
                           onClick={() => handleUpdateClick(discount.discountCode)}
                         >
-                            Update
+                          Update
                         </button>
                       </div>
                     </td>

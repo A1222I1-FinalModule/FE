@@ -11,7 +11,7 @@ export const CustomerGrowth = () => {
       let temp = await BillService.getCustomerGrowth();
       setCustomerGrowth(temp);
     } catch (error) {
-      console.error('Error get data:', error);
+      console.error("Error get data:", error);
     }
   };
   return (
@@ -38,5 +38,5 @@ export const CustomerGrowth = () => {
       ))
         : null}
     </>
-  )
-}
+  );
+};

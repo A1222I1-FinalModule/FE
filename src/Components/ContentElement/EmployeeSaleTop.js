@@ -6,40 +6,42 @@ export const EmployeeSaleTop = () => {
   useEffect(() => {
     getAll();
   }, []);
+
   const getAll = async () => {
     try {
       let temp = await EmployeeService.getEmployeeSaleTop();
       setEmployeeTop(temp);
     } catch (error) {
-      console.error('Error get data:', error);
+      console.error("Error get data:", error);
     }
-  };
-  return (
-    <>
-      <div className={style.table_title}>
-        <span>Top nhân viên bán hàng tốt nhất</span>
-      </div>
-      <div className={style.table_record}>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Họ và tên</th>
-              <th scope="col">Giá (vnđ)</th>
-              <th scope="col">Số lượng (cái)</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employeeTop ? employeeTop.map((value, index) => (
-              <tr key={index}>
-                <th scope="row">{value.employeeName}</th>
-                <td>{value.totalSales}</td>
-                <td>{value.totalOrders}</td>
+
+    return (
+      <>
+        <div className={style.table_title}>
+          <span>Top nhân viên bán hàng tốt nhất</span>
+        </div>
+        <div className={style.table_record}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Họ và tên</th>
+                <th scope="col">Giá (vnđ)</th>
+                <th scope="col">Số lượng (cái)</th>
               </tr>
-            ))
-              : null}
-          </tbody>
-        </table>
-      </div>
-    </>
-  );
-};
+            </thead>
+            <tbody>
+              {employeeTop ? employeeTop.map((value, index) => (
+                <tr key={index}>
+                  <th scope="row">{value.employeeName}</th>
+                  <td>{value.totalSales}</td>
+                  <td>{value.totalOrders}</td>
+                </tr>
+              ))
+                : null}
+            </tbody>
+          </table>
+        </div>
+      </>
+    );
+  }
+}

@@ -1,7 +1,8 @@
+import { Route, Routes } from "react-router-dom";
+import Login from "../Components/Login";
+import "react-toastify/dist/ReactToastify.css";
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
 import Dashboard from '../Pages/DashBoard';
-import Login from '../Components/Login';
 import Payment from '../Components/Payment';
 import { CreateDiscount } from '../Components/Discount/createDiscount';
 import { ListCustomer } from '../Components/Customer/listCustomer';
@@ -11,43 +12,57 @@ import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
 import Saler from '../Pages/Saler';
 import { Warehouse } from '../Pages/WareHouse';
-import PrivateRoute from './privateRoute';
-import Info from '../Components/Info/Info';
 import AdminRoutes from './AdminRoutes';
+import SalerRoutes from './SalerRoutes';
+import { useEffect, useState } from "react";
+import { useUser } from "../Services/UserContext";
+import { jwtDecode } from 'jwt-decode';
 
 const MainRouter = () => {
-    return (
-        <Routes>
-            <Route path="/admin/*" element={<AdminRoutes />} />
-            <Route path="/sale/*" element={<Saler />}></Route>
-            <Route path="/warehouse/*" element={<Warehouse />}></Route>
-            <Route path="/login" element={<Login />} />
-            <Route
-                path="/"
-                element={
-                    <DefaultLayout>
-                        <Home />
-                    </DefaultLayout>
-                }
-            />
-            <Route
-                path="/home"
-                element={
-                    <DefaultLayout>
-                        <Home />
-                    </DefaultLayout>
-                }
-            />
-
-
-            <Route path="/createDiscount" element={<CreateDiscount />}></Route>
-            <Route path="/updateDiscount/:id" element={<UpdateDiscount />}></Route>
-            <Route path="/listCustomer" element={<ListCustomer />}></Route>
-            <Route path="/listDiscount" element={<Discount />}></Route>
-            <Route path="/info" element={<Info></Info>} />
-            <Route path="/payment" element={<Payment />} />
-        </Routes>
-    );
+  const [roles, setRoles] = useState([]);
+  const user = useUser();
+  function getRolesFromJWT() {
+    if (user.jwt) {
+      const decodedJwt = jwtDecode(user.jwt);
+      return decodedJwt.authorities;
+    }
+    return [];
+  }
+  useEffect(() => {
+    setRoles(getRolesFromJWT());
+  }, [user.jwt]);
+  console.log(roles);
+  return (
+    <Routes>
+      <Route path="/admin/*" element={roles.find((role) => role === "ROLE_ADMIN") ? (<AdminRoutes />) : (<DefaultLayout>
+        <Home />
+      </DefaultLayout>)} />
+      <Route path="/sale/*"
+        element={roles.find((role) => role === "ROLE_SALE") ? (<SalerRoutes />) : (<DefaultLayout>
+          <Home />
+        </DefaultLayout>)}></Route>
+      <Route path="/warehouse"
+        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<Warehouse />) : (<DefaultLayout>
+          <Home />
+        </DefaultLayout>)}></Route>
+      <Route
+        path="/"
+        element={
+          <DefaultLayout>
+            <Home />
+          </DefaultLayout>
+        }
+      />
+      <Route
+        path="/home"
+        element={
+          <DefaultLayout>
+            <Home />
+          </DefaultLayout>
+        }
+      />
+    </Routes>
+  );
 };
 
 export default MainRouter;
