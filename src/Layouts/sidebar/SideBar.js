@@ -35,20 +35,20 @@ export default function SideBar(){
                 </div>
               </div>
             </Link>
-          </div>
-          <div className={style.contain_item}>
-            <Link to="/admin/notification" className={style.single_option}>
+            <a href="/admin/customer" className={style.single_option}>
               <div className={style.item_sidebar}>
                 <div className={style.item_title}>
                   <ion-icon name="logo-buffer"></ion-icon>
-                  <span>Đăng Thông Báo</span>
+                  <span>Khách Hàng</span>
                 </div>
               </div>
-            </Link>
+            </a>
+            
           </div>
+          
         </div>
       </div>
     </div>
-  );
+  )
 }
 

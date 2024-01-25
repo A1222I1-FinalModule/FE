@@ -1,27 +1,57 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
-import Dashboard from "../Pages/DashBoard";
-import Login from "../Components/Login";
-import InfoProductCreate from "../Components/product/InfoProductCreate";
-import ProductList from "../Components/product/ProductList";
-import PrivateRoute from "./privateRoute";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import Login from '../Components/Login';
+import Payment from '../Components/Payment';
+import { CreateDiscount } from '../Components/Discount/createDiscount';
+import { ListCustomer } from '../Components/Customer/listCustomer';
+import { Discount } from '../Components/Discount/listDiscount';
+import { Toaster } from 'react-hot-toast';
+import { UpdateDiscount } from '../Components/Discount/updateDiscount';
+import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
+import Home from '../Pages/Home';
+import { Warehouse } from '../Pages/WareHouse';
+import AdminRoutes from './AdminRoutes';
+import SalerRoutes from './SalerRoutes';
+import ProductList from '../Components/product/ProductList';
+import InfoProductCreate from '../Components/product/InfoProductCreate';
+
 const MainRouter = () => {
-  return (
-    <Routes>
-      <Route path="/admin/dashboard" element={<Dashboard></Dashboard>}></Route>
-      <Route path="/login" element={<Login />} />
-      <Route
-        path="/private"
-        element={
-          <PrivateRoute>
-            <></>
-          </PrivateRoute>
-        }
-      />
-      <Route path="/createInfo" element={<InfoProductCreate />} />
-      <Route path="/listProduct" element={<ProductList />} />
-    </Routes>
-  );
+    return (
+        <>
+            <Routes>
+                <Route path="/admin/*" element={<AdminRoutes />} />
+                <Route path="/sale/*" element={<SalerRoutes />}></Route>
+                <Route path="/warehouse" element={<Warehouse />}></Route>
+                <Route path="/login" element={<Login />} />
+                <Route
+                    path="/"
+                    element={
+                        <DefaultLayout>
+                            <Home />
+                        </DefaultLayout>
+                    }
+                />
+                <Route
+                    path="/home"
+                    element={
+                        <DefaultLayout>
+                            <Home />
+                        </DefaultLayout>
+                    }
+                />
+
+
+                <Route path="/createDiscount" element={<CreateDiscount />}></Route>
+                <Route path="/updateDiscount/:id" element={<UpdateDiscount />}></Route>
+                <Route path="/listCustomer" element={<ListCustomer />}></Route>
+                <Route path="/" element={<></>} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/listProduct" element={<ProductList />}></Route>
+                <Route path="/createProduct" element={<InfoProductCreate />}></Route>
+            </Routes>
+            <Toaster position="top-right" reverseOrder={false} />
+        </>
+    );
 };
 
 export default MainRouter;

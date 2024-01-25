@@ -1,12 +1,12 @@
 import axios from "axios";
 
 export const getAllListProduct = async() => {
-    let temp = await axios.get(`/api/warehouse/getListProduct`);
+    let temp = await axios.get(`/api/public/getListProduct`);
     return temp.data;
 }
 
 export const saveInfoProduct = async(values) => {
-    let temp = await axios.post("/api/warehouse/createInfoProduct",values);
+    let temp = await axios.post("/api/public/createInfoProduct",values);
     console.log(temp)
     return temp.status;
 }
@@ -25,13 +25,13 @@ export const saveInfoProduct = async(values) => {
 // }
 
 export const getAllCategory = async() => {
-    let temp = await axios.get("/api/warehouse/getListCategory");
+    let temp = await axios.get("/api/public/getListCategory");
     return temp.data;
 }
 
 export const findByNameProduct = async (name)=>{
     try{
-        let temp= await axios.get(`/api/warehouse/findByNameProduct?name=${name}`);
+        let temp= await axios.get(`/api/public/findByNameProduct?name=${name}`);
         console.log(temp);
         return temp.data;
     }catch(err){

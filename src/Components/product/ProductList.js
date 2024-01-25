@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import classNames from "classnames/bind";
 import * as ProductService from "../../Services/product/ProductService";
 import styles from "../product/Product.module.css";
-
+import LoadingProduct from '../product/LodingProduct';
+import { formatMoney } from '../../utils/helpers'
 const cx = classNames.bind(styles);
-
-
 const INIT_PAGE = 1;
 const PER_PAGE = 6;
 const ODER = 'desc'
@@ -17,6 +16,7 @@ export default function ProductList() {
   const [perPage, setPerPage] = useState(PER_PAGE);
   const [totalPages, setTotalPages] = useState(1);
   const [searchInput, setSearchInput] = useState('');
+  const [loading, setLoading] = useState(true);
 
 
 
@@ -30,21 +30,24 @@ export default function ProductList() {
 
   useEffect(() => {
     getAllListProduct();
-  }, [name]);
+  }, []);
 
   const getAllListProduct = async () => {
     let temp;
-    if (name) {
-      temp = await ProductService.findByNameProduct(name);
+    if (searchInput) {
+      setLoading(true);
+      temp = await ProductService.findByNameProduct(searchInput);
       if (temp.length === 0) {
-        alert('NOT FOUND.');
+        alert('Không tìm thấy sản phẩm bạn cần tìm!');
       } else {
         setProduct(temp);
+        setLoading(false);
       }
 
     } else {
       temp = await ProductService.getAllListProduct();
       setProduct(temp);
+      setLoading(false);
     }
   };
   function changeCPage(id) {
@@ -81,8 +84,8 @@ export default function ProductList() {
                       placeholder
                       aria-label="Search"
                       aria-describedby="search-addon"
-                      value={name}
-                      onChange={(evt) => setName(evt.target.value)}
+                      value={searchInput}
+                      onChange={(evt) => setSearchInput(evt.target.value)}
 
                     />
                   </div>
@@ -113,7 +116,14 @@ export default function ProductList() {
                     </tr>
                   </thead>
                   <tbody>
-                    {records.map((values, index) => {
+                  {loading ? (
+                                <tr>
+                                    <td colSpan="7">
+                                        <LoadingProduct />
+                                    </td>
+                                </tr>
+                            ) : (
+                    records.map((values, index) => {
                       const rowNumber = firstIndex + index + 1;
                       return (
                         <tr>
@@ -123,7 +133,7 @@ export default function ProductList() {
                           <td scope="col" style={{ textAlign: "center" }}>
                             {values.productCode}
                           </td>
-                          <td scope="col" style={{ textAlign: "center" }}>
+                          <td scope="col" >
                             {values.name}
                           </td>
                           <td scope="col" style={{ textAlign: "center" }}>
@@ -133,7 +143,7 @@ export default function ProductList() {
                             <img className={cx('pictureList')} src={`${values.image}`} alt={`photo${index + 1}`} />
                           </td>
                           <td scope="col" style={{ textAlign: "right" }}>
-                            {values.price}
+                            {formatMoney(values.price)}
                           </td>
                           <td scope="col" style={{ textAlign: "center" }}>
                             {values.productCategory.name}
@@ -142,11 +152,13 @@ export default function ProductList() {
                             {/* {size.map(size => <div>{values.size}</div>)} */}
                             {values.size.size}
                           </td>
-
-
                         </tr>
+                      
                       )
-                    })}
+                    })
+
+                    )}
+                            
                   </tbody>
                 </table>
                 <nav className={cx['container-pagination']}>

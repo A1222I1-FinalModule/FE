@@ -21,6 +21,7 @@ const cx = classNames.bind(styles);
 export default function InfoProductCreate() {
   const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(``);
+  
 
   const productCategoryList = [
     {
@@ -75,7 +76,7 @@ export default function InfoProductCreate() {
 
   };
 
-  
+
 
   const productValidate = {
     productCode: Yup.string()
@@ -83,14 +84,16 @@ export default function InfoProductCreate() {
       .matches(/^H[0-9]{3,20}$/, "Không đúng định dạng"),
     name: Yup.string()
       .required("Vui lòng điền vào thông tin!")
-      .matches(/^[A-ZÁ+]+[a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểìíịỉĩễòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđA-Z0-9 /]{2,255}$/, "Độ dài ký tự phải từ 2 đến 255 và không chứa ký tự đặc biệt"),
+      .matches(/^[A-ZÁ+]+[a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểìíịỉĩễòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđA-Z0-9 /]{2,255}$/, "Độ dài ký tự phải từ 2 đến 255 và không chứa ký tự đặc biệt,chữ cái đầu tiên phải viết hoa"),
     quantity: Yup.number()
       .required("Vui lòng điền vào thông tin!")
       .min(1, "Số lượng phải từ 1 trở lên"),
     price: Yup.number()
       .required("Vui lòng điền vào thông tin!")
-      .min(1, "Gía phải từ 1 VND trở lên")
+      .min(10000, "Giá phải từ 10.000 VND trở lên")
   }
+  
+  
 
   const uploadFirebase = async () => {
     if (selectedFile) {
@@ -104,6 +107,7 @@ export default function InfoProductCreate() {
 
   const saveInfoProduct = async (values) => {
     const imgUrl = await uploadFirebase();
+
     const obj = {
       ...values,
       productCategory: JSON.parse(values.productCategory),
@@ -111,7 +115,7 @@ export default function InfoProductCreate() {
       image: imgUrl
 
     };
-   let temp = await ProductService.saveInfoProduct(obj);
+    let temp = await ProductService.saveInfoProduct(obj);
     console.log(temp);
     navigate("/listProduct")
   };
@@ -162,7 +166,7 @@ export default function InfoProductCreate() {
             </div>
 
             <div className={cx('contact')}>
-              <h3 className={cx('text-primary')}>Thêm thông tin hàng hóa</h3>
+              <h3 className={cx('text-primary')}>Thêm Thông Tin Hàng Hóa</h3>
               <Form>
                 <p>
                   <label className={cx('text-primary')} htmlFor="">Mã hàng hóa</label>
@@ -213,6 +217,7 @@ export default function InfoProductCreate() {
                     value={""}
                     onChange={(event) => setSelectedFile(event.target.files[0])}
                   />
+                  {/* <ErrorMessage style={{ color: "red" }} name="image" component="span" className={cx('form-err')} ></ErrorMessage> */}
                 </div>
 
                 <div className={cx('form-group')}>

@@ -6,7 +6,6 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -18,17 +17,16 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    /* justify-content: flex-start;  */
+    justify-content: flex-start; 
+    padding-bottom: 10px;
 }
 
 .container-pagination {
     padding-top: 20px;
     display: flex;
-    justify-content: center;
-    /* Can giữa theo chiều ngang */
-    align-items: center;
-    /* Can giữa theo chiều dọc */
-    width: 100%;
+    justify-content: center; 
+    align-items: center;  
+    width: 100%;  
 }
 
 .row-container {
@@ -41,3 +39,22 @@
     display: flex;
     gap: 10px;
 }
+
+.head-customer{
+    height: 55.4375px;
+    width: 96.4625px;
+    line-height: 3em;
+    text-align: center;
+    }
+
+.headtr-customer{
+    width: 860.275px;
+    height: 60px;
+}
+
+.headtd-customer{
+    height: 80px;
+    padding: 16px 22.4px !important;
+}
+
+  
