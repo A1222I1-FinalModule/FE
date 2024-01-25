@@ -4,8 +4,8 @@ import { Cookies } from 'react-cookie';
 const instance = axios.create({
     withCredentials: true,
     //baseURL: 'http://54.254.193.131:8080',
-    baseURL: 'http://localhost:8080',
-    proxy: 'http://localhost:8080',
+    // baseURL: 'http://localhost:8080',
+    // proxy: 'http://localhost:8080',
     Headers: {
         'Content-Type': 'application/json',
     }

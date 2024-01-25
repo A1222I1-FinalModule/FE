@@ -7,7 +7,6 @@ export const EmployeeService = {
 };
 export async function getUser() {
     try {
-
         const res = await instance.get(`/api/public/info`);
         return res.data;
     } catch (error) {
