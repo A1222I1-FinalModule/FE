@@ -1,7 +1,7 @@
 import React from "react";
 import style from '../Assets/Styles/StyleDashBoard.module.css';
 import { Route, Routes } from "react-router";
-import Payment from "./Payment";
+import Payment from "./Payment/Payment";
 import ContentAdmin from "./ContentAdmin";
 export const ContentSaler = () => {
   return (

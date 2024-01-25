@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import Info from '../Components/Info/Info';
-import Payment from '../Components/Payment'
+import Payment from '../Components/Payment/Payment'
 import Saler from '../Pages/Saler';
 import StatisticalTable from '../templates/MonthlyStatisticalTable';
 

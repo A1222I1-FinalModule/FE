@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from '../Components/Login';
-import Payment from '../Components/Payment';
+import Payment from '../Components/Payment/Payment';
 import { CreateDiscount } from '../Components/Discount/createDiscount';
 import { ListCustomer } from '../Components/Customer/listCustomer';
 import { Discount } from '../Components/Discount/listDiscount';
