@@ -38,5 +38,15 @@ export const getEmployeeCode = async (user_id) => {
     return await instance.get("/api/staff/employee/code?user_id=" + user_id);
 };
 export const addBill = async (bill) => {
-    return await instance.post("/api/staff/bill/add", bill);
+    try {
+        const response = await instance.post("/api/staff/bill/add", bill);
+        return response;
+    } catch (error) {
+        if (error.response) {
+            return error.response;
+        } else {
+            console.error('Unexpected error:', error.message);
+            throw error;
+        }
+    }
 };

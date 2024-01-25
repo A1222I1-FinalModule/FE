@@ -14,20 +14,17 @@ function CustomerSearchModal(props) {
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [customers, setCustomers] = useState([]);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        setShow(false);
+    };
+    const handleShow = () => {
+        setShow(true);
+        setSearchStr("")
+    };
     const debounce = (func, delay) => {
         if (timer) clearTimeout(timer);
         timer = setTimeout(func, delay);
     };
-    function activeTableRow(event) {
-        let rows = document.getElementsByClassName("tbl-row");
-        for (let i = 0; i < rows.length; i++) {
-            rows[i].className = rows[i].className.replace(" table-active", "");
-        }
-        event.currentTarget.className += " table-active";
-    };
-
     const handleChange = (code) => {
         selectedCode = code;
     };
@@ -51,6 +48,7 @@ function CustomerSearchModal(props) {
         if (temp.status !== 204) {
             setCustomers(temp.data);
         } else {
+            setCustomers([])
             toast.error('Không tìm thấy khách hàng!', {
                 position: "bottom-right",
                 autoClose: 3000,
@@ -70,14 +68,17 @@ function CustomerSearchModal(props) {
             <>
                 {currentItems &&
                     currentItems.map((item, index) => (
-                        <tr key={item.id} className={"tbl-row" + (item.id == props.chooseCode ? " table-active" : "")} onClick={(event) => {
-                            handleChange(item.id)
-                            activeTableRow(event);
+                        <tr key={item.id} className={"tbl-row table-light" + (item.id == props.chooseCode ? " table-active" : "")} onClick={(event) => {
+                            handleChange(item.id);
                         }}>
-                            <td>{index + 1}</td>
-                            <td>{item.id}</td>
+                            <td style={{ width: "5%" }}>{index + 1}</td>
+                            <td style={{ width: "25%" }}>{item.id}</td>
                             <td style={{ width: "40%" }}>{item.name}</td>
-                            <td>{item.phone}</td>
+                            <td style={{ width: "30%" }}>{item.phone}</td>
+                            <td><button className="btn btn-primary normal-txt-payment" onClick={() => {
+                                props.handleSubmit(item.id);
+                                handleClose();
+                            }}>Chọn</button></td>
                         </tr>
                     ))}
             </>
@@ -97,13 +98,14 @@ function CustomerSearchModal(props) {
 
         return (
             <>
-                <table align="center" id="custom-table" className="table table-hover mt-4 table-bordered normal-txt-payment">
+                <table align="center" id="custom-table-customer-search" className="table table-hover mt-4 table-bordered normal-txt-payment">
                     <thead>
-                        <tr className="table-dark">
+                        <tr className="table-dark text-center">
                             <th>STT</th>
                             <th>Mã khách hàng</th>
                             <th>Tên khách hàng</th>
                             <th>Số điện thoại</th>
+                            <th>Chức năng</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,7 +127,7 @@ function CustomerSearchModal(props) {
                         previousClassName="page-item"
                         previousLinkClassName="page-link normal-txt-payment"
                         renderOnZeroPageCount={null}
-                        className="pagination"
+                        className="pagination justify-content-center"
                         pageClassName="page-item"
                         pageLinkClassName="page-link normal-txt-payment"
                         activeClassName="active"
@@ -155,12 +157,6 @@ function CustomerSearchModal(props) {
                                     <button className="btn btn-success normal-txt-payment" onClick={() => {
                                         debounce(getSearchCustomer, 800);
                                     }}>Tìm kiếm</button>
-                                </div>
-                                <div className='input-group-append col-auto'>
-                                    <button className="btn btn-primary normal-txt-payment" onClick={() => {
-                                        props.handleSubmit(selectedCode)
-                                        handleClose();
-                                    }}>Chọn</button>
                                 </div>
                             </div>
                         </div>

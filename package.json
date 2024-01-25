@@ -2,7 +2,6 @@
     "name": "web",
     "version": "0.1.0",
     "private": true,
-    "proxy": "http://localhost:8080",
     "dependencies": {
         "@ant-design/icons": "^5.2.6",
         "@emotion/react": "^11.11.3",
@@ -32,6 +31,7 @@
         "formik": "^2.4.5",
         "google-fonts": "^1.0.0",
         "html5-qrcode": "^2.3.8",
+        "http-proxy-middleware": "^2.0.6",
         "js-cookie": "^3.0.5",
         "jwt-decode": "^4.0.0",
         "moment": "^2.30.1",
