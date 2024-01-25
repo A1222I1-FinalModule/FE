@@ -13,7 +13,7 @@ function ProductItem({ data, number }) {
         <div className={cx('wrapper')}>
             {data?.slice(0, number).map((product) => (
                 <div key={product.productCode} className={cx('product-item')}>
-                    <Link className={cx('thumbnail')}>
+                    <Link to={convertSlug(product.name)} className={cx('thumbnail')}>
                         <Image src={product.image} alt={product.name} />
                     </Link>
                     <div className={cx('info')}>

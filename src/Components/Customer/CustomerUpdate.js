@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import Button from '../Button';
 import { formatDate } from '../../utils/helpers';
 import * as customerService from '../../Services/customerService';
+import Button from '../Button';
 
 function CustomerUpdate() {
     const params = useParams();
@@ -55,7 +55,7 @@ function CustomerUpdate() {
                         name: customer.name,
                         dateOfBirth: formatDate(customer.dateOfBirth),
                         address: customer.address,
-                        gender: customer.gender === true ? 1 : 0,
+                        gender: customer.gender ? '1' : '0',
                         phone: customer.phone,
                         email: customer.email,
                         point: customer.point,
@@ -79,7 +79,7 @@ function CustomerUpdate() {
                             <label htmlFor="id" class="form-label">
                                 Mã khách hàng
                             </label>
-                            <Field type="text" class="form-control" name="id" />
+                            <Field type="text" class="form-control user-select-none pe-none" name="id" />
                         </div>
                         <div class="mb-3 spacing">
                             <label htmlFor="name" class="form-label">

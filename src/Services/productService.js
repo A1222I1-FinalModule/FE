@@ -10,15 +10,19 @@ export const getProducts = async () => {
     }
 };
 
-export const searchProducts = async (name) => {
+export const searchProducts = async ({ name, page, size, sortBy, sortOrder }) => {
     try {
         const response = await axios.get('/api/public/findByNameProduct', {
             params: {
                 name,
+                page,
+                size,
+                sortBy,
+                sortOrder,
             },
         });
 
-        return response.data;
+        return response.data.content;
     } catch (error) {
         console.log(error);
     }

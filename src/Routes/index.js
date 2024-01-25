@@ -5,9 +5,11 @@ import Login from '../Components/Login';
 import DefaultLayout from '../Layouts/DefaultLayout';
 import Home from '../Pages/Home';
 import PrivateRoute from './privateRoute';
-import Payment from '../Components/Payment';
 import { CustomerCreate, CustomerUpdate } from '../Components/Customer';
 import ListProduct from '../Pages/ListProduct';
+import News from '../Pages/News';
+import ProductMale from '../Pages/ProductMale';
+import ProductFemale from '../Pages/ProductFemale';
 
 const MainRouter = () => {
     return (
@@ -35,6 +37,33 @@ const MainRouter = () => {
                 element={
                     <DefaultLayout>
                         <ListProduct />
+                    </DefaultLayout>
+                }
+            />
+
+            <Route
+                path="/news"
+                element={
+                    <DefaultLayout>
+                        <News />
+                    </DefaultLayout>
+                }
+            />
+
+            <Route
+                path="/nam"
+                element={
+                    <DefaultLayout>
+                        <ProductMale />
+                    </DefaultLayout>
+                }
+            />
+
+            <Route
+                path="/nu"
+                element={
+                    <DefaultLayout>
+                        <ProductFemale />
                     </DefaultLayout>
                 }
             />
