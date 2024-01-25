@@ -32,9 +32,6 @@ function SellingProducts() {
         <div className={cx('wrapper')}>
             <h2 className={cx('title')}>
                 Hàng bán chạy nhất
-                <Link to={'/thoi-trang-nam-nu'} className={cx('more')}>
-                    Xem thêm <ChevronRightIcon width="1.2rem" height="1.2rem" className={cx('icon')} />
-                </Link>
             </h2>
 
             <div className={cx('inner')}>

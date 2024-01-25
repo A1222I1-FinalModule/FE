@@ -30,12 +30,7 @@ function NewProduct() {
 
     return (
         <div className={cx('wrapper')}>
-            <h2 className={cx('title')}>
-                Sản phẩm mới nhất
-                <Link to={'/thoi-trang-nam-nu'} className={cx('more')}>
-                    Xem thêm <ChevronRightIcon width="1.2rem" height="1.2rem" className={cx('icon')} />
-                </Link>
-            </h2>
+            <h2 className={cx('title')}>Sản phẩm mới nhất</h2>
 
             <div className={cx('inner')}>
                 <ProductItem data={newProducts} />
