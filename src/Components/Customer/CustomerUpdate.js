@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import classNames from 'classnames/bind';
 
+import { toast } from 'react-toastify'
 import { formatDate } from '../../utils/helpers';
 import * as customerService from '../../Services/customerService';
 import styles from './Customer.module.scss'
@@ -47,6 +48,7 @@ function CustomerUpdate() {
             console.log(formFormat)
             await customerService.updateCustomer(params.id, formFormat);
             navigate('/admin/customer');
+            toast.success('Cập nhận thành công')
             setSubmitting(false);
         } catch (error) {
             console.error('Error:', error);

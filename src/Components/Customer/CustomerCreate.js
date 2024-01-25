@@ -4,9 +4,9 @@ import * as Yup from 'yup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/helpers';
 import * as customerService from '../../Services/customerService';
-import Button from '../Button';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Customer.module.scss'
@@ -28,10 +28,9 @@ function CustomerCreate() {
                 dateOfBirth: formatDate(value.dateOfBirth),
             };
 
-            console.log(formFormat)
-
             await customerService.createCustomer(formFormat);
             navigate('/admin/customer');
+            toast.success('Thêm mới thành công');
             setSubmitting(false);
         } catch (error) {
             console.error('Error:', error);
