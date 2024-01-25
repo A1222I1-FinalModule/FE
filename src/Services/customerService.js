@@ -17,13 +17,9 @@ export const createCustomer = async (value) => {
 };
 
 export const updateCustomer = async (id, value) => {
-    try {
-        const response = await axios.put(`/api/admin/update-customer/${id}`, value);
-        console.log('Thành công', response);
-        return response.data;
-    } catch (error) {
-        console.log('Thất bại', error);
-    }
+    const response = await axios.put(`/api/admin/update-customer/${id}`, value);
+    console.log('Thành công', response);
+    return response.data;
 };
 
 export const detailCustomer = async (id) => {
