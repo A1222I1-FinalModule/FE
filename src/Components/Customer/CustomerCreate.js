@@ -22,7 +22,7 @@ function CustomerCreate() {
             };
 
             await customerService.createCustomer(formFormat);
-            // navigate('/');
+            navigate('/');
             setSubmitting(false);
         } catch (error) {
             console.error('Error:', error);

@@ -41,7 +41,7 @@ function CustomerUpdate() {
                 dateOfBirth: formatDate(value.dateOfBirth),
             };
             await customerService.updateCustomer(params.id, formFormat);
-            // navigate('/');
+            navigate('/');
             setSubmitting(false);
         } catch (error) {
             console.error('Error:', error);
