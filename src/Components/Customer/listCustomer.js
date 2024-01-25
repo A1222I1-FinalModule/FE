@@ -46,6 +46,7 @@ export function ListCustomer() {
             if (searchInput == '_') {
                 setShowNotFoundModal(true);
             } else if (temp.length === 0) {
+                setLoading(false);
                 setShowNotFoundModal(true);
             } else {
                 setCustomer(temp.filter((item) => item.delete === true));

@@ -43,12 +43,13 @@ export function Discount() {
     }
     const getAllDiscount = async () => {
         let temp;
-        if (searchInput) {
+        if (searchInput || searhType) {
             setLoading(true);
             temp = await discounts.getFindByNameDiscount(searchInput,searhType);
             if (searchInput == '_') {
                 setShowNotFoundModal(true);
             } else if (temp.length === 0) {
+                setLoading(false);
                 setShowNotFoundModal(true);
             } else {
                 setDiscount(temp.filter((item) => item.delete === true));
