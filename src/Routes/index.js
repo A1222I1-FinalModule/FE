@@ -2,14 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
-import { Warehouse } from '../Pages/WareHouse';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
 import { useEffect, useState } from "react";
 import { useUser } from "../Services/UserContext";
 import { jwtDecode } from 'jwt-decode';
 import NotFound from "../Pages/NotFound";
-
+import WarehouseRoutes from './WarehouseRoutes';
 const MainRouter = () => {
   const [roles, setRoles] = useState([]);
   const user = useUser();
@@ -34,7 +33,7 @@ const MainRouter = () => {
           <Home />
         </DefaultLayout>)}></Route>
       <Route path="/warehouse"
-        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<Warehouse />) : (<DefaultLayout>
+        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<WarehouseRoutes />) : (<DefaultLayout>
           <Home />
         </DefaultLayout>)}></Route>
       <Route
@@ -59,5 +58,4 @@ const MainRouter = () => {
     </Routes>
   );
 };
-
 export default MainRouter;

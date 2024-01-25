@@ -10,7 +10,6 @@ export default function Dashboard({ children }) {
                 <SideBar />
                 <div className={style.content + ' col-12 col-lg-10 col-md-8 ps-0'} style={{ height: "100vh" }}>
                     {children}
-
                 </div>
             </div>
         </div>

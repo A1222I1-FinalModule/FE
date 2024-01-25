@@ -1,8 +1,7 @@
 import instance from "../../Config/axiosConfig";
 export const getProducts = async () => {
     try {
-        const response = await instance.get('/api/public/list-product');
-
+        const response = await instance.get('/api/public/getListProduct');
         return response.data;
     } catch (error) {
         console.log(error);

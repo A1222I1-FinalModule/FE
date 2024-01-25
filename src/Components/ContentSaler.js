@@ -5,11 +5,12 @@ import Payment from "./Payment/Payment";
 import ContentAdmin from "./ContentAdmin";
 export const ContentSaler = () => {
   return (
-    <Routes >
-      <Route path="/">
-        <Route index element={<div className={style.content + " col-10 ps-0"}><Payment /></div>} />
-      </Route>
-      <Route path="/abc" element={<ContentAdmin />} />
-    </Routes>
+    <>
+      <div className={style.content + " col-10 ps-0"}>
+        <div className={style.content_main}>
+          <span>Nội dung chức năng cho Saler</span>
+        </div>
+      </div>
+    </>
   );
 };
