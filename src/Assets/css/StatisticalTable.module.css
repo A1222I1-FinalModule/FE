@@ -12,8 +12,7 @@
 }
 
 .statistical .chart {
-  width: 70%;
-  height: 300px;
+  max-height: 300px;
 }
 
 .data_input .title {
@@ -24,6 +23,11 @@
 
 .data_input .action_buttons {
   text-align: center;
+}
+
+.total {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0px 10px 0px;
 }
 
 .total_revenue {
@@ -66,4 +70,8 @@
 .navbar_item .navbar_item_link:hover:not(.active) {
   font-weight: bold;
   background-color: #5E2572;
+}
+
+.date {
+  font-weight: 600;
 }

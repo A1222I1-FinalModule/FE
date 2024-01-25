@@ -21,7 +21,11 @@ export const save = async (value) => {
   return response.status;
 }
 export const saveByWarehouse = async (value) => {
-  const response = await axios.post(`${WAREHOUSE_URL}/importing`, value)
+  const response = await axios.post(`${WAREHOUSE_URL}/importing`, value, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
   return response.status;
 }
 
