@@ -1,7 +1,6 @@
 import React from 'react';
 import style from '../../Assets/Styles/StyleDashBoard.module.css';
 import { Link } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 export default function SideBarSaler() {
   return (
     <div className={`${style.sidebar}  col-2 pe-0`}>
@@ -9,7 +8,6 @@ export default function SideBarSaler() {
         <div className={style.list_item}>
           <div className={style.contain_item}>
             <Link to={"/sale/payment"} className={style.single_option}>
-            <Link to="/sale/payment" className={style.single_option}>
               <div className={style.item_sidebar}>
                 <div className={style.item_title}>
                   <ion-icon name="logo-buffer"></ion-icon>
@@ -17,18 +15,15 @@ export default function SideBarSaler() {
                 </div>
               </div>
             </Link>
-            </Link>
           </div>
           <div className={style.contain_item}>
             <Link to={"/sale/statistical"} className={style.single_option}>
-            <Link to="/sale/statistical" className={style.single_option}>
               <div className={style.item_sidebar}>
                 <div className={style.item_title}>
                   <ion-icon name="logo-buffer"></ion-icon>
                   <span>Thống Kê</span>
                 </div>
               </div>
-            </Link>
             </Link>
           </div>
           <div className={style.contain_item}>
@@ -55,5 +50,4 @@ export default function SideBarSaler() {
       </div>
     </div>
   )
-  )
-} 
+}
