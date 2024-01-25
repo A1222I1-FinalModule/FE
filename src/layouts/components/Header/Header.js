@@ -10,6 +10,7 @@ import { useUser } from '../../../Services/UserContext';
 import Login from '../../../Components/Login';
 import { useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
+import NotificationList from '../../../Components/Notification/NotificationList';
 import images from '../../../Assets/Images';
 
 const cx = classNames.bind(styles);
@@ -57,8 +58,10 @@ function Header() {
                 <div className={cx('right')}>
                     <Search />
                     <div className={cx('actions')}>
-                        <div>
-                            {currentUser === true ? (
+                        <div className={cx("icon-container")}>
+                            {currentUser === true ? (<>
+
+                                <NotificationList />
                                 <Menu items={userMenu}>
                                     <Image
                                         className={cx('user-avatar')}
@@ -66,6 +69,7 @@ function Header() {
                                         alt=""
                                     />
                                 </Menu>
+                            </>
                             ) : (
                                 <Button primary onClick={() => setModalShow(true)} className={cx('login-btn')}>
                                     Đăng nhập

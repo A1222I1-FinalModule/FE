@@ -1,99 +1,108 @@
-body{
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-}
-#menu{
+#menu {
     color: red;
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid #DDD;
-   
+    border-top: 1px solid #ddd;
     height: 50px;
 }
-.menu_left .btn_nav{
+
+.menu_left .btn_nav {
     width: 40px;
-    border-right:1px solid #DDD;
+    border-right: 1px solid #ddd;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.btn_look{
+
+.btn_look {
     margin-right: 10px;
     display: flex;
     align-items: center;
 }
-.menu_left{
+
+.menu_left {
     display: flex;
 }
-.menu_left_search{
+
+.menu_left_search {
     display: flex;
     align-items: center;
     padding-left: 15px;
 }
-.border_input{
+
+.border_input {
     display: flex;
     align-items: center;
     padding: 8px;
-    border: 0.5px solid #DDD;
+    border: 0.5px solid #ddd;
     border-radius: 20px;
 }
-.menu_left_search input{
+
+.menu_left_search input {
     border: 0;
     outline: none;
-    
 }
-.image_account{
+
+.image_account {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     overflow: hidden;
 }
-.image_account img, .menu_middle img{
+
+.image_account img,
+.menu_middle img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     /* transform: scale(1.2); */
 }
-.menu_middle .image{
+
+.menu_middle .image {
     height: 50px;
-    
 }
-.menu_right{
+
+.menu_right {
     display: flex;
     align-items: center;
 }
-.account{
+
+.account {
     display: flex;
     padding: 10px;
-    border-left: 1px solid #DDD;
+    border-left: 1px solid #ddd;
 }
-.border_edit_option{
+
+.border_edit_option {
     padding: 5px;
-    
 }
-.edit_option{
-    border-left: 1px solid #DDD;
+
+.edit_option {
+    border-left: 1px solid #ddd;
     padding: 0 10px;
     height: 100%;
     display: flex;
     align-items: center;
 }
-.account select{
+
+.account select {
     border: 0;
     outline: none;
 }
-.image_account{
+
+.image_account {
     margin-right: 5px;
 }
-.notifacation{
+
+.notifacation {
     margin-right: 10px;
     height: 100%;
     align-items: center;
     display: flex;
     position: relative;
 }
-.notifacation.active::before{
+
+.notifacation.active::before {
     position: absolute;
     content: '';
     top: 7px;
@@ -104,211 +113,247 @@ body{
     border-radius: 50%;
     background-color: red;
 }
+
 /* CSS FOR Sidebar */
-.sidebar_container{
-    
+.sidebar_container {
     color: white;
     padding: 10px 5px;
 }
-.sidebar{
-    background-color: #5E2572;
+
+.sidebar {
+    background-color: #5e2572;
+    min-height: 100%;
 }
-.contain_item{
+
+.contain_item {
     text-decoration: none;
     color: white;
     cursor: pointer;
 }
-.contain_item .single_option{
+
+.contain_item .single_option {
     text-decoration: none;
     color: white;
 }
-.item_sidebar{
+
+.item_sidebar {
     padding: 10px 10px;
 }
-.item_sidebar.active{
+
+.item_sidebar.active {
     background-color: #56126e;
 }
-.contain_item :hover{
+
+.contain_item :hover {
     background-color: #56126e;
 }
-.item_sidebar a{
+
+.item_sidebar a {
     text-decoration: none;
     color: white;
 }
-.item_title{
+
+.item_title {
     display: flex;
     align-items: center;
 }
-.item_title span{
+
+.item_title span {
     margin-left: 15px;
     font-weight: bold;
 }
-.dropdown{
+
+.dropdown {
     position: relative;
 }
-.dropdown::after{
+
+.dropdown::after {
     position: absolute;
     content: '';
     right: 10px;
     top: 50%;
     width: 0;
     height: 0;
-    border-left: 5px solid transparent; 
-    border-right: 5px solid transparent; 
-    border-bottom: 5px solid #DDD; 
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid #ddd;
     transform: translateY(-50%) rotate(180deg);
 }
-.submenu ul{
+
+.submenu ul {
     padding-left: 0;
     margin-bottom: 0;
 }
-.submenu ul li{
+
+.submenu ul li {
     list-style: none;
     font-weight: bold;
-   
 }
-.submenu ul li a{
+
+.submenu ul li a {
     padding: 10px 5px;
     padding-left: 45px;
     color: white;
     text-decoration: none;
     display: block;
 }
-.submenu ul li:hover{
-    background-color: #56126e;;
+
+.submenu ul li:hover {
+    background-color: #56126e;
 }
+
 .submenu {
     display: none;
     overflow: hidden;
-    transition: max-height 0.3s ease-in-out; 
+    transition: max-height 0.3s ease-in-out;
 }
+
 .dropdown.active+.submenu {
     display: block;
 }
+
 /* CSS FOR Content */
-.content{
-    background-color: #F1F2F7;
+.content {
+    min-height: 100%;
+    background-color: #f1f2f7;
 }
-.content_main{
+
+.content_main {
     padding: 35px 35px;
-}    
-.chart_customer{
+}
+
+.chart_customer {
     text-align: center;
     padding-top: 20px;
 }
-.content_customer{
+
+.content_customer {
     background-color: white;
 }
-.total_customer{
+
+.total_customer {
     text-align: center;
     padding: 15px 25px;
 }
-.sale_total{
+
+.sale_total {
     padding-top: 15px;
 }
-.content_second{
+
+.content_second {
     background-color: white;
     margin-top: 20px;
     padding: 25px;
 }
-.sale{
+
+.sale {
     background-color: white;
     padding: 25px;
 }
-.sale_item{
+
+.sale_item {
     display: flex;
     align-items: center;
-    
+
     justify-content: space-between;
 }
-.sale_select select{
+
+.sale_select select {
     display: flex;
     justify-content: flex-end;
     border-radius: 25px;
 }
+
 .content_three {
     background-color: white;
     margin-top: 20px;
     padding: 25px;
 }
-h1 {
-    font-size: 20px;
-    text-align: center;
-    color: red;
-}  
+
+
 .list_order {
     list-style: none;
     margin: 0;
     padding: 0;
 }
-  
+
 .list_order li {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
 }
-  
+
 .date {
     width: 100px;
-} 
+}
+
 .name {
     width: 250px;
     font-size: 16px;
-  }
-.time_line{
-  }
-  .time_line ul{
-    list-style-type:none;
-    padding:10px 5px;
-  }
-  .time_line ul li{
-    padding:20px 20px;
-    position:relative;
-    cursor:pointer;
-    transition:.5s;
-  }
-  .time_line ul li span{
-    display:inline-block;
-    background-color:#1685b8;
-    border-radius:25px;
-    padding:2px 5px;
-    font-size:15px;
-    text-align:center;
-  }
-  .time_line ul li .content h3{
-    color:#34ace0;
-    font-size:17px;
-    padding-top:5px;
-  }
-  .time_line ul li .content p{
-    padding:5px 0px 15px 0px;
-    font-size:15px;
-  }
-  .time_line ul li:before{
-    position:absolute;
-    content:'';
-    width:10px;
-    height:10px;
-    background-color:#34ace0;
-    border-radius:50%;
-    left:-11px;
-    top:28px;
-    transition:.5s;
-  }
-  .time_line ul li:hover:before{
-    background-color:#0F0;
-    box-shadow:0px 0px 10px 2px #0F0;
-  }
-  @media (max-width:300px){
-    .time_line{
-      width:100%;
-      padding:30px 5px 30px 10px;
+}
+
+.time_line {}
+
+.time_line ul {
+    list-style-type: none;
+    padding: 10px 5px;
+}
+
+.time_line ul li {
+    padding: 20px 20px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.time_line ul li span {
+    display: inline-block;
+    background-color: #1685b8;
+    border-radius: 25px;
+    padding: 2px 5px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.time_line ul li .content h3 {
+    color: #34ace0;
+    font-size: 17px;
+    padding-top: 5px;
+}
+
+.time_line ul li .content p {
+    padding: 5px 0px 15px 0px;
+    font-size: 15px;
+}
+
+.time_line ul li:before {
+    position: absolute;
+    content: '';
+    width: 10px;
+    height: 10px;
+    background-color: #34ace0;
+    border-radius: 50%;
+    left: -11px;
+    top: 28px;
+    transition: 0.5s;
+}
+
+.time_line ul li:hover:before {
+    background-color: #0f0;
+    box-shadow: 0px 0px 10px 2px #0f0;
+}
+
+@media (max-width: 300px) {
+    .time_line {
+        width: 100%;
+        padding: 30px 5px 30px 10px;
     }
-    .time_line ul li .content h3{
-      color:#34ace0;
-      font-size:15px;
+
+    .time_line ul li .content h3 {
+        color: #34ace0;
+        font-size: 15px;
     }
-  
-  }
-.content_finally{
+}
+
+.content_finally {
     padding: 25px;
 }
