@@ -6,7 +6,12 @@ export const EmployeeService = {
     },
 };
 export async function getUser() {
-    const res = await instance.get(`/api/public/info`, { withCredentials: true });
-    return res.data;
+    try {
+
+        const res = await instance.get(`/api/public/info`);
+        return res.data;
+    } catch (error) {
+        console.log(error);
+    }
 }
 export default EmployeeService;
