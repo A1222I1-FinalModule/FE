@@ -7,6 +7,7 @@ import { faAsterisk, faBookmark, faCloud, faPhone, faUser } from '@fortawesome/f
 import { getUser } from '../../Services/API/EmployeeService';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../Services/API/authService';
+import images from '../../Assets/Images'
 const Info = () => {
 
     const [employee, setEmployee] = useState(null);
@@ -28,7 +29,6 @@ const Info = () => {
     if (employee == null) {
         return null
     }
-
     return (
         <>
             <div className={style.content + '  ps-0'}>
@@ -37,10 +37,10 @@ const Info = () => {
                         <div className="col-md-4 text-center">
                             <img
                                 alt=""
-                                style={{ width: "300px" }}
+                                style={{ width: "300px", height: "300px" }}
                                 title=""
                                 className={style['img-thumbnail'] + " " + style["img"] + " " + style['img-circle']}
-                                src={avatar}
+                                src={employee.image || images.noImage}
                                 data-original-title="Usuario"
                             />
 

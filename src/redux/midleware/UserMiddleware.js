@@ -1,10 +1,10 @@
 import { getUser } from '../../Services/API/EmployeeService';
+import { LoginAPI } from '../../Services/API/authService';
 import { LOGIN } from '../type';
 
-export const getUserMiddleware = (role) => async (dispatch) => {
-    const res = await getUser(role);
+export const getUserMiddleware = (values) => async (dispatch) => {
     dispatch({
         type: LOGIN,
-        payload: res,
+        payload: { jwt: values },
     });
 };

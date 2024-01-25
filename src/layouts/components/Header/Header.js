@@ -61,7 +61,7 @@ function Header() {
                         <div className={cx("icon-container")}>
                             {currentUser === true ? (<>
 
-                                <NotificationList />
+
                                 <Menu items={userMenu}>
                                     <Image
                                         className={cx('user-avatar')}

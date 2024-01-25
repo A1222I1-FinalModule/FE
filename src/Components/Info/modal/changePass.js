@@ -56,9 +56,7 @@ const ChangePass = (props) => {
                 progress: undefined,
                 theme: "light",
             });
-            setTimeout(() => {
-                window.location.reload(false);
-            }, 3000)
+            props.onHide();
         }).catch((err) => {
             if (err.response) {
                 setFieldError("oldPassword", "Mật Khẩu hiện Tại Không Chính Xác")
