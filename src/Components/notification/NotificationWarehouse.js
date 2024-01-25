@@ -6,6 +6,10 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NotificationList.module.css";
 import * as NotificationService from "../../Services/API/notification/NotificationService";
+import { Modal } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { NotificationDelete } from "./NotificationDelete";
+
 
 export default function NotificationWarehouse() {
   const [isActive, setIsActive] = useState(false);
@@ -14,6 +18,7 @@ export default function NotificationWarehouse() {
   const [notificationNotRead, setNotifficationNotRead] = useState([]);
   const [toggle, setToggle] = useState(true);
   const [modal, setModal] = useState(false);
+  const [notification, setNotification] = useState();
 
 
   console.log(notifications);
@@ -53,14 +58,39 @@ export default function NotificationWarehouse() {
   const handleNotRead = () => {
     setToggle(false);
   };
+
+  const getDelete = async (id) => {
+    await NotificationService.deleteNotification(id);
+    await getAllByWarehouse();
+  }
   const handleDelete = async (id) => {
-    await NotificationService.deleteNotification(id);
-    getAllByWarehouse();
+    getDelete(id).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
   };
+
+  const getDeleteNotRead = async (id) => {
+    await NotificationService.deleteNotification(id);
+    await getAllNotRead();
+  }
+
   const handleDeleteNotRead = async (id) => {
-    await NotificationService.deleteNotification(id);
-    getAllNotRead();
-  };
+    getDeleteNotRead(id).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+  const handleClose = () => setModal(false);
+
+
+  const handleFindById = async (id) => {
+    setModal(true);
+    let data = await NotificationService.findByid(id);
+    setNotification(data);
+  }
 
   const currentDate = format(new Date(), "dd-MM-yyyy");
   if (!notifications) return null;
@@ -88,7 +118,7 @@ export default function NotificationWarehouse() {
               <div className={styles.contenttitle}>Thông báo</div>
               <div className="button-notification d-flex flex-wrap gap-2 ">
                 <button
-                  className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3"
+                  className="btn btn-sm btn-outline-info  fs-5 mt-3"
                   onClick={() => {
                     handleAll();
                   }}
@@ -96,7 +126,7 @@ export default function NotificationWarehouse() {
                   Tất Cả
                 </button>
                 <button
-                  className="btn btn-sm btn-outline-info text-lowercase fs-5 mt-3"
+                  className="btn btn-sm btn-outline-info  fs-5 mt-3"
                   onClick={() => {
                     handleNotRead();
                   }}
@@ -106,7 +136,7 @@ export default function NotificationWarehouse() {
               </div>
             </div>
             <div className={styles.contentbody}>
-              {toggle ? (notifications.map((notification, index) => {
+              {toggle ? (notifications.map((notification) => {
                 return (
                   <div
                     className={styles.contentnotification}
@@ -129,17 +159,18 @@ export default function NotificationWarehouse() {
                         className={styles.threedotdetail}
                         id={`selection${notification.id}`}
                       >
-                        <button className={styles.contentlink}>
-                          Chi tiết Thông báo
-                        </button>
-                        <button
-                          className={styles.contentlink}
+                        <button className={styles.contentlink}
                           onClick={() => {
-                            handleDelete(notification.id);
+                            handleFindById(notification.id)
                           }}
                         >
-                          Gỡ thông báo
+                          Chi tiết Thông báo
                         </button>
+                        <NotificationDelete
+                          id={notification.id}
+                          getNotifications={handleDelete}
+                        >
+                        </NotificationDelete>
                       </div>
                     </div>
                   </div>
@@ -167,17 +198,19 @@ export default function NotificationWarehouse() {
                         className={styles.threedotdetail}
                         id={`selection${notification.id}`}
                       >
-                        <button className={styles.contentlink} >
-                          Chi tiết Thông báo
-                        </button>
-                        <button
-                          className={styles.contentlink}
+                        <button className={styles.contentlink}
                           onClick={() => {
-                            handleDeleteNotRead(notification.id);
+                            handleFindById(notification.id);
                           }}
                         >
-                          Gỡ thông báo
+                          Chi tiết Thông báo
                         </button>
+                        <NotificationDelete
+                          id={notification.id}
+                          getNotifications={handleDeleteNotRead}
+                        >
+
+                        </NotificationDelete>
                       </div>
                     </div>
                   </div>
@@ -187,6 +220,20 @@ export default function NotificationWarehouse() {
           </div>
         )}
       </div>
+      {<Modal show={modal} onHide={handleClose} backdrop="static" keyboard={false} className={styles.modalcss}>
+        <Modal.Header className={styles.contenttitle}>
+          <Modal.Title className={styles.titlemodal}>Thông báo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className={styles.contentmodal}>
+          {notification ? notification.content : ""}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Đóng thông báo
+          </Button>
+        </Modal.Footer>
+
+      </Modal>}
     </>
   );
 }

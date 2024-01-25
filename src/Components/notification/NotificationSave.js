@@ -24,7 +24,6 @@ export default function NotificationSave() {
 
   const addNewNotification = async (notification) => {
     await notificationService.saveNotification(notification);
-    console.log(notification);
     toast.success(' gửi thông báo thành công !', {
       position: "top-right",
       autoClose: 5000,
@@ -35,6 +34,7 @@ export default function NotificationSave() {
       progress: undefined,
       theme: "light",
     });
+
   };
 
   const handleCancleNotification = () => {

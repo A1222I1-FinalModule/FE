@@ -382,6 +382,14 @@ textarea.input1+.shadow-input1 {
         padding: 90px 15px 88px 15px;
     }
 
+    .contact1formbtn2 {}
+}
+
+@media (max-width :412px) {
+    .containercontact1 {
+        padding: 90px 15px 88px 15px;
+    }
+
     .contact1formbtn2 {
         margin-top: 10px;
     }
