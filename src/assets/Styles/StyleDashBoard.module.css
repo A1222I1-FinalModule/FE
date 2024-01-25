@@ -359,6 +359,17 @@ h1 {
         font-size: 15px;
     }
 } */
+body {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+body::-webkit-scrollbar {
+    display: none;
+}
 
 .content_finally {
     padding: 25px;

@@ -1,17 +1,29 @@
-html,body{
-    margin: 0 auto;
-    padding: 0;
-}
-
-.wrapper{
+.wrapper {
     width: 100%;
-    height: 100vh;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-image:
-    url(https://decordi.vn/wp-content/uploads/2021/10/tu-quan-ao-canh-mo.jpg);
+    height: 90vh;
+    padding: 16px;
+    box-sizing: border-box;
+
 }
 
-.pictureList{
+.pictureList {
     width: 50px;
+}
+
+.card {
+    height: 100vh;
+}
+
+.pagination-content li a {
+    background-color: #F1F2F7;
+}
+
+.page-item {
+    background-color: #F1F2F7 !important;
+}
+
+.input {
+    flex-direction: row;
+    justify-content: left;
+    margin-bottom: 12px;
 }

@@ -32,7 +32,7 @@ const MainRouter = () => {
         element={roles.find((role) => role === "ROLE_SALE") ? (<SalerRoutes />) : (<DefaultLayout>
           <Home />
         </DefaultLayout>)}></Route>
-      <Route path="/warehouse"
+      <Route path="/warehouse/*"
         element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<WarehouseRoutes />) : (<DefaultLayout>
           <Home />
         </DefaultLayout>)}></Route>

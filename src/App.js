@@ -11,6 +11,7 @@ function App() {
 
         <MainRouter />
       </Provider>
+      
     </CookiesProvider>
   );
 }

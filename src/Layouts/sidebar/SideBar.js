@@ -99,7 +99,7 @@ export default function SideBar() {
               </Link>
             </div>
             <div className={style.contain_item}>
-              <Link href="/abc" className={style.single_option}>
+              <Link to="/sale/goods" className={style.single_option}>
                 <div className={style.item_sidebar}>
                   <div className={style.item_title}>
                     <ion-icon name="logo-buffer"></ion-icon>
@@ -117,7 +117,7 @@ export default function SideBar() {
           <>
             <div className={style.list_item}>
               <div className={style.contain_item}>
-                <a href="/abc" className={style.single_option}>
+                <a href="/warehouse/info" className={style.single_option}>
                   <div className={style.item_sidebar}>
                     <div className={style.item_title}>
                       <ion-icon name="logo-buffer"></ion-icon>
@@ -126,6 +126,26 @@ export default function SideBar() {
                   </div>
                 </a>
               </div>
+            </div>
+            <div className={style.contain_item}>
+              <Link to="/warehouse/goods" className={style.single_option}>
+                <div className={style.item_sidebar}>
+                  <div className={style.item_title}>
+                    <ion-icon name="logo-buffer"></ion-icon>
+                    <span>Hàng Trong Kho</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className={style.contain_item}>
+              <Link to="/warehouse/infoCreate" className={style.single_option}>
+                <div className={style.item_sidebar}>
+                  <div className={style.item_title}>
+                    <ion-icon name="logo-buffer"></ion-icon>
+                    <span>Thêm mới thông tin sản phẩm</span>
+                  </div>
+                </div>
+              </Link>
             </div>
           </>
         );

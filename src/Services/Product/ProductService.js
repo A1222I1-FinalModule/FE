@@ -6,9 +6,13 @@ export const getAllListProduct = async() => {
 }
 
 export const saveInfoProduct = async(values) => {
-    let temp = await axios.post("/api/public/createInfoProduct",values);
-    console.log(temp)
-    return temp.status;
+    try {
+        let temp = await axios.post("/api/public/createInfoProduct", values);
+        return temp.status;
+    } catch (err) {
+        console.log(err);
+        throw err;
+    }
 }
 
 // export const pageProduct = async(name,page,perPage) => {

@@ -1,5 +1,5 @@
 
-import * as ProductService from "../../Services/product/ProductService";
+import * as ProductService from "../../Services/Product/ProductService.js";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import styles from "../product/InfoProductCreate.module.css";
 import classNames from "classnames/bind";
@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { imageDb } from '../../FirebaseProduct/ConfigProduct.js';
 import { v4 } from 'uuid'
-import imgProduct from '../../Assets/images/product/upload-image.webp';
+import imgProduct from '../../Assets/Images/Product/upload-image.webp';
 
 
 
@@ -20,8 +20,7 @@ const cx = classNames.bind(styles);
 
 export default function InfoProductCreate() {
   const navigate = useNavigate();
-  const [selectedFile, setSelectedFile] = useState(``);
-  
+  const [error, setError] = useState('');
 
   const productCategoryList = [
     {
@@ -90,12 +89,13 @@ export default function InfoProductCreate() {
       .min(1, "Số lượng phải từ 1 trở lên"),
     price: Yup.number()
       .required("Vui lòng điền vào thông tin!")
-      .min(10000, "Giá phải từ 10.000 VND trở lên")
+      .min(10000, "Giá phải từ 10.000 VND trở lên"),
+    image: Yup.mixed().required("Vui Lòng Chọn Ảnh")
   }
-  
-  
 
-  const uploadFirebase = async () => {
+
+
+  const uploadFirebase = async (selectedFile) => {
     if (selectedFile) {
       const imgRef = ref(imageDb, `files/${v4()}`);
       console.log(selectedFile);
@@ -106,18 +106,26 @@ export default function InfoProductCreate() {
   };
 
   const saveInfoProduct = async (values) => {
-    const imgUrl = await uploadFirebase();
+    try {
+      const imgUrl = await uploadFirebase(values['image']);
+      const obj = {
+        ...values,
+        productCategory: JSON.parse(values.productCategory),
+        size: JSON.parse(values.size),
+        image: imgUrl
 
-    const obj = {
-      ...values,
-      productCategory: JSON.parse(values.productCategory),
-      size: JSON.parse(values.size),
-      image: imgUrl
+      };
 
-    };
-    let temp = await ProductService.saveInfoProduct(obj);
-    console.log(temp);
-    navigate("/listProduct")
+      await ProductService.saveInfoProduct(obj);
+      notifySubmit();
+      navigate("/warehouse/goods")
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        setError('Mã Sản Phẩm Đã Tồn Tại');
+      } else {
+        console.error(error);
+      }
+    }
   };
 
   const notifySubmit = () => {
@@ -139,7 +147,7 @@ export default function InfoProductCreate() {
         initialValues={infoProductInit}
         onSubmit={(values) => {
           saveInfoProduct(values)
-          notifySubmit();
+
         }}
         validationSchema={
           Yup.object(productValidate)
@@ -179,6 +187,7 @@ export default function InfoProductCreate() {
                     Vui lòng nhập mã sản phẩm"
                   />
                   <ErrorMessage style={{ color: "red" }} name="productCode" component="span" className={cx('form-err')} ></ErrorMessage>
+                  {error && <div className={cx('error-message')}>{error}</div>}
                 </p>
                 <p>
                   <label className={cx('text-primary')} htmlFor="">Tên hàng hóa</label>
@@ -210,14 +219,14 @@ export default function InfoProductCreate() {
                     <img src={imgProduct} className={cx('pictureCreate')} />
                   </label>
                   <Field
+                    required
+                    name="image"
                     type="file"
                     accept="image/jpeg, image/png, image/jpg"
                     id="input-file"
                     className={cx("input-imgg")}
-                    value={""}
-                    onChange={(event) => setSelectedFile(event.target.files[0])}
                   />
-                  {/* <ErrorMessage style={{ color: "red" }} name="image" component="span" className={cx('form-err')} ></ErrorMessage> */}
+                  <ErrorMessage style={{ color: "red" }} name="image" component="span" className={cx('form-err')} ></ErrorMessage>
                 </div>
 
                 <div className={cx('form-group')}>

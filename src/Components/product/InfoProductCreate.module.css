@@ -45,7 +45,7 @@ ul {
   box-shadow: 0 0 20px 0 rgba(57, 82, 163, 0.7);
 }
 
-.wrapper > * {
+.wrapper>* {
   padding: 1em;
 }
 
@@ -121,7 +121,7 @@ ul {
     grid-template-columns: 1fr 2fr;
   }
 
-  .wrapper > * {
+  .wrapper>* {
     padding: 2em;
   }
 
@@ -140,6 +140,11 @@ ul {
   }
 }
 
-.pictureCreate{
-  width:20px;
+.pictureCreate {
+  width: 20px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
 }

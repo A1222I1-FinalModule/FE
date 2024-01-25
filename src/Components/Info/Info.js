@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import style from './infomation.module.css'
-import avatar from '../../Assets/images/Anh-avatar-dep-anh-dai-dien-FB-Tiktok-Zalo.webp'
 import ChangePass from './modal/changePass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAsterisk, faBookmark, faCloud, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
