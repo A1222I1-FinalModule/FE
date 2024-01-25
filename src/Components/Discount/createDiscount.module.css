@@ -24,10 +24,6 @@
   width: 48%;
 }
 
-.form-row > div:first-child {
-  margin-right: 4%;
-}
-
 .label {
   font-weight: bold;
   margin-bottom: 10px;
@@ -63,15 +59,8 @@
 .font{
   display: flex;
   justify-content: center;
-  align-items: center;
-  text-align: center;
   font-family: Verdana;
-  margin-bottom: 8px;
 }
 .error-message {
   color: red;
-  margin-top: 10px;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
 }

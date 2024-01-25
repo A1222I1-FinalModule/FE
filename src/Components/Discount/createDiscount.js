@@ -31,12 +31,13 @@ export function CreateDiscount() {
             .matches(/^C[a-zA-Z0-9]{2,9}$/, 'Không Đúng Định Dạng C0001'),
         name: Yup.string()
             .required('Không Được Bỏ Trống')
-            .matches(/^[A-ZÀ-ỸĐ\s][a-zA-Z0-9À-ỹđĐ\s]{1,28}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
+            .matches(/^[A-ZÀ-ỸĐ][a-zA-Z0-9À-ỹđĐ\s/%-]{1,29}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
         sale: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
             .min(20000, 'Giảm ít nhất là 20000 VNĐ')
-            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ'),
+            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ')
+            .max(Yup.ref('condition'), 'Giảm phải nhỏ hơn hoặc bằng Điều kiện'),
         rewardPoint: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
@@ -91,7 +92,6 @@ export function CreateDiscount() {
         <div className="page-container">
             <div className={style['container-main']}>
                 <h1 className={style['font']} >Giảm Giá</h1>
-                {error && <div className={style['error-message']}>{error}</div>}
                 <Formik
                     initialValues={initDiscount}
                     validationSchema={Yup.object().shape(validateDiscount)}
@@ -129,6 +129,7 @@ export function CreateDiscount() {
                                     name="discountCode"
                                     placeholder="C001"
                                 />
+                                {error && <div className={style['error-message']}>{error}</div>}
                                 <ErrorMessage
                                     name="discountCode"
                                     component="span"
@@ -151,15 +152,19 @@ export function CreateDiscount() {
                             </div>
                             <div>
                                 <span className={style['label']}>
-                                    Giảm (VNĐ) <span className={` ${style['required-field']}`}>*</span>
+                                    Điều Kiện(VNĐ) <span className={` ${style['required-field']}`}>*</span>
                                 </span>
                                 <Field
                                     className={` ${style['form-control']}`}
                                     type="text"
-                                    name="sale"
-                                    placeholder="20"
+                                    name="condition"
+                                    placeholder="500.000"
                                 />
-                                <ErrorMessage name="sale" component="span" className={style['form-err']}></ErrorMessage>
+                                <ErrorMessage
+                                    name="condition"
+                                    component="span"
+                                    className={style['form-err']}
+                                ></ErrorMessage>
                             </div>
                         </div>
                         <div className={style['form-row']}>
@@ -181,19 +186,15 @@ export function CreateDiscount() {
                             </div>
                             <div>
                                 <span className={style['label']}>
-                                    Điều Kiện(VNĐ) <span className={` ${style['required-field']}`}>*</span>
+                                    Giảm (VNĐ) <span className={` ${style['required-field']}`}>*</span>
                                 </span>
                                 <Field
                                     className={` ${style['form-control']}`}
                                     type="text"
-                                    name="condition"
-                                    placeholder="500.000"
+                                    name="sale"
+                                    placeholder="20"
                                 />
-                                <ErrorMessage
-                                    name="condition"
-                                    component="span"
-                                    className={style['form-err']}
-                                ></ErrorMessage>
+                                <ErrorMessage name="sale" component="span" className={style['form-err']}></ErrorMessage>
                             </div>
                         </div>
                         <div className={style['form-row']}>
