@@ -48,7 +48,7 @@ function CustomerCreate() {
     };
 
     return (
-        <div className="container">
+        <div className="container mt-5 mb-5">
             <h1 class="mt-4" style={{ fontSize: '30px' }}>
                 Thêm khách hàng mới
             </h1>
@@ -80,6 +80,8 @@ function CustomerCreate() {
                     dateOfBirth: Yup.date()
                         .max(new Date(), 'Ngày sinh không được lớn hơn ngày hiện tại')
                         .required('Không được để trống'),
+                    phone: Yup.string().required('Không được để trống'),
+                    email: Yup.string().email('Nhập email không hợp lệ').required('Không được để trống'),
                 })}
             >
                 {(formikProps) => (
@@ -175,10 +177,8 @@ function CustomerCreate() {
                                 name="email"
                                 onBlur={(e) => {
                                     Yup.string()
-                                        .email('Nhập email không hợp lệ')
-                                        .required('Không được để trống')
                                         .validate(formikProps.values.email)
-                                        .catch((err) => formikProps.setFieldError('phone', err.message));
+                                        .catch((err) => formikProps.setFieldError('email', err.message));
                                 }}
                             />
                             <ErrorMessage

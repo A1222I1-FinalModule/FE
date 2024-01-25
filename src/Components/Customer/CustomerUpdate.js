@@ -67,7 +67,7 @@ function CustomerUpdate() {
     };
 
     return (
-        <div className="container">
+        <div className="container mt-5 mb-5">
             <h1 class="mt-4" style={{ fontSize: '30px' }}>
                 Sửa thông tin khách hàng
             </h1>
