@@ -3,9 +3,7 @@ import classNames from 'classnames/bind';
 
 import * as productService from '../../Services/productService';
 import styles from './Products.module.scss';
-import ProductItem from '../ProductItem';
-import { Link } from 'react-router-dom';
-import { ChevronRightIcon } from '../Icons';
+import ProductItem from '../ProductItem'
 
 const cx = classNames.bind(styles);
 

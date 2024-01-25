@@ -26,15 +26,15 @@ function ProductGender({ category }) {
             <h2 className={cx('title')}>Đề xuất cho bạn</h2>
             <div className={cx('inner')}>
                 <ProductItem data={products} number={size} />
-
-                {size === 10 && (
-                    <div className={cx('more')}>
-                        <Button primary className={cx('more-btn')} onClick={() => setSize(20)}>
-                            Xem thêm
-                        </Button>
-                    </div>
-                )}
             </div>
+
+            {size === 10 && (
+                <div className={cx('more')}>
+                    <Button primary className={cx('more-btn')} onClick={() => setSize(20)}>
+                        Xem thêm
+                    </Button>
+                </div>
+            )}
         </div>
     );
 }

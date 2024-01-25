@@ -34,7 +34,7 @@ function Header() {
         {
             icon: <UserIcon />,
             title: 'Tài khoản của tôi',
-            to: '/user',
+            to: '/admin',
         },
         {
             icon: <LogoutIcon />,

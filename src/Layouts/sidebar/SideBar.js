@@ -45,7 +45,16 @@ export default function SideBar() {
                 </div>
               </div>
             </Link>
+            <a href="/admin/customer" className={style.single_option}>
+              <div className={style.item_sidebar}>
+                <div className={style.item_title}>
+                  <ion-icon name="logo-buffer"></ion-icon>
+                  <span>Khách Hàng</span>
+                </div>
+              </div>
+            </a>
           </div>
+          
         </div>
       </div>
     </div>

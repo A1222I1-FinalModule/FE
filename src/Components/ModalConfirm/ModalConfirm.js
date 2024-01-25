@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-function Example({ handleDelete, id, name }) {
+ function Example({handleDelete,id,name}) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -16,7 +16,7 @@ function Example({ handleDelete, id, name }) {
 
   return (
     <>
-      <Button variant="danger" onClick={handleShow} style={{ height: '34px', width: '40px' }}>
+      <Button variant="danger" onClick={handleShow} style={{height:'34px',width:'40px'}}>
         Xóa
       </Button>
 
