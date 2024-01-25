@@ -44,8 +44,9 @@ export default function NotificationSave() {
     <>
       <Formik
         initialValues={notificationInit}
-        onSubmit={(value) => {
+        onSubmit={(value, { resetForm }) => {
           addNewNotification(value);
+          resetForm();
         }}
         validationSchema={yup.object(validateNotification)}
       >
