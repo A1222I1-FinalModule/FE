@@ -32,8 +32,8 @@ export function CreateDiscount() {
         sale: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
-            .min(5, 'Giảm ít nhất là 5')
-            .max(100, 'Giảm nhiều nhất là 100'),
+            .min(20000, 'Giảm ít nhất là 20000 VNĐ')
+            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ'),
         rewardPoint: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
@@ -87,7 +87,7 @@ export function CreateDiscount() {
     return (
         <div className="page-container">
             <div className={style['container-main']}>
-                <h1 className={style['font']}>Mã Giảm Giá</h1>
+                <h1 className={style['font']}>Giảm Giá</h1>
                 {error && <div className={style['error-message']}>{error}</div>}
                 <Formik
                     initialValues={initDiscount}
@@ -105,7 +105,7 @@ export function CreateDiscount() {
                                         as="select"
                                         name="customerType.id"
                                         className="form-select"
-                                        style={{ height: '44px' }}
+                                        style={{ height: '44px', fontSize: '15px' }}
                                     >
                                         <option value={1} className={style['option']}>
                                             Regular
@@ -118,7 +118,7 @@ export function CreateDiscount() {
                             </div>
                             <div>
                                 <span className={style['label']}>
-                                    Code <span className={` ${style['required-field']}`}>*</span>
+                                    Mã Giảm Giá <span className={` ${style['required-field']}`}>*</span>
                                 </span>
                                 <Field
                                     className={` ${style['form-control']}`}
@@ -148,7 +148,7 @@ export function CreateDiscount() {
                             </div>
                             <div>
                                 <span className={style['label']}>
-                                    Giảm (%) <span className={` ${style['required-field']}`}>*</span>
+                                    Giảm (VNĐ) <span className={` ${style['required-field']}`}>*</span>
                                 </span>
                                 <Field
                                     className={` ${style['form-control']}`}
@@ -178,7 +178,7 @@ export function CreateDiscount() {
                             </div>
                             <div>
                                 <span className={style['label']}>
-                                    Điều Kiện <span className={` ${style['required-field']}`}>*</span>
+                                    Điều Kiện(VNĐ) <span className={` ${style['required-field']}`}>*</span>
                                 </span>
                                 <Field
                                     className={` ${style['form-control']}`}

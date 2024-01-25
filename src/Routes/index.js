@@ -45,7 +45,7 @@ const MainRouter = () => {
             <Route path="/" element={<></>} />
             <Route path="/payment" element={<Payment />} />
         </Routes>
-        <Toaster position="top-right" reverseOrder={false} />;
+        <Toaster position="top-right" reverseOrder={false} />
         </>
     );
 };

@@ -48,9 +48,9 @@ export const updateDiscount = async (id, value) => {
     }
 }
 
-export const getFindByNameDiscount = async(name)=>{
+export const getFindByNameDiscount = async(name,customerType)=>{
     try{
-        let temp=await axios.get(`/api/admin/findByNameDiscount?name=${name}`);
+        let temp=await axios.get(`/api/admin/findByNameDiscount?name=${name}&customerType=${customerType}`);
         return temp.data;
     } catch (err) {
         console.log(err);

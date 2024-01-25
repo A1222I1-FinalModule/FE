@@ -12,6 +12,7 @@ import NotFound from '../ModalConfirm/NotificationDiscount';
 export function Discount() {
     const [discount, setDiscount] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    const [searhType, setSearhType] = useState('0');
     const [showNotFoundModal, setShowNotFoundModal] = useState(false);
     const navigate = useNavigate();
 
@@ -42,15 +43,19 @@ export function Discount() {
     const getAllDiscount = async () => {
         let temp;
         if (searchInput) {
-            temp = await discounts.getFindByNameDiscount(searchInput);
-            if (temp.length === 0) {
+            temp = await discounts.getFindByNameDiscount(searchInput,searhType);
+            console.log("test",temp.length);
+            if (searchInput == '_') {
                 setShowNotFoundModal(true);
-            }else{
-                setDiscount(temp.filter(item => item.delete === true));
+            } else if (temp.length === 0) {
+                setShowNotFoundModal(true);
+            } else {
+                setDiscount(temp.filter((item) => item.delete === true));
+                setCurrentPage(1);
             }
         } else {
             temp = await discounts.findAllDiscount();
-            setDiscount(temp.filter(item => item.delete === true));
+            setDiscount(temp.filter((item) => item.delete === true));
         }
     };
     const getDelete = async (id) => {
@@ -73,32 +78,44 @@ export function Discount() {
 
     const handleCloseNotFoundModal = () => {
         setShowNotFoundModal(false);
-      };
+    };
     return (
         <div>
             <div className={styles['list_Discount_container-main']}>
-                <div style={{ paddingBottom: '30px' }}>
+                <div style={{ paddingBottom: '20px' }}>
                     <h1>Danh Sách Giảm Giá</h1>
                 </div>
                 <div className={styles['row-container']}>
-                    <div className={styles['List_discount_find_container-find']}  >
-                        <button
-                            type="button"
-                            className="btn btn-primary"
-                            data-mdb-ripple-init
-                            style={{ width: '75px', height: '33px' }}
-                            onClick={getAllDiscount}
+                    <div className={styles['findHeader']}>
+                        <div className={styles['List_discount_find_container-find']}>
+                            <button
+                                type="button"
+                                className="btn btn-primary"
+                                data-mdb-ripple-init
+                                style={{ width: '75px', height: '33px' }}
+                                onClick={getAllDiscount}
+                            >
+                                Tìm
+                            </button>
+                            <input
+                                type="text"
+                                style={{ width: '190px', height: '33px' }}
+                                placeholder="Tên"
+                                class="form-control"
+                                value={searchInput}
+                                onChange={(e) => setSearchInput(e.target.value)}
+                            />
+                        </div>
+                        <select
+                            class="form-select"
+                            onChange={(e) => setSearhType(e.target.value)}
+                            value={searhType}
+                            style={{ width: '190px' ,height:'33px' }}
                         >
-                            Tìm
-                        </button>
-                        <input
-                            type="text"
-                            style={{ width: '190px', height: '36px' }}
-                            placeholder="name"
-                            class="form-control"
-                            value={searchInput}
-                            onChange={(e) => setSearchInput(e.target.value)}
-                        />
+                            <option value="0">Chọn loại</option>
+                            <option value="2">Vip</option>
+                            <option value="1">Regular</option>
+                        </select>
                     </div>
                     <div className="contaner-function">
                         <button
@@ -114,39 +131,55 @@ export function Discount() {
                     </div>
                 </div>
                 <div className={styles['container-table']}>
-                    <table className="table align-middle mb-0 bg-white">
+                    <table className="table align-middle mb-0 bg-white" style={{ width: '1000px' }}>
                         <thead className="bg-light">
                             <tr className={styles['headtr-discount']}>
-                                <th scope="col" className={styles['head-discount']}>Code</th>
-                                <th scope="col" className={styles['head-discount']}>Tên</th>
-                                <th scope="col" className={styles['head-discount']}>Điều kiện</th>
-                                <th scope="col" className={styles['head-discount']}>Điểm</th>
-                                <th scope="col" className={styles['head-discount']}>Loại</th>
-                                <th scope="col" className={styles['head-discount']}>Ngày Bắt Đầu</th>
-                                <th scope="col" className={styles['head-discount']}>Ngày Kết Thúc</th>
-                                <th scope="col" style={{ textAlign: 'center' }}>
-                                    
+                                <th scope="col" className={styles['head-discount']}>
+                                    Mã Giảm Giá
                                 </th>
+                                <th scope="col" className={styles['head-discount']}>
+                                    Tên
+                                </th>
+                                <th scope="col" className={styles['head-discount']}>
+                                    Điều kiện
+                                </th>
+                                <th scope="col" className={styles['head-discount']}>
+                                    Điểm
+                                </th>
+                                <th scope="col" className={styles['head-discount']}>
+                                    Loại
+                                </th>
+                                <th scope="col" className={styles['head-discount']}>
+                                    Ngày Bắt Đầu
+                                </th>
+                                <th scope="col" className={styles['head-discount']}>
+                                    Ngày Kết Thúc
+                                </th>
+                                <th scope="col" className={styles['head-discount']}></th>
                             </tr>
                         </thead>
                         <tbody>
                             {records.map((discount, index) => {
                                 return (
-                                    <tr key={index} className={styles['headtr-discount']}>
-                                        <td className={styles['headtd-discount']}>{discount.discountCode}</td>
-                                        <td className={styles['headtd-discount']}>
-                                            <div className="d-flex align-items-center text-nowrap">
-                                                <span>{discount.name}</span>
-                                            </div>
+                                    <tr key={index} className="text-center">
+                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.discountCode}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.name}</td>
+                                        <td className={styles['text-center']} style={{fontSize:'13px'}}>{discount.condition}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.rewardPoint}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.customerType.typeName}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>
+                                            {moment(discount.beginDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}
                                         </td>
-                                        <td className={styles['headtd-discount']}>{discount.condition}</td>
-                                        <td className={styles['headtd-discount']}>{discount.rewardPoint}</td>
-                                        <td className={styles['headtd-discount']}>{discount.customerType.typeName}</td>
-                                        <td className={styles['headtd-discount']}>{moment(discount.beginDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
-                                        <td className={styles['headtd-discount']}>{moment(discount.endDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}</td>
-                                        <td className={styles['headtd-discount']}>
+                                        <td className="text-center" style={{fontSize:'13px'}}>
+                                            {moment(discount.endDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}
+                                        </td>
+                                        <td className="text-center">
                                             <div className={styles['action']}>
-                                                <Example id={discount.discountCode} name={discount.name} handleDelete={handleDelete} />
+                                                <Example
+                                                    id={discount.discountCode}
+                                                    name={discount.name}
+                                                    handleDelete={handleDelete}
+                                                />
                                                 <button
                                                     class="btn btn-success"
                                                     ids={discount.discountCode}
@@ -164,25 +197,27 @@ export function Discount() {
                 </div>
                 <nav className={styles['container-pagination']}>
                     <ul className="pagination pagination-circle">
-                        <li className="page-item">
-                            <a href="#" className="page-link" onClick={prePage}>
-                                Sau
-                            </a>
-                        </li>
-                        {numbers.map((n, i) => {
-                            return (
-                                <li className={`page-item ${currentPage == n ? `active` : ` `}`} key={i}>
-                                    <a href="#" className="page-link" onClick={() => changeCPage(n)}>
-                                        {n}
-                                    </a>
-                                </li>
-                            );
-                        })}
-                        <li className="page-item">
-                            <a href="#" className="page-link" onClick={nextPage}>
-                                Trước
-                            </a>
-                        </li>
+                        {npage > 1 && (
+                            <li className="page-item">
+                                <a href="#" className="page-link" onClick={prePage}>
+                                    Trước
+                                </a>
+                            </li>
+                        )}
+                        {numbers.map((n, i) => (
+                            <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
+                                <a href="#" className="page-link" onClick={() => changeCPage(n)}>
+                                    {n}
+                                </a>
+                            </li>
+                        ))}
+                        {npage > 1 && (
+                            <li className="page-item">
+                                <a href="#" className="page-link" onClick={nextPage}>
+                                    Sau
+                                </a>
+                            </li>
+                        )}
                     </ul>
                 </nav>
             </div>

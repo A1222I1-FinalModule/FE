@@ -41,15 +41,17 @@ export function ListCustomer() {
         let temp;
         if (searchInput) {
             temp = await customers.findByNameCustomer(searchInput);
-            if (temp.length === 0) {
+            if (searchInput == '_') {
                 setShowNotFoundModal(true);
-            }else{
-                setCustomer(temp.filter(item => item.delete === true));
+            } else if (temp.length === 0) {
+                setShowNotFoundModal(true);
+            } else {
+                setCustomer(temp.filter((item) => item.delete === true));
+                setCurrentPage(1);
             }
-            
         } else {
             temp = await customers.findAllCustomer();
-            setCustomer(temp.filter(item => item.delete === true));
+            setCustomer(temp.filter((item) => item.delete === true));
         }
     };
     const getDelete = async (id) => {
@@ -68,12 +70,12 @@ export function ListCustomer() {
     };
     const handleCloseNotFoundModal = () => {
         setShowNotFoundModal(false);
-      };
+    };
     return (
         <div className={styled['list_Customer_container-main']}>
             <div style={{ paddingBottom: '30px' }}>
-                    <h1>Danh Sách Khách Hàng</h1>
-                </div>
+                <h1>Danh Sách Khách Hàng</h1>
+            </div>
             <div className="list_Discount_container-main">
                 <div className={styled['row-container']}>
                     <div className={styled['List_customer_find_container-find']}>
@@ -89,7 +91,7 @@ export function ListCustomer() {
                         <input
                             type="text"
                             style={{ width: '190px', height: '36px' }}
-                            placeholder="name"
+                            placeholder="Tên , email"
                             class="form-control"
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
@@ -107,15 +109,25 @@ export function ListCustomer() {
                     </div>
                 </div>
                 <div className="container-table">
-                    <table className="table align-middle mb-0 bg-white">
+                    <table className="table align-middle mb-0 bg-white" style={{width:'1000px'}}>
                         <thead className="bg-light">
                             <tr className={styled['headtr-customer']}>
                                 <th scope="col" className={styled['head-customer']}></th>
-                                <th scope="col" className={styled['head-customer']}>Code</th>
-                                <th scope="col" className={styled['head-customer']}>Tên</th>
-                                <th scope="col" className={styled['head-customer']}>Giới Tính</th>
-                                <th scope="col" className={styled['head-customer']}>Điểm</th>
-                                <th scope="col" className={styled['head-customer']}>Loại</th>
+                                <th scope="col" className={styled['head-customer']}>
+                                    Mã Khách Hàng
+                                </th>
+                                <th scope="col" className={styled['head-customer']}>
+                                    Tên
+                                </th>
+                                <th scope="col" className={styled['head-customer']}>
+                                    Giới Tính
+                                </th>
+                                <th scope="col" className={styled['head-customer']}>
+                                    Điểm
+                                </th>
+                                <th scope="col" className={styled['head-customer']}>
+                                    Loại
+                                </th>
                                 <th scope="col" className={styled['head-customer']}></th>
                             </tr>
                         </thead>
@@ -124,26 +136,29 @@ export function ListCustomer() {
                                 const rowNumber = firstIndex + index + 1;
                                 return (
                                     <tr key={index} className={styled['headtr-customer']}>
-                                        <td className={styled['headtd-customer']}> {rowNumber}</td>
-                                        <td className={styled['headtd-customer']}>{customer.id}</td>
-                                        <td className={styled['headtd-customer']}>
+                                        <td className="text-center" style={{fontSize:'13px'}}> {rowNumber}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.id}</td>
+                                        <td className={styled['text-center']}>
                                             <div className="d-flex align-items-center">
                                                 <div className="ms-3">
-                                                    <p className="fw-bold mb-1">{customer.name}</p>
-                                                    <p className="text-muted mb-0">{customer.email}</p>
+                                                    <p className="fw-bold mb-1" style={{fontSize:'13px'}}>{customer.name}</p>
+                                                    <p className="text-muted mb-0" style={{fontSize:'13px'}}>{customer.email}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className={styled['headtd-customer']}>{customer.gender ? 'Nam' : 'Nữ'}</td>
-                                        <td className={styled['headtd-customer']}>{customer.point}</td>
-                                        <td className={styled['headtd-customer']}>{customer.customerType.typeName}</td>
-                                        <td className={styled['headtd-customer']}>
+                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.gender ? 'Nam' : 'Nữ'}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.point}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>{customer.customerType.typeName}</td>
+                                        <td className="text-center" style={{fontSize:'13px'}}>
                                             <div className={styled['action']}>
-                                                <Example2 id={customer.id} name={customer.name} handleDelete={handleDelete} />
+                                                <Example2
+                                                    id={customer.id}
+                                                    name={customer.name}
+                                                    handleDelete={handleDelete}
+                                                />
                                                 <button
                                                     class="btn btn-success"
                                                     ids={customer.id}
-                                                    onClick={() => handleDelete(customer.id)}
                                                 >
                                                     Sửa
                                                 </button>
@@ -155,11 +170,11 @@ export function ListCustomer() {
                         </tbody>
                     </table>
                 </div>
-                <nav className={styled['container-pagination']}>
+                {/* <nav className={styled['container-pagination']}>
                     <ul className="pagination pagination-circle">
                         <li className="page-item">
                             <a href="#" className="page-link" onClick={prePage}>
-                                Sau
+                                Trước
                             </a>
                         </li>
                         {numbers.map((n, i) => {
@@ -173,9 +188,34 @@ export function ListCustomer() {
                         })}
                         <li className="page-item">
                             <a href="#" className="page-link" onClick={nextPage}>
-                                Trước
+                                Sau
                             </a>
                         </li>
+                    </ul>
+                </nav> */}
+                <nav className={styled['container-pagination']}>
+                    <ul className="pagination pagination-circle">
+                        {npage > 1 && (
+                            <li className="page-item">
+                                <a href="#" className="page-link" onClick={prePage}>
+                                    Trước
+                                </a>
+                            </li>
+                        )}
+                        {numbers.map((n, i) => (
+                            <li className={`page-item ${currentPage === n ? 'active' : ''}`} key={i}>
+                                <a href="#" className="page-link" onClick={() => changeCPage(n)}>
+                                    {n}
+                                </a>
+                            </li>
+                        ))}
+                        {npage > 1 && (
+                            <li className="page-item">
+                                <a href="#" className="page-link" onClick={nextPage}>
+                                    Sau
+                                </a>
+                            </li>
+                        )}
                     </ul>
                 </nav>
             </div>

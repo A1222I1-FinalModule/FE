@@ -90,7 +90,7 @@ export function UpdateDiscount() {
     return (
         <div className="page-container">
             <div className={style['container-main']}>
-                <h1 className={style['font']}>Mã Giảm Giá</h1>
+                <h1 className={style['font']}>Giảm Giá</h1>
                 <Formik
                     initialValues={initDiscount}
                     validationSchema={Yup.object().shape(validateDiscount)}
@@ -107,7 +107,7 @@ export function UpdateDiscount() {
                                         as="select"
                                         name="customerType.id"
                                         className="form-select"
-                                        style={{ height: '44px' }}
+                                        style={{ height: '44px', fontSize: '15px' }}
                                     >
                                         <option value={1}>Regular</option>
                                         <option value={2}>Vip</option>
@@ -116,7 +116,7 @@ export function UpdateDiscount() {
                             </div>
                             <div>
                                 <span className={style['label']}>
-                                    Code <span className={` ${style['required-field']}`}>*</span>
+                                    Mã Giảm Giá <span className={` ${style['required-field']}`}>*</span>
                                 </span>
                                 <Field
                                     className={` ${style['form-control']}`}

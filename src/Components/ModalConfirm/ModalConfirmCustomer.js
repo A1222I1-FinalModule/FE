@@ -16,7 +16,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
   return (
     <>
-      <Button variant="danger" onClick={handleShow}>
+      <Button variant="danger" onClick={handleShow} style={{height:'34px',width:'40px'}}>
         Xóa
       </Button>
 

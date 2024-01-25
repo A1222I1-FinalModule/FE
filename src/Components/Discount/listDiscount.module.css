@@ -1,9 +1,9 @@
 .list_Discount_container-main{
-  width: 60%;
-  height: auto;
+  width: 1000px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-top: 30px;
   align-items: center;
   margin: 0 auto;
   font-family: 14.4px 'Roboto', sans-serif;
@@ -42,6 +42,7 @@ height: 55.4375px;
 width: 96.4625px;
 line-height: 3em;
 text-align: center;
+font-size: 13px;
 }
 
 .headtr-discount{
@@ -49,7 +50,18 @@ text-align: center;
   height: 60px;
 }
 
-.headtd-discount{
+.text-center{
   height: 80px;
-  padding: 16px 28px !important;
+}
+
+.findHeader{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start; 
+}
+
+.buttonnn{
+  height:34px;
+  width:40px
 }

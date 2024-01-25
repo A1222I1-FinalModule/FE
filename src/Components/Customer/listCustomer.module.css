@@ -1,16 +1,11 @@
 .list_Customer_container-main {
-    width: 50%;
-    height: auto;
+    width: 1000px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    padding-top: 30px;
     align-items: center;
     margin: 0 auto;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    font-family: 14.4px 'Roboto', sans-serif;
 }
 
 .List_customer_find_container-find {
@@ -45,6 +40,7 @@
     width: 96.4625px;
     line-height: 3em;
     text-align: center;
+    font-size: 13px;
     }
 
 .headtr-customer{
@@ -52,9 +48,8 @@
     height: 60px;
 }
 
-.headtd-customer{
-    height: 80px;
-    padding: 16px 22.4px !important;
+.text-center{
+  height: 80px;
 }
 
   
