@@ -49,18 +49,24 @@ export function Discount() {
             temp = await discounts.getFindByNameDiscount(searchInput, searhType);
             if (searchInput == '_') {
                 setLoading(false);
+                setSearchInput('');
+                setSearhType('0');
                 setShowNotFoundModal(true);
                 temp = await discounts.findAllDiscount();
                 setDiscount(temp.filter((item) => item.delete === true));
             } else if (temp.length === 0) {
                 setLoading(false);
+                setSearchInput('');
+                setSearhType('0');
                 setShowNotFoundModal(true);
                 temp = await discounts.findAllDiscount();
                 setDiscount(temp.filter((item) => item.delete === true));
             } else {
                 setDiscount(temp.filter((item) => item.delete === true));
-                setCurrentPage(1);
                 setLoading(false);
+                setSearchInput('');
+                setSearhType('0');
+                setCurrentPage(1);
             }
         } else {
             temp = await discounts.findAllDiscount();

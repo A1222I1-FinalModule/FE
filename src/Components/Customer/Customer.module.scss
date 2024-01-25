@@ -13,18 +13,16 @@
 .form-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
-    width: auto;
-    height: 110px;
+    height: 100px;
 }
 
-.form-row>div {
+.form-row > div {
     display: flex;
     flex-direction: column;
     width: 48%;
 }
 
-.form-row>div:first-child {
+.form-row > div:first-child {
     margin-right: 4%;
 }
 
@@ -36,7 +34,6 @@
 .form-control {
     border: 1px solid #ccc;
     padding: 10px;
-    margin-bottom: 5px;
     border-radius: 5px;
 }
 
@@ -67,10 +64,13 @@
     align-items: center;
     text-align: center;
     font-family: Verdana;
-    margin-bottom: 8px;
+    margin-bottom: 20px;
+    color: var(--primary);
 }
-
 .error-message {
     color: red;
     margin-top: 10px;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
 }

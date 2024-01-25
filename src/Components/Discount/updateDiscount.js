@@ -4,7 +4,7 @@ import * as discounts from '../../Services/API/Discount/discount';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import style from '../Discount/createDiscount.module.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 export function UpdateDiscount() {
     let { id } = useParams();
     const [discount, setDiscount] = useState();
@@ -23,12 +23,13 @@ export function UpdateDiscount() {
             .matches(/^[A-Z][a-zA-Z0-9 /]{2,29}$/, 'Not format'),
         name: Yup.string()
             .required('Không Được Bỏ Trống')
-            .matches(/^[A-ZÀ-ỸĐ\s][a-zA-Z0-9À-ỹđĐ\s]{1,28}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
+            .matches(/^[A-ZÀ-ỸĐ][a-zA-Z0-9À-ỹđĐ\s/%-]{1,29}$/, 'Không Đúng Đinh Dạng Sale 5/5'),
         sale: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
             .min(20000, 'Giảm ít nhất là 20000 VNĐ')
-            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ'),
+            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ')
+            .max(Yup.ref('condition'), 'Giảm phải nhỏ hơn hoặc bằng Điều kiện'),
         rewardPoint: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
@@ -68,8 +69,8 @@ export function UpdateDiscount() {
             endDate: formatDate(values.endDate),
         };
         await discounts.updateDiscount(id, formattedValues);
-        toast.success('Cập Nhật Thành Công');
         navigate('/admin/discount');
+        toast.success('Cập Nhật Thành Công');
     };
 
     if (!discount) {
@@ -88,163 +89,160 @@ export function UpdateDiscount() {
         },
     };
     return (
-        <>
-            <div className="page-container">
-                <div className={style['container-main']}>
-                    <h1 className={style['font']}>Giảm Giá</h1>
-                    <Formik
-                        initialValues={initDiscount}
-                        validationSchema={Yup.object().shape(validateDiscount)}
-                        onSubmit={(value) => {
-                            handleSubmit(discount.discountCode, value);
-                        }}
-                    >
-                        <Form>
-                            <div className={style['form-row']}>
-                                <div>
-                                    <span className={style['label']}>Loại</span>
-                                    <div className="col-sm-10" style={{ width: '240px' }}>
-                                        <Field
-                                            as="select"
-                                            name="customerType.id"
-                                            className="form-select"
-                                            style={{ height: '44px', fontSize: '15px' }}
-                                        >
-                                            <option value={1}>Regular</option>
-                                            <option value={2}>Vip</option>
-                                        </Field>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span className={style['label']}>
-                                        Mã Giảm Giá <span className={` ${style['required-field']}`}>*</span>
-                                    </span>
+        <div className="page-container">
+            <div className={style['container-main']}>
+                <h1 className={style['font']}>Giảm Giá</h1>
+                <Formik
+                    initialValues={initDiscount}
+                    validationSchema={Yup.object().shape(validateDiscount)}
+                    onSubmit={(value) => {
+                        handleSubmit(discount.discountCode, value);
+                    }}
+                >
+                    <Form>
+                        <div className={style['form-row']}>
+                            <div>
+                                <span className={style['label']}>Loại</span>
+                                <div className="col-sm-10" style={{ width: '240px' }}>
                                     <Field
-                                        className={` ${style['form-control']}`}
-                                        type="text"
-                                        name="discountCode"
-                                        placeholder="S001"
-                                        readOnly
-                                    />
-                                    <ErrorMessage
-                                        name="discountCode"
-                                        component="span"
-                                        className={style['form-err']}
-                                    ></ErrorMessage>
+                                        as="select"
+                                        name="customerType.id"
+                                        className="form-select"
+                                        style={{ height: '44px', fontSize: '15px' }}
+                                    >
+                                        <option value={1}>Regular</option>
+                                        <option value={2}>Vip</option>
+                                    </Field>
                                 </div>
                             </div>
-                            <div className={style['form-row']}>
-                                <div>
-                                    <span className={style['label']}>
-                                        Tên Giám Giá <span className={` ${style['required-field']}`}>*</span>
-                                    </span>
-                                    <Field
-                                        className={` ${style['form-control']}`}
-                                        type="text"
-                                        name="name"
-                                        placeholder="Sale 2/2"
-                                    />
-                                    <ErrorMessage name="name" component="span" className={style['form-err']}></ErrorMessage>
-                                </div>
-                                <div>
-                                    <span className={style['label']}>
-                                        Giảm (VNĐ) <span className={` ${style['required-field']}`}>*</span>
-                                    </span>
-                                    <Field
-                                        className={` ${style['form-control']}`}
-                                        type="text"
-                                        name="sale"
-                                        placeholder="20"
-                                    />
-                                    <ErrorMessage name="sale" component="span" className={style['form-err']}></ErrorMessage>
-                                </div>
+                            <div>
+                                <span className={style['label']}>
+                                    Mã Giảm Giá <span className={` ${style['required-field']}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${style['form-control']}`}
+                                    type="text"
+                                    name="discountCode"
+                                    placeholder="S001"
+                                    readOnly
+                                />
+                                <ErrorMessage
+                                    name="discountCode"
+                                    component="span"
+                                    className={style['form-err']}
+                                ></ErrorMessage>
                             </div>
-                            <div className={style['form-row']}>
-                                <div>
-                                    <span className={style['label']}>
-                                        Điểm Nhận <span className={` ${style['required-field']}`}>*</span>
-                                    </span>
-                                    <Field
-                                        className={` ${style['form-control']}`}
-                                        type="text"
-                                        name="rewardPoint"
-                                        placeholder="350"
-                                    />
-                                    <ErrorMessage
-                                        name="rewardPoint"
-                                        component="span"
-                                        className={style['form-err']}
-                                    ></ErrorMessage>
-                                </div>
-                                <div>
-                                    <span className={style['label']}>
-                                        Điều Kiện(VNĐ) <span className={` ${style['required-field']}`}>*</span>
-                                    </span>
-                                    <Field
-                                        className={` ${style['form-control']}`}
-                                        type="text"
-                                        name="condition"
-                                        placeholder="500.000"
-                                    />
-                                    <ErrorMessage
-                                        name="condition"
-                                        component="span"
-                                        className={style['form-err']}
-                                    ></ErrorMessage>
-                                </div>
+                        </div>
+                        <div className={style['form-row']}>
+                            <div>
+                                <span className={style['label']}>
+                                    Tên Giám Giá <span className={` ${style['required-field']}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${style['form-control']}`}
+                                    type="text"
+                                    name="name"
+                                    placeholder="Sale 2/2"
+                                />
+                                <ErrorMessage name="name" component="span" className={style['form-err']}></ErrorMessage>
                             </div>
-                            <div className={style['form-row']}>
-                                <div>
-                                    <span className={style['label']}>
-                                        Ngày Bắt Đầu <span className={` ${style['required-field']}`}>*</span>
-                                    </span>
-                                    <Field className={` ${style['form-control']}`} name="beginDate" type="date" />
-                                    <ErrorMessage
-                                        name="endDate"
-                                        component="span"
-                                        className={style['form-err']}
-                                    ></ErrorMessage>
-                                </div>
-                                <div>
-                                    <span className={style['label']}>
-                                        Ngày Kết Thúc <span className={` ${style['required-field']}`}>*</span>
-                                    </span>
-                                    <Field className={` ${style['form-control']}`} name="endDate" type="date" />
-                                    <ErrorMessage
-                                        name="endDate"
-                                        component="span"
-                                        className={style['form-err']}
-                                    ></ErrorMessage>
-                                </div>
+                            <div>
+                                <span className={style['label']}>
+                                    Điều Kiện(VNĐ) <span className={` ${style['required-field']}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${style['form-control']}`}
+                                    type="text"
+                                    name="condition"
+                                    placeholder="500.000"
+                                />
+                                <ErrorMessage
+                                    name="condition"
+                                    component="span"
+                                    className={style['form-err']}
+                                ></ErrorMessage>
                             </div>
-                            <div className={`${style.buttons} form-row`}>
-                                <button
-                                    type="submit"
-                                    className="btn btn-success"
-                                    onClick={() => navigate('/admin/discount')}
-                                    style={{
-                                        padding: '10px 20px',
-                                        margin: '0 5px',
-                                    }}
-                                >
-                                    Thoát
-                                </button>
-                                <button
-                                    type="submit"
-                                    class="btn btn-danger"
-                                    style={{
-                                        padding: '10px 20px',
-                                        margin: '0 5px',
-                                    }}
-                                >
-                                    Cập Nhật
-                                </button>
+                        </div>
+                        <div className={style['form-row']}>
+                            <div>
+                                <span className={style['label']}>
+                                    Điểm Nhận <span className={` ${style['required-field']}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${style['form-control']}`}
+                                    type="text"
+                                    name="rewardPoint"
+                                    placeholder="350"
+                                />
+                                <ErrorMessage
+                                    name="rewardPoint"
+                                    component="span"
+                                    className={style['form-err']}
+                                ></ErrorMessage>
                             </div>
-                        </Form>
-                    </Formik>
-                </div>
+                            <div>
+                                <span className={style['label']}>
+                                    Giảm (VNĐ) <span className={` ${style['required-field']}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${style['form-control']}`}
+                                    type="text"
+                                    name="sale"
+                                    placeholder="20"
+                                />
+                                <ErrorMessage name="sale" component="span" className={style['form-err']}></ErrorMessage>
+                            </div>
+                        </div>
+                        <div className={style['form-row']}>
+                            <div>
+                                <span className={style['label']}>
+                                    Ngày Bắt Đầu <span className={` ${style['required-field']}`}>*</span>
+                                </span>
+                                <Field className={` ${style['form-control']}`} name="beginDate" type="date" />
+                                <ErrorMessage
+                                    name="endDate"
+                                    component="span"
+                                    className={style['form-err']}
+                                ></ErrorMessage>
+                            </div>
+                            <div>
+                                <span className={style['label']}>
+                                    Ngày Kết Thúc <span className={` ${style['required-field']}`}>*</span>
+                                </span>
+                                <Field className={` ${style['form-control']}`} name="endDate" type="date" />
+                                <ErrorMessage
+                                    name="endDate"
+                                    component="span"
+                                    className={style['form-err']}
+                                ></ErrorMessage>
+                            </div>
+                        </div>
+                        <div className={`${style.buttons} form-row`}>
+                            <button
+                                type="submit"
+                                className="btn btn-success"
+                                onClick={() => navigate('/admin/discount')}
+                                style={{
+                                    padding: '10px 20px',
+                                    margin: '0 5px',
+                                }}
+                            >
+                                Thoát
+                            </button>
+                            <button
+                                type="submit"
+                                class="btn btn-danger"
+                                style={{
+                                    padding: '10px 20px',
+                                    margin: '0 5px',
+                                }}
+                            >
+                                Cập Nhật
+                            </button>
+                        </div>
+                    </Form>
+                </Formik>
             </div>
-            <ToastContainer />
-        </>
+        </div>
     );
 }

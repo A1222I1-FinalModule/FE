@@ -9,6 +9,7 @@ import Example2 from '../ModalConfirm/ModalConfirmCustomer';
 import { toast } from 'react-toastify';
 import NotFound from '../ModalConfirm/NotificationDiscount';
 import Loading from '../Customer/Loading';
+import { Link } from 'react-router-dom';
 export function ListCustomer() {
     const [customer, setCustomer] = useState([]);
     const [searchInput, setSearchInput] = useState('');
@@ -61,7 +62,6 @@ export function ListCustomer() {
         } else {
             temp = await customers.findAllCustomer();
             setCustomer(temp.filter((item) => item.delete === true));
-            setCurrentPage(1);
             setLoading(false);
         }
     };
@@ -109,14 +109,15 @@ export function ListCustomer() {
                         />
                     </div>
                     <div className="contaner-function">
-                        <button
+                        <Link
+                            to={'/admin/customer/create'}
                             type="button"
                             className="btn btn-success"
                             data-mdb-ripple-init
-                            style={{ width: '200px', height: '36px', fontSize: '13px' }}
+                            style={{ width: '200px', height: '36px', fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
                             Thêm mới khách hàng
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className="container-table">
@@ -175,7 +176,7 @@ export function ListCustomer() {
                                                 </div>
                                             </td>
                                             <td className="text-center" style={{ fontSize: '13px' }}>
-                                                {customer.gender ? 'Nam' : 'Nữ'}
+                                                {customer.gender ? "Nữ" : "Nam"}
                                             </td>
                                             <td className="text-center" style={{ fontSize: '13px' }}>
                                                 {customer.point}
@@ -190,9 +191,9 @@ export function ListCustomer() {
                                                         name={customer.name}
                                                         handleDelete={handleDelete}
                                                     />
-                                                    <button class="btn btn-success" ids={customer.id}>
+                                                    <Link to={`/admin/customer/update/${customer.id}`} class="btn btn-success" ids={customer.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                         Sửa
-                                                    </button>
+                                                    </Link>
                                                 </div>
                                             </td>
                                         </tr>

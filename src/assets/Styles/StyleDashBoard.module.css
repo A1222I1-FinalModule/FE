@@ -208,7 +208,7 @@
     transition: max-height 0.3s ease-in-out;
 }
 
-.dropdown.active+.submenu {
+.dropdown.active + .submenu {
     display: block;
 }
 
@@ -297,7 +297,8 @@ h1 {
     font-size: 16px;
 }
 
-.time_line {}
+.time_line {
+}
 
 .time_line ul {
     list-style-type: none;

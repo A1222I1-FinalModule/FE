@@ -1,132 +1,263 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import { formatDate } from '../../utils/helpers';
-import * as customerService from '../../Services/customerService';
+import * as customerService from '../../Services/API/customerService';
 import Button from '../Button';
+import { useState } from 'react';
+import classNames from 'classnames/bind';
+import styles from './Customer.module.scss'
 
+
+const cx = classNames.bind(styles)
 function CustomerCreate() {
     const navigate = useNavigate();
 
-    const handleSubmit = async (value, { setSubmitting }) => {
-        const formFormat = {
-            ...value,
-            gender: parseInt(value.gender),
-            dateOfBirth: formatDate(value.dateOfBirth),
-        };
+    const [errorPhone, setErrorPhone] = useState('');
+    const [errorMail, setErrorMail] = useState('');
 
-        await customerService.createCustomer(formFormat);
-        navigate('/');
-        setSubmitting(false);
+    console.log(errorPhone, errorMail)
+
+    const handleSubmit = async (value, { setSubmitting, setFieldError }) => {
+        try {
+
+            const formFormat = {
+                ...value,
+                gender: parseInt(value.gender),
+                dateOfBirth: formatDate(value.dateOfBirth),
+            };
+
+            console.log(formFormat)
+
+            await customerService.createCustomer(formFormat);
+            navigate('/admin/customer');
+            setSubmitting(false);
+        } catch (error) {
+            console.error('Error:', error);
+            const errorMessage = error.response.data;
+            console.log(errorMessage)
+            if (errorMessage.length === 1) {
+                if (errorMessage[0] === 'Email đã tồn tại.') {
+                    setErrorMail(errorMessage[0]);
+                    setFieldError('email', errorMessage[0]);
+                } else if (errorMessage[0] === 'Số điện thoại đã tồn tại.') {
+                    setErrorPhone(errorMessage[0]);
+                    setFieldError('phone', errorMessage[0]);
+                }
+            } else {
+                setErrorPhone(errorMessage[0]);
+                setErrorMail(errorMessage[1]);
+                setFieldError('phone', errorMessage[0]);
+                setFieldError('email', errorMessage[1]);
+            }
+
+            setFieldError('general', errorMessage);
+        }
     };
 
     return (
-        <div className="container">
-            <h1 class="mt-4" style={{ fontSize: '30px' }}>
-                Thêm khách hàng mới
-            </h1>
+        <div className="page-container">
+            <div className={cx('container-main')}>
+                <h1 className={cx('font')}>Thêm mới khách hàng</h1>
 
-            <Formik
-                initialValues={{
-                    id: '',
-                    name: '',
-                    dateOfBirth: '',
-                    address: '',
-                    gender: 0,
-                    phone: '',
-                    email: '',
-                    point: 0,
-                    customerType: {
-                        id: 1,
-                    },
-                }}
-                onSubmit={handleSubmit}
-                validationSchema={Yup.object().shape({
-                    id: Yup.string()
-                        .matches(/^KH\d{3}$/, 'Phải theo mẫu KH000')
-                        .required('Không được để trống'),
-                    name: Yup.string().max(100, 'Không được quá 100 ký tự').required('Không được để trống'),
-                    address: Yup.string().required('Không được để trống'),
-                    phone: Yup.string()
-                        .matches(/^[0-9]{10}$/, 'Số điện thoại không hợp lệ')
-                        .required('Không được để trống'),
-                    email: Yup.string().email().required('Không được để trống'),
-                })}
-            >
-                <Form class="">
-                    <div class="mb-3 spacing">
-                        <label for="id" class="form-label">
-                            Mã khách hàng
-                        </label>
-                        <Field type="text" class="form-control" name="id" />
-                        <ErrorMessage className="form-text text-danger" name="id" component="span"></ErrorMessage>
-                    </div>
-                    <div class="mb-3 spacing">
-                        <label for="name" class="form-label">
-                            Họ tên
-                        </label>
-                        <Field type="text" class="form-control" name="name" />
-                        <ErrorMessage className="form-text text-danger" name="name" component="span"></ErrorMessage>
-                    </div>
-                    <div class="mb-3 spacing">
-                        <label for="dateOfBirth" class="form-label">
-                            Ngày sinh
-                        </label>
-                        <Field type="date" class="form-control" name="dateOfBirth" />
-                    </div>
-                    <div class="mb-3 spacing">
-                        <label for="address" class="form-label">
-                            Địa chỉ
-                        </label>
-                        <Field type="text" class="form-control" name="address" />
-                        <ErrorMessage className="form-text text-danger" name="address" component="span"></ErrorMessage>
-                    </div>
-                    <div className="mb-3 spacing">
-                        <label htmlFor="gender" class="form-label">
-                            Giới tính
-                        </label>
-                        <div className="d-flex mt-2">
-                            <div class="form-check d-flex me-4">
-                                <Field class="form-check-input me-2" type="radio" name="gender" value="0" />
-                                <label class="form-check-label" htmlFor="">
-                                    Nam
-                                </label>
+                <Formik
+                    initialValues={{
+                        id: '',
+                        name: '',
+                        dateOfBirth: '',
+                        address: '',
+                        gender: 0,
+                        phone: '',
+                        email: '',
+                        point: 0,
+                        customerType: {
+                            id: 1,
+                        },
+                    }}
+                    onSubmit={handleSubmit}
+                    validationSchema={Yup.object().shape({
+                        id: Yup.string()
+                            .matches(/^KH\d{3}$/, 'Phải theo mẫu KH000')
+                            .required('Không được để trống'),
+                        name: Yup.string()
+                            .max(100, 'Không được quá 100 ký tự')
+                            .matches(/^[a-zA-Z0-9\s]+$/, 'Không được chứa ký tự đặc biệt')
+                            .required('Không được để trống'),
+                        address: Yup.string().required('Không được để trống'),
+                        dateOfBirth: Yup.date()
+                            .max(new Date(), 'Không được hơn ngày hiện tại')
+                            .required('Không được để trống'),
+                        phone: Yup.string().matches(/^[0-9]{10}$/, 'Số điện thoại không hợp lệ').required('Không được để trống'),
+                        email: Yup.string().email('Nhập email không hợp lệ').required('Không được để trống'),
+                    })}
+                >
+                    {(formikProps) => <Form>
+                        <div className={cx('form-row')}>
+                            <div>
+                                <span className={cx('label')}>
+                                    Mã Khách Hàng <span className={` ${cx('required-field')}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${cx('form-control')}`}
+                                    type="text"
+                                    name="id"
+                                    placeholder="KH000"
+                                />
+                                <ErrorMessage
+                                    name="id"
+                                    component="span"
+                                    className={cx('form-err')}
+                                ></ErrorMessage>
                             </div>
-                            <div class="form-check d-flex">
-                                <Field class="form-check-input me-2" type="radio" name="gender" value="1" />
-                                <label class="form-check-label" htmlFor="">
-                                    Nữ
-                                </label>
+                            <div>
+                                <span className={cx('label')}>
+                                    Email <span className={` ${cx('required-field')}`}>*</span>
+                                </span>
+                                <Field
+                                    type="email"
+                                    className={` ${cx('form-control')}`}
+                                    name="email"
+                                    placeholder="a@gmail.com"
+                                    onBlur={(e) => {
+                                        Yup.string()
+                                            .validate(formikProps.values.email)
+                                            .catch((err) => formikProps.setFieldError('email', err.message));
+                                    }}
+                                />
+                                <ErrorMessage
+                                    name="email"
+                                    render={(msg) => (
+                                        <>
+                                            <span className={cx('form-err')}>
+                                                {(msg && msg) || (errorMail && errorMail)}
+                                            </span>
+                                        </>
+                                    )}
+                                />
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-3 spacing">
-                        <label for="phone" class="form-label">
-                            Số điện thoại
-                        </label>
-                        <Field type="text" class="form-control" name="phone" />
-                        <ErrorMessage className="form-text text-danger" name="phone" component="span"></ErrorMessage>
-                    </div>
-                    <div class="mb-3 spacing">
-                        <label for="email" class="form-label">
-                            Email
-                        </label>
-                        <Field type="email" class="form-control" name="email" />
-                        <ErrorMessage className="form-text text-danger" name="email" component="span"></ErrorMessage>
-                    </div>
+                        <div className={cx('form-row')}>
+                            <div>
+                                <span className={cx('label')}>
+                                    Họ Và Tên <span className={` ${cx('required-field')}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${cx('form-control')}`}
+                                    type="text"
+                                    name="name"
+                                    placeholder="Nguyen Van A"
+                                />
+                                <ErrorMessage
+                                    name="name"
+                                    component="span"
+                                    className={cx('form-err')}
+                                ></ErrorMessage>
+                            </div>
+                            <div>
+                                <span className={cx('label')}>
+                                    Số Điện Thoại <span className={` ${cx('required-field')}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${cx('form-control')}`}
+                                    type="text"
+                                    name="phone"
+                                    placeholder="0123456789"
+                                    onBlur={(e) => {
+                                        Yup.string()
+                                            .required('Không được để trống')
+                                            .matches(/^[0-9]{10}$/, 'Số điện thoại không hợp lệ')
+                                            .validate(formikProps.values.phone)
+                                            .catch((err) => formikProps.setFieldError('phone', err.message));
+                                    }}
+                                />
+                                <ErrorMessage name="phone" render={(msg) => (
+                                    <>
+                                        <span className={cx('form-err')}>
+                                            {(msg && msg) || (errorPhone && errorPhone)}
+                                        </span>
+                                    </>
+                                )}></ErrorMessage>
+                            </div>
+                        </div>
+                        <div className={cx('form-row')}>
+                            <div>
+                                <span className={cx('label')}>
+                                    Giới Tính <span className={` ${cx('required-field')}`}>*</span>
+                                </span>
+                                <div className="d-flex">
+                                    <Field
+                                        as="select"
+                                        name="gender"
+                                        className="form-select"
+                                        style={{ height: '44px', fontSize: '15px' }}
+                                    >
+                                        <option value={0} className={cx('option')}>
+                                            Nam
+                                        </option>
+                                        <option value={1} className={cx('option')}>
+                                            Nữ
+                                        </option>
+                                    </Field>
+                                </div>
+                                <ErrorMessage name="sale" component="span" className={cx('form-err')}></ErrorMessage>
+                            </div>
 
-                    <div className="mt-4">
-                        <Button type="submit" primary>
-                            Thêm
-                        </Button>
-                        <Button to="/" outline>
-                            Hủy
-                        </Button>
-                    </div>
-                </Form>
-            </Formik>
-        </div>
+                            <div>
+                                <span className={cx('label')}>
+                                    Ngày Sinh <span className={` ${cx('required-field')}`}>*</span>
+                                </span>
+                                <Field className={` ${cx('form-control')}`} name="dateOfBirth" type="date" style={{ height: '45px' }} />
+                                <ErrorMessage
+                                    name="dateOfBirth"
+                                    component="span"
+                                    className={cx('form-err')}
+                                ></ErrorMessage>
+                            </div>
+                        </div>
+                        <div className={cx('form-row')}>
+                            <div>
+                                <span className={cx('label')}>
+                                    Địa Chỉ <span className={` ${cx('required-field')}`}>*</span>
+                                </span>
+                                <Field
+                                    className={` ${cx('form-control')}`}
+                                    type="text"
+                                    name="address"
+                                />
+                                <ErrorMessage name="address" component="span" className={cx('form-err')}></ErrorMessage>
+                            </div>
+                        </div>
+
+                        <div className={cx(`buttons`)}>
+                            <button
+                                type="submit"
+                                class="btn btn-success"
+                                style={{
+                                    padding: '10px 20px',
+                                    margin: '0 5px',
+                                }}
+                            >
+                                Tạo
+                            </button>
+                            <button
+                                type="submit"
+                                className="btn btn-danger"
+                                style={{
+                                    padding: '10px 20px',
+                                    margin: '0 5px',
+                                }}
+                                onClick={() => navigate('/admin/customer')}
+                            >
+                                Thoát
+                            </button>
+                        </div>
+                    </Form>}
+                </Formik>
+            </div>
+        </div >
     );
 }
 

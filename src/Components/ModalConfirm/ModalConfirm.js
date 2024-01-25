@@ -9,7 +9,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const submit =()=>{
+  const submit = () => {
     handleDelete(id);
     handleClose();
   }
