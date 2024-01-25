@@ -3,7 +3,7 @@ import Header from "../Layouts/Header/Header";
 import { ContentWareHouse } from "../Components/ContentWareHouse";
 import SideBar from "../Layouts/sidebar/SideBar";
 
-const Warehouse = () => {
+export default function Warehouse(){
   return (
     <>
       <div>
@@ -16,4 +16,3 @@ const Warehouse = () => {
     </>
   );
 };
-export default Warehouse();

@@ -83,6 +83,7 @@ export default function SideBar() {
           </>
         );
       } else if (roles.includes('ROLE_WAREHOUSE')) {
+        console.log(`Role: ${roles}`)
         return (
           <>
             <div className={style.list_item}>
@@ -91,7 +92,7 @@ export default function SideBar() {
                   <div className={style.item_sidebar}>
                     <div className={style.item_title}>
                       <ion-icon name="logo-buffer"></ion-icon>
-                      <span>saler</span>
+                      <span>Thông tin cá nhân</span>
                     </div>
                   </div>
                 </a>

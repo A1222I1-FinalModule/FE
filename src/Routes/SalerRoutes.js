@@ -5,7 +5,7 @@ import Payment from '../Components/Payment'
 import Saler from '../Pages/Saler';
 import StatisticalTable from '../templates/MonthlyStatisticalTable';
 
-const SalerRoutes = () => {
+export default function SalerRoutes() {
     return (
         <Routes>
             <Route path='/' element={<Saler><Payment /></Saler>} />
@@ -15,5 +15,3 @@ const SalerRoutes = () => {
         </Routes>
     );
 };
-
-export default SalerRoutes;
