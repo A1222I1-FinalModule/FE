@@ -2,8 +2,9 @@ import React from 'react';
 import SideBar from '../Layouts/sidebar/SideBar';
 import style from '../Assets/Styles/StyleDashBoard.module.css';
 import Header from '../Layouts/Header/Header';
-export default function Dashboard({ children }) {
-    return (
+// import style from '../assets/Styles/StyleDashBoard.module.css';
+export default function Dashboard({ children }){
+    return(
         <div>
             <Header></Header>
             <div className="row">

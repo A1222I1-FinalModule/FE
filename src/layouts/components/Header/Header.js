@@ -10,8 +10,8 @@ import { useUser } from '../../../Services/UserContext';
 import Login from '../../../Components/Login';
 import { useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
-import NotificationList from '../../../Components/Notification/NotificationList';
-import images from '../../../Assets/Images';
+import NotificationList from '../../../Components/notification/NotificationList';
+import images from '../../../Assets/images/logo.png';
 
 const cx = classNames.bind(styles);
 

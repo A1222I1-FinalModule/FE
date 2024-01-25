@@ -270,6 +270,13 @@
     padding: 25px;
 }
 
+/* 
+h1 {
+    font-size: 20px;
+    text-align: center;
+    color: red;
+} */
+
 .list_order {
     list-style: none;
     margin: 0;

@@ -1,4 +1,4 @@
-.list_Discount_container-main{
+.list_Discount_container-main {
   width: 1000px;
   height: 100vh;
   display: flex;
@@ -8,24 +8,26 @@
   margin: 0 auto;
   font-family: 14.4px 'Roboto', sans-serif;
 }
+
 .List_discount_find_container-find {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 }
 
-.container-table{
-  width: 100%; 
+.container-table {
+  width: 100%;
   margin-top: 20px;
 }
+
 .row-container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.action{
+.action {
   display: flex;
   gap: 10px;
 }
@@ -33,35 +35,36 @@
 .container-pagination {
   padding-top: 20px;
   display: flex;
-  justify-content: center; 
-  align-items: center;  
-  width: 100%;  
-}
-.head-discount{
-height: 55.4375px;
-width: 96.4625px;
-line-height: 3em;
-text-align: center;
-font-size: 13px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
-.headtr-discount{
+.head-discount {
+  height: 55.4375px;
+  width: 96.4625px;
+  line-height: 3em;
+  text-align: center;
+  font-size: 13px;
+}
+
+.headtr-discount {
   width: 860.275px;
   height: 60px;
 }
 
-.text-center{
+.text-center {
   height: 80px;
 }
 
-.findHeader{
+.findHeader {
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 }
 
-.buttonnn{
-  height:34px;
-  width:40px
+.buttonnn {
+  height: 34px;
+  width: 40px
 }
