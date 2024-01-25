@@ -8,7 +8,7 @@ export default function Dashboard({ children }) {
             <Header></Header>
             <div className="row">
                 <SideBar />
-                <div className={style.content + ' col-10 ps-0'} style={{ height: "100vh" }}>
+                <div className={style.content + ' col-12 col-lg-10 col-md-8 ps-0'} style={{ height: "100vh" }}>
                     {children}
 
                 </div>

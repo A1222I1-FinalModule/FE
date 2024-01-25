@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { LoginAPI } from '../../Services/API/authService';
 import Modal from 'react-bootstrap/Modal';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../Services/UserContext';
 import styles from '../../Assets/Styles/Login/login.module.css';
@@ -14,8 +13,10 @@ import {
   REGEX_SPECIAL_CHARACTERS,
 } from '../../Constants/LoginConstant/index';
 import { Button } from 'antd';
-import { PoweroffOutlined } from '@ant-design/icons';
+import { EyeInvisibleOutlined, EyeOutlined, PoweroffOutlined } from '@ant-design/icons';
+import { useCookies } from "react-cookie";
 const Login = (props) => {
+  const [cookies, setCookie] = useCookies(['jwt']);
   const defaultInput = {
     username: '',
     password: '',
@@ -25,6 +26,8 @@ const Login = (props) => {
   const [loadings, setLoadings] = useState([]);
   const [inputs, setInputs] = useState(defaultInput);
   const [error, setError] = useState('');
+  const [type, setType] = useState('password');
+  const [isShowPass, setIsShowPass] = useState(false);
   const updateValue = (key, value) => {
     setInputs({ ...inputs, [key]: value });
   };
@@ -41,6 +44,14 @@ const Login = (props) => {
       newLoadings[index] = false;
       return newLoadings;
     });
+  }
+  const handleShowPass = () => {
+    if (isShowPass) {
+      setType('password');
+    } else {
+      setType('text');
+    }
+    setIsShowPass(!isShowPass);
   }
   const resetError = () => setError('');
   const handleLogin = async () => {
@@ -59,6 +70,8 @@ const Login = (props) => {
     if (isValid) {
       LoginAPI(inputs)
         .then(async (response) => {
+          setCookie('jwt', response, { path: '/' });
+
           return await user.setUser(response);
         })
         .then((roles) => {
@@ -126,18 +139,21 @@ const Login = (props) => {
                     />
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-4" style={{ position: 'relative' }}>
                     <label className={styles['login-label']} htmlFor="pass">
                       Mật Khẩu
                     </label>
                     <input
                       value={inputs.password}
-                      type="password"
+                      type={type || 'password'}
                       id="pass"
                       className="form-control form-control-lg"
                       onFocus={() => resetError()}
                       onChange={(e) => updateValue('password', e.target.value)}
                     />
+                    {isShowPass ? (<EyeInvisibleOutlined className={styles['icon-eye']} onClick={handleShowPass} />) : (<EyeOutlined className={styles['icon-eye']} onClick={handleShowPass} />)}
+
+
                   </div>
                   <div style={{ height: '20px' }}>
                     <span style={{ color: 'red' }}>{error}</span>

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 
 import { formatMoney, convertSlug } from '../../utils/helpers';
-import * as productService from '../../Services/productService';
+import * as productService from '../../Services/API/productService';
 import styles from './Products.module.scss';
 
 const cx = classNames.bind(styles);
