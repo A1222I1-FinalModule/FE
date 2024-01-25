@@ -7,9 +7,10 @@ import Payment from '../Components/Payment'
 export default function SalerRoutes() {
     return (
         <Routes>       
-            <Route path='/payment' element={<Saler><Payment></Payment></Saler>} />
             <Route path='/statistical' element={<Saler><StatisticalTable /></Saler>} />
             <Route path='/info' element={<Saler><Info /></Saler>} />
+            <Route path='/payment' element={<Saler><Payment /></Saler>} />
         </Routes>
     );
 };
+

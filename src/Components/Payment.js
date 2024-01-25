@@ -2,19 +2,19 @@ import React, { useEffect, useRef, useState } from 'react';
 import CustomerSearchModal from "./CustomerSearchModal";
 import DiscounrSelectModal from "./DiscountSelectModal";
 import { Formik, Form } from "formik";
-import * as PaymentService from "../Services/payment/PaymentService"
+import * as PaymentService from "../Services/API/Payment/PaymentService"
 import "../Assets/Styles/payment.css"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PdfDoc from './PdfDoc';
 
 function Payment() {
-    // const pdfExportComponent = useRef(null);
-    // const handleExportPdf = () => {
-    //     if (pdfExportComponent.current) {
-    //         pdfExportComponent.current.handleExportPdf();
-    //     }
-    // };
+    const pdfExportComponent = useRef(null);
+    const handleExportPdf = () => {
+        if (pdfExportComponent.current) {
+            pdfExportComponent.current.handleExportPdf();
+        }
+    };
     const [productBill, setProductBill] = useState({
         productCode: "",
         quantity: 0
@@ -277,7 +277,7 @@ function Payment() {
                                     </div>
                                 </div>
                             </div>
-                            {/* {checkValidBill(bill) ? <PdfDoc bill={bill} discount={discount} ref={pdfExportComponent} /> : ""} */}
+                            {checkValidBill(bill) ? <PdfDoc bill={bill} discount={discount} ref={pdfExportComponent} /> : ""}
                         </div>
                     </Form>
                 )}

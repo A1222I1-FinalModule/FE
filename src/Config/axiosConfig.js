@@ -4,7 +4,7 @@ import { Cookies } from 'react-cookie';
 const instance = axios.create(() => {
     const intRequest = {
         withCredentials: true,
-        baseURL: 'http://54.254.193.131:8080',
+        // baseURL: 'http://54.254.193.131:8080',
         Headers: {
             'Content-Type': 'application/json',
         }
