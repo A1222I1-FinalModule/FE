@@ -153,7 +153,7 @@ function CustomerSearchModal(props) {
                             <div className='row'>
                                 <div className="input-group-append col-auto">
                                     <button className="btn btn-success normal-txt-payment" onClick={() => {
-                                        debounce(getSearchCustomer, 700);
+                                        debounce(getSearchCustomer, 800);
                                     }}>Tìm kiếm</button>
                                 </div>
                                 <div className='input-group-append col-auto'>

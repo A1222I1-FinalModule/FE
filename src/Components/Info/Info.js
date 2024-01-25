@@ -1,6 +1,6 @@
 import React from 'react';
 import style from './infomation.module.css'
-import avatar from '../../Assets/images/Anh-avatar-dep-anh-dai-dien-FB-Tiktok-Zalo.webp'
+import avatar from '../../Assets/Images/Anh-avatar-dep-anh-dai-dien-FB-Tiktok-Zalo.webp'
 const Info = () => {
     return (
         <>
