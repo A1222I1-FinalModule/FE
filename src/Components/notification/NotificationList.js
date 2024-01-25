@@ -9,8 +9,11 @@ import * as NotificationService from "../../Services/API/notification/Notificati
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { NotificationDelete } from "./NotificationDelete";
+import { useUser } from "../../Services/UserContext";
 
 export default function NotificationList() {
+
+  const user = useUser();
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
@@ -20,8 +23,22 @@ export default function NotificationList() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    getAllBySaler();
+    roleNotification();
   }, []);
+
+  const roleNotification = async () => {
+    const roles = await user.getRole(user.jwt);
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i] === "ROLE_SALE".trim()) {
+        getAllBySaler();
+      } else if (roles[i] === "ROLE_WAREHOUSE".trim()) {
+        getAllByWareHouse();
+      } else {
+        return;
+      }
+    }
+  }
+
 
   const getAllBySaler = async () => {
     let data = await NotificationService.getAllBySaler();
@@ -31,10 +48,22 @@ export default function NotificationList() {
     setCountNotification(newArr.length);
   };
 
+  const getAllByWareHouse = async () => {
+    let warehouse = await NotificationService.getAllByWarehouse();
+    setNotifications(warehouse);
+    let newArr = warehouse.filter((item) => item.status === false);
+    setNotificationNotRead(newArr);
+    setCountNotification(newArr.length);
+  }
+
   const getAllByNotReadSaler = () => {
     let arrNotRead = [...notificationNotRead];
     setNotificationNotRead(arrNotRead);
   };
+  // const getAllByNotReadWareHouse = () => {
+  //   let arrNotRead = [...notificationNotRead];
+  //   setNotificationNotRead(arrNotRead);
+  // }
   const handleDropdownClick = () => {
     setIsActive(!isActive);
   };
@@ -52,7 +81,7 @@ export default function NotificationList() {
 
   const handleAll = () => {
     setToggle(true);
-    getAllBySaler();
+    // getAllBySaler();
   };
   const handleNotRead = () => {
     setToggle(false);
@@ -134,7 +163,7 @@ export default function NotificationList() {
               </div>
             </div>
             <div className={styles.contentbody}>
-              {toggle ? (notifications.map((notification, index) => {
+              {toggle ? (notifications.map((notification) => {
                 return (<div
                   className={styles.contentnotification}
                   key={notification.id}
@@ -172,7 +201,8 @@ export default function NotificationList() {
                       </NotificationDelete>
                     </div>
                   </div>
-                </div>)
+                </div>
+                )
               }
               )) : (notificationNotRead.map((notification) => {
                 return (<div
@@ -212,8 +242,8 @@ export default function NotificationList() {
                       </NotificationDelete>
                     </div>
                   </div>
+                  <div className={styles.notread}><span></span></div>
                 </div>
-
                 )
               }))}
             </div>

@@ -23,7 +23,7 @@ export function NotificationDelete({ getNotifications, id }) {
             }, 2000);
         }),
             {
-                pending: "Loading Content....",
+                pending: "Đang xóa....",
                 success: "xóa thành công",
                 error: "Error received!",
             }

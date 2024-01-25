@@ -107,7 +107,7 @@
 }
 
 .contentnotification {
-    position: static;
+    position: relative;
 }
 
 .threedots {
@@ -139,6 +139,7 @@
     right: 30px;
     height: 100px;
     border-radius: 10px;
+    z-index: 99;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
@@ -222,9 +223,11 @@
 .notread {
     width: 10px;
     height: 10px;
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0.477);
     border-radius: 50%;
-    display: inline-block;
+    position: absolute;
+    top: 5px;
+    left: 450px;
 }
 
 @media (max-width: 576px) {
