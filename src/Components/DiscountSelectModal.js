@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import * as PaymentService from "../Services/payment/PaymentService"
+import * as PaymentService from "../Services/API/payment/PaymentService"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../Assets/Styles/discount-select-modal.css'

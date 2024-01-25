@@ -37,3 +37,12 @@
 .error {
     height: 24px !important;
 }
+
+.icon-eye {
+    position: absolute;
+    top: 35px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    opacity: 0.5;
+}

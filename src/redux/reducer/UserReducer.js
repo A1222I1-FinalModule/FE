@@ -1,19 +1,16 @@
 import { LOGIN } from '../type';
-const initUser = {
-    isLogged: false,
-};
-const userReducer = (initUser, action) => {
+
+const userReducer = (users = { jwt: "", }, action) => {
     const { type, payload } = action;
     switch (type) {
         case LOGIN: {
             return {
-                ...initUser,
+                ...users,
                 ...payload,
-                isLogged: true,
             };
         }
         default:
-            return initUser;
+            return users;
     }
 };
 
