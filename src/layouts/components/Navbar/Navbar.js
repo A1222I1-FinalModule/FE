@@ -10,7 +10,9 @@ function Navbar() {
         <div className={cx('wrapper')}>
             <Menu>
                 <MenuItem to={'/'} title="Trang chủ" />
-                <MenuItem to={'/news'} title="Tin tức" />
+                <MenuItem to={'/nam'} title="Nam" />
+                <MenuItem to={'/nu'} title="Nữ" />
+                <MenuItem to={'/tin-tuc'} title="Tin tức" />
             </Menu>
         </div>
     );

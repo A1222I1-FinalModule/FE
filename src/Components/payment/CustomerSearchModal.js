@@ -8,7 +8,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerSearchModal(props) {
-    let selectedCode = props.chooseCode;
     let timer;
     const [searchStr, setSearchStr] = useState("");
     const [show, setShow] = useState(false);
@@ -24,9 +23,6 @@ function CustomerSearchModal(props) {
     const debounce = (func, delay) => {
         if (timer) clearTimeout(timer);
         timer = setTimeout(func, delay);
-    };
-    const handleChange = (code) => {
-        selectedCode = code;
     };
 
     useEffect(() => {
@@ -68,9 +64,7 @@ function CustomerSearchModal(props) {
             <>
                 {currentItems &&
                     currentItems.map((item, index) => (
-                        <tr key={item.id} className={"tbl-row table-light" + (item.id == props.chooseCode ? " table-active" : "")} onClick={(event) => {
-                            handleChange(item.id);
-                        }}>
+                        <tr key={item.id} className={"tbl-row table-light" + (item.id == props.chooseCode ? " table-active" : "")}>
                             <td style={{ width: "5%" }}>{index + 1}</td>
                             <td style={{ width: "25%" }}>{item.id}</td>
                             <td style={{ width: "40%" }}>{item.name}</td>
@@ -98,7 +92,7 @@ function CustomerSearchModal(props) {
 
         return (
             <>
-                <table align="center" id="custom-table-customer-search" className="table table-hover mt-4 table-bordered normal-txt-payment">
+                <table align="center" id="custom-table-customer-search" className="table mt-4 table-bordered normal-txt-payment">
                     <thead>
                         <tr className="table-dark text-center">
                             <th>STT</th>
@@ -150,7 +144,7 @@ function CustomerSearchModal(props) {
                     <div>
                         <div>
                             <div className="input-group mb-3">
-                                <input type="text" value={searchStr} onChange={(e) => setSearchStr(e.target.value)} className="form-control p-4 normal-txt-payment" placeholder="Nhập mã KH, tên KH hoặc sdt" />
+                                <input type="text" onChange={(e) => setSearchStr(e.target.value)} className="form-control p-4 normal-txt-payment" placeholder="Nhập mã KH, tên KH hoặc sdt" />
                             </div>
                             <div className='row'>
                                 <div className="input-group-append col-auto">

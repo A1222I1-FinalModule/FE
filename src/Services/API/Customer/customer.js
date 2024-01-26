@@ -1,4 +1,4 @@
-import instance from "../../../Config/instanceConfig";
+import instance from "../../../Config/axiosConfig";
 export const findAllCustomer = async () => {
     try {
         let temp = await instance.get("/api/admin/listCustomer");
@@ -10,7 +10,7 @@ export const findAllCustomer = async () => {
 }
 
 export const getDeleteCustomer = async (id) => {
-    let temp = await instance.delete(`/api/admin/deleteByIdCustomer?id=${id}`);
+    let temp = await instance.get(`/api/admin/deleteByIdCustomer?id=${id}`);
     return temp.data;
 }
 
@@ -18,7 +18,6 @@ export const getDeleteCustomer = async (id) => {
 export const findByNameCustomer = async (name) => {
     try {
         let temp = await instance.get(`/api/admin/findByNameCustomer?name=${name}`);
-        console.log(temp);
         return temp.data;
     } catch (err) {
         console.log(err);
