@@ -78,6 +78,16 @@ export default function SideBar() {
       } else if (roles.includes('ROLE_SALE')) {
         return (
           <>
+           <div className={style.contain_item}>
+              <Link to="/sale/info" className={style.single_option}>
+                <div className={style.item_sidebar}>
+                  <div className={style.item_title}>
+                    <ion-icon name="logo-buffer"></ion-icon>
+                    <span>Thông Tin Cá Nhân</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
             <div className={style.contain_item}>
               <Link to="/sale/payment" className={style.single_option}>
                 <div className={style.item_sidebar}>
