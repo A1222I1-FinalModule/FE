@@ -1,15 +1,17 @@
-import { Route, Routes } from "react-router-dom";
-import Login from "../Components/Login";
-import "react-toastify/dist/ReactToastify.css";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom'; 
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
-import { Warehouse } from '../Pages/WareHouse';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
 import { useEffect, useState } from "react";
 import { useUser } from "../Services/UserContext";
 import { jwtDecode } from 'jwt-decode';
-
+import NotFound from "../Pages/NotFound";
+import WarehouseRoutes from './WarehouseRoutes';
+import ListProduct from '../Pages/ListProduct'
+import ProductMale from '../Pages/ProductMale'
+import ProductFemale from '../Pages/ProductFemale'
 const MainRouter = () => {
   const [roles, setRoles] = useState([]);
   const user = useUser();
@@ -33,8 +35,8 @@ const MainRouter = () => {
         element={roles.find((role) => role === "ROLE_SALE") ? (<SalerRoutes />) : (<DefaultLayout>
           <Home />
         </DefaultLayout>)}></Route>
-      <Route path="/warehouse"
-        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<Warehouse />) : (<DefaultLayout>
+      <Route path="/warehouse/*"
+        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<WarehouseRoutes />) : (<DefaultLayout>
           <Home />
         </DefaultLayout>)}></Route>
       <Route
@@ -45,16 +47,38 @@ const MainRouter = () => {
           </DefaultLayout>
         }
       />
+
       <Route
-        path="/home"
+        path="/search"
         element={
           <DefaultLayout>
-            <Home />
+            <ListProduct />
           </DefaultLayout>
         }
       />
-    </Routes>
-  );
-};
 
+      <Route
+        path="/nam"
+        element={
+          <DefaultLayout>
+            <ProductMale />
+          </DefaultLayout>
+        }
+      />
+
+      <Route
+        path="/nu"
+        element={
+          <DefaultLayout>
+            <ProductFemale />
+          </DefaultLayout>
+        }
+      />
+      <Route path="*" element={<NotFound />}>
+
+      </Route>
+    </Routes>
+
+  );
+}
 export default MainRouter;

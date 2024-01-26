@@ -8,9 +8,8 @@ const Saler = ({ children }) => {
   return (
     <>
       <div>
-        <HeaderSaler>
-
-        </HeaderSaler>
+        <Header>
+        </Header>
         <div className="row h-100">
           <SideBarSaler></SideBarSaler>
           <div className={style.content + ' col-10 ps-0'}>

@@ -1,0 +1,29 @@
+.wrapper {
+    width: 100%;
+    height: 90vh;
+    padding: 16px;
+    box-sizing: border-box;
+
+}
+
+.pictureList {
+    width: 50px;
+}
+
+.card {
+    height: 100vh;
+}
+
+.pagination-content li a {
+    background-color: #F1F2F7;
+}
+
+.page-item {
+    background-color: #F1F2F7 !important;
+}
+
+.input {
+    flex-direction: row;
+    justify-content: left;
+    margin-bottom: 12px;
+}

@@ -36,6 +36,17 @@ export default function SideBarSaler() {
               </div>
             </a>
           </div>
+          <div className={style.contain_item}>
+            <a href="/abc" className={style.single_option}>
+              <div className={style.item_sidebar}>
+                <div className={style.item_title}>
+                  <ion-icon name="logo-buffer"></ion-icon>
+                  <span>Thông Báo Mới</span>
+                </div>
+              </div>
+            </a>
+          </div>
+
         </div>
       </div>
     </div>

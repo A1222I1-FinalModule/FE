@@ -41,11 +41,11 @@ export default function NotificationList() {
 
 
   const getAllBySaler = async () => {
-    let data = await NotificationService.getAllBySaler();
-    setNotifications(data);
-    let newArr = data.filter((item) => item.status === false);
-    setNotificationNotRead(newArr);
-    setCountNotification(newArr.length);
+    // let data = await NotificationService.getAllBySaler();
+    // setNotifications(data);
+    // let newArr = data.filter((item) => item.status === false);
+    // setNotificationNotRead(newArr);
+    // setCountNotification(newArr.length);
   };
 
   const getAllByWareHouse = async () => {

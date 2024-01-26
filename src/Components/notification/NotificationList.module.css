@@ -7,6 +7,8 @@
 .detail {
     color: #e4e6eb;
     text-decoration: none;
+    color: #e4e6eb;
+    text-decoration: none;
 }
 
 .contentlink {
@@ -29,25 +31,43 @@
     outline: none;
     border-radius: 50%;
     background: #dddddd;
+    position: relative;
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    border-radius: 50%;
+    background: #dddddd;
 }
 
 .dropdownbtn:hover .bibellfill {
+    color: black !important;
     color: black !important;
 }
 
 .dropdownbtn:hover .titlehide {
     display: block;
+    display: block;
 }
 
 .bibellfill {
+    color: white;
     color: white;
 }
 
 .active i {
     color: black;
+    color: black;
 }
 
 .active .iconbutton_badge {
+    display: none;
     display: none;
 }
 
@@ -66,6 +86,9 @@
 }
 
 .titleshow {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #242526 !important;
     text-align: center;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #242526 !important;
@@ -127,6 +150,8 @@
 .bithreedots {
     width: 40px;
     height: 20px;
+    width: 40px;
+    height: 20px;
 }
 
 .threedotdetail {
@@ -145,13 +170,17 @@
 
 .contentnotification:hover .threedots {
     visibility: visible;
+    visibility: visible;
 }
 
 .threedots:hover {
     color: #dddddd;
+    color: #dddddd;
 }
 
 .buttonnotification {
+    padding: 5px;
+    padding-left: 10px;
     padding: 5px;
     padding-left: 10px;
 }
@@ -159,13 +188,17 @@
 .contentbody::-webkit-scrollbar {
     width: 10px;
     background-color: transparent;
+    width: 10px;
+    background-color: transparent;
 }
 
 .contentbody:hover:-webkit-scrollbar-track {
     background: #242526;
+    background: #242526;
 }
 
 .contentbody:hover:-webkit-scrollbar-thumb {
+    background-color: transparent;
     background-color: transparent;
 }
 
@@ -174,9 +207,13 @@
     margin-top: 15px;
     max-height: 400px;
     overflow-y: scroll;
+    margin-top: 15px;
+    max-height: 400px;
+    overflow-y: scroll;
 }
 
 .contentbody:hover::-webkit-scrollbar-thumb {
+    background-color: gray;
     background-color: gray;
 }
 
@@ -235,8 +272,21 @@
         width: 70%;
     }
 
+    .dropdowncontainer {
+        width: 70%;
+    }
+
     .threedots {
         left: 250px;
+    }
+
+    .threedots {
+        left: 250px;
+    }
+
+    .threedotdetail {
+        width: 250px;
+        left: -200px;
     }
 
     .threedotdetail {

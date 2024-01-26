@@ -1,19 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import Tippy from '@tippyjs/react/headless';
 
-import * as productService from '../../../Services/productService';
+import { useDebounce } from '../../../Hooks';
+import * as productService from '../../../Services/API/productService';
 import { Wrapper as PopperWrapper } from '../../../Components/Popper';
 import Button from '../../../Components/Button';
 import { ClearIcon, SearchIcon, SpinnerIcon } from '../../../Components/Icons';
+import ProductSearch from '../../../Components/ProductSearch';
 import styles from './Search.module.scss';
-import ProductItem from '../../../Components/ProductItem';
-import { useDebounce } from '../../../Hooks';
 
 const cx = classNames.bind(styles);
 
 function Search() {
+    const navigate = useNavigate();
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(false);
@@ -21,8 +23,6 @@ function Search() {
 
     const debouncedValue = useDebounce(searchValue, 500);
     const inputRef = useRef();
-
-    console.log(searchResult);
 
     useEffect(() => {
         if (!debouncedValue.trim()) {
@@ -32,7 +32,7 @@ function Search() {
 
         const fetchApi = async () => {
             setLoading(true);
-            const result = await productService.searchProducts(searchValue);
+            const result = await productService.searchProducts({ name: searchValue, size: '20' });
             setSearchResult(result);
             setLoading(false);
         };
@@ -67,12 +67,15 @@ function Search() {
                         <PopperWrapper>
                             <h4 className={cx('search-title')}>Sản phẩm</h4>
                             {searchResult.slice(0, 5).map((result) => (
-                                <ProductItem key={result.id} data={result} />
+                                <ProductSearch key={result.id} data={result} />
                             ))}
 
                             <Button
-                                to={{ pathname: '/list-product', state: { data: searchResult } }}
                                 className={cx('search-more')}
+                                onClick={() => {
+                                    navigate(`/search?q=${searchValue}`, { state: { data: searchResult } });
+                                    setSearchValue('');
+                                }}
                             >
                                 Xem thêm
                             </Button>

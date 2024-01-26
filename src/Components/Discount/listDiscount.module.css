@@ -1,24 +1,19 @@
 .list_Discount_container-main {
-  width: 90%;
-  height: auto;
+  width: 1000px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  padding-top: 30px;
   align-items: center;
   margin: 0 auto;
   font-family: 14.4px 'Roboto', sans-serif;
 }
 
-.List_customer_find_container-find {
+.List_discount_find_container-find {
   display: flex;
   align-items: center;
   gap: 10px;
   justify-content: flex-start;
-}
-
-.custom-table-layout {
-  table-layout: auto !important;
-  width: auto !important;
 }
 
 .container-table {
@@ -27,9 +22,9 @@
 }
 
 .row-container {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .action {
@@ -41,8 +36,35 @@
   padding-top: 20px;
   display: flex;
   justify-content: center;
-  /* Can giữa theo chiều ngang */
   align-items: center;
-  /* Can giữa theo chiều dọc */
   width: 100%;
+}
+
+.head-discount {
+  height: 55.4375px;
+  width: 96.4625px;
+  line-height: 3em;
+  text-align: center;
+  font-size: 13px;
+}
+
+.headtr-discount {
+  width: 860.275px;
+  height: 60px;
+}
+
+.text-center {
+  height: 80px;
+}
+
+.findHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.buttonnn {
+  height: 34px;
+  width: 40px
 }
