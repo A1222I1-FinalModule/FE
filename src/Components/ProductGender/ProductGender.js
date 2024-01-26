@@ -5,21 +5,21 @@ import * as productService from '../../Services/API/productService';
 import ProductItem from '../ProductItem';
 import Button from '../Button';
 import styles from './ProductGender.module.scss';
-
 const cx = classNames.bind(styles);
 
 function ProductGender({ category }) {
     const [products, setProducts] = useState([]);
     const [size, setSize] = useState(10);
 
-    useEffect(() => {
-        const fetchProductGender = async () => {
-            const res = await productService.searchProductCategories(category);
-            setProducts(res);
-        };
+    // useEffect(() => {
+    //     const fetchProductGender = async () => {
+    //         const res = await productService.searchProductCategories(category);
+    //         console.log(res);
+    //         setProducts(res);
+    //     };
 
-        fetchProductGender();
-    }, []);
+    //     fetchProductGender();
+    // }, []);
 
     return (
         <div className={cx('wrapper')}>

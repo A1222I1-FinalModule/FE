@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import * as productService from '../../Services/API/productService';
+import ProductItem from '../../Components/ProductItem';
 import styles from './Products.module.scss';
-import ProductItem from '../ProductItem'
 
 const cx = classNames.bind(styles);
 

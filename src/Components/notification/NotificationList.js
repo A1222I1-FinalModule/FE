@@ -6,17 +6,39 @@ import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import styles from "./NotificationList.module.css";
 import * as NotificationService from "../../Services/API/notification/NotificationService";
+import { Modal } from "react-bootstrap";
+import Button from "react-bootstrap/Button";
+import { NotificationDelete } from "./NotificationDelete";
+import { useUser } from "../../Services/UserContext";
 
 export default function NotificationList() {
+
+  const user = useUser();
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
   const [notificationNotRead, setNotificationNotRead] = useState([]);
-  const [notificationDelete, setNotificationDelete] = useState([]);
   const [toggle, setToggle] = useState(true);
+  const [modal, setModal] = useState(false);
+  const [data, setData] = useState();
+
   useEffect(() => {
-    getAllBySaler();
+    roleNotification();
   }, []);
+
+  const roleNotification = async () => {
+    const roles = await user.getRole(user.jwt);
+    for (let i = 0; i < roles.length; i++) {
+      if (roles[i] === "ROLE_SALE".trim()) {
+        getAllBySaler();
+      } else if (roles[i] === "ROLE_WAREHOUSE".trim()) {
+        getAllByWareHouse();
+      } else {
+        return;
+      }
+    }
+  }
+
 
   const getAllBySaler = async () => {
     // let data = await NotificationService.getAllBySaler();
@@ -26,10 +48,22 @@ export default function NotificationList() {
     // setCountNotification(newArr.length);
   };
 
-  const getAllByNotReadSaler = async () => {
-    let newArrNotRead = [...notificationNotRead];
-    notificationDelete(newArrNotRead);
+  const getAllByWareHouse = async () => {
+    let warehouse = await NotificationService.getAllByWarehouse();
+    setNotifications(warehouse);
+    let newArr = warehouse.filter((item) => item.status === false);
+    setNotificationNotRead(newArr);
+    setCountNotification(newArr.length);
+  }
+
+  const getAllByNotReadSaler = () => {
+    let arrNotRead = [...notificationNotRead];
+    setNotificationNotRead(arrNotRead);
   };
+  // const getAllByNotReadWareHouse = () => {
+  //   let arrNotRead = [...notificationNotRead];
+  //   setNotificationNotRead(arrNotRead);
+  // }
   const handleDropdownClick = () => {
     setIsActive(!isActive);
   };
@@ -42,23 +76,48 @@ export default function NotificationList() {
     }
   };
 
+
+  const handleClose = () => setModal(false);
+
   const handleAll = () => {
     setToggle(true);
-    getAllBySaler();
+    // getAllBySaler();
   };
   const handleNotRead = () => {
     setToggle(false);
   };
 
-  const handleDelete = async (id) => {
+
+  const getDelete = async (id) => {
     await NotificationService.deleteNotification(id);
-    getAllBySaler();
+    await getAllBySaler();
+  }
+
+  const getDeleteNotRead = async (id) => {
+    await NotificationService.deleteNotification(id);
+    getAllByNotReadSaler();
+  }
+  const handleDelete = async (id) => {
+    getDelete(id).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err);
+    })
   };
 
   const handleDeleteNotRead = async (id) => {
-    await NotificationService.deleteNotification(id);
-    getAllByNotReadSaler();
-  };
+    getDeleteNotRead(id).then((res) => {
+      console.log(res)
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+  const handleFindById = async (id) => {
+    setModal(true);
+    let data = await NotificationService.findByid(id);
+    setData(data);
+  }
+
 
   const currentDate = format(new Date(), "dd-MM-yyyy");
   if (!notifications) return null;
@@ -86,7 +145,7 @@ export default function NotificationList() {
               <div className={styles.contenttitle}>Thông báo</div>
               <div className="button-notification d-flex flex-wrap gap-2 ">
                 <button
-                  className="btn btn-sm btn-outline-info text-lowercase fs-6 "
+                  className="btn btn-sm btn-outline-info  fs-5 mt-3 "
                   onClick={() => {
                     handleAll();
                   }}
@@ -94,7 +153,7 @@ export default function NotificationList() {
                   Tất Cả
                 </button>
                 <button
-                  className="btn btn-sm btn-outline-info text-lowercase fs-6"
+                  className="btn btn-sm btn-outline-info  fs-5 mt-3"
                   onClick={() => {
                     handleNotRead();
                   }}
@@ -104,7 +163,7 @@ export default function NotificationList() {
               </div>
             </div>
             <div className={styles.contentbody}>
-              {toggle ? (notifications.map((notification, index) => {
+              {toggle ? (notifications.map((notification) => {
                 return (<div
                   className={styles.contentnotification}
                   key={notification.id}
@@ -127,24 +186,25 @@ export default function NotificationList() {
                       className={styles.threedotdetail}
                       id={`selection${notification.id}`}
                     >
-                      <a
-                        className={styles.contentlink}
-                        href="#"
-                      >
-                        Chi tiết Thông báo
-                      </a>
                       <button
                         className={styles.contentlink}
                         onClick={() => {
-                          handleDelete(notification.id);
+                          handleFindById(notification.id);
                         }}
                       >
-                        Gỡ thông báo
+                        Chi tiết Thông báo
                       </button>
+                      <NotificationDelete
+                        id={notification.id}
+                        getNotifications={handleDelete}
+                      >
+                      </NotificationDelete>
                     </div>
                   </div>
-                </div>)
-              })) : (notificationNotRead.map((notification, index) => {
+                </div>
+                )
+              }
+              )) : (notificationNotRead.map((notification) => {
                 return (<div
                   className={styles.contentnotification}
                   key={notification.id}
@@ -167,36 +227,42 @@ export default function NotificationList() {
                       className={styles.threedotdetail}
                       id={`selection${notification.id}`}
                     >
-                      <a
+                      <button
                         className={styles.contentlink}
-                        href="#"
+                        onClick={() => {
+                          handleFindById(notification.id);
+                        }}
                       >
                         Chi tiết Thông báo
-                      </a>
-                      <button
-                        className={styles.contentlink}
-                        onClick={() => {
-                          handleDeleteNotRead(notification.id);
-                        }}
-                      >
-                        Gỡ thông báo
                       </button>
-                      <button
-                        className={styles.contentlink}
-                        onClick={() => {
-
-                        }}
+                      <NotificationDelete
+                        id={notification.id}
+                        getNotifications={handleDeleteNotRead}
                       >
-                        Đánh dấu đã đọc
-                      </button>
+                      </NotificationDelete>
                     </div>
                   </div>
-                </div>)
+                  <div className={styles.notread}><span></span></div>
+                </div>
+                )
               }))}
             </div>
           </div>
         )}
       </div>
+      {<Modal show={modal} onHide={handleClose} backdrop="static" keyboard={false} className={styles.modalcss}>
+        <Modal.Header >
+          <Modal.Title className={styles.titlemodal}>Thông báo</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className={styles.contentmodal}>
+          {data ? data.content : ""}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Đóng thông báo
+          </Button>
+        </Modal.Footer>
+      </Modal>}
     </>
   );
 }
