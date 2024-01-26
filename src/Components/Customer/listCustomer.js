@@ -47,20 +47,25 @@ export function ListCustomer() {
                 setLoading(false);
                 setShowNotFoundModal(true);
                 temp = await customers.findAllCustomer();
+                setSearchInput('');
                 setCustomer(temp.filter((item) => item.delete === true));
             } else if (temp.length === 0) {
                 setLoading(false);
                 setShowNotFoundModal(true);
                 temp = await customers.findAllCustomer();
+                setSearchInput('');
                 setCustomer(temp.filter((item) => item.delete === true));
             } else {
-                setCustomer(temp.filter((item) => item.delete === true));
+                const arr = temp.filter((item) => item.delete === true);
+                setCustomer(arr.reverse());
+                setSearchInput('');
                 setLoading(false);
                 setCurrentPage(1);
             }
         } else {
             temp = await customers.findAllCustomer();
-            setCustomer(temp.filter((item) => item.delete === true));
+            const arr = temp.filter((item) => item.delete === true);
+            setCustomer(arr.reverse());
             setLoading(false);
         }
     };
@@ -151,7 +156,6 @@ export function ListCustomer() {
                             ) : (
                                 records.map((customer, index) => {
                                     const rowNumber = firstIndex + index + 1;
-                                    
                                     return (
                                         <tr key={index} className={styled['headtr-customer']}>
                                             <td className="text-center" style={{ fontSize: '13px' }}>

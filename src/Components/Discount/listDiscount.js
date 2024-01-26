@@ -13,7 +13,7 @@ import Loading from '../Customer/Loading';
 export function Discount() {
     const [discount, setDiscount] = useState([]);
     const [searchInput, setSearchInput] = useState('');
-    const [searhType, setSearhType] = useState('0');
+    const [searhType, setSearhType] = useState(0);
     const [showNotFoundModal, setShowNotFoundModal] = useState(false);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
@@ -61,7 +61,8 @@ export function Discount() {
                 temp = await discounts.findAllDiscount();
                 setDiscount(temp.filter((item) => item.delete === true));
             } else {
-                setDiscount(temp.filter((item) => item.delete === true));
+                const arr = temp.filter((item) => item.delete === true)
+                setDiscount(arr.reverse());
                 setLoading(false);
                 setSearchInput('');
                 setSearhType('0');
@@ -69,7 +70,8 @@ export function Discount() {
             }
         } else {
             temp = await discounts.findAllDiscount();
-            setDiscount(temp.filter((item) => item.delete === true));
+            const arr = temp.filter((item) => item.delete === true)
+            setDiscount(arr.reverse());
             setLoading(false);
         }
     };
@@ -108,7 +110,7 @@ export function Discount() {
                                 className="btn btn-primary"
                                 data-mdb-ripple-init
                                 style={{ width: '75px', height: '33px' }}
-                                onClick={getAllDiscount}
+                                onClick={getAllDiscount}    
                             >
                                 Tìm
                             </button>
@@ -176,7 +178,7 @@ export function Discount() {
                         <tbody>
                             {loading ? (
                                 <tr>
-                                    <td colSpan="7">
+                                    <td colSpan="8">
                                         <Loading />
                                     </td>
                                 </tr>
