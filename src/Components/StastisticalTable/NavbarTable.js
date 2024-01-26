@@ -3,7 +3,6 @@ import style from '../../Assets/css/StatisticalTable.module.css';
 
 const NavbarTable = () => {
   return (
-    <div className={`col-2 p-0`}>
       <ul className={style.statistical_navbar}>
         <li className={style.navbar_item}>
           <Link to="daily" className={`${style.navbar_item_link} active`}>
@@ -16,7 +15,6 @@ const NavbarTable = () => {
           </Link>
         </li>
       </ul>
-    </div>
   )
 }
 

@@ -5,6 +5,7 @@ import { Chart as ChartJS, Tooltip, Legend, Title, BarElement, CategoryScale, Li
 import { Bar, Pie } from "react-chartjs-2";
 import ReactToPrint from "react-to-print";
 import { Button } from "react-bootstrap";
+import NavbarTable from "./NavbarTable";
 
 ChartJS.register(
   ArcElement,
@@ -103,6 +104,7 @@ const MonthlyTable = () => {
   return (
     <div className={`col-10 p-0`}>
       <div className={`card text-dark w-100 mb-3`}>
+        <NavbarTable />
         <div className={`card-body w-100`} ref={(element) => (componentRef = element)}>
           <div className={`row`}>
             <p className={`col-3 title mb-2`}>Tháng/năm</p>

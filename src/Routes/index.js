@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { useUser } from "../Services/UserContext";
 import { jwtDecode } from 'jwt-decode';
 import NotFound from "../Pages/NotFound";
+import WarehouseRoutes from "./WarehouseRoutes";
 
 const MainRouter = () => {
   const [roles, setRoles] = useState([]);
@@ -41,8 +42,8 @@ const MainRouter = () => {
         element={roles.find((role) => role === "ROLE_SALE") ? (<SalerRoutes />) : (<DefaultLayout>
           <Home />
         </DefaultLayout>)}></Route>
-      <Route path="/warehouse"
-        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<Warehouse />) : (<DefaultLayout>
+      <Route path="/warehouse/*"
+        element={roles.find((role) => role === "ROLE_WAREHOUSE") ? (<WarehouseRoutes />) : (<DefaultLayout>
           <Home />
         </DefaultLayout>)}></Route>
       <Route

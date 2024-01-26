@@ -6,9 +6,9 @@ function Home() {
     return (
         <div>
             <Banner />
-            <Products />
+            {/* <Products />
             <ProductGender category={'1'} />
-            <ProductGender category={'2'} />
+            <ProductGender category={'2'} /> */}
         </div>
     );
 }

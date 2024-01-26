@@ -4,13 +4,16 @@ import Info from '../Components/Info/Info';
 import Payment from '../Components/Payment'
 import StatisticalTable from '../templates/MonthlyStatisticalTable';
 import { Warehouse } from '../Pages/WareHouse';
+import DailyTable from '../Components/StastisticalTable/DailyTable';
+import MonthlyTable from '../Components/StastisticalTable/MonthlyTable';
 
 const WarehouseRoutes = () => {
     return (
         <Routes>
             <Route path='/' element={<Warehouse><Payment /></Warehouse>} />
             <Route path='/payment' element={<Warehouse><Payment /></Warehouse>} />
-            <Route path='/statistical' element={<Warehouse><StatisticalTable /></Warehouse>} />
+            <Route path='/daily' element={<Warehouse><DailyTable /></Warehouse>} />
+            <Route path='/monthly' element={<Warehouse><MonthlyTable /></Warehouse>} />
             <Route path='/info' element={<Warehouse><Info /></Warehouse>} />
         </Routes>
     );

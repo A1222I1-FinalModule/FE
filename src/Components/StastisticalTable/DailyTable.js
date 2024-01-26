@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 import ReactToPrint from 'react-to-print';
 import { Chart as ChartJS, Tooltip, Legend, Title, BarElement, CategoryScale, LinearScale, ArcElement } from "chart.js";
 import { Pie } from "react-chartjs-2";
+import NavbarTable from './NavbarTable';
 
 ChartJS.register(
   ArcElement,
@@ -82,6 +83,7 @@ const DailyTable = () => {
   return (
     <div className={`col-10 p-0`}>
       <div className={`card text-dark w-100 mb-3`}>
+        <NavbarTable />
         <div className={`card-body w-100`} ref={(element) => (componentRef = element)}>
           <div className={`row`}>
             <p className={`col-3 title mb-2`}>Ngày/tháng/năm</p>
