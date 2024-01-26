@@ -12,7 +12,6 @@ import { NotificationDelete } from "./NotificationDelete";
 import { useUser } from "../../Services/UserContext";
 
 export default function NotificationList() {
-
   const user = useUser();
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
@@ -41,11 +40,11 @@ export default function NotificationList() {
 
 
   const getAllBySaler = async () => {
-    // let data = await NotificationService.getAllBySaler();
-    // setNotifications(data);
-    // let newArr = data.filter((item) => item.status === false);
-    // setNotificationNotRead(newArr);
-    // setCountNotification(newArr.length);
+    let data = await NotificationService.getAllBySaler();
+    setNotifications(data);
+    let newArr = data.filter((item) => item.status === false);
+    setNotificationNotRead(newArr);
+    setCountNotification(newArr.length);
   };
 
   const getAllByWareHouse = async () => {

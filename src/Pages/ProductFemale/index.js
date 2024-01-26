@@ -1,4 +1,4 @@
-import ProductGender from '../../Components/ProductGender/ProductGender';
+import ProductGender from '../../Components/ProductGender';
 
 function ProductFemale() {
     return (

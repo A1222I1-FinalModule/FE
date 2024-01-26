@@ -10,7 +10,7 @@ export default function Dashboard({ children }) {
             <Header hideSearch={false}></Header>
             <div className="row" style={{ marginTop: '80px' }}>
                 <SideBar />
-                <div className={style.content + ' col-12 col-lg-10 col-md-8 ps-0'} style={{ height: "100vh" }}>
+                <div className={style.content + ' col-12 col-lg-10 col-md-8 ps-0'} >
                     {children}
                 </div>
                 <ToastContainer />

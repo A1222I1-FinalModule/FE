@@ -11,15 +11,15 @@ function ProductGender({ category }) {
     const [products, setProducts] = useState([]);
     const [size, setSize] = useState(10);
 
-    // useEffect(() => {
-    //     const fetchProductGender = async () => {
-    //         const res = await productService.searchProductCategories(category);
-    //         console.log(res);
-    //         setProducts(res);
-    //     };
+    useEffect(() => {
+        const fetchProductGender = async () => {
+            const res = await productService.searchProductCategories(category);
+            console.log(res);
+            setProducts(res);
+        };
 
-    //     fetchProductGender();
-    // }, []);
+        fetchProductGender();
+    }, []);
 
     return (
         <div className={cx('wrapper')}>
