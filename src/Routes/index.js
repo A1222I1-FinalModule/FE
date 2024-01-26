@@ -1,24 +1,17 @@
-import { Route, Routes } from "react-router-dom";
-import "react-toastify/dist/ReactToastify.css";
 import React from 'react';
-import Dashboard from '../Pages/DashBoard';
-import Payment from '../Components/Payment';
-import { CreateDiscount } from '../Components/Discount/createDiscount';
-import { ListCustomer } from '../Components/Customer/listCustomer';
-import { Discount } from '../Components/Discount/listDiscount';
-import { UpdateDiscount } from '../Components/Discount/updateDiscount';
+import { Route, Routes } from 'react-router-dom'; 
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
-import Saler from '../Pages/Saler';
-import { Warehouse } from '../Pages/WareHouse';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
 import { useEffect, useState } from "react";
 import { useUser } from "../Services/UserContext";
 import { jwtDecode } from 'jwt-decode';
 import NotFound from "../Pages/NotFound";
-import WarehouseRoutes from "./WarehouseRoutes";
-
+import WarehouseRoutes from './WarehouseRoutes';
+import ListProduct from '../Pages/ListProduct'
+import ProductMale from '../Pages/ProductMale'
+import ProductFemale from '../Pages/ProductFemale'
 const MainRouter = () => {
   const [roles, setRoles] = useState([]);
   const user = useUser();
@@ -54,11 +47,30 @@ const MainRouter = () => {
           </DefaultLayout>
         }
       />
+
       <Route
-        path="/home"
+        path="/search"
         element={
           <DefaultLayout>
-            <Home />
+            <ListProduct />
+          </DefaultLayout>
+        }
+      />
+
+      <Route
+        path="/nam"
+        element={
+          <DefaultLayout>
+            <ProductMale />
+          </DefaultLayout>
+        }
+      />
+
+      <Route
+        path="/nu"
+        element={
+          <DefaultLayout>
+            <ProductFemale />
           </DefaultLayout>
         }
       />
@@ -66,6 +78,7 @@ const MainRouter = () => {
 
       </Route>
     </Routes>
+
   );
-};
+}
 export default MainRouter;

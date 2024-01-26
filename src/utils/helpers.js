@@ -1,4 +1,4 @@
-import { slugify } from 'transliteration';
+import {slugify} from 'transliteration';
 
 export const formatMoney = (number) => {
     return number.toLocaleString('vi-VN', {
