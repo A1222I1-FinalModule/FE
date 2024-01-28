@@ -6,7 +6,7 @@ import * as discounts from '../../Services/API/Discount/discount';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import { toast } from 'react-hot-toast';
+import { ToastContainer , toast } from 'react-toastify';
 import Example from '../ModalConfirm/ModalConfirm';
 import NotFound from '../ModalConfirm/NotificationDiscount';
 import Loading from '../Customer/Loading';
@@ -45,7 +45,7 @@ export function Discount() {
         let temp;
         if (searchInput || searhType) {
             setLoading(true);
-            temp = await discounts.getFindByNameDiscount(searchInput,searhType);
+            temp = await discounts.getFindByNameDiscount(searchInput, searhType);
             if (searchInput.includes('_')) {
                 setLoading(false);
                 setSearchInput('');
@@ -61,8 +61,10 @@ export function Discount() {
                 temp = await discounts.findAllDiscount();
                 setDiscount(temp.filter((item) => item.delete === true));
             } else {
-                const arr = temp.filter((item) => item.delete === true)
-                setDiscount(arr.reverse());
+                const arr = temp.filter((item) => item.delete === true);
+                arr.sort((a, b) => b.number - a.number);
+
+                setDiscount(arr);
                 setLoading(false);
                 setSearchInput('');
                 setSearhType('0');
@@ -70,8 +72,10 @@ export function Discount() {
             }
         } else {
             temp = await discounts.findAllDiscount();
-            const arr = temp.filter((item) => item.delete === true)
-            setDiscount(arr.reverse());
+            const arr = temp.filter((item) => item.delete === true);
+            arr.sort((a, b) => b.number - a.number);
+
+            setDiscount(arr);
             setLoading(false);
         }
     };
@@ -110,7 +114,7 @@ export function Discount() {
                                 className="btn btn-primary"
                                 data-mdb-ripple-init
                                 style={{ width: '75px', height: '33px' }}
-                                onClick={getAllDiscount}    
+                                onClick={getAllDiscount}
                             >
                                 Tìm
                             </button>
@@ -127,7 +131,7 @@ export function Discount() {
                             class="form-select"
                             onChange={(e) => setSearhType(e.target.value)}
                             value={searhType}
-                            style={{ width: '190px' ,height:'33px' }}
+                            style={{ width: '190px', height: '33px' }}
                         >
                             <option value="0">Chọn loại</option>
                             <option value="2">Vip</option>
@@ -139,7 +143,7 @@ export function Discount() {
                             type="button"
                             className="btn btn-success"
                             data-mdb-ripple-init
-                            style={{ width: '200px',height:'33px',fontSize:'13px' }}
+                            style={{ width: '200px', height: '33px', fontSize: '13px' }}
                             onClick={() => navigate('/admin/createDiscount')}
                         >
                             Thêm mới mã giảm giá
@@ -183,39 +187,49 @@ export function Discount() {
                                     </td>
                                 </tr>
                             ) : (
-                            records.map((discount, index) => {
-                                return (
-                                    <tr key={index} className="text-center">
-                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.discountCode}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.name}</td>
-                                        <td className={styles['text-center']} style={{fontSize:'13px'}}>{discount.condition}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.rewardPoint}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>{discount.customerType.typeName}</td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>
-                                            {moment(discount.beginDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}
-                                        </td>
-                                        <td className="text-center" style={{fontSize:'13px'}}>
-                                            {moment(discount.endDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}
-                                        </td>
-                                        <td className="text-center">
-                                            <div className={styles['action']}>
-                                                <Example
-                                                    id={discount.discountCode}
-                                                    name={discount.name}
-                                                    handleDelete={handleDelete}
-                                                />
-                                                <button
-                                                    class="btn btn-success"
-                                                    ids={discount.discountCode}
-                                                    onClick={() => handleUpdateClick(discount.discountCode)}
-                                                >
-                                                    Sửa
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                );
-                            })
+                                records.map((discount, index) => {
+                                    return (
+                                        <tr key={index} className="text-center">
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {discount.discountCode}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {discount.name}
+                                            </td>
+                                            <td className={styles['text-center']} style={{ fontSize: '13px' }}>
+                                                {discount.condition}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {discount.rewardPoint}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {discount.customerType.typeName}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {moment(discount.beginDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}
+                                            </td>
+                                            <td className="text-center" style={{ fontSize: '13px' }}>
+                                                {moment(discount.endDate, 'DD-MM-YYYY').format('DD/MM/YYYY')}
+                                            </td>
+                                            <td className="text-center">
+                                                <div className={styles['action']}>
+                                                    <Example
+                                                        id={discount.discountCode}
+                                                        name={discount.name}
+                                                        handleDelete={handleDelete}
+                                                    />
+                                                    <button
+                                                        class="btn btn-success"
+                                                        ids={discount.discountCode}
+                                                        onClick={() => handleUpdateClick(discount.discountCode)}
+                                                    >
+                                                        Sửa
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })
                             )}
                         </tbody>
                     </table>

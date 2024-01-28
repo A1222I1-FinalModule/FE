@@ -6,7 +6,7 @@ import styled from '../Customer/listCustomer.module.css';
 import { useEffect, useState } from 'react';
 import * as customers from '../../Services/API/Customer/customer';
 import Example2 from '../ModalConfirm/ModalConfirmCustomer';
-import { toast } from 'react-hot-toast';
+import { ToastContainer , toast } from 'react-toastify';
 import NotFound from '../ModalConfirm/NotificationDiscount';
 import Loading from '../Customer/Loading';
 export function ListCustomer() {
