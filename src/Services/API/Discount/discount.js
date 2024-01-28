@@ -19,11 +19,11 @@ export const findAllDiscount = async () => {
         console.log(err)
     }
 }
-export const listDiscountCode = async()=>{
-    try{
-        let temp=await axios.get("/api/admin/listDiscountCode");
+export const listDiscountCode = async () => {
+    try {
+        let temp = await instance.get("/api/admin/listDiscountCode");
         return temp.data;
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 }
@@ -45,17 +45,17 @@ export const updateDiscount = async (id, value) => {
     }
 }
 
-export const getFindByNameDiscount = async(name,customerType)=>{
-    try{
-        let temp=await instance.get(`/api/admin/findByNameDiscount?name=${name}&customerType=${customerType}`);
+export const getFindByNameDiscount = async (name, customerType) => {
+    try {
+        let temp = await instance.get(`/api/admin/findByNameDiscount?name=${name}&customerType=${customerType}`);
         return temp.data;
     } catch (err) {
         console.log(err);
     }
 }
-export const getFindByIdDiscount = async(id)=>{
-    try{
-        let temp=await instance.get(`/api/admin/findByIdDiscount?id=${id}`);
+export const getFindByIdDiscount = async (id) => {
+    try {
+        let temp = await instance.get(`/api/admin/findByIdDiscount?id=${id}`);
         return temp.data;
     } catch (err) {
         console.log(err);

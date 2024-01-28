@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage, useFormik } from 'formik';
 import * as Yup from 'yup';
 import * as discounts from '../../Services/API/Discount/discount';
-import { toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 import moment from 'moment';
 export function CreateDiscount() {
     const [error, setError] = useState('');
@@ -21,8 +21,8 @@ export function CreateDiscount() {
         customerType: {
             id: 2,
         },
-        beginDate:'',
-        endDate:'',
+        beginDate: '',
+        endDate: '',
         isDeleted: true,
     };
     const validateDiscount = {
@@ -198,7 +198,7 @@ export function CreateDiscount() {
                             </div>
                         </div>
                         <div className={style['form-row']}>
-                            <div style={{height:'2000px'}}>
+                            <div style={{ height: '2000px' }}>
                                 <span className={style['label']}>
                                     Ngày Bắt Đầu <span className={` ${style['required-field']}`}>*</span>
                                 </span>
@@ -209,7 +209,7 @@ export function CreateDiscount() {
                                     className={style['form-err']}
                                 ></ErrorMessage>
                             </div>
-                            <div style={{height:'2000px'}}>
+                            <div style={{ height: '2000px' }}>
                                 <span className={style['label']}>
                                     Ngày Kết Thúc <span className={` ${style['required-field']}`}>*</span>
                                 </span>

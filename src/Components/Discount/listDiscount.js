@@ -46,7 +46,7 @@ export function Discount() {
         if (searchInput || searhType) {
             setLoading(true);
             temp = await discounts.getFindByNameDiscount(searchInput,searhType);
-            if (searchInput == '_') {
+            if (searchInput.includes('_')) {
                 setLoading(false);
                 setSearchInput('');
                 setSearhType('0');

@@ -4,7 +4,7 @@ import * as discounts from '../../Services/API/Discount/discount';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import style from '../Discount/createDiscount.module.css';
-import { toast } from 'react-hot-toast';
+import { toast } from 'react-toastify';
 export function UpdateDiscount() {
     let { id } = useParams();
     const [discount, setDiscount] = useState();
@@ -28,7 +28,8 @@ export function UpdateDiscount() {
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
             .min(20000, 'Giảm ít nhất là 20000 VNĐ')
-            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ'),
+            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ')
+            .max(Yup.ref('condition'), 'Giảm phải nhỏ hơn hoặc bằng Điều kiện'),
         rewardPoint: Yup.number()
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')

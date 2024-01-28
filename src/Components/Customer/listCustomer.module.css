@@ -12,16 +12,16 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     padding-bottom: 10px;
 }
 
 .container-pagination {
     padding-top: 20px;
     display: flex;
-    justify-content: center; 
-    align-items: center;  
-    width: 100%;  
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 .row-container {
@@ -35,21 +35,19 @@
     gap: 10px;
 }
 
-.head-customer{
+.head-customer {
     height: 55.4375px;
-    width: 96.4625px;
+    width: 200px;
     line-height: 3em;
     text-align: center;
     font-size: 13px;
-    }
+}
 
-.headtr-customer{
+.headtr-customer {
     width: 860.275px;
     height: 60px;
 }
 
-.text-center{
-  height: 80px;
+.text-center {
+    height: 80px;
 }
-
-  

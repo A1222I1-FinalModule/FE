@@ -43,7 +43,7 @@ export function ListCustomer() {
         if (searchInput) {
             setLoading(true);
             temp = await customers.findByNameCustomer(searchInput);
-            if (searchInput == '_') {
+            if (searchInput.includes('_')) {
                 setLoading(false);
                 setShowNotFoundModal(true);
                 temp = await customers.findAllCustomer();
@@ -127,7 +127,9 @@ export function ListCustomer() {
                     <table className="table align-middle mb-0 bg-white" style={{ width: '1000px' }}>
                         <thead className="bg-light">
                             <tr className={styled['headtr-customer']}>
-                                <th scope="col" className={styled['head-customer']}></th>
+                                <th scope="col" className={styled['head-customer']}>
+                                    Số Thứ Tự
+                                </th>
                                 <th scope="col" className={styled['head-customer']}>
                                     Mã Khách Hàng
                                 </th>
