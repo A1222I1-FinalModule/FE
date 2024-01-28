@@ -62,8 +62,7 @@ export function Discount() {
                 setDiscount(temp.filter((item) => item.delete === true));
             } else {
                 const arr = temp.filter((item) => item.delete === true);
-                arr.sort((a, b) => b.number - a.number);
-
+                // arr.sort((a, b) => b.number - a.number);
                 setDiscount(arr);
                 setLoading(false);
                 setSearchInput('');
@@ -74,7 +73,6 @@ export function Discount() {
             temp = await discounts.findAllDiscount();
             const arr = temp.filter((item) => item.delete === true);
             arr.sort((a, b) => b.number - a.number);
-
             setDiscount(arr);
             setLoading(false);
         }
