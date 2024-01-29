@@ -13,6 +13,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { imageDb } from '../../FirebaseProduct/ConfigProduct.js';
 import { v4 } from 'uuid'
 // import imgProduct from '../../Assets/Images/Product/upload-image.webp';
+import imgProduct from '../../Assets/Images/product/upload-image.webp';
 
 
 
