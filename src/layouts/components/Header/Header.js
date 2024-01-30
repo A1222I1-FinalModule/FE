@@ -6,34 +6,41 @@ import Search from '../Search';
 import Menu from '../../../Components/Popper/Menu';
 import styles from './Header.module.scss';
 import { LogoutIcon, UserIcon } from '../../../Components/Icons';
-import { useUser } from '../../../Services/UserContext';
 import Login from '../../../Components/Login';
 import { Fragment, useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
 import images from '../../../Assets/Images/index';
 import NotificationList from '../../../Components/Notification/NotificationList'
+import { useSelector } from 'react-redux';
 const cx = classNames.bind(styles);
 
 function Header({ hideSearch }) {
-    const user = useUser();
-    const [currentUser, setCurrentUser] = useState(null);
+    const user = useSelector(store => store.users);
+    const role = useSelector(store => store.users.role);
     const [modalShow, setModalShow] = useState(false);
-
-    const getCurrentUser = async () => {
-        return setCurrentUser(await user.isActive());
-    };
-
-    useEffect(() => {
-        if (currentUser === null) {
-            getCurrentUser();
+    let href = "/";
+    if (role) {
+        switch (user.role[0]) {
+            case 'ROLE_ADMIN':
+                href = '/admin'
+                break;
+            case 'ROLE_SALE':
+                href = '/sale'
+                break;
+            case 'ROLE_WAREHOUSE':
+                href = '/warehouse'
+                break;
+            default:
+                href = '/';
+                break;
         }
-    }, [currentUser]);
+    }
 
     const userMenu = [
         {
             icon: <UserIcon />,
             title: 'Tài khoản của tôi',
-            to: '/admin',
+            to: href,
         },
         {
             icon: <LogoutIcon />,
@@ -58,16 +65,21 @@ function Header({ hideSearch }) {
                     {hideSearch ? <Search /> : <Fragment></Fragment>}
                     <div className={cx('actions')}>
                         <div className={cx("icon-container")}>
-                            {currentUser === true ? (<>
+                            {user.login ? (<>
 
                                 <NotificationList />
                                 <Menu items={userMenu}>
-                                    <Image
-                                        className={cx('user-avatar')}
-                                        src="https://scontent.fsgn2-4.fna.fbcdn.net/v/t1.30497-1/143086968_2856368904622192_1959732218791162458_n.png?stp=cp0_dst-png_p40x40&_nc_cat=1&ccb=1-7&_nc_sid=2b6aad&_nc_ohc=y4CS_aO5lE0AX8RrZBP&_nc_ht=scontent.fsgn2-4.fna&oh=00_AfDNhfpETPCX4z53p6vkobsD8YfW9Uhm_Z30kh_7YDTMjA&oe=65C8A7B8"
-                                        alt=""
-                                    />
+                                    <div style={{ display: "inline-block" }}>
+
+                                        <Image
+                                            className={cx('user-avatar')}
+                                            src={user.employee.image || images.defaultAvatar}
+                                            alt=""
+                                        />
+                                        <span className='mx-2' style={{ cursor: "pointer" }}>{user.employee.name}</span>
+                                    </div>
                                 </Menu>
+
                             </>
                             ) : (
                                 <Button primary onClick={() => setModalShow(true)} className={cx('login-btn')}>

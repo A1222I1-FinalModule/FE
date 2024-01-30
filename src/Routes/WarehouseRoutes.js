@@ -10,7 +10,7 @@ const DashboardRoutes = () => {
             <Route path='/' element={<Dashboard><Info /></Dashboard>} />
             <Route path='/goods' element={<Dashboard><ProductList /></Dashboard>} />
             <Route path='/info' element={<Dashboard><Info /></Dashboard>} />
-            <Route path='/infoCreate' element={<Dashboard><InfoCreate /></Dashboard>} />
+            <Route path='/productCreate' element={<Dashboard><InfoCreate /></Dashboard>} />
         </Routes>
     );
 };
