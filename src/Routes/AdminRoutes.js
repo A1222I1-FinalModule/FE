@@ -5,9 +5,10 @@ import { Discount } from '../Components/Discount/listDiscount';
 import { ListCustomer } from '../Components/Customer/listCustomer';
 import { CreateDiscount } from '../Components/Discount/createDiscount';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
+
 import CustomerCreate from '../Components/Customer/CustomerCreate';
 import CustomerUpdate from '../Components/Customer/CustomerUpdate';
-import ContentAdmin from '../Components/ContentAdmin'
+import ContentAdmin from '../Components/ContentAdmin';
 import NotificationSave from '../Components/Notification/NotificationSave';
 import ProductList from '../Components/product/ProductList'
 import InfoProductCreate from '../Components/product/InfoProductCreate';
@@ -20,7 +21,7 @@ const AdminRoutes = () => {
             <Route path='/goods' element={<Dashboard><ProductList /></Dashboard>} />
             <Route path='/productCreate' element={<Dashboard><InfoProductCreate /></Dashboard>} />
             <Route path='/discount' element={<Dashboard><Discount /></Dashboard>} />
-            <Route path='/notification' element={<Dashboard><NotificationSave /></Dashboard>} />
+            <Route path='/report' element={<Dashboard><ContentAdmin /></Dashboard>} />
             <Route path='/customer' element={<Dashboard><ListCustomer /></Dashboard>} />
             <Route path='/createDiscount' element={<Dashboard><CreateDiscount /></Dashboard>} />
             <Route path='/updateDiscount/:id' element={<Dashboard><UpdateDiscount /></Dashboard>} />

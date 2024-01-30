@@ -36,7 +36,6 @@ export function CreateDiscount() {
             .typeError('Không Nhận Ký Tự')
             .required('Không Được Bỏ Trống')
             .min(20000, 'Giảm ít nhất là 20000 VNĐ')
-            .max(1000000, 'Giảm nhiều nhất là 1000000 VNĐ')
             .max(Yup.ref('condition'), 'Giảm phải nhỏ hơn hoặc bằng Điều kiện'),
         rewardPoint: Yup.number()
             .typeError('Không Nhận Ký Tự')
