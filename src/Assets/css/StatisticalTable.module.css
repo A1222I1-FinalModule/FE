@@ -1,6 +1,7 @@
 .statistical {
   width: 100%;
   height: 100%;
+  padding: 7px;
 }
 
 .statistical .title {
@@ -16,7 +17,7 @@
 }
 
 .statistical .chart {
-  max-height: 300px;
+  max-height: 400px;
 }
 
 .data_input .title {
@@ -52,12 +53,12 @@
   padding: 0;
   align-items: center;
   justify-content: space-around;
-  background-color: #ddd;
   color: #ffff;
 }
 
 .statistical_navbar .navbar_item {
-  float: left;
+  list-style: none;
+
 }
 
 .navbar_item .navbar_item_link {
@@ -65,19 +66,22 @@
   color: #ffff;
   text-align: center;
   padding: 14px 16px;
+  border: 1px solid #56126e;
+  border-radius: 10px;
   text-decoration: none;
 }
 
 .navbar_item .navbar_item_link:not(.active) {
-  font-weight: bold;
+  /* font-weight: bold; */
   color: #ffff;
-  background-color: #56126e;
+  background-color: #5E2572;
 }
 
 .navbar_item .navbar_item_link:hover:not(.active) {
-  font-weight: bold;
+  font-weight: bolder;
+  /* font-style: italic; */
   color: #ffff;
-  background-color: #5E2572;
+  background-color: #56126e;
 }
 
 .date {

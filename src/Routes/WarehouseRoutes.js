@@ -1,9 +1,8 @@
 import React from 'react';
 import { Route, Routes } from 'react-router';
 import Info from '../Components/Info/Info';
-import Payment from '../Components/Payment'
-import StatisticalTable from '../templates/MonthlyStatisticalTable';
-import { Warehouse } from '../Pages/WareHouse';
+import Payment from '../Components/Payment/Payment'
+import Warehouse from '../Pages/WareHouse';
 import DailyTable from '../Components/StastisticalTable/DailyTable';
 import MonthlyTable from '../Components/StastisticalTable/MonthlyTable';
 

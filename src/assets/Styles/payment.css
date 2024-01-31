@@ -17,7 +17,7 @@
     width: 50%;
     font-size: var(--normal-font-size) !important;
 }
-
+/* 
 @media only screen and (max-width: 800px) {
     :root {
         --normal-font-size: 12px !important;
@@ -34,7 +34,7 @@
     :root {
         --normal-font-size: 15px !important;
     }
-}
+} */
 
 .normal-txt-payment {
     font-size: var(--normal-font-size) !important;

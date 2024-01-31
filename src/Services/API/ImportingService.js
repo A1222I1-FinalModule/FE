@@ -1,14 +1,18 @@
 import instance from "../../Config/axiosConfig";
+const BASE_URL = `/api/admin`;
+const SALER_URL = `/api/saler`;
+const WAREHOUSE_URL = `/api/warehouse`;
+
 export const getAll = async () => {
-  const respone = await instance.get(`/api/admin/importing}`);
+  const respone = await instance.get(`${BASE_URL}/importing`);
   return respone.data;
 }
 export const getAllBySaler = async () => {
-  const respone = await instance.get(`/api/saler/importing}`);
+  const respone = await instance.get(`${SALER_URL}/importing`);
   return respone.data;
 }
 export const getAllByWarehouse = async () => {
-  const respone = await instance.get(`/api/warehouse/importing}`);
+  const respone = await instance.get(`${WAREHOUSE_URL}/importing`);
   return respone.data;
 }
 

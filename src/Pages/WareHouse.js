@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../Layouts/Header/Header";
-import { ContentWareHouse } from "../Components/ContentWareHouse";
 import SideBar from "../Layouts/sidebar/SideBar";
 
 export default function Warehouse({ children }) {

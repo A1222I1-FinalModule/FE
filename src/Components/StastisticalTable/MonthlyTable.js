@@ -6,6 +6,12 @@ import { Bar, Pie } from "react-chartjs-2";
 import ReactToPrint from "react-to-print";
 import { Button } from "react-bootstrap";
 import NavbarTable from "./NavbarTable";
+import locale from 'antd/locale/vi_VN';
+import dayjs from 'dayjs';
+
+import 'dayjs/locale/vi';
+import { formatMoney } from '../../utils/helpers';
+import { ConfigProvider, DatePicker } from "antd";
 
 ChartJS.register(
   ArcElement,
@@ -19,14 +25,15 @@ ChartJS.register(
 
 const MonthlyTable = () => {
   const [statisticalTable, setStatisticalTable] = useState([])
-  const thisMonth = getMonth()
   const [totalRevenue, setTotalRevenue] = useState(0)
   const [totalExpenditure, setTotalExpenditure] = useState(0)
+  const [month, setMonth] = useState(getMonth())
+
   let componentRef = useRef();
 
   useEffect(() => {
     getMonthlyStastistical()
-  }, [])
+  }, [month])
   useEffect(() => {
     getRevenue()
     getExpenditure()
@@ -77,7 +84,9 @@ const MonthlyTable = () => {
   }
 
   const getMonthlyStastistical = async () => {
-    let respone = await statisticalService.getMonthlyStastisticalBySaler()
+    let chooseMonth = month === getMonth() ? getMonthToSearch(month) : month
+    console.log(chooseMonth);
+    let respone = await statisticalService.getMonthlyStastistical(chooseMonth)
     setStatisticalTable(respone)
   }
 
@@ -93,24 +102,36 @@ const MonthlyTable = () => {
     }, 0)
     setTotalExpenditure(total)
   }
-
+  const getMonthToSearch = (month) => {
+    let temp = month.split('/').reverse()
+    if (temp[1].length === 1) temp[1] = `0${temp[1]}`
+    return temp.join('-')
+  }
   function getMonth() {
     let date = new Date().toLocaleDateString().split('/')
     return date[0] + '/' + date[2]
   }
+  const chooseMonth = (date, dateString) => {
+    console.log(dateString);
+    setMonth(dateString)
+  };
 
   if (statisticalTable === null) return null
 
   return (
-    <div className={`col-10 p-0`}>
+    <div className={style.statistical}>
       <div className={`card text-dark w-100 mb-3`}>
         <NavbarTable />
         <div className={`card-body w-100`} ref={(element) => (componentRef = element)}>
           <div className={`row`}>
             <p className={`col-3 title mb-2`}>Tháng/năm</p>
-            <p className={`col-3 mb-2 ${style.date}`}>{thisMonth}</p>
+            <div className={`col-6 title mb-2`}>
+              <ConfigProvider locale={locale}>
+                <DatePicker onChange={chooseMonth} defaultValue={dayjs().month(0)} picker="month" />
+              </ConfigProvider>
+            </div>
             <ReactToPrint
-              trigger={() => <Button className={`col-6 mb-2 btn btn-lg btn-secondary`}>In thống kê</Button>}
+              trigger={() => <Button className={`col-3 mb-2 btn btn-sm btn-secondary`}>In thống kê</Button>}
               content={() => componentRef}
             />
           </div>
@@ -121,8 +142,8 @@ const MonthlyTable = () => {
                 <tr>
                   <th className="text-center" scope={`col`}>STT</th>
                   <th scope={`col`}>Ngày</th>
-                  <th scope={`col`}>Tổng thu (ngàn đồng)</th>
-                  <th scope={`col`}>Tổng chi (ngàn đồng)</th>
+                  <th scope={`col`}>Tổng thu</th>
+                  <th scope={`col`}>Tổng chi</th>
                   <th scope={`col`}>Lãi</th>
                 </tr>
               </thead>
@@ -133,9 +154,9 @@ const MonthlyTable = () => {
                       <tr key={item[0]}>
                         <td className="text-center">{index + 1}</td>
                         <td>{item[0]}</td>
-                        <td>{item[1]}</td>
-                        <td>{item[2]}</td>
-                        <td>{item[1] - item[2]}</td>
+                        <td>{formatMoney(item[1])}</td>
+                        <td>{formatMoney(item[2])}</td>
+                        <td>{formatMoney(item[1] - item[2])}</td>
                       </tr>
                     )
                   })
@@ -146,14 +167,14 @@ const MonthlyTable = () => {
           <div className={`row ${style.total}`}>
             <div className={`${style.total_revenue} col-6`}>
               <div className={`row`}>
-                <p className={`col-5 title mb-2`}>Tổng thu (ngàn đồng)</p>
-                <p className={`col-7 mb-2`}>{totalRevenue}</p>
+                <p className={`col-5 title mb-2`}>Tổng thu</p>
+                <p className={`col-7 mb-2`}>{formatMoney(totalRevenue)}</p>
               </div>
             </div>
             <div className={`${style.total_expenditure} col-6`}>
               <div className={`row`}>
-                <p className={`col-5 title mb-2`}>Tổng chi (ngàn đồng)</p>
-                <p className={`col-7 mb-2`}>{totalExpenditure}</p>
+                <p className={`col-5 title mb-2`}>Tổng chi</p>
+                <p className={`col-7 mb-2`}>{formatMoney(totalExpenditure)}</p>
               </div>
             </div>
           </div>

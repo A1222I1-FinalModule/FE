@@ -1,31 +1,11 @@
-import axios from "axios";
-const BASE_URL = `/api/admin`;
-const SALER_URL = `/api/saler`;
-const WAREHOUSE_URL = `/api/warehouse`;
+import instance from '../../Config/axiosConfig';
+const PUBLIC_URL = `/api/public`;
 
-export const getDailyStastisticalByAdmin = async () => {
-  const res = await axios.get(`${BASE_URL}/statistical/daily`)
+export const getDailyStastistical = async (date) => {
+  const res = await instance.get(`${PUBLIC_URL}/daily/${date}`)
   return res.data
 }
-export const getMonthlyStastisticalByAdmin = async () => {
-  const res = await axios.get(`${BASE_URL}/statistical/monthly`)
+export const getMonthlyStastistical = async (month) => {
+  const res = await instance.get(`${PUBLIC_URL}/monthly/${month}`)
   return res.data
 }
-export const getDailyStastisticalBySaler = async () => {
-  const res = await axios.get(`${SALER_URL}/statistical/daily`)
-  return res.data
-}
-export const getMonthlyStastisticalBySaler = async () => {
-  const res = await axios.get(`${SALER_URL}/statistical/monthly`)
-  console.log(res)
-  return res.data
-}
-export const getDailyStastisticalByWarehouse = async () => {
-  const res = await axios.get(`${WAREHOUSE_URL}/statistical/daily`)
-  return res.data
-}
-export const getMonthlyStastisticalByWarehouse = async () => {
-  const res = await axios.get(`${WAREHOUSE_URL}/statistical/monthly`)
-  return res.data
-}
-

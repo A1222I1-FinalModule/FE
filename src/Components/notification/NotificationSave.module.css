@@ -22,7 +22,7 @@
 }
 
 /* [ RESTYLE TAG ] */
-
+/* 
 * {
     margin: 0px;
     padding: 0px;
@@ -55,10 +55,10 @@ ul,
 li {
     margin: 0px;
     list-style-type: none;
-}
+} */
 
 /*---------------------------------------------*/
-input {
+/* input {
     outline: none;
     border: none;
 }
@@ -97,10 +97,10 @@ textarea::-moz-placeholder {
 }
 textarea:-ms-input-placeholder {
     color: #999999;
-}
+} */
 
 /*---------------------------------------------*/
-button {
+/* button {
     outline: none !important;
     border: none;
     background: transparent;
@@ -112,7 +112,7 @@ button:hover {
 
 iframe {
     border: none !important;
-}
+} */
 
 /*//////////////////////////////////////////////////////////////////
     [ Contact 1 ]*/
@@ -189,7 +189,7 @@ iframe {
     color: transparent;
     -webkit-background-clip: text;
 }
-
+/* 
 input.input1 {
     height: 50px;
     border-radius: 25px;
@@ -206,7 +206,7 @@ textarea.input1 {
 }
 textarea.input1 + .shadow-input1 {
     border-radius: 25px;
-}
+} */
 
 /*---------------------------------------------*/
 .wrapinput1 {

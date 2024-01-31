@@ -7,13 +7,13 @@
 * {
   box-sizing: border-box;
 }
-
+/* 
 body {
   background: #dfe6e9;
   color: #485e74;
   line-height: 1.6;
   font-family: "Yantramanav", sans-serif;
-}
+} */
 
 .container {
   max-width: 1170px;
@@ -23,11 +23,11 @@ body {
   background: Slateblue;
   box-sizing: border-box;
 }
-
+/* 
 ul {
   list-style: none;
   padding: 0;
-}
+} */
 
 .brand {
   text-align: center;

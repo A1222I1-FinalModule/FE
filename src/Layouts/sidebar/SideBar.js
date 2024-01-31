@@ -89,7 +89,7 @@ export default function SideBar() {
               </Link>
             </div>
             <div className={style.contain_item}>
-              <Link to="abc" className={style.single_option}>
+              <Link to="/sale/daily" className={style.single_option}>
                 <div className={style.item_sidebar}>
                   <div className={style.item_title}>
                     <ion-icon name="logo-buffer"></ion-icon>
