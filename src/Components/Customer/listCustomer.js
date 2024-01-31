@@ -123,7 +123,7 @@ export function ListCustomer() {
                         </button>
                     </div>
                 </div>
-                <div className="container-table">
+                <div className={styled['container-table']}>
                     <table className="table align-middle mb-0 bg-white" style={{ width: '1000px' }}>
                         <thead className="bg-light">
                             <tr className={styled['headtr-customer']}>
