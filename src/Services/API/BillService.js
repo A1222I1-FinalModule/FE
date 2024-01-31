@@ -24,7 +24,7 @@ const BillService = {
         return res.data;
     },
     getMonthRevenue: async () => {
-        const res = await instance.get(`${BASE_URL}/month/revenue`);
+        const res = await instance.get(`${BASE_URL}/monthly/revenue`);
         return res.data;
     },
     getWeekRevenue: async () => {

@@ -4,7 +4,7 @@ import DiscountSelectModal from "./DiscountSelectModal";
 import { Formik, Form } from "formik";
 import { getUser } from '../../Services/API/EmployeeService';
 import * as PaymentService from "../../Services/API/Payment/PaymentService"
-import "../../Assets/Styles/payment.css"
+import "../../Assets/Styles/payment.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import PdfDoc from './PdfDoc';
@@ -57,7 +57,7 @@ function Payment() {
     const getQuantityProductInBill = (code) => {
         let currentQuantity = 0;
         bill.productBills.forEach(productBill => {
-            if (productBill.productCode == code) {
+            if (productBill.productCode === code) {
                 currentQuantity = productBill.quantity;
                 return;
             };
