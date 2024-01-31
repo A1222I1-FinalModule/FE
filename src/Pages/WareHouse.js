@@ -1,8 +1,8 @@
 import React from "react";
 import Header from "../Layouts/Header/Header";
 import style from '../Assets/Styles/StyleDashBoard.module.css';
-import SideBarWareHouse from "../Layouts/sidebar/SideBarWareHouse";
 import { ContentWareHouse } from "../Components/ContentWareHouse";
+import SideBar from '../Layouts/sidebar/SideBar';
 
 export const Warehouse = ({ children }) => {
   return (
@@ -10,7 +10,7 @@ export const Warehouse = ({ children }) => {
       <div>
         <Header></Header>
         <div className="row h-100">
-          <SideBarWareHouse></SideBarWareHouse>
+          <SideBar></SideBar>
           <div className={style.content + ' col-10 ps-0'}>
             {children}
 

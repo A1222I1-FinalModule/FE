@@ -7,6 +7,7 @@ import { CreateDiscount } from '../Components/Discount/createDiscount';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
 import CustomerCreate from '../Components/Customer/CustomerCreate';
 import CustomerUpdate from '../Components/Customer/CustomerUpdate';
+import NotificationSave from '../Components/notification/NotificationSave';
 
 const AdminRoutes = () => {
     return (
@@ -19,6 +20,7 @@ const AdminRoutes = () => {
             <Route path='/updateDiscount/:id' element={<Dashboard><UpdateDiscount /></Dashboard>} />
             <Route path='/customer/create' element={<Dashboard><CustomerCreate /></Dashboard>} />
             <Route path='/customer/update/:id' element={<Dashboard><CustomerUpdate /></Dashboard>} />
+            <Route path='/notification' element={<Dashboard><NotificationSave /></Dashboard>}></Route>
         </Routes>
     );
 };

@@ -11,6 +11,9 @@ import Login from '../../../Components/Login';
 import { Fragment, useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
 import images from '../../../Assets/Images/index';
+import NotificationList from '../../../Components/notification/NotificationList';
+
+
 
 const cx = classNames.bind(styles);
 
@@ -51,7 +54,6 @@ function Header({ hideSearch }) {
                     <Link to={'/'}>
                         <img className={cx('logo')} src={images.logo} alt="" />
                     </Link>
-
                     <Navbar />
                 </div>
                 <div className={cx('right')}>
@@ -59,8 +61,7 @@ function Header({ hideSearch }) {
                     <div className={cx('actions')}>
                         <div className={cx("icon-container")}>
                             {currentUser === true ? (<>
-
-
+                                <NotificationList />
                                 <Menu items={userMenu}>
                                     <Image
                                         className={cx('user-avatar')}
