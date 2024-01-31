@@ -1,4 +1,5 @@
 import axios from "axios";
+import instance from "../../Config/axiosConfig";
 
 export const getAllListProduct = async() => {
     let temp = await axios.get(`/api/public/getListProduct`);
@@ -40,5 +41,22 @@ export const findByNameProduct = async (name)=>{
         return temp.data;
     }catch(err){
         console.log(err);
+    }
+}
+
+/**
+ * This function is used to update the quantity of a product
+ * @param {*} id
+ * @param {*} product
+ * @author : NhanNNB
+ * @returns : If success, return status 200
+ */
+export const updateProductQuantity = async (id, product) => {
+    try {
+        let response = await instance.put(`/api/public/updateProductQuantity/${id}`, product);
+        return response.status;
+    } catch (err) {
+        console.log(err);
+        throw err;
     }
 }

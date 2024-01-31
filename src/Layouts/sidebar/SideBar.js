@@ -138,11 +138,31 @@ export default function SideBar() {
               </Link>
             </div>
             <div className={style.contain_item}>
+              <Link to="/warehouse/daily" className={style.single_option}>
+                <div className={style.item_sidebar}>
+                  <div className={style.item_title}>
+                    <ion-icon name="logo-buffer"></ion-icon>
+                    <span>Thống kê</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className={style.contain_item}>
               <Link to="/warehouse/infoCreate" className={style.single_option}>
                 <div className={style.item_sidebar}>
                   <div className={style.item_title}>
                     <ion-icon name="logo-buffer"></ion-icon>
                     <span>Thêm mới thông tin sản phẩm</span>
+                  </div>
+                </div>
+              </Link>
+            </div>
+            <div className={style.contain_item}>
+              <Link to="/warehouse/getInput" className={style.single_option}>
+                <div className={style.item_sidebar}>
+                  <div className={style.item_title}>
+                    <ion-icon name="logo-buffer"></ion-icon>
+                    <span>Nhập hàng</span>
                   </div>
                 </div>
               </Link>
