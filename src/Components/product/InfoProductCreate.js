@@ -21,6 +21,7 @@ const cx = classNames.bind(styles);
 export default function InfoProductCreate() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [selectedFile, setSelectedFile] = useState(``);
 
   const productCategoryList = [
     {
@@ -31,10 +32,7 @@ export default function InfoProductCreate() {
       id: 2,
       name: 'Nữ',
     },
-    {
-      id: 3,
-      name: 'Trẻ em',
-    }
+
   ];
 
   const sizeList = [
@@ -72,7 +70,6 @@ export default function InfoProductCreate() {
     price: "",
     productCategory: JSON.stringify(productCategoryList[0]),
     size: JSON.stringify(sizeList[0])
-
   };
 
 
@@ -89,22 +86,20 @@ export default function InfoProductCreate() {
       .min(1, "Số lượng phải từ 1 trở lên"),
     price: Yup.number()
       .required("Vui lòng điền vào thông tin!")
-      .min(10000, "Giá phải từ 10.000 VND trở lên"),
-    image: Yup.mixed().required("Vui Lòng Chọn Ảnh")
+      .min(10000, "Giá phải từ 10.000 VND trở lên")
   }
 
 
 
-  const uploadFirebase = async (selectedFile) => {
+  const uploadFirebase = async () => {
     if (selectedFile) {
       const imgRef = ref(imageDb, `files/${v4()}`);
-      console.log(selectedFile);
       await uploadBytes(imgRef, selectedFile);
+      setSelectedFile(imgRef.name)
       return await getDownloadURL(imgRef);
     }
     return null
   };
-
   const saveInfoProduct = async (values) => {
     try {
       const imgUrl = await uploadFirebase(values['image']);
@@ -113,7 +108,6 @@ export default function InfoProductCreate() {
         productCategory: JSON.parse(values.productCategory),
         size: JSON.parse(values.size),
         image: imgUrl
-
       };
 
       await ProductService.saveInfoProduct(obj);
@@ -219,13 +213,21 @@ export default function InfoProductCreate() {
                     <img src={imgProduct} className={cx('pictureCreate')} />
                   </label>
                   <Field
-                    required
-                    name="image"
                     type="file"
+                    name="image"
                     accept="image/jpeg, image/png, image/jpg"
                     id="input-file"
                     className={cx("input-imgg")}
+                    value={""}
+                    onChange={(event) => setSelectedFile(event.target.files[0])}
                   />
+                  {selectedFile && (
+                    <div>
+                      <p>Tên tệp: {selectedFile.name}</p>  
+                       {/* <img src={URL.createObjectURL(selectedFile)} alt="Uploaded" width="50px" /> */}
+                    </div>
+                    
+                  )}  
                   <ErrorMessage style={{ color: "red" }} name="image" component="span" className={cx('form-err')} ></ErrorMessage>
                 </div>
 
@@ -253,8 +255,6 @@ export default function InfoProductCreate() {
                     ))}
                   </Field>
                 </div>
-
-
                 <div className={cx('form-group')}>
                   <label htmlFor="size" className={cx('text-primary')}>
                     Size
@@ -267,109 +267,6 @@ export default function InfoProductCreate() {
                     ))}
                   </Field>
                 </div>
-
-
-                {/* 
-                <div className={cx('form-group')}>
-                  <label
-                    htmlFor
-                    className={cx('col-sm-2 col-form-label text-primary')}
-                  >
-                    Size
-                  </label>
-                  <div className={cx('form-check-inline')}>
-                    <Field
-                      className={cx('form-check-input')}
-                      type="checkbox"
-                      id="XS"
-                      name="size"
-                      value="XS"
-                    />
-
-                    <label
-                      className={cx('form-check-label text-primary')}
-                      htmlFor="XS"
-                    >
-                      XS
-                    </label>
-                  </div>
-                  <div className={cx('form-check-inline')}>
-                    <Field
-                      className={cx('form-check-input')}
-                      type="checkbox"
-                      id="S"
-                      name="size"
-                      value="S"
-                    />
-                    <label
-                      className={cx('form-check-label text-primary')}
-                      htmlFor="S"
-                    >
-                      S
-                    </label>
-                  </div>
-                  <div className={cx('form-check-inline')}>
-                    <Field
-                      className={cx('form-check-input')}
-                      type="checkbox"
-                      id="M"
-                      name="size"
-                      value="M"
-                    />
-                    <label
-                      className={cx('form-check-label text-primary')}
-                      htmlFor="M"
-                    >
-                      M
-                    </label>
-                  </div>
-                  <div className={cx('form-check-inline')}>
-                    <Field
-                      className={cx('form-check-input')}
-                      type="checkbox"
-                      id="L"
-                      name="size"
-                      value="L"
-                    />
-                    <label
-                      className={cx('form-check-label text-primary')}
-                      htmlFor="L"
-                    >
-                      L
-                    </label>
-                  </div>
-                  <div className={cx('form-check-inline')}>
-                    <Field
-                      className={cx('form-check-input')}
-                      type="checkbox"
-                      id="XL"
-                      name="size"
-                      value="XL"
-                    />
-                    <label
-                      className={cx('form-check-label text-primary')}
-                      htmlFor="XL"
-                    >
-                      XL
-                    </label>
-                  </div>
-                  <div className={cx('form-check-inline')}>
-                    <Field
-                      className={cx('form-check-input')}
-                      type="checkbox"
-                      id="XXL"
-                      name="size"
-                      value="XXL"
-                    />
-                    <label
-                      className={cx('form-check-label text-primary')}
-                      htmlFor="XXL"
-                    >
-                      XXL
-                    </label>
-                  </div>
-                </div> */}
-
                 <p className={cx('full')}>
                   <button type="submit">Thêm</button>
                 </p>

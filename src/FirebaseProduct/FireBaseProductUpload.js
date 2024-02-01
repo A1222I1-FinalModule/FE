@@ -5,11 +5,11 @@ import { v4 } from "uuid";
 
 
 function FirebaseProductUpload() {
-    const [img, setImg] = useState('');
+    const [image, setImg] = useState('');
 
     const handleClick = () => {
         const imgRef = ref(imageDb, `files/${v4()}`);
-        uploadBytes(imgRef, img);
+        uploadBytes(imgRef, image);
     }
 
     return (

@@ -35,7 +35,7 @@ export const getAllCategory = async() => {
 
 export const findByNameProduct = async (name)=>{
     try{
-        let temp= await axios.get(`/api/public/findByNameProduct?name=${name}`);
+        let temp= await axios.get(`/api/public/findByNameInfoProduct?name=${name}`);
         console.log(temp);
         return temp.data;
     }catch(err){

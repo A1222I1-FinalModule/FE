@@ -5,13 +5,15 @@ import styles from "../product/Product.module.css";
 import LoadingProduct from '../product/LodingProduct';
 import { formatMoney } from '../../utils/helpers'
 import ReactPaginate from "react-paginate";
+
 const cx = classNames.bind(styles);
 
 function Items({ currentItems }) {
+  const [loading, setLoading] = useState(true);
   return (
+ 
     <>
-      {currentItems &&
-        currentItems.map((values, index) => (
+        {currentItems.map((values, index) => (
           <tr>
 
             <td scope="col" style={{ textAlign: "center" }}>
@@ -37,9 +39,11 @@ function Items({ currentItems }) {
               {values.size.size}
             </td>
           </tr>
-        ))}
+        ))
+        }            
     </>
-  );
+  
+  )
 }
 
 function PaginatedItems({ itemsPerPage, items }) {
@@ -69,9 +73,9 @@ function PaginatedItems({ itemsPerPage, items }) {
       <table className="table table-bordered border-secondary table-secondary table-striped table-hover">
         <thead>
           <tr className="text-center">
-            <th className={cx('align-middle')} style={{ width: "10%" }}>Mã hàng hóa</th>
-            <th className={cx('align-middle')} style={{ width: "45%" }}>Tên hàng hóa</th>
-            <th className={cx('align-middle')} style={{ width: "10%" }}>Số lượng</th>
+            <th className={cx('align-middle')} style={{ width: "5%" }}>Mã</th>
+            <th className={cx('align-middle')} style={{ width: "55%" }}>Tên hàng hóa</th>
+            <th className={cx('align-middle')} style={{ width: "5%" }}>Số lượng</th>
             <th className={cx('align-middle')} style={{ width: "10%" }}>Hình ảnh</th>
             <th className={cx('align-middle')} style={{ width: "10%" }}>Giá</th>
             <th className={cx('align-middle')} style={{ width: "10%" }}>Loại hàng hóa</th>
@@ -81,6 +85,7 @@ function PaginatedItems({ itemsPerPage, items }) {
           </tr>
         </thead>
         <tbody>
+          
           <Items currentItems={currentItems} />
         </tbody>
       </table>
@@ -130,7 +135,9 @@ export default function ProductList() {
       }
 
     } else {
+     
       temp = await ProductService.getAllListProduct();
+      temp.sort((a, b) => b.number - a.number);
       setProduct(temp);
       setLoading(false);
     }
@@ -150,13 +157,12 @@ export default function ProductList() {
                 <input
                   style={{ width: '60%', flex: "none" }}
                   type="search"
-                  className={cx('form-control rounded')}
+                  className={cx('form-control rounded') } 
                   placeholder
                   aria-label="Search"
                   aria-describedby="search-addon"
                   value={searchInput}
                   onChange={(evt) => setSearchInput(evt.target.value)}
-
                 />
                 <button
                   type="button"
@@ -170,7 +176,7 @@ export default function ProductList() {
               </div>
             </div>
             <div >
-              <PaginatedItems itemsPerPage={6} items={product} />
+              <PaginatedItems itemsPerPage={5} items={product} />
             </div>
           </div>
         </div>

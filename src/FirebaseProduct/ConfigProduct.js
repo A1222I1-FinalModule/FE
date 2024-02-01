@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: "fir-reactjs-fashion-shop.appspot.com",
   messagingSenderId: "292183972264",
   appId: "1:292183972264:web:ced615ee2ea40482d7259d",
-  // measurementId: "G-22WVFTHF2B"
+  measurementId: "G-22WVFTHF2B"
 };
 
 // Initialize Firebase
