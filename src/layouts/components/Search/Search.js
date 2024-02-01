@@ -55,6 +55,7 @@ function Search() {
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
+
         if (!searchValue.startsWith(' ')) {
             setSearchValue(searchValue);
         }
@@ -71,7 +72,8 @@ function Search() {
                             {(searchResult.length === 0) ?
                                 <div className={cx('no-results')}>
                                     Không tìm thấy sản phẩm
-                                </div> :
+                                </div>
+                                :
                                 <Fragment>
                                     <h4 className={cx('search-title')}>Sản phẩm</h4>
                                     {searchResult.slice(0, 5).map((result) => (
@@ -89,16 +91,15 @@ function Search() {
                                     >
                                         Xem thêm
                                     </Button>
-                                </Fragment>}
+                                </Fragment>
+                            }
                         </PopperWrapper>
                     </div>
                 )}
                 onClickOutside={handleHideResult}
             >
                 <div className={cx('search')}>
-                    <button className={cx('search-btn')} onMouseDown={(e) => {
-                        e.preventDefault();
-                    }}>
+                    <button className={cx('search-btn')}>
                         <SearchIcon />
                     </button>
 
