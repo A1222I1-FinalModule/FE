@@ -1,19 +1,21 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import { Link } from 'react-router-dom';
 
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css'
 import * as productService from '../../Services/productService';
 import ProductItem from '../ProductItem';
-import { ChevronRightIcon } from '../Icons';
 import styles from './NewProducts.module.scss';
 
 const cx = classNames.bind(styles);
 
 function NewProduct() {
     const [newProducts, setNewProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchProduct = async () => {
+            setLoading(true)
             const res = await productService.searchProducts({
                 name: '',
                 sortBy: 'product_code',
@@ -21,6 +23,9 @@ function NewProduct() {
                 size: '20',
             });
             setNewProducts(res);
+            setTimeout(() => {
+                setLoading(false)
+            }, 1000)
         };
 
         fetchProduct();
@@ -28,10 +33,12 @@ function NewProduct() {
 
     return (
         <div className={cx('wrapper')}>
-            <h2 className={cx('title')}>Sản phẩm mới nhất</h2>
+            {loading ? <SkeletonTheme>
+                <Skeleton width={200} height={30} count={1} />
+            </SkeletonTheme> : <h2 className={cx('title')}>Sản phẩm mới nhất</h2>}
 
             <div className={cx('inner')}>
-                <ProductItem data={newProducts} />
+                <ProductItem data={newProducts} loading={loading} />
             </div>
         </div>
     );

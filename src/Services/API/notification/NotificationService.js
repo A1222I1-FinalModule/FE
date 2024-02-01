@@ -4,7 +4,6 @@ export const getAllBySaler = async () => {
   try {
     let api = "http://localhost:3000/api/saler/listnotification";
     let respone = await axios.get(api);
-    console.log(respone);
     return respone.data;
   } catch (error) {
     console.log(error);

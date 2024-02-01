@@ -9,14 +9,13 @@ import { Toaster } from 'react-hot-toast';
 import { UpdateDiscount } from '../Components/Discount/updateDiscount';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
+import News from '../Pages/News';
 import { Warehouse } from '../Pages/WareHouse';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
 import ListProduct from '../Pages/ListProduct'
 import ProductMale from '../Pages/ProductMale'
 import ProductFemale from '../Pages/ProductFemale'
-import CustomerCreate from '../Components/Customer/CustomerCreate'
-import CustomerUpdate from '../Components/Customer/CustomerUpdate'
 
 
 const MainRouter = () => {
@@ -58,6 +57,15 @@ const MainRouter = () => {
           element={
             <DefaultLayout>
               <ProductFemale />
+            </DefaultLayout>
+          }
+        />
+
+        <Route
+          path="/tin-tuc"
+          element={
+            <DefaultLayout>
+              <News />
             </DefaultLayout>
           }
         />

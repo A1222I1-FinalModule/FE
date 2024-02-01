@@ -97,7 +97,7 @@ function CustomerUpdate() {
                             .required('Không được để trống'),
                         name: Yup.string()
                             .max(100, 'Không được quá 100 ký tự')
-                            .matches(/^[a-zA-Z0-9\s]+$/, 'Không được chứa ký tự đặc biệt')
+                            .matches(/^[a-zA-ZàáảãạâầấẩẫậăắằẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵĐđ][a-zA-Z\sàáảãạâầấẩẫậăắằẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵĐđ]*$/, 'Không được chứa ký tự đặc biệt')
                             .required('Không được để trống'),
                         address: Yup.string().required('Không được để trống'),
                         dateOfBirth: Yup.date()
@@ -111,10 +111,10 @@ function CustomerUpdate() {
                         <div className={cx('form-row')}>
                             <div>
                                 <span className={cx('label')}>
-                                    Mã Khách Hàng <span className={` ${cx('required-field')}`}>*</span>
+                                    Mã Khách Hàng <span className={`${cx('required-field')}`}>*</span>
                                 </span>
                                 <Field
-                                    className={` ${cx('form-control')}`}
+                                    className={` ${cx('form-control', 'pe-none')}`}
                                     type="text"
                                     name="id"
                                     placeholder="KH000"

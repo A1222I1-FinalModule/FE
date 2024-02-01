@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import ProductSearchList from '../../Components/ProductSearchList/ProductSearchList';
+import ProductSearchList from '../../Components/ProductSearchList';
 
 function ListProduct() {
     const location = useLocation();
