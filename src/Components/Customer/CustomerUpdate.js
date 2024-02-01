@@ -87,7 +87,7 @@ function CustomerUpdate() {
                         email: Yup.string().email('Nhập email không hợp lệ').required('Không được để trống'),
                     })}
                 >
-                    {(formikProps) => <Form>
+                    <Form>
                         <div className={cx('form-row')}>
                             <div>
                                 <span className={cx('label')}>
@@ -253,7 +253,7 @@ function CustomerUpdate() {
                                 Thoát
                             </button>
                         </div>
-                    </Form>}
+                    </Form>
                 </Formik>}
             </div>
         </div >
