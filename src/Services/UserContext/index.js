@@ -1,10 +1,11 @@
 import React, { createContext, useContext, useState } from 'react';
-import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import { validateUser } from '../API/authService';
+import { useCookies } from 'react-cookie';
 const UserContext = createContext();
 const UserProvider = ({ children }) => {
-    const [jwt, setJwt] = useState(Cookies.get('jwt'));
+    const [cookies] = useCookies(['jwt']);
+    const [jwt, setJwt] = useState(cookies.jwt);
     const setUser = async (jwtToken) => {
         setJwt(jwtToken);
         return await getRole(jwtToken);
@@ -14,7 +15,7 @@ const UserProvider = ({ children }) => {
         return roles;
     };
     const isActive = async () => {
-        return await validateUser(jwt);
+        return await validateUser();
     };
     const value = { getRole, setUser, isActive, jwt };
     return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

@@ -14,34 +14,40 @@ export const EmployeeSaleTop = () => {
     } catch (error) {
       console.error("Error get data:", error);
     }
-
-    return (
-      <>
-        <div className={style.table_title}>
-          <span>Top nhân viên bán hàng tốt nhất</span>
-        </div>
-        <div className={style.table_record}>
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Họ và tên</th>
-                <th scope="col">Giá (vnđ)</th>
-                <th scope="col">Số lượng (cái)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {employeeTop ? employeeTop.map((value, index) => (
-                <tr key={index}>
-                  <th scope="row">{value.employeeName}</th>
-                  <td>{value.totalSales}</td>
-                  <td>{value.totalOrders}</td>
-                </tr>
-              ))
-                : null}
-            </tbody>
-          </table>
-        </div>
-      </>
+  };
+  return (
+    <>
+      <div className={style.table_title}>
+        <span>Top nhân viên bán hàng tốt nhất</span>
+      </div>
+      <div className={style.table_record}>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Họ và tên</th>
+              <th scope="col">Giá (vnđ)</th>
+              <th scope="col">Số lượng (cái)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employeeTop
+              ? employeeTop.map((value, index) => (
+                  <tr key={index}>
+                    <th scope="row">{value.employeeName}</th>
+                    <td>
+                      {new Intl.NumberFormat('vi-VN', {
+                        style: 'currency',
+                        currency: 'VND',
+                      }).format(value.totalSales)}
+                    </td>
+                    <td>{value.totalOrders}</td>
+                  </tr>
+                ))
+              : null}
+          </tbody>
+        </table>
+      </div>
+    </>
     );
-  }
 }
+

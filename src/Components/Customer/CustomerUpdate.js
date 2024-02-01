@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 
 import { toast } from 'react-toastify'
 import { formatDate } from '../../utils/helpers';
-import * as customerService from '../../Services/customerService';
+import * as customerService from '../../Services/API/customerService';
 import styles from './Customer.module.scss'
 
 const cx = classNames.bind(styles)

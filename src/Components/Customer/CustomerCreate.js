@@ -6,7 +6,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/helpers';
-import * as customerService from '../../Services/customerService';
+import * as customerService from '../../Services/API/customerService';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Customer.module.scss'
@@ -19,6 +19,8 @@ function CustomerCreate() {
     const [errorPhone, setErrorPhone] = useState('');
     const [errorMail, setErrorMail] = useState('');
     const [errorId, setErrorId] = useState('');
+
+    console.log(errorPhone, errorMail)
 
     const handleSubmit = async (value, { setSubmitting, setFieldError }) => {
         try {

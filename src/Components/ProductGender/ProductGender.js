@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
-import * as productService from '../../Services/productService';
+import * as productService from '../../Services/API/productService';
 import ProductItem from '../ProductItem';
 import Button from '../Button';
 import styles from './ProductGender.module.scss';

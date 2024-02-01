@@ -1,8 +1,8 @@
-import axios from "axios";
-
+import instance from "../../../Config/axiosConfig";
 export const addDiscount = async (value) => {
     try {
-        let temp = await axios.post("/api/admin/createDiscount", value);
+        console.log("du lieu", value);
+        let temp = await instance.post("/api/admin/createDiscount", value);
         return temp.status;
     } catch (err) {
         console.log(err);
@@ -12,46 +12,50 @@ export const addDiscount = async (value) => {
 
 export const findAllDiscount = async () => {
     try {
-        let temp = await axios.get("/api/admin/listDiscount");
+        let temp = await instance.get("/api/admin/listDiscount");
+        console.log(temp);
         return temp.data;
     } catch (err) {
         console.log(err)
     }
 }
-export const listDiscountCode = async()=>{
-    try{
-        let temp=await axios.get("/api/admin/listDiscountCode");
+export const listDiscountCode = async () => {
+    try {
+        let temp = await instance.get("/api/admin/listDiscountCode");
         return temp.data;
-    }catch(err){
+    } catch (err) {
         console.log(err)
     }
 }
 
-export const getDeleteDiscount =async (id)=>{
-    let temp=await axios.get(`/api/admin/deleteByIdDiscount?id=${id}`);
+export const getDeleteDiscount = async (id) => {
+    let temp = await instance.get(`/api/admin/deleteByIdDiscount?id=${id}`);
     return temp.data;
 }
 
 export const updateDiscount = async (id, value) => {
     try {
-        let temp=await axios.put("/api/admin/updateDiscount/"+id,value);
+        console.log("Hahahah");
+        console.log(value);
+        let temp = await instance.put("/api/admin/updateDiscount/" + id, value);
+        console.log(temp.data);
         return temp.status;
     } catch (err) {
         console.log(err);
     }
 }
 
-export const getFindByNameDiscount = async(name,customerType)=>{
-    try{
-        let temp=await axios.get(`/api/admin/findByNameDiscount?name=${name}&customerType=${customerType}`);
+export const getFindByNameDiscount = async (name, customerType) => {
+    try {
+        let temp = await instance.get(`/api/admin/findByNameDiscount?name=${name}&customerType=${customerType}`);
         return temp.data;
     } catch (err) {
         console.log(err);
     }
 }
-export const getFindByIdDiscount = async(id)=>{
-    try{
-        let temp=await axios.get(`/api/admin/findByIdDiscount?id=${id}`);
+export const getFindByIdDiscount = async (id) => {
+    try {
+        let temp = await instance.get(`/api/admin/findByIdDiscount?id=${id}`);
         return temp.data;
     } catch (err) {
         console.log(err);
@@ -60,7 +64,7 @@ export const getFindByIdDiscount = async(id)=>{
 
 export const checkDiscountCodeExistence = async (id) => {
     try {
-        let temp = await axios.get("/api/admin/existDiscountCode/" + id);
+        let temp = await instance.get("/api/admin/existDiscountCode/" + id);
         if (temp.data !== undefined) {
             return temp.data;
         } else {

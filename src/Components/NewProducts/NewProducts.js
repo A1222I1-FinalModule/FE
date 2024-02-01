@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css'
-import * as productService from '../../Services/productService';
+import * as productService from '../../Services/API/productService';
 import ProductItem from '../ProductItem';
 import styles from './NewProducts.module.scss';
 
