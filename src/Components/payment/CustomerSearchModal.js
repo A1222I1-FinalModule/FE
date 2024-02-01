@@ -6,10 +6,12 @@ import "../../Assets/Styles/customer-search.css"
 import * as PaymentService from "../../Services/API/Payment/PaymentService"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CustomerAddModal from './CustomerAddModal';
 
 function CustomerSearchModal(props) {
     let timer;
     const [searchStr, setSearchStr] = useState("");
+    const [errSearch, setErrSearch] = useState("");
     const [show, setShow] = useState(false);
     const [loading, setLoading] = useState(false);
     const [customers, setCustomers] = useState([]);
@@ -18,7 +20,8 @@ function CustomerSearchModal(props) {
     };
     const handleShow = () => {
         setShow(true);
-        setSearchStr("")
+        setErrSearch("");
+        setSearchStr("");
     };
     const debounce = (func, delay) => {
         if (timer) clearTimeout(timer);
@@ -39,24 +42,28 @@ function CustomerSearchModal(props) {
     };
 
     const getSearchCustomer = async () => {
-        setLoading(true);
-        let temp = await PaymentService.searchCustomer(searchStr);
-        if (temp.status !== 204) {
-            setCustomers(temp.data);
+        setErrSearch("");
+        if (/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/]/.test(searchStr)) {
+            setErrSearch("Từ khóa tìm kiếm không được chứa kí tự đặc biệt.");
         } else {
-            setCustomers([])
-            toast.error('Không tìm thấy khách hàng!', {
-                position: "bottom-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light"
-            });
-        };
-        setLoading(false);
+            setLoading(true);
+            let temp = await PaymentService.searchCustomer(searchStr);
+            if (temp.status !== 204) {
+                setCustomers(temp.data);
+            } else {
+                toast.error('Không tìm thấy khách hàng!', {
+                    position: "bottom-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light"
+                });
+            };
+            setLoading(false);
+        }
     };
 
     function Items({ currentItems }) {
@@ -70,7 +77,7 @@ function CustomerSearchModal(props) {
                             <td style={{ width: "40%" }}>{item.name}</td>
                             <td style={{ width: "30%" }}>{item.phone}</td>
                             <td><button className="btn btn-primary normal-txt-payment" onClick={() => {
-                                props.handleSubmit(item.id);
+                                props.handleSubmit(item.id, item.name);
                                 handleClose();
                             }}>Chọn</button></td>
                         </tr>
@@ -147,10 +154,14 @@ function CustomerSearchModal(props) {
                                 <input type="text" onChange={(e) => setSearchStr(e.target.value)} className="form-control p-4 normal-txt-payment" placeholder="Nhập mã KH, tên KH hoặc sdt" />
                             </div>
                             <div className='row'>
+                                <p style={{ color: "red", fontSize: "15px", lineHeight: "15px" }}>{errSearch}</p>
+                            </div>
+                            <div className='row'>
                                 <div className="input-group-append col-auto">
-                                    <button className="btn btn-success normal-txt-payment" onClick={() => {
+                                    <button className="btn btn-success normal-txt-payment m-3" onClick={() => {
                                         debounce(getSearchCustomer, 800);
                                     }}>Tìm kiếm</button>
+                                    <CustomerAddModal getList={getAllCustomer} />
                                 </div>
                             </div>
                         </div>

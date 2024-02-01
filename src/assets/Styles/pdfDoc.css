@@ -1,9 +1,6 @@
-div {
+.display-none-payment {
     font-family: "DejaVu Sans", "Arial", sans-serif;
     font-size: 12px;
-}
-
-.display-none-payment {
     z-index: -999;
     position: absolute;
 }

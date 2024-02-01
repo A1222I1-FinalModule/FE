@@ -18,7 +18,10 @@ function Payment() {
             pdfExportComponent.current.handleExportPdf();
         }
     };
+    const [customerName, setCustomerName] = useState("");
+    const [availableQuantity, setAvailableQuantity] = useState(-1);
     const [loading, setLoading] = useState(false);
+    const [importLoading, setImportLoading] = useState(false);
     const [isScanOn, setIsScanOn] = useState(false);
     const [productBill, setProductBill] = useState({
         productCode: "",
@@ -57,17 +60,18 @@ function Payment() {
     const getQuantityProductInBill = (code) => {
         let currentQuantity = 0;
         bill.productBills.forEach(productBill => {
-            if (productBill.productCode === code) {
+            if (productBill.productCode === code.toUpperCase()) {
                 currentQuantity = productBill.quantity;
                 return;
             };
         });
         return currentQuantity;
     };
-    const changeCustomerCode = (newCode) => {
+    const changeCustomerCode = (newCode, newName) => {
         setBill(prevState => {
             return { ...prevState, customerCode: newCode };
         });
+        setCustomerName(newName);
     };
     const changeDiscount = (newDiscount) => {
         setDiscount(newDiscount);
@@ -93,7 +97,7 @@ function Payment() {
             errors.productCode = "Bắt buộc nhập";
         }
         if (!productBill.quantity) {
-            errors.password = "Bắt buộc nhập";
+            errors.quantity = "Bắt buộc nhập";
         } else if (productBill.quantity <= 0) {
             errors.quantity = "SL phải lớn hơn 0"
         }
@@ -138,12 +142,11 @@ function Payment() {
         });
         setDiscount({});
         setBillCode();
+        setCustomerName("");
     }
     const handleSubmitImport = async (values) => {
-        setProductBill({
-            productCode: "",
-            quantity: 1
-        });
+        setAvailableQuantity(-1);
+        setImportLoading(true);
         let temp = getQuantityProductInBill(values.productCode);
         let result;
         if (temp === 0) {
@@ -162,21 +165,28 @@ function Payment() {
                 });
             }
             else {
-                updateProductQuantity(values.productCode, parseInt(values.quantity) + parseInt(temp));
+                updateProductQuantity(values.productCode.toUpperCase(), parseInt(values.quantity) + parseInt(temp));
             }
+            setProductBill({
+                productCode: "",
+                quantity: 1
+            });
         } else {
             let errLog = "";
-            if (result.status === 204) {
+            if (result.status === 400) {
                 errLog = 'Số lượng còn lại của sản phẩm không đủ!';
+                console.log("sss" + parseInt(result.data))
+                setAvailableQuantity(result.data);
             }
             if (result.status === 404) {
                 errLog = 'Không tìm thấy sản phẩm này!';
             }
-            if (result.status === 400) {
+            if (result.status === 204) {
                 errLog = 'Số lượng cần lớn hơn 0!';
             }
             toastErr(errLog);
         };
+        setImportLoading(false);
     };
     const toastErr = (log) => {
         toast.error(log, {
@@ -198,14 +208,14 @@ function Payment() {
         getEmployeeCode();
     }, []);
     return (
-        <div className='w-100'>
+        <div className='w-100 div-container-payment d-flex justify-content-center align-items-center'>
             <Formik initialValues={productBill}
                 validate={validateProduct}
                 enableReinitialize={true}
                 onSubmit={values => handleSubmitImport(values)}>
                 {({ errors }) => (
-                    <Form className="my-auto d-flex justify-content-center align-items-center">
-                        <div className="col-12 card p-xl-4 p-sm-2 p-xs-2 shadow">
+                    <Form className="my-auto">
+                        <div className="card p-xl-4 p-sm-2 p-xs-2 shadow">
                             <div className="row d-flex justify-content-center">
                                 <span className="fw-medium col-auto normal-txt-payment">Mã hóa đơn</span>
                                 <span className="col normal-txt-payment">{bill.billCode}</span>
@@ -220,6 +230,9 @@ function Payment() {
                                 <div className="col">
                                     <CustomerSearchModal handleSubmit={changeCustomerCode} chooseCode={bill.customerCode} />
                                 </div>
+                            </div>
+                            <div className="row">
+                                <p className="text-primary error-message-payment">{customerName !== "" ? "Tên khách hàng: " + customerName : ""}</p>
                             </div>
                             <div className="row">
                                 <span className="fw-medium col-auto normal-txt-payment">Ngày tháng năm</span>
@@ -246,7 +259,9 @@ function Payment() {
                                     </div>
                                 </div>
                                 <div className="col-12 col-md ">
-                                    <button type="submit" className="btn btn-success button-size-payment mx-auto">Nhập </button>
+                                    <button type="submit" className="btn btn-success button-size-payment mx-auto" disabled={importLoading}>Nhập {importLoading ?
+                                        <span className="spinner-grow spinner-grow-sm" aria-hidden="true"></span> : ""}</button>
+                                    <p className="text-danger error-message-payment">{availableQuantity !== -1 ? "SL còn: " + availableQuantity : ""}</p>
                                 </div>
                             </div>
                             <div className='table-responsive'>

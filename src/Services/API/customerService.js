@@ -10,17 +10,15 @@ export const findAllCustomerType = async () => {
 };
 
 export const createCustomer = async (value) => {
-
-        const response = await instance.post('/api/admin/insert-customer', value);
-        console.log('Thành công', response);
-        return response.data;
-
+    const response = await instance.post('/api/admin/insert-customer', value);
+    console.log('Thành công', response);
+    return response.data;
 };
 
 export const updateCustomer = async (id, value) => {
-        const response = await instance.put(`/api/admin/update-customer/${id}`, value);
-        console.log('Thành công', response);
-        return response.data;
+    const response = await instance.put(`/api/admin/update-customer/${id}`, value);
+    console.log('Thành công', response);
+    return response.data;
 };
 
 export const detailCustomer = async (id) => {
