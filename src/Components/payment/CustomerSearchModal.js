@@ -47,7 +47,7 @@ function CustomerSearchModal(props) {
             setErrSearch("Từ khóa tìm kiếm không được chứa kí tự đặc biệt.");
         } else {
             setLoading(true);
-            let temp = await PaymentService.searchCustomer(searchStr);
+            let temp = await PaymentService.searchCustomer(searchStr.trim());
             if (temp.status !== 204) {
                 setCustomers(temp.data);
             } else {
