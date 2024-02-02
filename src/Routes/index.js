@@ -13,6 +13,8 @@ import WarehouseRoutes from './WarehouseRoutes';
 import ListProduct from '../Pages/ListProduct'
 import ProductMale from '../Pages/ProductMale'
 import ProductFemale from '../Pages/ProductFemale'
+import { NewsList } from '../Pages/News/List/List';
+import { CreateNews } from '../Pages/News/Create/Create';
 const MainRouter = () => {
   const [roles, setRoles] = useState([]);
   const user = useUser();
@@ -80,10 +82,20 @@ const MainRouter = () => {
         path="/tin-tuc"
         element={
           <DefaultLayout>
-            <News />
+            <NewsList />
           </DefaultLayout>
         }
       />
+
+      <Route
+        path="/tao-tin-tuc"
+        element={
+          <DefaultLayout>
+            <CreateNews />
+          </DefaultLayout>
+        }
+      />
+
       <Route path="*" element={<NotFound />}>
       </Route>
     </Routes>

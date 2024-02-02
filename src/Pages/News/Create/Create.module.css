@@ -1,0 +1,152 @@
+.all {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.my-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: white; /* Thay đổi background thành màu trắng */
+}
+
+.my-section {
+    position: relative;
+    max-width: 400px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    backdrop-filter: blur(55px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 3rem;
+}
+
+.heade-title h1 {
+    font-size: 2rem;
+    color: #000; /* Thay đổi màu chữ thành màu đen */
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.inputbox {
+    position: relative;
+    margin: 30px 0;
+    max-width: 310px;
+    border-bottom: 2px solid #000; /* Thay đổi màu viền bottom thành màu đen */
+}
+
+.inputbox label {
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    transform: translateY(-50%);
+    color: #000; /* Thay đổi màu chữ thành màu đen */
+    font-size: 1rem;
+    font-weight: bold;
+    pointer-events: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.inputbox input, textarea, select {
+    resize: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #000; /* Thay đổi màu chữ thành màu đen */
+}
+
+.inputbox input {
+    width: 100%;
+    height: 60px;
+    padding: 0 35px 0 5px;
+}
+
+.inputbox select {
+    width: 95%;
+    height: 60px;
+    padding: 0 35px 0 5px;
+}
+
+.inputbox select option {
+    background-color: #000; /* Thay đổi màu nền option thành màu đen */
+    color: #fff; /* Thay đổi màu chữ option thành màu trắng */
+    border: none;
+    border-radius: 5px;
+}
+
+.inputbox textarea {
+    height: 100px;
+    width: 100%;
+    padding: 20px 35px 0 5px;
+}
+
+.inputbox input::placeholder, textarea::placeholder {
+    color: #000; /* Thay đổi màu chữ placeholder thành màu đen */
+}
+
+.icon {
+    position: absolute;
+    right: 8px;
+    color: #000; /* Thay đổi màu icon thành màu đen */
+    font-size: 1.2rem;
+    top:  -5px;
+}
+
+.image-upload {
+    position: relative;
+    margin: 30px 0;
+    max-width: 310px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-upload img {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+    border: 10%;
+}
+
+.input-imgg {
+    display: none ;
+}
+
+.image-upload i {
+    position: absolute;
+    right: 8px;
+    color: #000; /* Thay đổi màu icon thành màu đen */
+    font-size: 1.2rem;
+    top: 55px;
+}
+
+.my-section button {
+    width: 100%;
+    height: 40px;
+    border-radius: 40px;
+    background-color: #000; /* Thay đổi màu nền button thành màu đen */
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.4s ease;
+    color: #fff; /* Thay đổi màu chữ button thành màu trắng */
+}
+
+.my-section button:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Thay đổi màu hover button thành màu đen có độ trong suốt */
+}
+
+.form-err {
+    display: block;
+    color: #faab5c; /* Màu đỏ */
+    font-size: 14px;
+    margin-top: 4px;
+}
