@@ -1,4 +1,4 @@
-/*//////////////////////////////////////////////////////////////////
+/* //////////////////////////////////////////////////////////////////
 [ FONT ]*/
 
 @font-face {
@@ -29,19 +29,19 @@
     box-sizing: border-box;
 }
 
-body,
+/* body,
 html {
     height: 100%;
     font-family: Montserrat-Regular, sans-serif;
-}
-h1,
+} */
+/* h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
     margin: 0px;
-}
+} */
 
 p {
     font-family: Montserrat-Regular;
@@ -76,12 +76,15 @@ input:focus {
 input::-webkit-input-placeholder {
     color: #999999;
 }
+
 input:-moz-placeholder {
     color: #999999;
 }
+
 input::-moz-placeholder {
     color: #999999;
 }
+
 input:-ms-input-placeholder {
     color: #999999;
 }
@@ -89,12 +92,15 @@ input:-ms-input-placeholder {
 textarea::-webkit-input-placeholder {
     color: #999999;
 }
+
 textarea:-moz-placeholder {
     color: #999999;
 }
+
 textarea::-moz-placeholder {
     color: #999999;
 }
+
 textarea:-ms-input-placeholder {
     color: #999999;
 }
@@ -195,7 +201,8 @@ input.input1 {
     border-radius: 25px;
     padding: 0 30px;
 }
-input.input1 + .shadow-input1 {
+
+input.input1+.shadow-input1 {
     border-radius: 25px;
 }
 
@@ -204,7 +211,8 @@ textarea.input1 {
     border-radius: 25px;
     padding: 12px 30px;
 }
-textarea.input1 + .shadow-input1 {
+
+textarea.input1+.shadow-input1 {
     border-radius: 25px;
 }
 
@@ -227,6 +235,7 @@ textarea.input1 + .shadow-input1 {
     line-height: 1.5;
     color: #666666;
 }
+
 .formchecklabel {
     font-family: Montserrat-Bold;
     font-size: 15px;
@@ -247,7 +256,7 @@ textarea.input1 + .shadow-input1 {
     color: rgba(87, 184, 70, 0.5);
 }
 
-.input1:focus + .shadow-input1 {
+.input1:focus+.shadow-input1 {
     -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
     animation: anim-shadow 0.5s ease-in-out forwards;
 }
@@ -322,6 +331,7 @@ textarea.input1 + .shadow-input1 {
     -o-transform: translateX(10px);
     transform: translateX(10px);
 }
+
 .validateContent {
     color: red;
 }
@@ -371,6 +381,18 @@ textarea.input1 + .shadow-input1 {
     .containercontact1 {
         padding: 90px 15px 88px 15px;
     }
+
+    .contact1formbtn2 {}
+}
+
+@media (max-width :412px) {
+    .containercontact1 {
+        padding: 90px 15px 88px 15px;
+    }
+
+    .contact1formbtn2 {
+        margin-top: 10px;
+    }
 }
 
 @media (max-width: 300px) {
@@ -380,6 +402,7 @@ textarea.input1 + .shadow-input1 {
         align-items: center;
         justify-content: center;
     }
+
     .contact1formbtn2 {
         margin-top: 10px;
     }

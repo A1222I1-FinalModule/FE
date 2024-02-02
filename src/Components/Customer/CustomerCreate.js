@@ -7,6 +7,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/helpers';
 import * as customerService from '../../Services/API/customerService';
+import { toast } from 'react-toastify';
+import Button from '../Button';
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Customer.module.scss'
@@ -33,7 +35,7 @@ function CustomerCreate() {
 
             await customerService.createCustomer(formFormat);
             navigate('/admin/customer');
-            toast.success('Thêm mới thành công');
+            toast.success('Thêm mới thành công')
             setSubmitting(false);
         } catch (error) {
             console.error('Error:', error);

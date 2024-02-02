@@ -25,9 +25,6 @@ export default function Header() {
         </div>
       </div>
       <div className={style.menu_right}>
-        <div className={`${style.notification} ${style.active}`}>
-          <ion-icon name="notifications-outline"></ion-icon>
-        </div>
         <div className={style.account}>
           <div className={style.image_account}>
             <a href='/admin/info'>

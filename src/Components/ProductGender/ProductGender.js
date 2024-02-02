@@ -5,7 +5,6 @@ import * as productService from '../../Services/API/productService';
 import ProductItem from '../ProductItem';
 import Button from '../Button';
 import styles from './ProductGender.module.scss';
-
 const cx = classNames.bind(styles);
 
 function ProductGender({ category }) {
@@ -17,6 +16,7 @@ function ProductGender({ category }) {
         const fetchProductGender = async () => {
             setLoading(true);
             const res = await productService.searchProductCategories(category);
+            console.log(res);
             setProducts(res);
             setTimeout(() => {
                 setLoading(false);

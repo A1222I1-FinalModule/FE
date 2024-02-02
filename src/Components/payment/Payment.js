@@ -3,7 +3,7 @@ import CustomerSearchModal from "./CustomerSearchModal";
 import DiscountSelectModal from "./DiscountSelectModal";
 import { Formik, Form } from "formik";
 import { getUser } from '../../Services/API/EmployeeService';
-import * as PaymentService from "../../Services/API/Payment/PaymentService"
+import * as PaymentService from "../../Services/API/payment/PaymentService"
 import "../../Assets/Styles/payment.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -120,7 +120,9 @@ function Payment() {
         let temp = await PaymentService.addBill(thisBill);
         if (temp.status === 200) {
             handleExportPdf();
-        };
+        } else if (temp.status === 403) {
+            toastErr("Dữ liệu thêm đã không còn tồn tại!");
+        } else toastErr("Đã có lỗi xảy ra!");;
         setLoading(false);
         handleCancel();
     };
@@ -173,18 +175,21 @@ function Payment() {
             if (result.status === 400) {
                 errLog = 'Số lượng cần lớn hơn 0!';
             }
-            toast.error(errLog, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light"
-            });
+            toastErr(errLog);
         };
     };
+    const toastErr = (log) => {
+        toast.error(log, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light"
+        });
+    }
     useEffect(() => {
         if (bill.billCode === "") {
             setBillCode();
@@ -200,7 +205,7 @@ function Payment() {
                 onSubmit={values => handleSubmitImport(values)}>
                 {({ errors }) => (
                     <Form className="my-auto d-flex justify-content-center align-items-center">
-                        <div className="col-xl-10 col-lg-8 col-md-10 card p-xl-4 p-sm-2 p-xs-2 shadow">
+                        <div className="col-12 card p-xl-4 p-sm-2 p-xs-2 shadow">
                             <div className="row d-flex justify-content-center">
                                 <span className="fw-medium col-auto normal-txt-payment">Mã hóa đơn</span>
                                 <span className="col normal-txt-payment">{bill.billCode}</span>
@@ -209,7 +214,7 @@ function Payment() {
                                 <label htmlFor="customer-code" className="fw-medium col-form-label col-auto normal-txt-payment">Mã khách
                                     hàng</label>
                                 <div className="col-auto">
-                                    <input type="text" className=" normal-txt-payment" id="customer-code" value={bill.customerCode}
+                                    <input type="text" className="form-control normal-txt-payment" id="customer-code" value={bill.customerCode}
                                         disabled />
                                 </div>
                                 <div className="col">
@@ -226,7 +231,7 @@ function Payment() {
                                         hàng</label>
                                     <div className="col-auto">
                                         <input type="text" name="productCode" value={productBill.productCode}
-                                            className="normal-txt-payment" id="productCode"
+                                            className="form-control normal-txt-payment" id="productCode"
                                             onChange={(e) => handleChangeProductBill(e)} />
                                         <p className="text-danger error-message-payment">{errors.productCode}</p>
                                     </div>
@@ -244,9 +249,9 @@ function Payment() {
                                     <button type="submit" className="btn btn-success button-size-payment mx-auto">Nhập </button>
                                 </div>
                             </div>
-                            <div>
-                                <table className="table table-striped table-hover normal-txt-payment table-responsive">
-                                    <thead className='table-font-payment'>
+                            <div className='table-responsive'>
+                                <table className="table align-middle mb-0 bg-white normal-txt-payment">
+                                    <thead className='text-center table-font-payment'>
                                         <tr>
                                             <th>STT</th>
                                             <th>Mã hàng</th>
@@ -261,8 +266,8 @@ function Payment() {
                                         {bill.productBills && bill.productBills.map((value, index) => (
                                             <tr key={value.productCode} style={{ textAlign: 'center' }}>
                                                 <td>{index + 1}</td>
-                                                <td>{value.productCode}</td>
-                                                <td className='col-md-6 col-sm-1 col-lg-12'>{value.name}</td>
+                                                <td className='col-2'>{value.productCode}</td>
+                                                <td className='col-md-4 col-sm-1 col-lg-12'>{value.name}</td>
                                                 <td>{value.quantity}</td>
                                                 <td>{value.size.size}</td>
                                                 <td>{value.price.toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}</td>
@@ -286,7 +291,7 @@ function Payment() {
                                 <span className="col-auto normal-txt-payment">+{discount.rewardPoint ? discount.rewardPoint : 0}</span>
                             </div>
                             <div className="row p-2 d-flex justify-content-center">
-                                <button type="button" className="btn btn-default normal-txt-payment col-auto" onClick={() => setIsScanOn(prevState => (!prevState))}>Mã QR</button>
+                                <button type="button" className="btn btn-dark normal-txt-payment col-auto" onClick={() => setIsScanOn(prevState => (!prevState))}>Mã QR</button>
                                 <div className="col-auto">
                                     <div className="row">
                                         <div className="col-auto">
