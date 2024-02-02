@@ -9,10 +9,10 @@ import * as NotificationService from "../../Services/API/notification/Notificati
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { NotificationDelete } from "./NotificationDelete";
-import { useUser } from "../../Services/UserContext";
+import { useSelector } from "react-redux";
 
 export default function NotificationList() {
-  const user = useUser();
+  const roles = useSelector(store => store.users.role);
   const [isActive, setIsActive] = useState(false);
   const [countNotification, setCountNotification] = useState(0);
   const [notifications, setNotifications] = useState([]);
@@ -26,7 +26,6 @@ export default function NotificationList() {
   }, []);
 
   const roleNotification = async () => {
-    const roles = await user.getRole(user.jwt);
     for (let i = 0; i < roles.length; i++) {
       if (roles[i] === "ROLE_SALE".trim()) {
         getAllBySaler();

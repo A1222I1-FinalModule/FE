@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as Yup from "yup";
 import { Modal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,10 +6,17 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../../Assets/Styles/Login/login.module.css';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import { changePassword } from '../../../Services/API/authService';
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Button } from 'antd';
+import { useCookies } from "react-cookie";
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { handleLogoutMiddleware } from '../../../redux/midleware/UserMiddleware';
 const ChangePass = (props) => {
+    const [cookie, setCookie, removeCookie] = useCookies(['jwt']);
     const [loadings, setLoadings] = useState([]);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const defaultInput = {
         oldPassword: '',
         newPassword: '',
@@ -39,16 +46,13 @@ const ChangePass = (props) => {
         confirmPassword: Yup.string().oneOf([Yup.ref('newPassword'), null], "Mật Khẩu Mới Không Chính Xác")
             .required('Hãy Nhập Thông Tin Đầy Đủ')
             .matches(/\w/, "Lỗi Chứa Kí Tự Đăc Biệt"),
-
-
     };
     const handleSubmit = async (value, setFieldError = () => { }) => {
         enterLoading(1);
         await changePassword(value).then(() => {
-            closedLoading(1);
             toast.success(' Thay đổi mật khẩu thành công !', {
                 position: "top-right",
-                autoClose: 5000,
+                autoClose: 3000,
                 hideProgressBar: false,
                 closeOnClick: true,
                 pauseOnHover: true,
@@ -56,7 +60,12 @@ const ChangePass = (props) => {
                 progress: undefined,
                 theme: "light",
             });
-            props.onHide();
+            removeCookie('jwt')
+            dispatch(handleLogoutMiddleware());
+            closedLoading(1);
+
+            navigate("/")
+
         }).catch((err) => {
             if (err.response) {
                 setFieldError("oldPassword", "Mật Khẩu hiện Tại Không Chính Xác")
@@ -141,7 +150,6 @@ const ChangePass = (props) => {
                     </Formik>
                 </Modal.Body>
             </Modal>
-            <ToastContainer />
         </>
     );
 };

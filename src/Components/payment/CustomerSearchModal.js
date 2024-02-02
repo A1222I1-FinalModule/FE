@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ReactPaginate from 'react-paginate';
 import "../../Assets/Styles/customer-search.css"
-import * as PaymentService from "../../Services/API/payment/PaymentService"
+import * as PaymentService from "../../Services/API/Payment/PaymentService"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

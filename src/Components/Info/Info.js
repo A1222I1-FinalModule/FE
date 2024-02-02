@@ -3,28 +3,15 @@ import style from './infomation.module.css'
 import ChangePass from './modal/changePass';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAsterisk, faBookmark, faCloud, faPhone, faUser } from '@fortawesome/free-solid-svg-icons';
-import { getUser } from '../../Services/API/EmployeeService';
-import { useNavigate } from 'react-router-dom';
-import { logout } from '../../Services/API/authService';
 import images from '../../Assets/Images'
+import { useSelector } from 'react-redux';
 const Info = () => {
 
-    const [employee, setEmployee] = useState(null);
+    const employee = useSelector(store => store.users.employee)
     const [modalShow, setModalShow] = useState(false);
 
-    const navigate = useNavigate();
-    const handleLogout = async () => {
-        await logout();
-        navigate("/home");
 
-    }
-    const getEmployee = async () => {
-        const employee = await getUser();
-        setEmployee(employee);
-    }
-    useEffect(() => {
-        getEmployee();
-    }, [])
+
     if (employee == null) {
         return null
     }
@@ -126,8 +113,6 @@ const Info = () => {
                                                     Đổi Mật Khẩu
                                                 </button>
                                             </td>
-                                            <td>
-                                                <button type="button" className={style['btnInfo'] + " btn btn-warning"} onClick={handleLogout}>Đăng Xuất</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

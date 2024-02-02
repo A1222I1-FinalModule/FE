@@ -12,7 +12,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { imageDb } from '../../FirebaseProduct/ConfigProduct.js';
 import { v4 } from 'uuid'
-import imgProduct from '../../Assets/Images/product/upload-image.webp';
+// import imgProduct from '../../Assets/Images/Product/upload-image.webp';
+import imgProduct from '../../Assets/Images/Product/upload-image.webp';
 
 
 
@@ -98,7 +99,6 @@ export default function InfoProductCreate() {
   const uploadFirebase = async (selectedFile) => {
     if (selectedFile) {
       const imgRef = ref(imageDb, `files/${v4()}`);
-      console.log(selectedFile);
       await uploadBytes(imgRef, selectedFile);
       return await getDownloadURL(imgRef);
     }
