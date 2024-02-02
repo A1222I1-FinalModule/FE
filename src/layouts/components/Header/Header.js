@@ -11,7 +11,7 @@ import Login from '../../../Components/Login';
 import { Fragment, useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
 import images from '../../../Assets/Images/index';
-import NotificationList from '../../../Components/Notification/NotificationList'
+// import NotificationList from '../../../Components/Notification/NotificationList'
 const cx = classNames.bind(styles);
 
 function Header({ hideSearch }) {
@@ -60,7 +60,7 @@ function Header({ hideSearch }) {
                         <div className={cx("icon-container")}>
                             {currentUser === true ? (<>
 
-                                <NotificationList />
+                                {/* <NotificationList /> */}
                                 <Menu items={userMenu}>
                                     <Image
                                         className={cx('user-avatar')}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router';
 import Info from '../Components/Info/Info';
 // import Payment from '../Components/Payment/Payment'
-import StatisticalTable from '../templates/MonthlyStatisticalTable';
+// import StatisticalTable from '../templates/MonthlyStatisticalTable';
 import Dashboard from '../Pages/DashBoard';
 export default function SalerRoutes() {
     return (
