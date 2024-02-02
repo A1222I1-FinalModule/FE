@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -7,9 +8,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/helpers';
 import * as customerService from '../../Services/API/customerService';
-import { toast } from 'react-toastify';
-import Button from '../Button';
-import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Customer.module.scss'
 
