@@ -1,6 +1,7 @@
 .scroll-div {
     overflow-y: scroll;
 }
-.list-container {
+
+.list-container-payment {
     height: 50vh;
 }

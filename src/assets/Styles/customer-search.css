@@ -1,8 +1,4 @@
-.tbl-row:hover {
-    cursor: pointer;
-}
-
-.tbl-row td,
+#custom-table-customer-search .tbl-row td,
 #custom-table-customer-search tr th {
     padding: 20px;
 }

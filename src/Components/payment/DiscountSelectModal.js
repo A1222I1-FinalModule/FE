@@ -39,7 +39,7 @@ function DiscountSelectModal(props) {
                     <Modal.Title>Mã giảm giá có thể chọn</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className='scroll-div list-container'>
+                    <div className='scroll-div list-container-payment'>
                         {loading ? (<div className="text-center">
                             <div className="spinner-border" style={{ width: "200px", height: "200px", color: "green" }} role="status">
                                 <span className="visually-hidden">Loading...</span>

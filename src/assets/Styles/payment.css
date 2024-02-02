@@ -2,6 +2,10 @@
     --normal-font-size: 24px !important;
 }
 
+.div-container-payment {
+    min-height: 100vh;
+}
+
 .table-font-payment {
     font-size: calc(var(--normal-font-size) - 5px);
 }
@@ -10,7 +14,7 @@
     width: 50%;
     font-size: var(--normal-font-size) !important;
 }
-/* 
+
 @media only screen and (max-width: 800px) {
     :root {
         --normal-font-size: 12px !important;
@@ -27,7 +31,7 @@
     :root {
         --normal-font-size: 15px !important;
     }
-} */
+}
 
 .normal-txt-payment {
     font-size: var(--normal-font-size) !important;
@@ -55,8 +59,9 @@
     color: black;
 }
 
-.error-message {
+.error-message-payment {
     box-sizing: border-box;
     line-height: var(--normal-font-size);
     font-size: var(--normal-font-size);
+    height: var(--normal-font-size);
 }
