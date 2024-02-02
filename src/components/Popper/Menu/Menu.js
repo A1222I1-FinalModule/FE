@@ -4,12 +4,18 @@ import Tippy from '@tippyjs/react/headless';
 import { logout } from '../../../Services/API/authService';
 import MenuItem from './MenuItem';
 import styles from './Menu.module.scss';
+import { useDispatch } from 'react-redux';
+import { handleLogoutMiddleware } from '../../../redux/midleware/UserMiddleware';
 
 const cx = classNames.bind(styles);
 
 function Menu({ items = [], hideOnClick = false, children }) {
+    const dispatch = useDispatch();
+
     const handleLogout = async () => {
+        dispatch(handleLogoutMiddleware());
         await logout();
+
         window.location.reload(false);
     };
 

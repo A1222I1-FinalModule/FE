@@ -1,10 +1,17 @@
-import { getUser } from '../../Services/API/EmployeeService';
-import { LoginAPI } from '../../Services/API/authService';
-import { LOGIN } from '../type';
-
-export const getUserMiddleware = (values) => async (dispatch) => {
-    dispatch({
-        type: LOGIN,
-        payload: { jwt: values },
+import { jwtDecode } from "jwt-decode";
+import { getUser } from "../../Services/API/EmployeeService";
+import { TYPE } from "../type";
+export const handleLoginMiddleware = async (values) => async (dispatch) => {
+    const res = await getUser();
+    const roles = await jwtDecode(values).authorities;
+    await dispatch({
+        type: TYPE.login,
+        payload: { jwt: values, login: true, employee: res, role: roles },
     });
 };
+export const handleLogoutMiddleware = () => async (dispatch) => {
+    dispatch({
+        type: TYPE.logout,
+        payload: {}
+    })
+}
