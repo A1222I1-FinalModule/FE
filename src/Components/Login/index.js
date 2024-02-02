@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { LoginAPI } from '../../Services/API/authService';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../Services/UserContext';
 import styles from '../../Assets/Styles/Login/login.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes, faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -12,16 +11,22 @@ import {
   ERROR_UNAUTHORIZED,
   REGEX_SPECIAL_CHARACTERS,
 } from '../../Constants/LoginConstant/index';
+import logoLogin from '../../Assets/Images/login.webp'
 import { Button } from 'antd';
 import { EyeInvisibleOutlined, EyeOutlined, PoweroffOutlined } from '@ant-design/icons';
 import { useCookies } from "react-cookie";
+import { useDispatch, useSelector } from 'react-redux';
+import { handleLoginMiddleware } from '../../redux/midleware/UserMiddleware';
+import { jwtDecode } from 'jwt-decode';
 const Login = (props) => {
-  const [cookies, setCookie] = useCookies(['jwt']);
+  const [cookie, setCookie] = useCookies(['jwt']);
+  const dispatch = useDispatch();
   const defaultInput = {
     username: '',
     password: '',
   };
-  const user = useUser();
+  const user = useSelector(store => store.users);
+ 
   const navigate = useNavigate();
   const [loadings, setLoadings] = useState([]);
   const [inputs, setInputs] = useState(defaultInput);
@@ -70,9 +75,10 @@ const Login = (props) => {
     if (isValid) {
       LoginAPI(inputs)
         .then(async (response) => {
-          setCookie('jwt', response, { path: '/' });
-
-          return await user.setUser(response);
+          setCookie('jwt', response);
+           dispatch(await handleLoginMiddleware(response));
+          const roles = await jwtDecode(response).authorities;
+          return roles
         })
         .then((roles) => {
           if (roles.length > 0) {
@@ -105,7 +111,7 @@ const Login = (props) => {
             <div className="row g-0">
               <div className="col-md-6 col-lg-5 d-none d-md-block">
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/img1.webp"
+                  src={logoLogin}
                   alt="login form"
                   className="img-fluid"
                   style={{ borderRadius: '1rem 0 0 1rem' }}

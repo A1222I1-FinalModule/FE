@@ -7,9 +7,9 @@ function Home() {
     return (
         <div>
             <Banner />
-            <Products />
-            <SellingProducts />
-            <NewProducts />
+            {/* <Products />
+            <ProductGender category={'1'} />
+            <ProductGender category={'2'} /> */}
         </div>
     );
 }

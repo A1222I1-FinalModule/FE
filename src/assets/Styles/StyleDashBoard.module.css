@@ -359,12 +359,10 @@ h1 {
         color: #34ace0;
         font-size: 15px;
     }
-} */
+}
 body {
     -ms-overflow-style: none;
-    /* IE and Edge */
     scrollbar-width: none;
-    /* Firefox */
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
