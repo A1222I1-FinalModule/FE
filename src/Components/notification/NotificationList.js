@@ -10,7 +10,6 @@ import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { NotificationDelete } from "./NotificationDelete";
 import { useSelector } from "react-redux";
-
 export default function NotificationList() {
   const roles = useSelector(store => store.users.role);
   const [isActive, setIsActive] = useState(false);
@@ -35,6 +34,7 @@ export default function NotificationList() {
         return;
       }
     }
+    console.log(roles);
   }
 
 
@@ -58,10 +58,6 @@ export default function NotificationList() {
     let arrNotRead = [...notificationNotRead];
     setNotificationNotRead(arrNotRead);
   };
-  // const getAllByNotReadWareHouse = () => {
-  //   let arrNotRead = [...notificationNotRead];
-  //   setNotificationNotRead(arrNotRead);
-  // }
   const handleDropdownClick = () => {
     setIsActive(!isActive);
   };
@@ -116,8 +112,27 @@ export default function NotificationList() {
     setData(data);
   }
 
+  const togggleBlueDot = (id) => {
+    var blueDot = document.getElementById(`notread${id}`);
+    if (blueDot.style.display === 'none') {
+      blueDot.style.display = 'block';
+    } else {
+      blueDot.style.display = 'none';
+    }
+  }
 
-  const currentDate = format(new Date(), "dd-MM-yyyy");
+  const divStyle = {
+    width: '10px',
+    height: '10px',
+    backgroundColor: 'rgba(0, 174, 255, 0.456)',
+    borderRadius: '50%',
+    position: 'absolute',
+    top: '20px',
+    right: '40px',
+    display: 'block',
+  }
+
+
   if (!notifications) return null;
   return (
     <>
@@ -166,10 +181,13 @@ export default function NotificationList() {
                   className={styles.contentnotification}
                   key={notification.id}
                 >
-                  <p className={styles.content1}>
-                    {notification.content}
-                  </p>
-                  <p className={styles.date}>{currentDate}</p>
+                  <div className="contentexample">
+                    <p className={styles.content1}>
+                      {notification.content}
+                    </p>
+                    <span id={`notread${notification.id}`} style={divStyle}></span>
+                  </div>
+                  <p className={styles.date}>{format(notification.startDate, "dd-MM-yyyy hh:MM")}</p>
                   <div
                     role="button"
                     className={styles.threedots}
@@ -191,6 +209,14 @@ export default function NotificationList() {
                         }}
                       >
                         Chi tiết Thông báo
+                      </button>
+                      <button
+                        className={styles.contentlink}
+                        onClick={() => {
+                          togggleBlueDot(notification.id)
+                        }}
+                      >
+                        đánh dấu đã đọc
                       </button>
                       <NotificationDelete
                         id={notification.id}
@@ -207,10 +233,13 @@ export default function NotificationList() {
                   className={styles.contentnotification}
                   key={notification.id}
                 >
-                  <p className={styles.content1}>
-                    {notification.content}
-                  </p>
-                  <p className={styles.date}>{currentDate}</p>
+                  <div className="contentexample">
+                    <p className={styles.content1}>
+                      {notification.content}
+                    </p>
+                    <span id={`notread${notification.id}`} style={divStyle}></span>
+                  </div>
+                  <p className={styles.date}>{format(notification.startDate, "dd-MM-yyyy hh:MM")}</p>
                   <div
                     role="button"
                     className={styles.threedots}
@@ -233,6 +262,14 @@ export default function NotificationList() {
                       >
                         Chi tiết Thông báo
                       </button>
+                      <button
+                        className={styles.contentlink}
+                        onClick={() => {
+                          togggleBlueDot(notification.id);
+                        }}
+                      >
+                        đánh dấu đã đọc
+                      </button>
                       <NotificationDelete
                         id={notification.id}
                         getNotifications={handleDeleteNotRead}
@@ -240,7 +277,6 @@ export default function NotificationList() {
                       </NotificationDelete>
                     </div>
                   </div>
-                  <div className={styles.notread}><span></span></div>
                 </div>
                 )
               }))}

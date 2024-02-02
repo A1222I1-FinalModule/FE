@@ -21,44 +21,9 @@
     src: url('../../Assets/fonts/montserrat/Montserrat-Medium.ttf');
 }
 
-/* [ RESTYLE TAG ] */
-/* 
-* {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-}
-
-/* body,
-html {
-    height: 100%;
-    font-family: Montserrat-Regular, sans-serif;
-} */
-/* h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    margin: 0px;
-} */
-
-p {
-    font-family: Montserrat-Regular;
-    font-size: 14px;
-    line-height: 1.7;
-    color: #666666;
-    margin: 0px;
-}
-
-ul,
-li {
-    margin: 0px;
-    list-style-type: none;
-} */
 
 /*---------------------------------------------*/
-/* input {
+input {
     outline: none;
     border: none;
 }
@@ -103,10 +68,12 @@ textarea::-moz-placeholder {
 
 textarea:-ms-input-placeholder {
     color: #999999;
-} */
+}
 
-/*---------------------------------------------*/
-/* button {
+
+
+/* ---------------------------------------------*/
+button {
     outline: none !important;
     border: none;
     background: transparent;
@@ -118,7 +85,7 @@ button:hover {
 
 iframe {
     border: none !important;
-} */
+}
 
 /*//////////////////////////////////////////////////////////////////
     [ Contact 1 ]*/
@@ -127,13 +94,6 @@ iframe {
     width: 100%;
     min-height: 100%;
     padding: 15px;
-
-    /* background: #009bff;
-  background: -webkit-linear-gradient(left, #44006b, #ad1fff, #8365fb);
-  background: -o-linear-gradient(left, #44006b, #ad1fff, #8365fb);
-  background: -moz-linear-gradient(left, #44006b, #ad1fff, #8365fb);
-  background: linear-gradient(left, #44006b, #ad1fff, #8365fb); */
-
     display: -webkit-box;
     display: -webkit-flex;
     display: -moz-box;
@@ -195,7 +155,8 @@ iframe {
     color: transparent;
     -webkit-background-clip: text;
 }
-/* 
+
+
 input.input1 {
     height: 50px;
     border-radius: 25px;
@@ -214,7 +175,7 @@ textarea.input1 {
 
 textarea.input1+.shadow-input1 {
     border-radius: 25px;
-} */
+}
 
 /*---------------------------------------------*/
 .wrapinput1 {

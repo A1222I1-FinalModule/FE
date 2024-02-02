@@ -10,10 +10,9 @@ import Login from '../../../Components/Login';
 import { Fragment, useEffect, useState } from 'react';
 import Button from '../../../Components/Button';
 import images from '../../../Assets/Images/index';
-import NotificationList from '../../../Components/Notification/NotificationList'
+import NotificationList from '../../../Components/notification/NotificationList'
 import { useSelector } from 'react-redux';
 const cx = classNames.bind(styles);
-
 function Header({ hideSearch }) {
     const user = useSelector(store => store.users);
     const role = useSelector(store => store.users.role);
@@ -66,8 +65,7 @@ function Header({ hideSearch }) {
                     <div className={cx('actions')}>
                         <div className={cx("icon-container")}>
                             {user.login ? (<>
-
-                                {/* <NotificationList /> */}
+                                <NotificationList />
                                 <Menu items={userMenu}>
                                     <div style={{ display: "inline-block" }}>
 

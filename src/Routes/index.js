@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom'; 
+import { Route, Routes } from 'react-router-dom';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
 import AdminRoutes from './AdminRoutes';
@@ -13,6 +13,7 @@ import ProductFemale from '../Pages/ProductFemale'
 import { NewsList } from '../Pages/News/List/List';
 import { CreateNews } from '../Pages/News/Create/Create';
 import { useSelector } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 const MainRouter = () => {
   const roles = useSelector(store => store.users.role);
   console.log(roles);

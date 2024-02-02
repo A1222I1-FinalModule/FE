@@ -9,7 +9,7 @@ import { UpdateDiscount } from '../Components/Discount/updateDiscount';
 import CustomerCreate from '../Components/Customer/CustomerCreate';
 import CustomerUpdate from '../Components/Customer/CustomerUpdate';
 import ContentAdmin from '../Components/ContentAdmin';
-// import NotificationSave from '../Components/Notification/NotificationSave';
+import NotificationSave from '../Components/notification/NotificationSave';
 import ProductList from '../Components/product/ProductList'
 import InfoProductCreate from '../Components/product/InfoProductCreate';
 const AdminRoutes = () => {

@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import style from '../../Assets/css/StatisticalTable.module.css';
 import { useEffect, useState } from 'react';
-import { useUser } from '../../Services/UserContext';
-
+import { useUser } from '../../Services/UserContext'
 const NavbarTable = () => {
   const user = useUser();
   const [roles, setRoles] = useState([]);
