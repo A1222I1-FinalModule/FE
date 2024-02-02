@@ -1,8 +1,7 @@
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom'; 
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
-import News from '../Pages/News';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
 import { useEffect, useState } from "react";

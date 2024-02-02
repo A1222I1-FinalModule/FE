@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../Layouts/Header/Header";
 import SideBar from "../Layouts/sidebar/SideBar";
-export default function Saler({ children }) {
+
+export default function Warehouse({ children }) {
   return (
     <div>
       <Header></Header>
@@ -12,5 +13,5 @@ export default function Saler({ children }) {
         </div>
       </div>
     </div>
-  )
+  );
 };

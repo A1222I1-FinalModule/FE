@@ -1,39 +1,30 @@
 import instance from "../../Config/axiosConfig";
+const PUBLIC_URL = `/api/public`;
+
 export const getAll = async () => {
-  const respone = await instance.get(`/api/admin/importing}`);
-  return respone.data;
-}
-export const getAllBySaler = async () => {
-  const respone = await instance.get(`/api/saler/importing}`);
-  return respone.data;
-}
-export const getAllByWarehouse = async () => {
-  const respone = await instance.get(`/api/warehouse/importing}`);
+  const respone = await instance.get(`$${PUBLIC_URL}/importing`);
   return respone.data;
 }
 
 export const save = async (value) => {
-  const respone = await instance.post(`/api/admin/importing`, value)
-  return respone.status;
-}
-export const saveByWarehouse = async (value) => {
-  const respone = await instance.post(`/api/warehouse/importing`, value)
-  return respone.status;
+  try {
+    const respone = await instance.post(`${PUBLIC_URL}/importing`, value)
+    return respone.status;
+  } catch (error) {
+    console.log(error)
+    throw error
+  }
 }
 
-export const getDailyImportingBySaler = async () => {
-  const respone = await instance.get(`/api/saler/importing/daily`);
+export const getDailyImporting = async () => {
+  const respone = await instance.get(`${PUBLIC_URL}/importing/daily`);
   return respone.data;
 }
-export const getMonthlyImportingBySaler = async () => {
-  const respone = await instance.get(`/api/saler/importing/month`);
+export const getMonthlyImporting = async () => {
+  const respone = await instance.get(`${PUBLIC_URL}/importing/monthly`);
   return respone.data;
 }
-export const getDailyImportingByWarehouse = async () => {
-  const respone = await instance.get(`/api/warehouse/importing/daily`);
-  return respone.data;
-}
-export const getMonthlyImportingByWarehouse = async () => {
-  const respone = await instance.get(`/api/warehouse/importing/month`);
+export const getMaxId = async () => {
+  const respone = await instance.get(`${PUBLIC_URL}/importing/maxId`);
   return respone.data;
 }

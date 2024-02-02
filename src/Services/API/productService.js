@@ -42,11 +42,11 @@ export const searchProductCategories = async (id) => {
         console.log(error);
     }
 };
-export const updateQuantityByAdmin = async (value) => {
-    const respone = await instance.post(`${BASE_URL}/update-quantity`, value)
+export const updateQuantityByAdmin = async (id, value) => {
+    const respone = await instance.put(`${BASE_URL}/update-quantity/${id}`, value)
     return respone.status;
 }
-export const updateQuantityByWarehouse = async (value) => {
-    const respone = await instance.post(`${WAREHOUSE_URL}/update-quantity`, value)
+export const updateQuantityByWarehouse = async (id, value) => {
+    const respone = await instance.post(`${WAREHOUSE_URL}/update-quantity/${id}`, value)
     return respone.status;
 }
