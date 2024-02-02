@@ -24,13 +24,10 @@
     width: 48%;
 }
 
-<<<<<<< HEAD
-=======
 .form-row>div:first-child {
     margin-right: 4%;
 }
 
->>>>>>> bad3bd5b25e41cbc874ae67b3e13ba6846de3d05
 .label {
     font-weight: bold;
     margin-bottom: 10px;

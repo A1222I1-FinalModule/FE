@@ -21,7 +21,7 @@ const AdminRoutes = () => {
             <Route path='/goods' element={<Dashboard><ProductList /></Dashboard>} />
             <Route path='/productCreate' element={<Dashboard><InfoProductCreate /></Dashboard>} />
             <Route path='/discount' element={<Dashboard><Discount /></Dashboard>} />
-            <Route path='/report' element={<Dashboard><ContentAdmin /></Dashboard>} />
+            <Route path='/notification' element={<Dashboard><NotificationSave /></Dashboard>} />
             <Route path='/customer' element={<Dashboard><ListCustomer /></Dashboard>} />
             <Route path='/createDiscount' element={<Dashboard><CreateDiscount /></Dashboard>} />
             <Route path='/updateDiscount/:id' element={<Dashboard><UpdateDiscount /></Dashboard>} />
