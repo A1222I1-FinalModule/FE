@@ -12,9 +12,11 @@ function ProductSearchList({ data }) {
                 <h4 className={cx('sub-heading')}>Tìm kiếm</h4>
                 <h2 className={cx('heading')}>Kết quả tìm kiếm sản phẩm</h2>
             </div>
+
             <div className={cx('inner')}>
-                <ProductItem data={data} number={20} />
+                <ProductItem data={data} number={40} />
             </div>
+
         </div>
     );
 }

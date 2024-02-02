@@ -67,7 +67,7 @@ function Header({ hideSearch }) {
                         <div className={cx("icon-container")}>
                             {user.login ? (<>
 
-                                <NotificationList />
+                                {/* <NotificationList /> */}
                                 <Menu items={userMenu}>
                                     <div style={{ display: "inline-block" }}>
 

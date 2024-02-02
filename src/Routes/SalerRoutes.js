@@ -10,6 +10,8 @@ export default function SalerRoutes() {
             <Route path='/' element={<Dashboard><Info /></Dashboard>} />
             <Route path='/payment' element={<Dashboard><Payment></Payment></Dashboard>} />
             <Route path='/goods' element={<Dashboard><ProductList /></Dashboard>} />
+            {/* <Route path='/payment' element={<Dashboard><Payment></Payment></Dashboard>} /> */}
+            {/* <Route path='/statistical' element={<Dashboard><StatisticalTable /></Dashboard>} /> */}
             <Route path='/info' element={<Dashboard><Info /></Dashboard>} />
         </Routes>
     );

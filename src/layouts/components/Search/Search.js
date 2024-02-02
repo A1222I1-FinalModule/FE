@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
@@ -27,18 +27,21 @@ function Search() {
     useEffect(() => {
         if (!debouncedValue.trim()) {
             setSearchResult([]);
+            setShowResult(false)
             return;
         }
 
         const fetchApi = async () => {
             setLoading(true);
-            const result = await productService.searchProducts({ name: searchValue, size: '20' });
+            const result = await productService.searchProducts({ name: searchValue, size: '40' });
             setSearchResult(result);
+            setShowResult(true);
             setLoading(false);
         };
 
         fetchApi();
     }, [debouncedValue]);
+
 
     const handleClear = () => {
         setSearchValue('');
@@ -52,6 +55,7 @@ function Search() {
 
     const handleChange = (e) => {
         const searchValue = e.target.value;
+
         if (!searchValue.startsWith(' ')) {
             setSearchValue(searchValue);
         }
@@ -61,31 +65,41 @@ function Search() {
         <div>
             <Tippy
                 interactive
-                visible={showResult && searchResult.length > 0}
+                visible={showResult}
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                         <PopperWrapper>
-                            <h4 className={cx('search-title')}>Sản phẩm</h4>
-                            {searchResult.slice(0, 5).map((result) => (
-                                <ProductSearch key={result.id} data={result} />
-                            ))}
+                            {(searchResult.length === 0) ?
+                                <div className={cx('no-results')}>
+                                    Không tìm thấy sản phẩm
+                                </div>
+                                :
+                                <Fragment>
+                                    <h4 className={cx('search-title')}>Sản phẩm</h4>
+                                    {searchResult.slice(0, 5).map((result) => (
+                                        <ProductSearch key={result.id} data={result} />
+                                    ))}
 
-                            <Button
-                                className={cx('search-more')}
-                                onClick={() => {
-                                    navigate(`/search?q=${searchValue}`, { state: { data: searchResult } });
-                                    setSearchValue('');
-                                }}
-                            >
-                                Xem thêm
-                            </Button>
+                                    <Button
+                                        type="submit"
+                                        className={cx('search-more')}
+                                        onClick={() => {
+                                            navigate(`/search?q=${searchValue}`, { state: { data: searchResult }, replace: true });
+                                            setSearchValue('');
+                                            window.scrollTo(0, 0);
+                                        }}
+                                    >
+                                        Xem thêm
+                                    </Button>
+                                </Fragment>
+                            }
                         </PopperWrapper>
                     </div>
                 )}
                 onClickOutside={handleHideResult}
             >
                 <div className={cx('search')}>
-                    <button className={cx('search-btn')} onMouseDown={(e) => e.preventDefault()}>
+                    <button className={cx('search-btn')}>
                         <SearchIcon />
                     </button>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import DefaultLayout from '../Layouts/DefaultLayout/DefaultLayout';
 import Home from '../Pages/Home';
+import News from '../Pages/News';
 import AdminRoutes from './AdminRoutes';
 import SalerRoutes from './SalerRoutes';
 import { useEffect, useState } from "react";
@@ -59,8 +60,16 @@ const MainRouter = () => {
           </DefaultLayout>
         }
       />
-      <Route path="*" element={<NotFound />}>
 
+      <Route
+        path="/tin-tuc"
+        element={
+          <DefaultLayout>
+            <News />
+          </DefaultLayout>
+        }
+      />
+      <Route path="*" element={<NotFound />}>
       </Route>
     </Routes>
 
