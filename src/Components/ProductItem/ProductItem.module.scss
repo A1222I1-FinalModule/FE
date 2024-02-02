@@ -1,13 +1,14 @@
 .wrapper {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     flex-wrap: wrap;
     margin: 0 -10px;
+    height: auto;
 }
 
 .product-item {
-    width: 20%;
-    flex: 1 1 20%;
+    flex: 0 0 20%;
+    max-width: 20%;
     padding: 0 10px;
     margin-bottom: 15px;
 }
@@ -18,8 +19,8 @@
     img {
         width: 100%;
         display: flex;
-        height: auto;
-        max-height: 328px;
+        height: 400px;
+        max-height: 330px;
         object-fit: cover;
         border-radius: 5px;
     }
@@ -51,6 +52,14 @@
 }
 
 .price {
+    font-size: 1.2rem;
+    color: #8a8a8f;
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+.discount {
+    margin-right: 15px;
     font-size: 1.6rem;
     font-weight: bold;
     color: var(--red);

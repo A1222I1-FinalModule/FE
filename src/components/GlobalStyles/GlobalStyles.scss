@@ -15,6 +15,7 @@
     // Default layout
     --default-layout-header-height: 80px;
     --default-layout-header-width: 1350px;
+    --default-layout-footer-width: 1350px;
     --default-layout-horizontal-spacer: 25px;
     --default-layout-footer-height: 50px;
 }
@@ -51,6 +52,12 @@ a {
     &:hover {
         color: var(--text-color);
     }
+}
+
+ul,
+li {
+    list-style: none;
+    padding-left: 0;
 }
 
 .form-control,

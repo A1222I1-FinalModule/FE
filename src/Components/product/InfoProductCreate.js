@@ -98,7 +98,6 @@ export default function InfoProductCreate() {
   const uploadFirebase = async (selectedFile) => {
     if (selectedFile) {
       const imgRef = ref(imageDb, `files/${v4()}`);
-      console.log(selectedFile);
       await uploadBytes(imgRef, selectedFile);
       return await getDownloadURL(imgRef);
     }

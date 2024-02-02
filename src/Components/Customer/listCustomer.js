@@ -44,24 +44,29 @@ export function ListCustomer() {
         if (searchInput) {
             setLoading(true);
             temp = await customers.findByNameCustomer(searchInput);
-            if (searchInput == '_') {
+            if (searchInput.includes('_')) {
                 setLoading(false);
                 setShowNotFoundModal(true);
                 temp = await customers.findAllCustomer();
+                setSearchInput('');
                 setCustomer(temp.filter((item) => item.delete === true));
             } else if (temp.length === 0) {
                 setLoading(false);
                 setShowNotFoundModal(true);
                 temp = await customers.findAllCustomer();
+                setSearchInput('');
                 setCustomer(temp.filter((item) => item.delete === true));
             } else {
-                setCustomer(temp.filter((item) => item.delete === true));
+                const arr = temp.filter((item) => item.delete === true);
+                setCustomer(arr.reverse());
+                setSearchInput('');
                 setLoading(false);
                 setCurrentPage(1);
             }
         } else {
             temp = await customers.findAllCustomer();
-            setCustomer(temp.filter((item) => item.delete === true));
+            const arr = temp.filter((item) => item.delete === true);
+            setCustomer(arr.reverse());
             setLoading(false);
         }
     };
@@ -120,11 +125,13 @@ export function ListCustomer() {
                         </Link>
                     </div>
                 </div>
-                <div className="container-table">
+                <div className={styled['container-table']}>
                     <table className="table align-middle mb-0 bg-white" style={{ width: '1000px' }}>
                         <thead className="bg-light">
                             <tr className={styled['headtr-customer']}>
-                                <th scope="col" className={styled['head-customer']}></th>
+                                <th scope="col" className={styled['head-customer']}>
+                                    Số Thứ Tự
+                                </th>
                                 <th scope="col" className={styled['head-customer']}>
                                     Mã Khách Hàng
                                 </th>
@@ -153,7 +160,6 @@ export function ListCustomer() {
                             ) : (
                                 records.map((customer, index) => {
                                     const rowNumber = firstIndex + index + 1;
-
                                     return (
                                         <tr key={index} className={styled['headtr-customer']}>
                                             <td className="text-center" style={{ fontSize: '13px' }}>
@@ -176,7 +182,7 @@ export function ListCustomer() {
                                                 </div>
                                             </td>
                                             <td className="text-center" style={{ fontSize: '13px' }}>
-                                                {customer.gender ? "Nữ" : "Nam"}
+                                                {customer.gender ? 'Nam' : 'Nữ'}
                                             </td>
                                             <td className="text-center" style={{ fontSize: '13px' }}>
                                                 {customer.point}

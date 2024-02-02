@@ -1,13 +1,13 @@
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
+import { toast } from 'react-toastify';
 import { formatDate } from '../../utils/helpers';
 import * as customerService from '../../Services/API/customerService';
-import Button from '../Button';
-import { useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Customer.module.scss'
 
@@ -18,6 +18,7 @@ function CustomerCreate() {
 
     const [errorPhone, setErrorPhone] = useState('');
     const [errorMail, setErrorMail] = useState('');
+    const [errorId, setErrorId] = useState('');
 
     console.log(errorPhone, errorMail)
 
@@ -30,33 +31,42 @@ function CustomerCreate() {
                 dateOfBirth: formatDate(value.dateOfBirth),
             };
 
-            console.log(formFormat)
-
             await customerService.createCustomer(formFormat);
             navigate('/admin/customer');
+            toast.success('Thêm mới thành công')
             setSubmitting(false);
         } catch (error) {
             console.error('Error:', error);
             const errorMessage = error.response.data;
-            console.log(errorMessage)
-            if (errorMessage.length === 1) {
-                if (errorMessage[0] === 'Email đã tồn tại.') {
-                    setErrorMail(errorMessage[0]);
-                    setFieldError('email', errorMessage[0]);
-                } else if (errorMessage[0] === 'Số điện thoại đã tồn tại.') {
-                    setErrorPhone(errorMessage[0]);
-                    setFieldError('phone', errorMessage[0]);
-                }
-            } else {
-                setErrorPhone(errorMessage[0]);
-                setErrorMail(errorMessage[1]);
-                setFieldError('phone', errorMessage[0]);
-                setFieldError('email', errorMessage[1]);
-            }
 
-            setFieldError('general', errorMessage);
+            let emailError, phoneError, idError;
+            if (Array.isArray(errorMessage)) {
+                errorMessage.forEach((errorItem) => {
+                    switch (errorItem) {
+                        case 'Email đã tồn tại':
+                            emailError = errorItem;
+                            setErrorMail(emailError);
+                            setFieldError('email', emailError);
+                            break;
+                        case 'Số điện thoại đã tồn tại':
+                            phoneError = errorItem;
+                            setErrorPhone(phoneError);
+                            setFieldError('phone', phoneError);
+                            break;
+                        case 'Id đã tồn tại':
+                            idError = errorItem;
+                            setErrorId(idError);
+                            setFieldError('id', idError);
+                            break;
+                        default:
+                            break;
+                    }
+                });
+
+                setFieldError('general', errorMessage);
+            };
         }
-    };
+    }
 
     return (
         <div className="page-container">
@@ -79,12 +89,13 @@ function CustomerCreate() {
                     }}
                     onSubmit={handleSubmit}
                     validationSchema={Yup.object().shape({
+
                         id: Yup.string()
                             .matches(/^KH\d{3}$/, 'Phải theo mẫu KH000')
                             .required('Không được để trống'),
                         name: Yup.string()
                             .max(100, 'Không được quá 100 ký tự')
-                            .matches(/^[a-zA-Z0-9\s]+$/, 'Không được chứa ký tự đặc biệt')
+                            .matches(/^[a-zA-ZàáảãạâầấẩẫậăắằẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵĐđ][a-zA-Z\sàáảãạâầấẩẫậăắằẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵĐđ]*$/, 'Không được chứa ký tự đặc biệt')
                             .required('Không được để trống'),
                         address: Yup.string().required('Không được để trống'),
                         dateOfBirth: Yup.date()
@@ -105,12 +116,22 @@ function CustomerCreate() {
                                     type="text"
                                     name="id"
                                     placeholder="KH000"
+                                    onBlur={(e) => {
+                                        Yup.string()
+                                            .validate(formikProps.values.id)
+                                            .catch((err) => formikProps.setFieldError('id', err.message));
+                                    }}
                                 />
                                 <ErrorMessage
                                     name="id"
-                                    component="span"
-                                    className={cx('form-err')}
-                                ></ErrorMessage>
+                                    render={(msg) => (
+                                        <>
+                                            <span className={cx('form-err')}>
+                                                {(msg && msg) || (errorId && errorId)}
+                                            </span>
+                                        </>
+                                    )}
+                                />
                             </div>
                             <div>
                                 <span className={cx('label')}>
@@ -260,5 +281,6 @@ function CustomerCreate() {
         </div >
     );
 }
+
 
 export default CustomerCreate;

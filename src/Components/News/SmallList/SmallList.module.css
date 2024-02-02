@@ -1,0 +1,53 @@
+.custom-modal-size {
+  max-width: 1000px; /* Điều chỉnh kích thước theo ý muốn của bạn */
+  margin: 0 auto; /* Đưa modal về giữa màn hình */
+}
+
+.my-table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .my-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  
+  .my-table th, td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .my-table img {
+    width: 100%; /* Chiều rộng tương đương với độ rộng của ô */
+    height: 50px; /* Chiều cao tương đương với độ cao của ô */
+    object-fit: cover; /* Cắt ảnh để vừa với kích thước của ô */
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  tr:hover {
+    background-color: #f5f5f5;
+  }
+
+  .more-button {
+    border: none;
+    border-radius: 5%;
+    background-color: #5E2572;
+    color: #fff;
+    cursor: pointer;
+    padding: 8px 16px;
+    margin-top: 10px;
+    text-align: center;
+  }
+  
+  /* Optional: Responsive design for smaller screens */
+  @media (max-width: 600px) {
+    th, td {
+      font-size: 14px;
+    }
+  }

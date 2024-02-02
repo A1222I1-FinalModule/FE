@@ -67,3 +67,12 @@
         color: var(--primary);
     }
 }
+
+.no-results {
+    font-size: 1.6rem;
+    max-height: min(100vh - 96px - 60px, 734px);
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

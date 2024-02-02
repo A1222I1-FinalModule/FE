@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import * as Yup from 'yup';
 import classNames from 'classnames/bind';
 
+import { toast } from 'react-toastify'
 import { formatDate } from '../../utils/helpers';
 import * as customerService from '../../Services/API/customerService';
 import styles from './Customer.module.scss'
@@ -15,8 +16,6 @@ function CustomerUpdate() {
     const navigate = useNavigate();
     const [customer, setCustomer] = useState({});
     const [customerType, setCustomerType] = useState([]);
-    const [errorPhone, setErrorPhone] = useState('');
-    const [errorMail, setErrorMail] = useState('');
 
     useEffect(() => {
         const fecthApi = async () => {
@@ -47,27 +46,10 @@ function CustomerUpdate() {
             console.log(formFormat)
             await customerService.updateCustomer(params.id, formFormat);
             navigate('/admin/customer');
+            toast.success('Cập nhật thành công')
             setSubmitting(false);
         } catch (error) {
             console.error('Error:', error);
-            const errorMessage = error.response.data;
-
-            if (errorMessage.length === 1) {
-                if (errorMessage[0] === 'Email đã tồn tại.') {
-                    setErrorMail(errorMessage[0]);
-                    setFieldError('email', errorMessage[0]);
-                } else if (errorMessage[0] === 'Số điện thoại đã tồn tại.') {
-                    setErrorPhone(errorMessage[0]);
-                    setFieldError('phone', errorMessage[0]);
-                }
-            } else {
-                setErrorPhone(errorMessage[0]);
-                setErrorMail(errorMessage[1]);
-                setFieldError('phone', errorMessage[0]);
-                setFieldError('email', errorMessage[1]);
-            }
-
-            setFieldError('general', errorMessage);
         }
     };
 
@@ -95,7 +77,7 @@ function CustomerUpdate() {
                             .required('Không được để trống'),
                         name: Yup.string()
                             .max(100, 'Không được quá 100 ký tự')
-                            .matches(/^[a-zA-Z0-9\s]+$/, 'Không được chứa ký tự đặc biệt')
+                            .matches(/^[a-zA-ZàáảãạâầấẩẫậăắằẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵĐđ][a-zA-Z\sàáảãạâầấẩẫậăắằẳẵặèéẻẽẹêềếểễệđìíỉĩịòóỏõọôồốổỗộơờớởỡợùúủũụưừứửữựỳýỷỹỵĐđ]*$/, 'Không được chứa ký tự đặc biệt')
                             .required('Không được để trống'),
                         address: Yup.string().required('Không được để trống'),
                         dateOfBirth: Yup.date()
@@ -105,18 +87,17 @@ function CustomerUpdate() {
                         email: Yup.string().email('Nhập email không hợp lệ').required('Không được để trống'),
                     })}
                 >
-                    {(formikProps) => <Form>
+                    <Form>
                         <div className={cx('form-row')}>
                             <div>
                                 <span className={cx('label')}>
-                                    Mã Khách Hàng <span className={` ${cx('required-field')}`}>*</span>
+                                    Mã Khách Hàng <span className={`${cx('required-field')}`}>*</span>
                                 </span>
                                 <Field
-                                    className={` ${cx('form-control')}`}
+                                    className={` ${cx('form-control', 'pe-none')}`}
                                     type="text"
                                     name="id"
                                     placeholder="KH000"
-
                                 />
                                 <ErrorMessage
                                     name="id"
@@ -129,26 +110,15 @@ function CustomerUpdate() {
                                     Email <span className={` ${cx('required-field')}`}>*</span>
                                 </span>
                                 <Field
-                                    type="email"
                                     className={` ${cx('form-control')}`}
+                                    type="text"
                                     name="email"
-                                    placeholder="a@gmail.com"
-                                    onBlur={(e) => {
-                                        Yup.string()
-                                            .validate(formikProps.values.email)
-                                            .catch((err) => formikProps.setFieldError('email', err.message));
-                                    }}
                                 />
                                 <ErrorMessage
                                     name="email"
-                                    render={(msg) => (
-                                        <>
-                                            <span className={cx('form-err')}>
-                                                {(msg && msg) || (errorMail && errorMail)}
-                                            </span>
-                                        </>
-                                    )}
-                                />
+                                    component="span"
+                                    className={cx('form-err')}
+                                ></ErrorMessage>
                             </div>
                         </div>
                         <div className={cx('form-row')}>
@@ -176,22 +146,12 @@ function CustomerUpdate() {
                                     className={` ${cx('form-control')}`}
                                     type="text"
                                     name="phone"
-                                    placeholder="0123456789"
-                                    onBlur={(e) => {
-                                        Yup.string()
-                                            .required('Không được để trống')
-                                            .matches(/^[0-9]{10}$/, 'Số điện thoại không hợp lệ')
-                                            .validate(formikProps.values.phone)
-                                            .catch((err) => formikProps.setFieldError('phone', err.message));
-                                    }}
                                 />
-                                <ErrorMessage name="phone" render={(msg) => (
-                                    <>
-                                        <span className={cx('form-err')}>
-                                            {(msg && msg) || (errorPhone && errorPhone)}
-                                        </span>
-                                    </>
-                                )}></ErrorMessage>
+                                <ErrorMessage
+                                    name="phone"
+                                    component="span"
+                                    className={cx('form-err')}
+                                ></ErrorMessage>
                             </div>
                         </div>
                         <div className={cx('form-row')}>
@@ -293,7 +253,7 @@ function CustomerUpdate() {
                                 Thoát
                             </button>
                         </div>
-                    </Form>}
+                    </Form>
                 </Formik>}
             </div>
         </div >

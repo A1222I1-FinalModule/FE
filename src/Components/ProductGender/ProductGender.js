@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
-import { formatMoney, convertSlug } from '../../utils/helpers';
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
+
 import * as productService from '../../Services/API/productService';
 import ProductItem from '../ProductItem';
 import Button from '../Button';
@@ -10,25 +11,38 @@ const cx = classNames.bind(styles);
 function ProductGender({ category }) {
     const [products, setProducts] = useState([]);
     const [size, setSize] = useState(10);
+    const [loading, setLoading] = useState(false)
 
-    // useEffect(() => {
-    //     const fetchProductGender = async () => {
-    //         const res = await productService.searchProductCategories(category);
-    //         console.log(res);
-    //         setProducts(res);
-    //     };
+    useEffect(() => {
+        const fetchProductGender = async () => {
+            setLoading(true);
+            const res = await productService.searchProductCategories(category);
+            console.log(res);
+            setProducts(res);
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000)
+        };
 
-    //     fetchProductGender();
-    // }, []);
+        fetchProductGender();
+    }, []);
 
     return (
         <div className={cx('wrapper')}>
-            <h2 className={cx('title')}>Đề xuất cho bạn</h2>
+            {loading ? <div className={cx('title')}>
+                <SkeletonTheme>
+                    <Skeleton width={300} height={30} count={1} />
+                </SkeletonTheme>
+            </div> : <h2 className={cx('title')}>Đề xuất cho bạn</h2>}
             <div className={cx('inner')}>
-                <ProductItem data={products} number={size} />
+                <ProductItem data={products} number={size} loading={loading} />
             </div>
 
-            {size === 10 && (
+            {loading ? <div className={cx('more')}>
+                <SkeletonTheme>
+                    <Skeleton width={300} height={50} count={1} />
+                </SkeletonTheme>
+            </div> : size === 10 && (
                 <div className={cx('more')}>
                     <Button primary className={cx('more-btn')} onClick={() => setSize(20)}>
                         Xem thêm

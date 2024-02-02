@@ -1,6 +1,5 @@
 import React from 'react';
 import style from '../../Assets/Styles/StyleDashBoard.module.css'
-import NotificationList from '../../Components/notification/NotificationList';
 export default function Header() {
   return (
     <div id={style.menu}>
@@ -26,7 +25,6 @@ export default function Header() {
         </div>
       </div>
       <div className={style.menu_right}>
-        <NotificationList />
         <div className={style.account}>
           <div className={style.image_account}>
             <a href='/admin/info'>
