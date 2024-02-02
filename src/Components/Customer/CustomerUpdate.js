@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 
 import { toast } from 'react-toastify'
 import { formatDate } from '../../utils/helpers';
-import { toast } from 'react-toastify';
 import * as customerService from '../../Services/API/customerService';
 import styles from './Customer.module.scss'
 
