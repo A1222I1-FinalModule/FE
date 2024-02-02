@@ -6,9 +6,10 @@ import styled from '../Customer/listCustomer.module.css';
 import { useEffect, useState } from 'react';
 import * as customers from '../../Services/API/Customer/customer';
 import Example2 from '../ModalConfirm/ModalConfirmCustomer';
-import { ToastContainer , toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import NotFound from '../ModalConfirm/NotificationDiscount';
 import Loading from '../Customer/Loading';
+import { Link } from 'react-router-dom';
 export function ListCustomer() {
     const [customer, setCustomer] = useState([]);
     const [searchInput, setSearchInput] = useState('');
@@ -113,14 +114,15 @@ export function ListCustomer() {
                         />
                     </div>
                     <div className="contaner-function">
-                        <button
+                        <Link
+                            to={'/admin/customer/create'}
                             type="button"
                             className="btn btn-success"
                             data-mdb-ripple-init
-                            style={{ width: '200px', height: '36px', fontSize: '13px' }}
+                            style={{ width: '200px', height: '36px', fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
                             Thêm mới khách hàng
-                        </button>
+                        </Link>
                     </div>
                 </div>
                 <div className={styled['container-table']}>
@@ -195,9 +197,9 @@ export function ListCustomer() {
                                                         name={customer.name}
                                                         handleDelete={handleDelete}
                                                     />
-                                                    <button class="btn btn-success" ids={customer.id}>
+                                                    <Link to={`/admin/customer/update/${customer.id}`} class="btn btn-success" ids={customer.id} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                                                         Sửa
-                                                    </button>
+                                                    </Link>
                                                 </div>
                                             </td>
                                         </tr>
