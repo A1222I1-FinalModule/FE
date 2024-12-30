@@ -1,75 +1,145 @@
+# Clothing Website 
 
-This is FrontEnd 
-B1: tạo 1 branche cho mình tại đây.
-vd: git checkout -b your_name_branch.
 
-# Getting Started with Create React App
+## OVERVIEW
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- According to the documentation provided by SRS, we have applied ReactJs to create product interfaces and process APIs from the server. This project helps us understand more about ReactJs and understand the related libraries in ReactJs.
 
-## Available Scripts
+## TIMELINE
 
-In the project directory, you can run:
+- Estimate time: **7 days (2024/01/05 - 2024/01/12)**
+- Actual time: **9 days (2024/01/05 - 2024/01/14)**
 
-### `npm start`
+## TEAM SIZE
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- 9 developer:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-[Bui Minh Thanh]
+-[Phan Van Ai]
+-[Ho Phuc Tam]
+-[Dang Van Tuyen]
+-[Duong Van Bao]
+-[Nguyen Ngoc Bao Nhan]
+-[Nguyen Van Quan]
+-[Nguyen Dinh Quan]
+-[Nguyen Thanh Truong]
 
-### `npm test`
+## TARGETS
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-Use useEffect and useState to handle sideEffects and state management
+-Use Axios to fetch data
+-using Bootstrap to build the interface 
+-the react-toast institute to handle the notification effect
 
-### `npm run build`
+## TECHNICAL STACK
+-React/React hooks: Hooks are the new feature introduced in the React 16.8 version. It allows you to use state and other React features without writing a class. Hooks are the functions which "hook into" React state and lifecycle features from function components. It does not work inside classes.
+-HTML/CSS
+-Bootstrap: library of css for build interface
+-FireBase: firebase is a NoSql database, it has the feature of real-time data processing and can store images.
+-Axios: Axios is a JS library that is used to make HTTP requests, and it is Javascript ES7 
+-React-pdf: this is a library be used processing print invocie
+-React-QR: this is a library be used processing payment throught QR code
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## REQUIREMENT DETAILS
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Read more detail requirement in here (https://docs.google.com/document/d/1gsihXSRbo9e-M9MaySyTg2ZmGK8DkftT/edit?rtpof=true&tab=t.0)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## ENVIROMENT
 
-### `npm run eject`
+- Windows
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## EDITOR
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [Visual studio code](https://code.visualstudio.com/)
+## DIRECTORY STRUCTURE
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+├──.idea
+├──.vscode
+├──node_modules
+├──public
+├──src
+    ├──Asserts
+      ├──imgaes
+      ├──css
+    ├──Components
+      ├──Button
+      ├──ContentElement
+      ├──Customer
+      ├──Disocunt
+      ├──GetInput
+      ├──info
+      ├──listProduct
+      ├──Login
+      ├──ModalCofirm
+      ├──NewProducts
+      ├──News
+      ├──ProductGender
+      ├──ProductItem
+      ├──ProductSearch
+      ├──ProductSearchList
+      ├──SellingProducts
+      ├──StastisticalTable
+      ├──notification
+      ├──payment
+      ├──product
+    ├──Config
+    ├──Constants
+      ├──LoginConstant
+    ├──FirebaseProduct
+    ├──Hooks
+    ├──Layouts
+      ├──Header
+      ├──sidebar
+    ├──Pages
+      ├──ListProduct
+      ├──News
+      ├──NotFound
+      ├──ProductFemale
+      ├──ProductMale
+    ├──Prototype
+    ├──Routes
+    ├──Services
+      ├──API
+      ├──Product
+      ├──UserContext
+    ├──assets
+      ├──Images
+      ├──Styles
+      ├──fonts
+      ├──images
+      ├──js
+    ├──components
+      ├──Banner
+      ├──GlobalStyles
+      ├──Icons
+      ├──Images
+      ├──Popper
+      ├──Products
+    ├──data
+      ├──product
+    ├──layouts
+      ├──DefaultLayout
+      ├──components
+    ├──pages
+      ├──Home
+      ├──News
+    ├──redux
+      ├──midleware
+      ├──reducer
+      ├──store
+    ├──utils
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## GET STARTED
 
-## Learn More
+- Clone project:
+  $ git clone https://github.com/A1222I1-FinalModule/FE.git
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Checkout branch:
+  $ git checkout TamHP
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Change directory:
+  $ cd FE
+- Install packages:
+  $ npm install
+- Start project
+  $ npm start
